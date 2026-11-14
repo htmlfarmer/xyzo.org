@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>XYZO Tests</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 20px;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+    h1 { color: var(--accent); margin-bottom: 20px; }
+    .test-suite { margin-bottom: 30px; }
+    .test-suite h2 { font-size: 16px; color: var(--fg); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .result {
+      padding: 8px 12px;
+      margin: 4px 0;
+      border-radius: 4px;
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+    }
+    .result.pass { background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--success); }
+    .result.fail { background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--error); }
+    .summary { margin-top: 20px; padding: 16px; background: rgba(94, 234, 212, 0.05); border: 1px solid var(--border); border-radius: 8px; }
+    .summary h3 { margin: 0 0 10px; }
+    .passed { color: var(--success); }
+    .failed { color: var(--error); }
+    .run-btn {
+      background: var(--accent); color: #0b0f14;
+      border: none; padding: 10px 20px;
+      border-radius: 6px; font-weight: 600; cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .run-btn:hover { filter: brightness(1.1); }
+  </style>
+</head>
+<body>
+  <h1>🧪 XYZO Test Suite</h1>
+  <button class="run-btn" onclick="runAllTests()">Run All Tests</button>
+
+  <div id="results"></div>
+
+  <script src="category-filter.test.js"></script>
+  <script src="search-marker.test.js"></script>
+  <script src="render-mode.test.js"></script>
+  <script src="canvas-renderer.test.js"></script>
+  <script src="memory-leaks.test.js"></script>
+  <script src="code-splitting.test.js"></script>
+  <script src="a11y.test.js"></script>
+  <script>
+    function runAllTests() {
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+      let totalPassed = 0;
+      let totalFailed = 0;
+
+      // Run Category Filter Tests
+      const cfDiv = document.createElement('div');
+      cfDiv.className = 'test-suite';
+      cfDiv.innerHTML = '<h2>Category Filtering Tests</h2>';
+      if (window.CategoryFilterTests) {
+        const { passed, failed } = window.CategoryFilterTests.runTests();
+        totalPassed += passed;
+        totalFailed += failed;
+        cfDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">Category Filter: ${passed} passed, ${failed} failed</div>`;
+      }
+      resultsDiv.appendChild(cfDiv);
+
+      // Run Search Marker Tests
+      const smDiv = document.createElement('div');
+      smDiv.className = 'test-suite';
+      smDiv.innerHTML = '<h2>Search & Marker Management Tests</h2>';
+      if (window.SearchMarkerTests) {
+        const { passed, failed } = window.SearchMarkerTests.runTests();
+        totalPassed += passed;
+        totalFailed += failed;
+        smDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">Search Marker: ${passed} passed, ${failed} failed</div>`;
+      }
+      resultsDiv.appendChild(smDiv);
+
+      // Run Render Mode Tests
+      const rmDiv = document.createElement('div');
+      rmDiv.className = 'test-suite';
+      rmDiv.innerHTML = '<h2>Render Mode & Map Behavior Tests</h2>';
+      if (window.RenderModeTests) {
+        const { passed, failed } = window.RenderModeTests.runTests();
+        totalPassed += passed;
+        totalFailed += failed;
+        rmDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">Render Mode: ${passed} passed, ${failed} failed</div>`;
+      }
+      resultsDiv.appendChild(rmDiv);
+
+      // Run Canvas Renderer Tests (async — has generation counter test)
+      const crDiv = document.createElement('div');
+      crDiv.className = 'test-suite';
+      crDiv.innerHTML = '<h2>Canvas Renderer & Pin Loading Tests</h2>';
+      if (window.CanvasRendererTests) {
+        window.CanvasRendererTests.runTests().then(({ passed, failed }) => {
+          totalPassed += passed;
+          totalFailed += failed;
+          crDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">Canvas Renderer: ${passed} passed, ${failed} failed</div>`;
+          // Update summary after async tests complete
+          updateSummary(totalPassed, totalFailed);
+        });
+      }
+      resultsDiv.appendChild(crDiv);
+
+      // Run Memory Leaks Tests (async — has AbortController tests)
+      const mlDiv = document.createElement('div');
+      mlDiv.className = 'test-suite';
+      mlDiv.innerHTML = '<h2>Memory Leaks Tests</h2>';
+      if (window.MemoryLeaksTests) {
+        window.MemoryLeaksTests.runTests().then(({ passed, failed }) => {
+          totalPassed += passed;
+          totalFailed += failed;
+          mlDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">Memory Leaks: ${passed} passed, ${failed} failed</div>`;
+          updateSummary(totalPassed, totalFailed);
+        });
+      }
+      resultsDiv.appendChild(mlDiv);
+
+      // Run Code Splitting Tests (async — fetches index.html/app.js to
+      // verify chunk-loading wiring)
+      const csDiv = document.createElement('div');
+      csDiv.className = 'test-suite';
+      csDiv.innerHTML = '<h2>Code Splitting & Lazy Load Tests</h2>';
+      if (window.CodeSplittingTests) {
+        window.CodeSplittingTests.runTests().then(({ passed, failed }) => {
+          totalPassed += passed;
+          totalFailed += failed;
+          csDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">Code Splitting: ${passed} passed, ${failed} failed</div>`;
+          updateSummary(totalPassed, totalFailed);
+        });
+      }
+      resultsDiv.appendChild(csDiv);
+
+      // Run a11y Tests (audit interactive elements + modal dialog
+      // markup for missing accessible names / dialog roles)
+      const a11yDiv = document.createElement('div');
+      a11yDiv.className = 'test-suite';
+      a11yDiv.innerHTML = '<h2>Accessibility (a11y) Tests</h2>';
+      if (window.A11yTests) {
+        const { passed, failed, results } = window.A11yTests.runTests();
+        totalPassed += passed;
+        totalFailed += failed;
+        a11yDiv.innerHTML += `<div class="result ${failed === 0 ? 'pass' : 'fail'}">a11y: ${passed} passed, ${failed} flagged</div>`;
+        results.forEach((r) => {
+          a11yDiv.innerHTML += `<div class="result ${r.passed ? 'pass' : 'fail'}">${r.passed ? '✓' : '✗'} ${r.name} — ${r.summary}</div>`;
+        });
+        updateSummary(totalPassed, totalFailed);
+      }
+      resultsDiv.appendChild(a11yDiv);
+
+      // Initial summary (will be updated after async tests)
+      updateSummary(totalPassed, totalFailed);
+    }
+
+    function updateSummary(passed, failed) {
+      let summary = document.getElementById('test-summary');
+      if (!summary) {
+        summary = document.createElement('div');
+        summary.id = 'test-summary';
+        summary.className = 'summary';
+        document.getElementById('results').appendChild(summary);
+      }
+      summary.innerHTML = `
+        <h3>Test Summary</h3>
+        <div class="passed">✅ Passed: ${passed}</div>
+        <div class="failed">❌ Failed: ${failed}</div>
+        <div style="margin-top:10px;">Total: ${passed + failed} tests</div>
+      `;
+    }
+
+    // Auto-run on load
+    runAllTests();
+  </script>
+</body>
+</html>

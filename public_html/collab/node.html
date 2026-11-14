@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>collab · node</title>
+<link rel="stylesheet" href="/collab/collab.css" />
+</head>
+<body>
+
+<header class="hero compact">
+  <div class="container">
+    <p class="kicker"><a href="/collab/">collab</a> · node</p>
+    <h1 id="node-title">loading…</h1>
+    <p class="lede" id="node-subtitle"></p>
+  </div>
+</header>
+
+<section class="container">
+  <div class="card-grid">
+    <div class="card">
+      <h3>profile</h3>
+      <dl id="profile-dl">
+        <dt>node_id</dt><dd id="p-node_id">…</dd>
+        <dt>name</dt><dd id="p-name">…</dd>
+        <dt>os / arch</dt><dd id="p-os">…</dd>
+        <dt>version</dt><dd id="p-version">…</dd>
+        <dt>registered</dt><dd id="p-registered">…</dd>
+        <dt>last heartbeat</dt><dd id="p-heartbeat">…</dd>
+        <dt>status</dt><dd id="p-status">…</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>7-day stats</h3>
+      <dl id="stats-dl">
+        <dt>jobs done</dt><dd id="s-done">…</dd>
+        <dt>jobs failed</dt><dd id="s-failed">…</dd>
+        <dt>jobs claimed</dt><dd id="s-claimed">…</dd>
+        <dt>total events</dt><dd id="s-total">…</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h2>recent activity</h2>
+  <p class="section-sub">last 50 events. server-trimmed to 30 days.</p>
+  <table id="activity-table">
+    <thead><tr><th>when</th><th>action</th><th>detail</th></tr></thead>
+    <tbody id="activity-body">
+      <tr><td colspan="3" class="loading">loading…</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<p class="container meta"><a href="/collab/nodes">← all nodes</a> · <a href="/collab/">collab home</a></p>
+
+<script src="/collab/collab.js"></script>
+<script>
+  // Auto-detect node_id from URL.
+  window.collabView = "node";
+</script>
+</body>
+</html>

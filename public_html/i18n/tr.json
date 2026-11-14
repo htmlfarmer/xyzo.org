@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — küresel haber haritası",
+  "search.placeholder": "Şehir veya haber ara…",
+  "search.button": "Ara",
+  "search.clear": "Temizle",
+
+  "panel.title": "Canlı durum",
+  "panel.toggle": "Canlı durum panelini aç/kapat",
+  "panel.loading": "yükleniyor…",
+  "tab.hot": "Popüler",
+  "tab.new": "Yeni",
+  "tab.near": "Yakınımda",
+  "tab.local": "Yerel",
+  "tab.trending": "Gündem",
+
+  "time.24h": "24 saat",
+  "time.7d": "Geçen hafta",
+  "time.30d": "Geçen ay",
+  "time.365d": "Geçen yıl",
+  "time.custom": "Tümü",
+
+  "mode.markers": "İşaretler",
+  "mode.heatmap": "Isı haritası",
+  "mode.clusters": "Kümeler",
+  "mode.links": "Bağlantılar",
+  "mode.wiki": "Viki",
+
+  "explore.button": "Keşfet",
+  "explore.title": "Bu bölgedeki haber kaynaklarını keşfedin",
+
+  "location.placeholder": "Şehir, adres, ülke…",
+  "location.use_my": "Tarayıcı konumunu kullan",
+  "location.clear": "Konumu temizle",
+
+  "pin.events": "olay",
+  "pin.sources": "kaynak",
+  "pin.nearby": "Yakın şehirler",
+  "pin.details": "Detaylar",
+  "pin.share": "Paylaş",
+  "pin.hide": "Gizle",
+  "pin.report": "Bildir",
+
+  "filter.all": "Tümü",
+  "filter.categories": "Kategoriler",
+  "filter.sources": "Kaynaklar",
+
+  "status.online": "Çevrimiçi",
+  "status.offline": "Çevrimdışı",
+  "status.updating": "Güncelleniyor…",
+  "status.last_update": "Son güncelleme",
+
+  "help.title": "Yardım",
+  "help.about": "XYZO hakkında",
+  "help.shortcuts": "Klavye kısayolları",
+
+  "lang.switcher": "Dil",
+
+  "category.politics": "Siyaset",
+  "category.business": "İş dünyası",
+  "category.crime": "Suç",
+  "category.weather": "Hava durumu",
+  "category.science": "Bilim",
+  "category.technology": "Teknoloji",
+  "category.sports": "Spor",
+  "category.culture": "Kültür",
+  "category.environment": "Çevre",
+  "category.conflict": "Çatışma",
+  "category.health": "Sağlık",
+  "category.other": "Diğer",
+
+  "event.earthquake": "Deprem",
+  "event.flood": "Sel",
+  "event.storm": "Fırtına",
+  "event.wildfire": "Orman yangını",
+  "event.shooting": "Silahlı saldırı",
+  "event.protest": "Protesto",
+  "event.election": "Seçim",
+  "event.accident": "Kaza"
+}

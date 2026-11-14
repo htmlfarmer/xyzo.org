@@ -1,0 +1,896 @@
+{
+ "view": "20,10,3",
+ "url": "https://xyzo.org/",
+ "baseline": {
+  "requests": 141,
+  "bytes": 6572320,
+  "quiet_ms": 5034,
+  "dcl": 2843,
+  "load": 3116,
+  "errors": []
+ },
+ "layers": [
+  {
+   "slug": "lightning",
+   "cold": {
+    "requests": 154,
+    "bytes": 26877909,
+    "own_requests": 15,
+    "own_bytes": 20381664,
+    "quiet_ms": 3180,
+    "first": {
+     "url": "https://xyzo.org/data/lightning/meta.json",
+     "ms": 749,
+     "kb": 1.7
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 108,
+      "bytes": 26877909
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "etopo",
+   "cold": {
+    "requests": 217,
+    "bytes": 23210077,
+    "own_requests": 81,
+    "own_bytes": 17041933,
+    "quiet_ms": 3398,
+    "first": {
+     "url": "https://xyzo.org/data/etopo/meta.json?v=202610281",
+     "ms": 647,
+     "kb": 0.9
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 171,
+      "bytes": 23210077
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "land-cover-esa",
+   "cold": {
+    "requests": 218,
+    "bytes": 22879239,
+    "own_requests": 78,
+    "own_bytes": 16306919,
+    "quiet_ms": 4844,
+    "first": {
+     "url": "https://xyzo.org/data/cropland/meta.json?v=202610281",
+     "ms": 841,
+     "kb": 0.5
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 172,
+      "bytes": 22879239
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "soil-soilgrids",
+   "cold": {
+    "requests": 218,
+    "bytes": 22201927,
+    "own_requests": 78,
+    "own_bytes": 15629607,
+    "quiet_ms": 5152,
+    "first": {
+     "url": "https://xyzo.org/data/soil/wrb/meta.json?v=202610281",
+     "ms": 544,
+     "kb": 0.9
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 172,
+      "bytes": 22201927
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "cropland-esa",
+   "cold": {
+    "requests": 218,
+    "bytes": 21972943,
+    "own_requests": 79,
+    "own_bytes": 15476698,
+    "quiet_ms": 3147,
+    "first": {
+     "url": "https://xyzo.org/data/cropland/meta.json?v=202610281",
+     "ms": 580,
+     "kb": 0.5
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 172,
+      "bytes": 21972943
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "rivers-fao-2026",
+   "cold": {
+    "requests": 215,
+    "bytes": 14426625,
+    "own_requests": 75,
+    "own_bytes": 7854305,
+    "quiet_ms": 5865,
+    "first": {
+     "url": "https://xyzo.org/data/rivers/fao/tiles/medium/2/1/1.png?v=20261106b",
+     "ms": 532,
+     "kb": 186.3
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 169,
+      "bytes": 14426625
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "waves",
+   "cold": {
+    "requests": 172,
+    "bytes": 12850332,
+    "own_requests": 33,
+    "own_bytes": 6354087,
+    "quiet_ms": 3181,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 126,
+      "bytes": 12850332
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "facebook",
+   "cold": {
+    "requests": 217,
+    "bytes": 12602103,
+    "own_requests": 77,
+    "own_bytes": 6029783,
+    "quiet_ms": 5918,
+    "first": {
+     "url": "https://xyzo.org/data/facebook/tiles/2/1/1.png",
+     "ms": 890,
+     "kb": 133.4
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 171,
+      "bytes": 12602103
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "rivers",
+   "cold": {
+    "requests": 172,
+    "bytes": 11488473,
+    "own_requests": 33,
+    "own_bytes": 4992228,
+    "quiet_ms": 3477,
+    "first": {
+     "url": "https://xyzo.org/data/rivers/fao/meta.json?v=20261105",
+     "ms": 7081,
+     "kb": 2.7
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 126,
+      "bytes": 11488473
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "koppen",
+   "cold": {
+    "requests": 218,
+    "bytes": 11827198,
+    "own_requests": 77,
+    "own_bytes": 4821736,
+    "quiet_ms": 4794,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 172,
+      "bytes": 11827198
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "phytoplankton",
+   "cold": {
+    "requests": 152,
+    "bytes": 10712640,
+    "own_requests": 13,
+    "own_bytes": 4216395,
+    "quiet_ms": 3620,
+    "first": {
+     "url": "https://xyzo.org/data/phytoplankton/meta.json",
+     "ms": 521,
+     "kb": 1.2
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 106,
+      "bytes": 10712640
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "tectonic-faults-usgs",
+   "cold": {
+    "requests": 171,
+    "bytes": 10670144,
+    "own_requests": 32,
+    "own_bytes": 4173899,
+    "quiet_ms": 3501,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 125,
+      "bytes": 10670144
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "basins",
+   "cold": {
+    "requests": 174,
+    "bytes": 11167617,
+    "own_requests": 33,
+    "own_bytes": 4162155,
+    "quiet_ms": 6195,
+    "first": {
+     "url": "https://xyzo.org/data/basins/meta.json?v=202610281",
+     "ms": 955,
+     "kb": 1.1
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 128,
+      "bytes": 11167617
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "temperature",
+   "cold": {
+    "requests": 152,
+    "bytes": 10291900,
+    "own_requests": 13,
+    "own_bytes": 3795655,
+    "quiet_ms": 2450,
+    "first": {
+     "url": "https://xyzo.org/data/temp/meta.json",
+     "ms": 529,
+     "kb": 0.7
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 106,
+      "bytes": 10291900
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "nasa-rain",
+   "cold": {
+    "requests": 218,
+    "bytes": 10054956,
+    "own_requests": 78,
+    "own_bytes": 3482636,
+    "quiet_ms": 5846,
+    "first": {
+     "url": "https://xyzo.org/api/tile/rain/2026-11-05/2/1/1",
+     "ms": 526,
+     "kb": 19.7
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 172,
+      "bytes": 10054956
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "ocean-currents-live",
+   "cold": {
+    "requests": 174,
+    "bytes": 9849921,
+    "own_requests": 34,
+    "own_bytes": 3277601,
+    "quiet_ms": 6431,
+    "first": {
+     "url": "https://xyzo.org/data/ocean/meta.json",
+     "ms": 492,
+     "kb": 1.0
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 128,
+      "bytes": 9849921
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "earthquakes-usgs",
+   "cold": {
+    "requests": 171,
+    "bytes": 9552378,
+    "own_requests": 31,
+    "own_bytes": 3054854,
+    "quiet_ms": 3611,
+    "first": {
+     "url": "https://xyzo.org/data/earthquakes/meta.json",
+     "ms": 3035,
+     "kb": 1.2
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 125,
+      "bytes": 9552378
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "wind-speed-gfs",
+   "cold": {
+    "requests": 171,
+    "bytes": 9617043,
+    "own_requests": 31,
+    "own_bytes": 3044723,
+    "quiet_ms": 3370,
+    "first": {
+     "url": "https://xyzo.org/data/wind/meta.json",
+     "ms": 422,
+     "kb": 0.6
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 125,
+      "bytes": 9617043
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "city-names",
+   "cold": {
+    "requests": 171,
+    "bytes": 9616475,
+    "own_requests": 31,
+    "own_bytes": 3044155,
+    "quiet_ms": 6110,
+    "first": {
+     "url": "https://xyzo.org/data/cities.10k.json",
+     "ms": 144,
+     "kb": 1192.2
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 125,
+      "bytes": 9616475
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "soil-type-hwsd-v2-2",
+   "cold": {
+    "requests": 218,
+    "bytes": 9603444,
+    "own_requests": 78,
+    "own_bytes": 3031124,
+    "quiet_ms": 5895,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 126,
+      "bytes": 9603444
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     },
+     "data.apps.fao.org": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "geology-macrostrat",
+   "cold": {
+    "requests": 218,
+    "bytes": 8773202,
+    "own_requests": 78,
+    "own_bytes": 2200882,
+    "quiet_ms": 5913,
+    "first": {
+     "url": "https://tiles.macrostrat.org/carto/2/1/1.png",
+     "ms": 1677,
+     "kb": 0.0
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 126,
+      "bytes": 8773202
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     },
+     "tiles.macrostrat.org": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "population-density-worldpop-1-km",
+   "cold": {
+    "requests": 215,
+    "bytes": 8696516,
+    "own_requests": 76,
+    "own_bytes": 2200271,
+    "quiet_ms": 3318,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 123,
+      "bytes": 8696516
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     },
+     "data.apps.fao.org": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "ocean-currents-ecco",
+   "cold": {
+    "requests": 152,
+    "bytes": 8551258,
+    "own_requests": 13,
+    "own_bytes": 2055013,
+    "quiet_ms": 2341,
+    "first": {
+     "url": "https://xyzo.org/data/transport/ocean-currents.png",
+     "ms": 726,
+     "kb": 328.5
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 106,
+      "bytes": 8551258
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "language-regions",
+   "cold": {
+    "requests": 169,
+    "bytes": 8346108,
+    "own_requests": 30,
+    "own_bytes": 1849863,
+    "quiet_ms": 3415,
+    "first": {
+     "url": "https://xyzo.org/data/languages/meta.json?v=202610291",
+     "ms": 433,
+     "kb": 1.6
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 123,
+      "bytes": 8346108
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "moisture-transport-ivt",
+   "cold": {
+    "requests": 169,
+    "bytes": 7974173,
+    "own_requests": 30,
+    "own_bytes": 1477928,
+    "quiet_ms": 3570,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 123,
+      "bytes": 7974173
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "magnetic",
+   "cold": {
+    "requests": 146,
+    "bytes": 7170936,
+    "own_requests": 59,
+    "own_bytes": 1367292,
+    "quiet_ms": 2110,
+    "first": {
+     "url": "https://xyzo.org/data/mag/meta.json",
+     "ms": 1993,
+     "kb": 1.7
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 100,
+      "bytes": 7170936
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "human-transportation",
+   "cold": {
+    "requests": 141,
+    "bytes": 7018561,
+    "own_requests": 54,
+    "own_bytes": 1214917,
+    "quiet_ms": 1849,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 95,
+      "bytes": 7018561
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "convective-instability-cape",
+   "cold": {
+    "requests": 142,
+    "bytes": 6646354,
+    "own_requests": 54,
+    "own_bytes": 822921,
+    "quiet_ms": 2708,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 96,
+      "bytes": 6646354
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "nasa-night",
+   "cold": {
+    "requests": 156,
+    "bytes": 6496245,
+    "own_requests": 69,
+    "own_bytes": 692601,
+    "quiet_ms": 2046,
+    "first": {
+     "url": "https://xyzo.org/api/tile/night/2016-01-01/2/1/1",
+     "ms": 1095,
+     "kb": 0.0
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 110,
+      "bytes": 6496245
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "nasa-sat",
+   "cold": {
+    "requests": 156,
+    "bytes": 6496245,
+    "own_requests": 69,
+    "own_bytes": 692601,
+    "quiet_ms": 2417,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 110,
+      "bytes": 6496245
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "isobars",
+   "cold": {
+    "requests": 140,
+    "bytes": 6496245,
+    "own_requests": 53,
+    "own_bytes": 692601,
+    "quiet_ms": 2023,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 94,
+      "bytes": 6496245
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "sea-surface-salinity",
+   "cold": {
+    "requests": 151,
+    "bytes": 7157940,
+    "own_requests": 12,
+    "own_bytes": 661695,
+    "quiet_ms": 2060,
+    "first": null,
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 105,
+      "bytes": 7157940
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "languages",
+   "cold": {
+    "requests": 150,
+    "bytes": 6762763,
+    "own_requests": 11,
+    "own_bytes": 266518,
+    "quiet_ms": 2216,
+    "first": {
+     "url": "https://xyzo.org/data/languages/meta.json?v=202610291",
+     "ms": 1909,
+     "kb": 1.6
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 104,
+      "bytes": 6762763
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "geologic-contacts-usgs",
+   "cold": {
+    "requests": 201,
+    "bytes": 6525778,
+    "own_requests": 61,
+    "own_bytes": 9705,
+    "quiet_ms": 4722,
+    "first": {
+     "url": "1.1.1&width=256&height=256&srs=EPSG%3A3857&bbox=-10018754.171394622,0,0,10018754.171394628",
+     "ms": 795,
+     "kb": 0.0
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 109,
+      "bytes": 6525778
+     },
+     "server.arcgisonline.com": {
+      "requests": 46,
+      "bytes": 0
+     },
+     "mrdata.usgs.gov": {
+      "requests": 46,
+      "bytes": 0
+     }
+    }
+   }
+  },
+  {
+   "slug": "wind-gfs",
+   "cold": {
+    "requests": 109,
+    "bytes": 6496245,
+    "own_requests": 0,
+    "own_bytes": 0,
+    "quiet_ms": 1770,
+    "first": {
+     "url": "https://xyzo.org/data/wind/meta.json",
+     "ms": 1450,
+     "kb": 0.6
+    },
+    "errors": [],
+    "by_host": {
+     "xyzo.org": {
+      "requests": 93,
+      "bytes": 6496245
+     },
+     "server.arcgisonline.com": {
+      "requests": 16,
+      "bytes": 0
+     }
+    }
+   }
+  }
+ ]
+}

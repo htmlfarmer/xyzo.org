@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "description": "Documents why news sources have high error counts and are unreachable",
+    "last_updated": "2026-09-20",
+    "version": "1.0",
+    "marked_in_db": {
+      "gov_blocked": 334,
+      "never_succeeded": 512,
+      "defunct": 1
+    }
+  },
+  "source_breakdown": {
+    "total_high_error": 1330,
+    "gov_blocked": 334,
+    "never_succeeded": 512,
+    "defunct": 1,
+    "unmarked": 483
+  },
+  "blocking_patterns": {
+    "ME": {
+      "name": "Middle East Region",
+      "countries": ["KW", "SA", "AE", "BH", "OM", "QA", "YE", "IQ", "LB", "SY", "JO", "IL", "PS"],
+      "reason": "Government-level internet filtering and DNS blocking",
+      "recommendation": "Accept as operational cost; requires local infrastructure to circumvent",
+      "example_sources": [
+        {"id": 4479, "name": "Al-Seyassah", "country": "KW"},
+        {"id": 4472, "name": "Al-Bayan", "country": "AE"},
+        {"id": 4638, "name": "Attessia TV", "country": "TN"}
+      ]
+    },
+    "SO": {
+      "name": "Somalia",
+      "countries": ["SO"],
+      "reason": "Government internet restrictions, limited infrastructure, intermittent connectivity",
+      "recommendation": "Keep marked but accept as expected failure; low likelihood of recovery",
+      "example_sources": [
+        {"id": 4352, "name": "Risingbd", "country": "SO"}
+      ]
+    },
+    "AF": {
+      "name": "Afghanistan",
+      "countries": ["AF"],
+      "reason": "Taliban government restrictions on media, blocking of foreign news services",
+      "recommendation": "Accept as operational cost; most western news blocked",
+      "example_sources": []
+    },
+    "EA": {
+      "name": "East Africa Region",
+      "countries": ["ET", "ER", "DJ"],
+      "reason": "Government-level internet restrictions, limited press freedom",
+      "recommendation": "Keep marked but accept as expected failure",
+      "example_sources": [
+        {"id": 4265, "name": "Togo Eco", "country": "TG"}
+      ]
+    },
+    "UZ": {
+      "name": "Uzbekistan",
+      "countries": ["UZ"],
+      "reason": "Government filtering of foreign news and social media",
+      "recommendation": "Accept as expected failure",
+      "example_sources": [
+        {"id": 4956, "name": "Daryo.uz", "country": "UZ"}
+      ]
+    },
+    "PH": {
+      "name": "Philippines - Defunct",
+      "countries": ["PH"],
+      "reason": "ABS-CBN and other major networks shut down by government decree",
+      "recommendation": "Mark as defunct; periodic recheck only",
+      "example_sources": [
+        {"id": 2373, "name": "ABS-CBN News", "country": "PH"}
+      ]
+    },
+    "LB": {
+      "name": "Lebanon - Media Restrictions",
+      "countries": ["LB"],
+      "reason": "Economic crisis affecting media viability, some outlet restrictions",
+      "recommendation": "Mark as potentially defunct; recheck quarterly",
+      "example_sources": [
+        {"id": 4520, "name": "Al-Akhbar", "country": "LB"}
+      ]
+    },
+    "SV": {
+      "name": "El Salvador",
+      "countries": ["SV"],
+      "reason": "Press freedom concerns under current government",
+      "recommendation": "Monitor; intermittent blocking reported",
+      "example_sources": [
+        {"id": 3615, "name": "El Faro", "country": "SV"}
+      ]
+    },
+    "VE": {
+      "name": "Venezuela",
+      "countries": ["VE"],
+      "reason": "Government blocking of independent media, social media restrictions",
+      "recommendation": "Accept as expected failure; limited press freedom",
+      "example_sources": [
+        {"id": 3861, "name": "Diario Panorama", "country": "VE"}
+      ]
+    },
+    "XX": {
+      "name": "Unknown/Multinational",
+      "countries": ["XX"],
+      "reason": "Sources that don't map to a specific country; often international aggregators",
+      "recommendation": "Review individually; may include blocked multinational sources",
+      "example_sources": [
+        {"id": 4091, "name": "Amnesty Asia", "country": "XX"}
+      ]
+    }
+  },
+  "error_categories": {
+    "unreachable": {
+      "description": "Network-level blocking or DNS resolution failure",
+      "action": "Accept as expected; cannot be fixed without local infrastructure",
+      "source_count": 658
+    },
+    "allowed_but_failing": {
+      "description": "Robots.txt allows access but fetch still fails",
+      "possible_reasons": [
+        "Rate limiting by server",
+        "IP-based blocking (not in robots.txt)",
+        "Temporary server issues",
+        "Authentication/paywall added after initial check"
+      ],
+      "action": "Reduce poll frequency for these sources",
+      "source_count": 913
+    },
+    "blocked_by_robots": {
+      "description": "Explicitly blocked by robots.txt",
+      "action": "Respect robots.txt; do not retry",
+      "source_count": 2
+    },
+    "error": {
+      "description": "Server returned error status (5xx, etc)",
+      "action": "Monitor; may be temporary",
+      "source_count": 8
+    }
+  },
+  "recommendations": {
+    "never_succeeded": {
+      "marked_count": 512,
+      "remaining_count": 970,
+      "action": "Mark as active=false after 30 days of no success",
+      "rationale": "These were likely never viable sources; don't waste resources rechecking"
+    },
+    "intermittent": {
+      "count": 99,
+      "action": "Increase poll_interval_s to reduce load (try 3600s or higher)",
+      "rationale": "They work sometimes; don't overwhelm them when they do"
+    },
+    "regional_blocks": {
+      "marked_count": 334,
+      "action": "Accept error_count growth as operational cost",
+      "rationale": "Cannot circumvent government-level blocking without local infrastructure"
+    }
+  }
+}

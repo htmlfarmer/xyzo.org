@@ -1,0 +1,458 @@
+[
+  {
+    "name": "BBC Hindi",
+    "feed_url": "http://feeds.bbci.co.uk/hindi/rss.xml",
+    "country": "IN",
+    "language": "hi",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Bangla",
+    "feed_url": "http://feeds.bbci.co.uk/bengali/rss.xml",
+    "country": "BD",
+    "language": "bn",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Urdu",
+    "feed_url": "http://feeds.bbci.co.uk/urdu/rss.xml",
+    "country": "PK",
+    "language": "ur",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Tamil",
+    "feed_url": "http://feeds.bbci.co.uk/tamil/rss.xml",
+    "country": "IN",
+    "language": "ta",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Malayalam",
+    "feed_url": "http://feeds.bbci.co.uk/malayalam/rss.xml",
+    "country": "IN",
+    "language": "ml",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Chinese (简体中文)",
+    "feed_url": "http://feeds.bbci.co.uk/zhongwen/simp/rss.xml",
+    "country": "CN",
+    "language": "zh",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Chinese (繁體中文)",
+    "feed_url": "http://feeds.bbci.co.uk/zhongwen/trad/rss.xml",
+    "country": "CN",
+    "language": "zh",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "NHK World Japan",
+    "feed_url": "https://www3.nhk.or.jp/rss/news/index.xml",
+    "country": "JP",
+    "language": "ja",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "KBS News (한국방송)",
+    "feed_url": "https://news.kbs.co.kr/rss/data/kbs_news.xml",
+    "country": "KR",
+    "language": "ko",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Yonhap News (연합뉴스)",
+    "feed_url": "https://www.yna.co.kr/rss/news.xml",
+    "country": "KR",
+    "language": "ko",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Thai",
+    "feed_url": "http://feeds.bbci.co.uk/thai/rss.xml",
+    "country": "TH",
+    "language": "th",
+    "region": "Southeast Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Vietnamese",
+    "feed_url": "http://feeds.bbci.co.uk/vietnamese/rss.xml",
+    "country": "VN",
+    "language": "vi",
+    "region": "Southeast Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Indonesian",
+    "feed_url": "http://feeds.bbci.co.uk/indonesia/rss.xml",
+    "country": "ID",
+    "language": "id",
+    "region": "Southeast Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Al Jazeera Arabic (الجزيرة)",
+    "feed_url": "https://www.aljazeera.net/aljazeerarss/1e4e5560-7d60-4eef-b66b-3d776e25667c/98c44608-b4e8-4f91-b58c-597e35606fad",
+    "country": "QA",
+    "language": "ar",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Arabic",
+    "feed_url": "http://feeds.bbci.co.uk/arabic/rss.xml",
+    "country": "SA",
+    "language": "ar",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Persian (فارسی)",
+    "feed_url": "http://feeds.bbci.co.uk/persian/rss.xml",
+    "country": "IR",
+    "language": "fa",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Turkish (Türkçe)",
+    "feed_url": "http://feeds.bbci.co.uk/turkce/rss.xml",
+    "country": "TR",
+    "language": "tr",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Swahili",
+    "feed_url": "http://feeds.bbci.co.uk/swahili/rss.xml",
+    "country": "KE",
+    "language": "sw",
+    "region": "Africa",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Hausa",
+    "feed_url": "http://feeds.bbci.co.uk/hausa/rss.xml",
+    "country": "NG",
+    "language": "ha",
+    "region": "Africa",
+    "source_type": "rss"
+  },
+  {
+    "name": "Le Monde",
+    "feed_url": "https://www.lemonde.fr/rss/une.xml",
+    "country": "FR",
+    "language": "fr",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "Le Figaro",
+    "feed_url": "https://www.lefigaro.fr/rss/figaro_une.xml",
+    "country": "FR",
+    "language": "fr",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "AFP (Agence France-Presse)",
+    "feed_url": "https://www.france24.com/fr/rss",
+    "country": "FR",
+    "language": "fr",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "El País",
+    "feed_url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada/rss.xml",
+    "country": "ES",
+    "language": "es",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "El Mundo",
+    "feed_url": "https://e00.elmundo.es/elmundo/rss/portada.xml",
+    "country": "ES",
+    "language": "es",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Mundo",
+    "feed_url": "http://feeds.bbci.co.uk/mundo/rss.xml",
+    "country": "ES",
+    "language": "es",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "Folha de São Paulo",
+    "feed_url": "https://www1.folha.uol.com.br/feed/emtempo/rss.xml",
+    "country": "BR",
+    "language": "pt",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Brasil",
+    "feed_url": "http://feeds.bbci.co.uk/portuguese/rss.xml",
+    "country": "BR",
+    "language": "pt",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Russian (Русская служба)",
+    "feed_url": "http://feeds.bbci.co.uk/russian/rss.xml",
+    "country": "RU",
+    "language": "ru",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "BBC Ukrainian (Українська служба)",
+    "feed_url": "http://feeds.bbci.co.uk/ukrainian/rss.xml",
+    "country": "UA",
+    "language": "uk",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "Corriere della Sera",
+    "feed_url": "https://www.corriere.it/rss/primepagine.xml",
+    "country": "IT",
+    "language": "it",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "La Repubblica",
+    "feed_url": "https://www.repubblica.it/rss/homepage/rss2.0.xml",
+    "country": "IT",
+    "language": "it",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "Clarín (Argentina)",
+    "feed_url": "https://www.clarin.com/rss/lo-ultimo.xml",
+    "country": "AR",
+    "language": "es",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "La Nación (Argentina)",
+    "feed_url": "https://www.lanacion.com.ar/arcio/rss/feed/",
+    "country": "AR",
+    "language": "es",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "O Globo (Brasil)",
+    "feed_url": "https://oglobo.globo.com/rss/oglobo.xml",
+    "country": "BR",
+    "language": "pt",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "Estadão (Brasil)",
+    "feed_url": "https://www.estadao.com.br/rss/home.xml",
+    "country": "BR",
+    "language": "pt",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "Deutsche Welle (German)",
+    "feed_url": "https://rss.dw.com/xml/rss-de-all",
+    "country": "DE",
+    "language": "de",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "RFI Français",
+    "feed_url": "https://www.rfi.fr/fr/rss.xml",
+    "country": "FR",
+    "language": "fr",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "Voice of America (VOA) Chinese",
+    "feed_url": "https://www.voachinese.com/api/zq-qoq_",
+    "country": "CN",
+    "language": "zh",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Voice of America (VOA) Persian",
+    "feed_url": "https://www.voapersian.com/api/zq-qoq_",
+    "country": "IR",
+    "language": "fa",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "Radio Free Asia Chinese",
+    "feed_url": "https://www.rfa.org/chinese/rss",
+    "country": "CN",
+    "language": "zh",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "France 24 Arabic",
+    "feed_url": "https://www.france24.com/ar/rss",
+    "country": "FR",
+    "language": "ar",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "France 24 Spanish",
+    "feed_url": "https://www.france24.com/es/rss",
+    "country": "FR",
+    "language": "es",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "France 24 Portuguese",
+    "feed_url": "https://www.france24.com/pt/rss",
+    "country": "FR",
+    "language": "pt",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "TRT World (Turkish)",
+    "feed_url": "https://www.trthaber.com/sondakika.rss",
+    "country": "TR",
+    "language": "tr",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "Nation Media Group (Kenya)",
+    "feed_url": "https://nation.africa/kenya/rss",
+    "country": "KE",
+    "language": "en",
+    "region": "Africa",
+    "source_type": "rss"
+  },
+  {
+    "name": "Jeune Afrique",
+    "feed_url": "https://www.jeuneafrique.com/feed/",
+    "country": "FR",
+    "language": "fr",
+    "region": "Africa",
+    "source_type": "rss"
+  },
+  {
+    "name": "El Universal (Mexico)",
+    "feed_url": "https://www.eluniversal.com.mx/rss/.xml",
+    "country": "MX",
+    "language": "es",
+    "region": "Latin America",
+    "source_type": "rss"
+  },
+  {
+    "name": "Dawn (Pakistan)",
+    "feed_url": "https://www.dawn.com/feed",
+    "country": "PK",
+    "language": "en",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "The Hindu",
+    "feed_url": "https://www.thehindu.com/news/feeder/default.rss",
+    "country": "IN",
+    "language": "en",
+    "region": "South Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Bangkok Post",
+    "feed_url": "https://www.bangkokpost.com/rss/data/most-recent.xml",
+    "country": "TH",
+    "language": "en",
+    "region": "Southeast Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Philippine Daily Inquirer",
+    "feed_url": "https://newsinfo.inquirer.net/feed",
+    "country": "PH",
+    "language": "en",
+    "region": "Southeast Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Kompas (Indonesia)",
+    "feed_url": "https://www.kompas.com/rss.xml",
+    "country": "ID",
+    "language": "id",
+    "region": "Southeast Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Haaretz (Israel)",
+    "feed_url": "https://www.haaretz.co.il/cmlink/1.1173616",
+    "country": "IL",
+    "language": "he",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "Times of Israel",
+    "feed_url": "https://www.timesofisrael.com/feed/",
+    "country": "IL",
+    "language": "en",
+    "region": "Middle East",
+    "source_type": "rss"
+  },
+  {
+    "name": "Asahi Shimbun (朝日新聞)",
+    "feed_url": "https://www.asahi.com/rss/asahi/news.html",
+    "country": "JP",
+    "language": "ja",
+    "region": "East Asia",
+    "source_type": "rss"
+  },
+  {
+    "name": "Meduza (Latvia/Russia)",
+    "feed_url": "https://meduza.io/rss/all",
+    "country": "LV",
+    "language": "ru",
+    "region": "Europe",
+    "source_type": "rss"
+  },
+  {
+    "name": "Ukrainska Pravda (Українська правда)",
+    "feed_url": "https://www.pravda.com.ua/rss/",
+    "country": "UA",
+    "language": "uk",
+    "region": "Europe",
+    "source_type": "rss"
+  }
+]

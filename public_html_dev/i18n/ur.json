@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — عالمی نیوز میپ",
+  "search.placeholder": "شہر یا خبر تلاش کریں…",
+  "search.button": "تلاش",
+  "search.clear": "صاف",
+
+  "panel.title": "براہ راست حالت",
+  "panel.toggle": "براہ راست حالت پینل ٹوگل کریں",
+  "panel.loading": "لوڈ ہو رہا ہے…",
+  "tab.hot": "مقبول",
+  "tab.new": "نیا",
+  "tab.near": "میرے قریب",
+  "tab.local": "مقامی",
+  "tab.trending": "ٹرینڈنگ",
+
+  "time.24h": "24 گھنٹے",
+  "time.7d": "پچھلا ہفتہ",
+  "time.30d": "پچھلا مہینہ",
+  "time.365d": "پچھلا سال",
+  "time.custom": "سب",
+
+  "mode.markers": "مارکرز",
+  "mode.heatmap": "ہیٹ میپ",
+  "mode.clusters": "کلسٹرز",
+  "mode.links": "لنکس",
+  "mode.wiki": "ویکی",
+
+  "explore.button": "دریافت کریں",
+  "explore.title": "اس علاقے میں خبروں کے ذرائع دریافت کریں",
+
+  "location.placeholder": "شہر، پتہ، ملک…",
+  "location.use_my": "براؤزر کا مقام استعمال کریں",
+  "location.clear": "مقام صاف کریں",
+
+  "pin.events": "واقعات",
+  "pin.sources": "ذرائع",
+  "pin.nearby": "قریبی شہر",
+  "pin.details": "تفصیلات",
+  "pin.share": "شیئر",
+  "pin.hide": "چھپائیں",
+  "pin.report": "رپورٹ",
+
+  "filter.all": "سب",
+  "filter.categories": "اقسام",
+  "filter.sources": "ذرائع",
+
+  "status.online": "آن لائن",
+  "status.offline": "آف لائن",
+  "status.updating": "اپ ڈیٹ ہو رہا ہے…",
+  "status.last_update": "آخری اپ ڈیٹ",
+
+  "help.title": "مدد",
+  "help.about": "XYZO کے بارے میں",
+  "help.shortcuts": "کی بورڈ شارٹ کٹس",
+
+  "lang.switcher": "زبان",
+
+  "category.politics": "سیاست",
+  "category.business": "کاروبار",
+  "category.crime": "جرم",
+  "category.weather": "موسم",
+  "category.science": "سائنس",
+  "category.technology": "ٹیکنالوجی",
+  "category.sports": "کھیل",
+  "category.culture": "ثقافت",
+  "category.environment": "ماحول",
+  "category.conflict": "تنازعہ",
+  "category.health": "صحت",
+  "category.other": "دیگر",
+
+  "event.earthquake": "زلزلہ",
+  "event.flood": "سیلاب",
+  "event.storm": "طوفان",
+  "event.wildfire": "جنگلی آگ",
+  "event.shooting": "گولی باری",
+  "event.protest": "مظاہرہ",
+  "event.election": "انتخابات",
+  "event.accident": "حادثہ"
+}

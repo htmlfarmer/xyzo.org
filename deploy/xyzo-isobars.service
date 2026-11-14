@@ -1,0 +1,25 @@
+[Unit]
+Description=XYZO isobar overlay - contours the global mean sea-level pressure into PostGIS
+After=network.target postgresql.service
+
+[Service]
+Type=oneshot
+# The database password lives in the root-only env file, not in the
+# unit. A unit file is world-readable; a committed one is a published
+# password.
+EnvironmentFile=/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.isobars
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# Two sources are built and stored side by side, each tagged in the
+# `source` column of weather_isobars:
+#
+#   ecmwf  ECMWF IFS open data, MSL pressure, 0.1° global. CC BY 4.0 —
+#          commercial use permitted, no key, no login. The finer grid.
+#   gfs    NOAA NCEP GFS PRMSL analysis, 0.25° global. US Government
+#          work — public domain. The fresher analysis.
+#
+# The API serves whichever analysis is newer for the viewport. One
+# source failing never blocks the other: the worker logs the failure
+# and keeps the previous lines for that source.

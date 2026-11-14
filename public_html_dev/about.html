@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About — XYZO (The Living Map of Earth)</title>
+  <meta name="description" content="Learn about XYZO — the world's most comprehensive AI-powered news map. 2,970+ sources across 220 countries &amp; territories, powered by neural networks and geolocation AI.">
+  <link rel="canonical" href="https://xyzo.org/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://xyzo.org/about.html">
+  <meta property="og:title" content="About XYZO — The Living Map of Earth">
+  <meta property="og:description" content="Learn about XYZO — the world's most comprehensive AI-powered news map. 2,970+ sources across 220 countries &amp; territories.">
+  <meta property="og:image" content="https://xyzo.org/og-image.svg">
+  <meta property="og:site_name" content="XYZO">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About XYZO — The Living Map of Earth">
+  <meta name="twitter:description" content="Learn about XYZO — the world's largest AI-powered news map.">
+  <meta name="twitter:image" content="https://xyzo.org/og-image.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --gold: #fbbf24;
+      --rose: #f43f5e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    header h1 {
+      margin: 0;
+      font-family: ui-monospace, monospace;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    header nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 16px;
+    }
+    header nav a:hover { color: var(--fg); }
+    
+    .hero {
+      text-align: center;
+      padding: 48px 20px 40px;
+      background: radial-gradient(ellipse at center, rgba(94,234,212,0.08) 0%, rgba(251,191,36,0.04) 50%, transparent 70%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 40px;
+    }
+    .hero-globe {
+      font-size: 72px;
+      line-height: 1;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 30px rgba(94,234,212,0.4));
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--fg);
+      margin: 0 0 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero-tagline {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 0;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      font-size: 20px;
+      color: var(--accent);
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      font-family: ui-monospace, monospace;
+    }
+    .section p {
+      font-size: 15px;
+      margin: 0 0 14px;
+      color: var(--fg);
+    }
+    .section strong { color: var(--accent); }
+    .section code {
+      background: rgba(94,234,212,0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+    }
+
+    .vision-quote {
+      font-size: 18px;
+      font-style: italic;
+      color: var(--gold);
+      text-align: center;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid var(--gold);
+      background: rgba(251,191,36,0.05);
+      border-radius: 0 8px 8px 0;
+      line-height: 1.8;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .value-card {
+      background: rgba(94,234,212,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .value-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(94,234,212,0.1);
+    }
+    .value-icon { font-size: 32px; margin-bottom: 10px; }
+    .value-card h3 { margin: 0 0 8px; font-size: 15px; color: var(--accent); }
+    .value-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .connection-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 32px 0;
+      border: none;
+    }
+
+    .legal-grid {
+      display: flex; flex-direction: column; gap: 14px; margin-top: 14px;
+    }
+    .legal-block {
+      padding: 14px 16px;
+      background: rgba(94,234,212,0.02);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+    .legal-block h4 { margin: 0 0 4px; font-size: 13px; color: var(--accent); }
+    .legal-block p { margin: 0; font-size: 12px; color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 40px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>xyzo / about</h1>
+      <nav>
+        <a href="/">← Back to Map</a>
+        <a href="/help/">Help & Diagnostics →</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="hero-globe">🌍</div>
+      <h1 class="hero-title">XYZO — The Living Map of Earth</h1>
+      <p class="hero-tagline">Every story, every city, every moment — indexed in real time. Every connection, every thread, every heartbeat of the planet — visible at last.</p>
+    </div>
+
+    <div class="vision-quote">
+      "The Earth is not a collection of isolated events. It is one living, breathing, spiritually connected organism. Every story is a cell in the body of humanity. Every connection is a synapse firing. XYZO makes the invisible web of life visible."
+    </div>
+
+    <div class="section">
+      <h2>Our Mission</h2>
+      <p>XYZO is building the most comprehensive, real-time map of global news ever created. We ingest, analyze, and geolocate news from thousands of sources across every continent, then plot them on an interactive map so you can explore what is happening anywhere on Earth.</p>
+      <p>But we're not just mapping news. We're mapping <strong>life itself</strong> — the food festivals and family celebrations, the scientific discoveries and spiritual moments, the community projects and random acts of kindness. Every story matters. Every place matters. Every person matters.</p>
+      <p>Our goal is to help people understand global news through <strong>place</strong> and geography, and to reveal the <strong>connections</strong> between stories that are invisible in standard linear feeds. When you see how a food festival in Tokyo connects to farming in Kenya connects to weather patterns connects to climate connects to trade connects to families — you begin to see the web of life.</p>
+      <p>We are committed to <strong>100% free and open information</strong> — no paywalls, no subscription gates. We strictly respect publisher <code>robots.txt</code> files and terms of service.</p>
+    </div>
+
+    <hr class="connection-line">
+
+    <div class="section">
+      <h2>The Web of Life</h2>
+      <p>XYZO tracks <strong>128,000+ connections</strong> between stories. When you enable "Links" on the map, you see the nervous system of the planet — how every story connects to every other story through shared locations, sources, entities, and topics.</p>
+      <p>This is the <strong>Earth intelligence</strong> we're building: a system that understands not just what is happening, but how everything connects.</p>
+      
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🍕</div>
+          <h3>Food & Agriculture</h3>
+          <p>Because nourishment is sacred. From farm to table, from seed to harvest, food connects us all.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🎭</div>
+          <h3>Entertainment & Culture</h3>
+          <p>Because joy is essential. Festivals, music, art, comedy — the human spirit celebrating itself.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">❤️</div>
+          <h3>Human Interest</h3>
+          <p>Because every person matters. Love, family, kindness, community — the heart of it all.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌍</div>
+          <h3>World News</h3>
+          <p>Because knowledge empowers. Politics, business, science — the backbone of understanding.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔬</div>
+          <h3>Science & Technology</h3>
+          <p>Because truth illuminates. Discovery, innovation, research — pushing humanity forward.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔗</div>
+          <h3>Connections</h3>
+          <p>Because everything is linked. 128,000+ story connections reveal the web of life.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="connection-line">
+
+    <div class="section">
+      <h2>How It Works</h2>
+      <p>XYZO watches <strong>2,970+ news sources</strong> across <strong>220 countries &amp; territories</strong>, ingesting <strong>50,000+ articles daily</strong>. Our AI pipeline:</p>
+      <p>1. <strong>Ingests</strong> news from RSS feeds, community submissions, and web scraping<br>
+      2. <strong>Extracts</strong> locations, topics, and entities using Gemma-4 AI<br>
+      3. <strong>Geocodes</strong> stories to exact coordinates using Nominatim<br>
+      4. <strong>Clusters</strong> related articles into events (multiple sources = one pin)<br>
+      5. <strong>Connects</strong> stories through shared locations, sources, and topics<br>
+      6. <strong>Ranks</strong> everything with neural networks that learned from real behavior</p>
+      <p>The result: a living, breathing map of Earth that shows not just what is happening, but how everything connects.</p>
+    </div>
+
+    <hr class="connection-line">
+
+    <div class="section">
+      <h2>Core Principles</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Open Collaboration</h3>
+          <p>Built with OpenStreetMap, Natural Earth, Leaflet, and open AI models. We believe in transparent, open tools for understanding the world.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤖</div>
+          <h3>AI That Learns</h3>
+          <p>Our neural pipeline learns from itself — auto-labeling generates training data, user corrections flow into retraining, and the system gets smarter every day.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🗺️</div>
+          <h3>Free Information</h3>
+          <p>No paywalls, no subscriptions, no registration. Every story on Earth should be accessible to everyone, everywhere.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💚</div>
+          <h3>Gentle Crawling</h3>
+          <p>We respect <code>robots.txt</code> and crawl slowly. Government and university sources get extra protection — we never hammer them.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="connection-line">
+
+    <div class="section">
+      <h2>The Earth Is Awesome</h2>
+      <p>When you look at XYZO's map, you see more than news. You see:</p>
+      <p>🍕 <strong>Food festivals</strong> connecting to <strong>farming</strong> connecting to <strong>weather</strong> connecting to <strong>climate</strong> connecting to <strong>trade</strong> connecting to <strong>families</strong> connecting to <strong>love</strong>.</p>
+      <p>🎭 <strong>Weddings in Brazil</strong> connecting to <strong>births in India</strong> connecting to <strong>graduations in Nigeria</strong> connecting to <strong>community projects in Indonesia</strong>.</p>
+      <p>🔬 <strong>Scientists in Japan</strong> connecting to <strong>researchers in Germany</strong> connecting to <strong>discoveries in Brazil</strong> — all working on the same problems, all connected.</p>
+      <p>Every pin on the map is a story. Every story is connected to other stories. The connections form a web — <strong>the nervous system of the planet</strong>.</p>
+      <p>Click "Links" on the map to see this web. Watch how stories from different continents, different cultures, different languages are all part of one great human conversation.</p>
+      
+      <div class="vision-quote">
+        "Earth is not just a planet. It is a living system — a web of connections between every person, every place, every story. XYZO makes this web visible. And when you see it, you cannot help but feel the wonder of it all."
+      </div>
+    </div>
+
+    <hr class="connection-line">
+
+    <div class="section">
+      <h2>Author & Creator</h2>
+      <div style="background:rgba(94,234,212,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;">
+        <h3 style="margin:0 0 8px;font-size:16px;color:var(--accent);">Hi, I'm Asher 👋</h3>
+        <p>I'm the author and creator of <strong>xyzo.org</strong>. I created XYZO because I believe the world needs a better way to see itself — not through the lens of algorithms that maximize engagement, but through the lens of geography, connection, and meaning.</p>
+        <p>Every story matters. Every place matters. Every person matters. XYZO is my attempt to build a system that honors all of that.</p>
+        <p>Feel free to reach out if you have any questions, or if you'd like to help or collaborate on our <strong>AI &amp; geolocation algorithms</strong>, <strong>search code</strong>, or have <strong>specific UI recommendations</strong>!</p>
+        
+        <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+          <a href="https://www.facebook.com/asherisme" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#1877f2;color:#fff;font-weight:600;padding:8px 14px;border-radius:6px;text-decoration:none;font-size:13px;">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook (asherisme)
+          </a>
+          <a href="https://www.linkedin.com/in/asherisme/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#0a66c2;color:#fff;font-weight:600;padding:8px 14px;border-radius:6px;text-decoration:none;font-size:13px;">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn (asherisme)
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="connection-line">
+
+    <div class="section">
+      <h2>Legal & Ethics</h2>
+      <div class="legal-grid">
+        <div class="legal-block">
+          <h4>Content Copyright</h4>
+          <p>All news content belongs to respective publishers. XYZO indexes publicly available RSS/web headlines and links directly to original publisher sites.</p>
+        </div>
+        <div class="legal-block">
+          <h4>Crawler Integrity & robots.txt</h4>
+          <p>We strictly obey all <code>robots.txt</code> directives and per-host crawling rate limits. Government and university sources get extra protection.</p>
+        </div>
+        <div class="legal-block">
+          <h4>Privacy</h4>
+          <p>XYZO stores anonymous analytics (viewport changes, search terms) to improve map coverage. No personal data is tracked or sold.</p>
+        </div>
+        <div class="legal-block">
+          <h4>Open Source</h4>
+          <p>XYZO is open-source. We believe in building tools that everyone can use, improve, and learn from.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>XYZO · The Living Map of Earth · <a href="/">Return to World Map</a> · <a href="/help/">Help & System Diagnostics</a></p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[Unit]
+Description=Xyzo event-centric ingestion cycle
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/xyzo.org
+# DB credentials come from the operator-managed env file — no in-unit default.
+EnvironmentFile=/etc/xyzo/xyzo.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m worker.run --limit 60
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=xyzo-fetcher
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

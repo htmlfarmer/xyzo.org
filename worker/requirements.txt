@@ -1,0 +1,18 @@
+httpx>=0.27
+psycopg[binary]>=3.1
+psycopg-pool>=3.2
+feedparser>=6.0
+youtube-transcript-api>=1.0
+pytest>=8.0
+pytest-asyncio>=0.23
+
+# GRIB decoding for worker/isobars.py (NOAA NCEP GFS pressure analysis).
+# `eccodes` is the Python binding, `eccodeslib` ships the ECMWF library
+# itself as a manylinux wheel — nothing has to be compiled.
+#
+# NOTE: these must be installed BEFORE psycopg is first imported in a
+# process, or the interpreter segfaults while tearing the two native
+# libraries down. worker/isobars.py imports worker.db (psycopg) at module
+# level to guarantee the order.
+eccodes>=2.38
+eccodeslib>=2.38

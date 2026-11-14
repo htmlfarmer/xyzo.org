@@ -1,0 +1,20 @@
+[Unit]
+Description=Xyzo Idle Worker (fetch when CPU/GPU idle)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/vhosts/xyzo.org
+ExecStart=/var/www/vhosts/xyzo.org/scripts/idle-worker.sh
+# DB credentials come from the operator-managed env file — no in-unit default.
+EnvironmentFile=/etc/xyzo/xyzo.env
+Environment=PYTHONUNBUFFERED=1
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

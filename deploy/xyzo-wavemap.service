@@ -1,0 +1,16 @@
+[Unit]
+Description=XYZO wave overlay - fetches the Open-Meteo marine field into the map grids
+After=network.target
+
+[Service]
+Type=oneshot
+# Optional: a free Open-Meteo key lifts the keyless hourly cap.
+# Environment=XYZO_OPENMETEO_KEY=...
+ExecStart=/usr/bin/python3 -m worker.wavemap
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# The worker rides out 429 rate limits on its own (up to ~30 min of
+# backoff per batch), so the unit is allowed to take a while; a bake is
+# 17 paced POSTs (~25 min worst case under contention).
+TimeoutStartSec=3600

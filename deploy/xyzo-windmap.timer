@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh the wind overlay every 15 minutes (the GFS analysis is 6-hourly; this polls so a new cycle is picked up within minutes of it being published)
+
+[Timer]
+OnBootSec=20min
+OnUnitActiveSec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

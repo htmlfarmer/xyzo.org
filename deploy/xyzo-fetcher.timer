@@ -1,0 +1,14 @@
+[Unit]
+Description=Poll RSS feeds and cluster into news events every 15 minutes
+Requires=xyzo-fetcher.service
+
+[Timer]
+# Fire every 15 minutes aligned to the wall clock (00, 15, 30, 45).
+# Persistent=true catches up on missed runs after downtime.
+OnCalendar=*:0/15
+Persistent=true
+AccuracySec=1min
+Unit=xyzo-fetcher.service
+
+[Install]
+WantedBy=timers.target

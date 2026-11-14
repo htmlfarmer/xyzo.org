@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Community Requests — Newsium</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="console-guard.js"></script>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --success: #22c55e;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    header h1 {
+      margin: 0;
+      font-family: ui-monospace, monospace;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    header a:hover { color: var(--fg); }
+
+    /* Stats bar */
+    .stats {
+      display: flex; gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      padding: 12px 16px;
+      background: rgba(94, 234, 212, 0.05);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      border-radius: 8px;
+      min-width: 120px;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex; gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* Request cards */
+    .requests {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .request-card {
+      background: rgba(11, 15, 20, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color 0.15s;
+    }
+    .request-card:hover {
+      border-color: var(--accent);
+    }
+    .request-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .request-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      margin: 0;
+    }
+    .request-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+      margin-top: 4px;
+    }
+    .request-status {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: ui-monospace, monospace;
+    }
+    .status-open {
+      background: rgba(94, 234, 212, 0.15);
+      color: var(--accent);
+    }
+    .status-validated {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+    .status-rejected {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--error);
+    }
+    .status-applied {
+      background: rgba(34, 197, 94, 0.3);
+      color: var(--success);
+    }
+
+    .request-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 600px) {
+      .request-body { grid-template-columns: 1fr; }
+    }
+
+    .location-box {
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .location-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .location-value {
+      font-size: 13px;
+      color: var(--fg);
+    }
+    .location-coords {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+      margin-top: 2px;
+    }
+
+    .view-original {
+      margin: -4px 16px 8px;
+      font-size: 13px;
+    }
+    .view-original a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent);
+    }
+    .view-original a:hover {
+      border-bottom-style: solid;
+    }
+
+    .user-suggestion {
+      padding: 8px 10px;
+      background: rgba(94, 234, 212, 0.08);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--fg);
+      margin-bottom: 12px;
+    }
+    .user-suggestion strong {
+      color: var(--accent);
+    }
+
+    /* Voting */
+    .voting {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .vote-btn {
+      display: flex; align-items: center; gap: 4px;
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .vote-btn:hover {
+      border-color: var(--fg);
+      color: var(--fg);
+    }
+    .vote-btn.confirm { color: var(--success); }
+    .vote-btn.confirm:hover { border-color: var(--success); background: rgba(34, 197, 94, 0.1); }
+    .vote-btn.reject { color: var(--error); }
+    .vote-btn.reject:hover { border-color: var(--error); background: rgba(239, 68, 68, 0.1); }
+    .vote-btn.info { color: var(--warning); }
+    .vote-btn.info:hover { border-color: var(--warning); background: rgba(245, 158, 11, 0.1); }
+    .vote-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .vote-count {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+    }
+    .vote-count .confirm { color: var(--success); }
+    .vote-count .reject { color: var(--error); }
+
+    .vote-reason {
+      flex: 1;
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: inherit;
+    }
+    .vote-reason::placeholder { color: var(--muted); }
+    .vote-reason:focus { outline: none; border-color: var(--accent); }
+
+    /* Vote reasons displayed on card */
+    .vote-reasons-list {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .vote-reason-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--fg);
+      margin-bottom: 4px;
+      padding: 4px 0;
+    }
+    .vote-reason-icon {
+      flex-shrink: 0;
+      width: 16px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .vote-reason-item:first-child .vote-reason-icon { color: var(--success); }
+    .vote-reason-text { color: var(--muted); }
+
+    /* AI validation result */
+    .ai-validation {
+      margin-top: 8px;
+      padding: 8px 10px;
+      background: rgba(94, 234, 212, 0.06);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .ai-valid { color: var(--success); }
+    .ai-invalid { color: var(--error); }
+    .ai-conf { color: var(--muted); font-size: 11px; }
+    .ai-error { color: var(--muted); font-style: italic; }
+    .ai-spinner {
+      display: inline-block;
+      width: 12px; height: 12px;
+      border: 2px solid var(--muted);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Recommend daily rerun button */
+    .rerun-section {
+      margin-top: 24px;
+      padding: 16px;
+      background: #111827;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .rerun-section h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--fg);
+    }
+    .rerun-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .rerun-reason {
+      flex: 1;
+      background: #0b0f14;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      border-radius: 4px;
+      font: inherit;
+      font-size: 13px;
+    }
+    .rerun-reason::placeholder { color: var(--muted); }
+    .rerun-btn {
+      background: var(--accent);
+      color: #0b0f14;
+      border: 1px solid var(--accent);
+      padding: 6px 16px;
+      border-radius: 4px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .rerun-btn:hover { filter: brightness(1.1); }
+    .rerun-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .rerun-status {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Replies */
+    .replies {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .reply {
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .reply-header {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 4px;
+    }
+    .reply-type {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+    .reply-type.admin { background: rgba(94, 234, 212, 0.2); color: var(--accent); }
+    .reply-type.ai { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+    .reply-type.system { background: rgba(100, 116, 139, 0.2); color: var(--muted); }
+    .reply-time {
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .reply-text {
+      color: var(--fg);
+      line-height: 1.4;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+    .spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(94, 234, 212, 0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Empty state */
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex; justify-content: center; gap: 8px;
+      margin-top: 24px;
+    }
+    .page-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .page-btn:hover { color: var(--fg); border-color: var(--fg); }
+    .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .page-info {
+      display: flex; align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Community Requests</h1>
+      <a href="/">← Back to Map</a>
+    </header>
+
+    <div class="stats" id="stats">
+      <div class="stat">
+        <div class="stat-value" id="stat-open">-</div>
+        <div class="stat-label">Open</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-validated">-</div>
+        <div class="stat-label">Validated</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-applied">-</div>
+        <div class="stat-label">Applied</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-total">-</div>
+        <div class="stat-label">Total</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-votes-24h">-</div>
+        <div class="stat-label">Votes (24h)</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-status="all">All</button>
+      <button class="filter-btn" data-status="open">Open</button>
+      <button class="filter-btn" data-status="validated">Validated</button>
+      <button class="filter-btn" data-status="rejected">Rejected</button>
+      <button class="filter-btn" data-status="applied">Applied</button>
+    </div>
+
+    <div class="requests" id="requests">
+      <div class="loading"><span class="spinner"></span> Loading requests…</div>
+    </div>
+
+    <div class="pagination" id="pagination" hidden>
+      <button class="page-btn" id="prev-btn" disabled>← Previous</button>
+      <span class="page-info" id="page-info">-</span>
+      <button class="page-btn" id="next-btn">Next →</button>
+    </div>
+
+    <div class="rerun-section">
+      <h3>🔄 Recommend Daily Rerun</h3>
+      <p style="color:var(--muted);font-size:12px;margin:0 0 8px">
+        Suggest that the news pipeline should be re-run to pick up fresh stories.
+        Your recommendation is logged and visible to admins.
+      </p>
+      <div class="rerun-row">
+        <input type="text" class="rerun-reason" id="rerun-reason"
+               placeholder="Optional reason — e.g. 'stale coverage in Asia', 'missing breaking news'…"
+               maxlength="500">
+        <button class="rerun-btn" id="rerun-btn">Recommend Rerun</button>
+      </div>
+      <div class="rerun-status" id="rerun-status"></div>
+    </div>
+  </div>
+
+  <script src="/analytics.js"></script>
+  <script>
+    const API = '';
+    let currentStatus = 'all';
+    let currentOffset = 0;
+    const LIMIT = 20;
+
+    // Load stats
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API}/api/community/stats`);
+        const data = await res.json();
+        document.getElementById('stat-open').textContent = data.requests.open;
+        document.getElementById('stat-validated').textContent = data.requests.validated;
+        document.getElementById('stat-applied').textContent = data.requests.applied;
+        document.getElementById('stat-total').textContent = data.requests.total;
+        document.getElementById('stat-votes-24h').textContent = data.votes_24h;
+      } catch (e) {
+        console.error('Failed to load stats:', e);
+      }
+    }
+
+    // Load requests
+     async function loadRequests() {
+      const container = document.getElementById('requests');
+      container.innerHTML = '<div class="loading"><span class="spinner"></span> Loading requests…</div>';
+
+      try {
+        const url = `${API}/api/community/requests?status=${currentStatus}&limit=${LIMIT}&offset=${currentOffset}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.requests.length === 0) {
+          container.innerHTML = '<div class="empty">No requests found.</div>';
+          document.getElementById('pagination').hidden = true;
+          return;
+        }
+
+        container.innerHTML = data.requests.map(renderRequest).join('');
+        setupVoteButtons();
+
+        // Update filter button counts
+        if (data.counts) {
+          const total = Object.values(data.counts).reduce((a, b) => a + b, 0);
+          document.querySelectorAll('.filter-btn').forEach(btn => {
+            const status = btn.dataset.status;
+            const count = status === 'all' ? total : (data.counts[status] || 0);
+            // Update button text to include count
+            const baseText = btn.textContent.replace(/\s*\(\d+\)$/, '');
+            btn.textContent = `${baseText} (${count})`;
+          });
+        }
+
+        // Update pagination
+        const totalPages = Math.ceil(data.total / LIMIT);
+        const currentPage = Math.floor(currentOffset / LIMIT) + 1;
+        document.getElementById('pagination').hidden = totalPages <= 1;
+        document.getElementById('prev-btn').disabled = currentOffset === 0;
+        document.getElementById('next-btn').disabled = currentOffset + LIMIT >= data.total;
+        document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages} (${data.total} total)`;
+      } catch (e) {
+        container.innerHTML = '<div class="empty">Failed to load requests. Please try again.</div>';
+        console.error('Failed to load requests:', e);
+      }
+    }
+
+    // Render a single request card
+    function renderRequest(r) {
+      const statusClass = r.community_status === 'validated' ? 'status-validated'
+        : r.community_status === 'rejected' ? 'status-rejected'
+        : r.worker_status === 'completed' && r.suggestion?.applied ? 'status-applied'
+        : 'status-open';
+
+      const statusText = r.community_status === 'validated' ? 'Validated'
+        : r.community_status === 'rejected' ? 'Rejected'
+        : r.worker_status === 'completed' && r.suggestion?.applied ? 'Applied'
+        : 'Open';
+
+      const timeAgo = formatRelativeTime(r.requested_at);
+
+      // Build "View original" link for both card types.
+      let viewOriginalUrl = null;
+      if (r.center && r.map_zoom != null) {
+        // Area coverage request
+        const c = r.center;
+        viewOriginalUrl = `https://${location.host}/#${Number(c.lat).toFixed(4)},${Number(c.lng).toFixed(4)},${r.map_zoom}`;
+      } else if (r.map_center_lat != null && r.map_center_lng != null && r.map_zoom != null) {
+        // Re-eval request (new fields)
+        let url = `https://${location.host}/#${Number(r.map_center_lat).toFixed(4)},${Number(r.map_center_lng).toFixed(4)},${r.map_zoom}`;
+        if (r.article_id) url += `/pin=${r.article_id}`;
+        viewOriginalUrl = url;
+      } else if (r.article && r.article.original_lat != null && r.article.original_lng != null) {
+        // Legacy re-eval row: no captured view → fall back to article location + zoom 8
+        let url = `https://${location.host}/#${Number(r.article.original_lat).toFixed(4)},${Number(r.article.original_lng).toFixed(4)},8`;
+        if (r.article_id) url += `/pin=${r.article_id}`;
+        viewOriginalUrl = url;
+      }
+
+      let originalHtml = '';
+      if (r.article) {
+        originalHtml = `
+          <div class="location-box">
+            <div class="location-label">Original Location</div>
+            <div class="location-value">${escapeHtml(r.article.original_place_name || r.article.original_location || 'Unknown')}</div>
+            ${r.article.original_lat ? `<div class="location-coords">${r.article.original_lat.toFixed(4)}, ${r.article.original_lng.toFixed(4)}</div>` : ''}
+          </div>
+        `;
+      }
+
+      let suggestedHtml = '';
+      if (r.suggestion) {
+        suggestedHtml = `
+          <div class="location-box">
+            <div class="location-label">Suggested Location</div>
+            <div class="location-value">${escapeHtml(r.suggestion.place_name || 'Map click')}</div>
+            ${r.suggestion.lat ? `<div class="location-coords">${r.suggestion.lat.toFixed(4)}, ${r.suggestion.lng.toFixed(4)}</div>` : ''}
+            ${r.suggestion.precision ? `<div class="location-coords">Precision: ${r.suggestion.precision} · Confidence: ${r.suggestion.confidence ? Math.round(r.suggestion.confidence * 100) + '%' : '?'}</div>` : ''}
+          </div>
+        `;
+      }
+
+      let suggestionHtml = '';
+      if (r.user_place) {
+        suggestionHtml = `
+          <div class="user-suggestion">
+            <strong>User said:</strong> "${escapeHtml(r.user_place)}"
+          </div>
+        `;
+      }
+
+      // Existing vote reasons
+      let reasonsHtml = '';
+      if (r.votes_with_reasons && r.votes_with_reasons.length > 0) {
+        reasonsHtml = '<div class="vote-reasons-list">' +
+          r.votes_with_reasons.map(v =>
+            `<div class="vote-reason-item">` +
+            `<span class="vote-reason-icon">${v.vote === 'confirm' ? '✓' : v.vote === 'reject' ? '✗' : '?'}</span> ` +
+            `<span class="vote-reason-text">${escapeHtml(v.reason)}</span>` +
+            `</div>`
+          ).join('') +
+          '</div>';
+      }
+
+      // Existing AI validation
+      let aiHtml = '';
+      if (r.ai_validation) {
+        const ai = r.ai_validation;
+        const icon = ai.valid ? '✓' : '✗';
+        const cls = ai.valid ? 'ai-valid' : 'ai-invalid';
+        const conf = Math.round((ai.confidence || 0) * 100);
+        aiHtml = `<div class="ai-validation"><span class="${cls}">${icon} AI: ${escapeHtml(ai.reasoning || 'no reasoning')}</span> <span class="ai-conf">(${conf}% conf)</span></div>`;
+      }
+
+      return `
+        <div class="request-card" data-id="${r.id}">
+          <div class="request-header">
+            <div>
+              <div class="request-title">${escapeHtml(r.article?.title || `Request #${r.id}`)}</div>
+              <div class="request-meta">#${r.id} · ${timeAgo}${r.article?.original_country ? ` · ${r.article.original_country}` : ''}</div>
+            </div>
+            <span class="request-status ${statusClass}">${statusText}</span>
+          </div>
+
+          ${suggestionHtml}
+
+          ${viewOriginalUrl ? `
+            <div class="view-original">
+              <a href="${viewOriginalUrl}" target="_blank" rel="noopener">🗺 View original</a>
+            </div>
+          ` : ''}
+
+          <div class="request-body">
+            ${originalHtml}
+            ${suggestedHtml}
+          </div>
+
+          ${reasonsHtml}
+          ${aiHtml}
+
+          <div class="voting" data-request-id="${r.id}">
+            <button class="vote-btn confirm" data-vote="confirm" title="Confirm this correction">✓ Confirm</button>
+            <button class="vote-btn reject" data-vote="reject" title="Reject this correction">✗ Reject</button>
+            <button class="vote-btn info" data-vote="needs_info" title="Need more info">? Info</button>
+            <input type="text" class="vote-reason" placeholder="Optional reason…" maxlength="500">
+            <span class="vote-count">
+              <span class="confirm">${r.confirm_votes}</span> / <span class="reject">${r.reject_votes}</span>
+            </span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Setup vote button handlers
+    function setupVoteButtons() {
+      document.querySelectorAll('.vote-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const voting = btn.closest('.voting');
+          const requestId = voting.dataset.requestId;
+          const vote = btn.dataset.vote;
+          const reasonInput = voting.querySelector('.vote-reason');
+          const reason = reasonInput.value.trim();
+
+          btn.disabled = true;
+          try {
+            const res = await fetch(`${API}/api/community/requests/${requestId}/vote`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ vote, reason: reason || undefined }),
+            });
+
+            if (!res.ok) {
+              const err = await res.json().catch(() => ({}));
+              alert(err.error === 'rate_limited' ? 'Rate limited — try again later.' : `Error: ${err.error}`);
+              return;
+            }
+
+            const data = await res.json();
+            if (typeof XyzoAnalytics !== 'undefined') {
+              XyzoAnalytics.queueEvent('vote', {
+                metadata: { request_id: Number(requestId), vote, has_reason: !!reason },
+              });
+            }
+            const countEl = voting.querySelector('.vote-count');
+            countEl.innerHTML = `<span class="confirm">${data.confirm_votes}</span> / <span class="reject">${data.reject_votes}</span>`;
+
+            // Display the reason on the card if one was provided.
+            if (reason) {
+              const card = voting.closest('.request-card');
+              let reasonList = card.querySelector('.vote-reasons-list');
+              if (!reasonList) {
+                reasonList = document.createElement('div');
+                reasonList.className = 'vote-reasons-list';
+                voting.insertAdjacentElement('afterend', reasonList);
+              }
+              const reasonEl = document.createElement('div');
+              reasonEl.className = 'vote-reason-item';
+              reasonEl.innerHTML = `<span class="vote-reason-icon">${vote === 'confirm' ? '✓' : vote === 'reject' ? '✗' : '?'}</span> <span class="vote-reason-text">${escapeHtml(reason)}</span>`;
+              reasonList.prepend(reasonEl);
+            }
+
+            // Update status if changed
+            if (data.community_status !== 'open') {
+              const card = voting.closest('.request-card');
+              const statusEl = card.querySelector('.request-status');
+              statusEl.className = `request-status status-${data.community_status}`;
+              statusEl.textContent = data.community_status === 'validated' ? 'Validated' : 'Rejected';
+            }
+
+            // Trigger AI validation on every first confirm (no reason required).
+            if (vote === 'confirm' && data.community_status === 'open') {
+              triggerAiValidation(requestId, voting);
+            }
+
+            reasonInput.value = '';
+          } catch (e) {
+            alert('Network error — try again.');
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+    }
+
+    // Trigger AI validation and display the result on the card.
+    async function triggerAiValidation(requestId, votingEl) {
+      const card = votingEl.closest('.request-card');
+      let aiEl = card.querySelector('.ai-validation');
+      if (!aiEl) {
+        aiEl = document.createElement('div');
+        aiEl.className = 'ai-validation';
+        aiEl.innerHTML = '<span class="ai-spinner"></span> AI evaluating…';
+        votingEl.insertAdjacentElement('afterend', aiEl);
+      }
+      try {
+        const res = await fetch(`${API}/api/community/requests/${requestId}/ai-validate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (!res.ok) {
+          aiEl.innerHTML = '<span class="ai-error">AI validation unavailable</span>';
+          return;
+        }
+        const data = await res.json();
+        const ai = data.ai;
+        if (!ai) {
+          aiEl.innerHTML = '<span class="ai-error">No AI result</span>';
+          return;
+        }
+        const icon = ai.valid ? '✓' : '✗';
+        const cls = ai.valid ? 'ai-valid' : 'ai-invalid';
+        const conf = Math.round((ai.confidence || 0) * 100);
+        aiEl.innerHTML = `<span class="${cls}">${icon} AI: ${escapeHtml(ai.reasoning || 'no reasoning')}</span> <span class="ai-conf">(${conf}% conf)</span>`;
+      } catch (e) {
+        aiEl.innerHTML = '<span class="ai-error">AI validation failed</span>';
+      }
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentStatus = btn.dataset.status;
+        currentOffset = 0;
+        loadRequests();
+      });
+    });
+
+     // Pagination
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      currentOffset = Math.max(0, currentOffset - LIMIT);
+      loadRequests();
+    });
+    document.getElementById('next-btn').addEventListener('click', () => {
+      currentOffset += LIMIT;
+      loadRequests();
+    });
+
+    // Recommend daily rerun
+    document.getElementById('rerun-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('rerun-btn');
+      const reasonInput = document.getElementById('rerun-reason');
+      const statusEl = document.getElementById('rerun-status');
+      const reason = reasonInput.value.trim();
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      statusEl.textContent = '';
+
+      try {
+        // Log the recommendation as a quality report on a sentinel article.
+        // We use article_id=0 as a convention for "system-level" feedback.
+        const res = await fetch(`${API}/api/analytics/report-quality`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            article_id: 0,
+            session_id: (typeof XyzoAnalytics !== 'undefined' && XyzoAnalytics.sessionId) || 'anonymous',
+            report_type: 'rerun_requested',
+            reason: reason || 'User requested a daily rerun',
+          }),
+        });
+
+        if (res.ok) {
+          statusEl.innerHTML = '<span style="color:var(--success)">✓ Recommendation logged — admins will see it.</span>';
+          reasonInput.value = '';
+        } else if (res.status === 409) {
+          statusEl.innerHTML = '<span style="color:var(--warning)">You already recommended a rerun recently.</span>';
+        } else {
+          statusEl.innerHTML = '<span style="color:var(--error)">Failed to log recommendation.</span>';
+        }
+      } catch (e) {
+        statusEl.innerHTML = '<span style="color:var(--error)">Network error.</span>';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Recommend Rerun';
+      }
+    });
+
+    // Helpers
+    function formatRelativeTime(iso) {
+      const delta = Date.now() - new Date(iso).getTime();
+      const m = Math.floor(delta / 60000);
+      if (m < 1) return 'just now';
+      if (m < 60) return `${m}m ago`;
+      const h = Math.floor(m / 60);
+      if (h < 24) return `${h}h ago`;
+      const d = Math.floor(h / 24);
+      return `${d}d ago`;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // Initial load
+    loadStats();
+    loadRequests();
+  </script>
+</body>
+</html>

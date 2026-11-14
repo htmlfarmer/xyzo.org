@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — globalna mapa wiadomości",
+  "search.placeholder": "Szukaj miasta lub wiadomości…",
+  "search.button": "Szukaj",
+  "search.clear": "Wyczyść",
+
+  "panel.title": "Status na żywo",
+  "panel.toggle": "Przełącz panel statusu na żywo",
+  "panel.loading": "ładowanie…",
+  "tab.hot": "Gorące",
+  "tab.new": "Nowe",
+  "tab.near": "Blisko mnie",
+  "tab.local": "Lokalne",
+  "tab.trending": "Na czasie",
+
+  "time.24h": "24h",
+  "time.7d": "Ostatni tydzień",
+  "time.30d": "Ostatni miesiąc",
+  "time.365d": "Ostatni rok",
+  "time.custom": "Wszystko",
+
+  "mode.markers": "Znaczniki",
+  "mode.heatmap": "Mapa ciepła",
+  "mode.clusters": "Klastry",
+  "mode.links": "Linki",
+  "mode.wiki": "Wiki",
+
+  "explore.button": "Odkryj",
+  "explore.title": "Odkryj źródła wiadomości w tym obszarze",
+
+  "location.placeholder": "Miasto, adres, kraj…",
+  "location.use_my": "Użyj lokalizacji przeglądarki",
+  "location.clear": "Wyczyść lokalizację",
+
+  "pin.events": "wydarzenia",
+  "pin.sources": "źródła",
+  "pin.nearby": "Bliskie miasta",
+  "pin.details": "Szczegóły",
+  "pin.share": "Udostępnij",
+  "pin.hide": "Ukryj",
+  "pin.report": "Zgłoś",
+
+  "filter.all": "Wszystko",
+  "filter.categories": "Kategorie",
+  "filter.sources": "Źródła",
+
+  "status.online": "Online",
+  "status.offline": "Offline",
+  "status.updating": "Aktualizacja…",
+  "status.last_update": "Ostatnia aktualizacja",
+
+  "help.title": "Pomoc",
+  "help.about": "O XYZO",
+  "help.shortcuts": "Skróty klawiszowe",
+
+  "lang.switcher": "Język",
+
+  "category.politics": "Polityka",
+  "category.business": "Biznes",
+  "category.crime": "Przestępczość",
+  "category.weather": "Pogoda",
+  "category.science": "Nauka",
+  "category.technology": "Technologia",
+  "category.sports": "Sport",
+  "category.culture": "Kultura",
+  "category.environment": "Środowisko",
+  "category.conflict": "Konflikt",
+  "category.health": "Zdrowie",
+  "category.other": "Inne",
+
+  "event.earthquake": "Trzęsienie ziemi",
+  "event.flood": "Powódź",
+  "event.storm": "Burza",
+  "event.wildfire": "Pożar lasu",
+  "event.shooting": "Strzelanina",
+  "event.protest": "Protest",
+  "event.election": "Wybory",
+  "event.accident": "Wypadek"
+}

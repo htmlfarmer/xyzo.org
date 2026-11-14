@@ -1,0 +1,10 @@
+[Unit]
+Description=Update GeoLite2-City database
+
+[Service]
+Type=oneshot
+ExecStart=/var/www/vhosts/xyzo.org/scripts/update-geolite.sh
+User=asher
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=geolite-update

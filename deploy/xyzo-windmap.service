@@ -1,0 +1,18 @@
+[Unit]
+Description=XYZO wind overlay - renders the GFS 10 m u/v field into the map particle grid
+After=network.target
+
+[Service]
+Type=oneshot
+# The database password lives in the root-only env file, not in the
+# unit. A unit file is world-readable; a committed one is a published
+# password.
+EnvironmentFile=/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.windmap
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# The worker is idempotent: it compares the analysis run_time in
+# public_html/data/wind/meta.json and writes nothing when GFS has not
+# advanced, so a timer tick that lands early is a no-op rather than a
+# pointless 260 KB rewrite that busts every client's cache.

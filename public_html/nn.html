@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neural Network — XYZO</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body { background: #0a0e14; color: #e6edf3; font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+    .nn-header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
+    .nn-header h1 { margin: 0; font-size: 1.2rem; color: #58a6ff; }
+    .nn-header .badge { padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .badge.healthy { background: #0d4429; color: #3fb950; }
+    .badge.degraded { background: #3d1f00; color: #d29922; }
+    .badge.offline { background: #3d1010; color: #f85149; }
+    .nn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; padding: 20px; }
+    .nn-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; }
+    .nn-card-title { font-size: 0.85rem; color: #8b949e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .nn-card-value { font-size: 1.6rem; font-weight: 700; color: #e6edf3; }
+    .nn-card-sub { font-size: 0.75rem; color: #6e7681; margin-top: 4px; }
+    .model-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding: 0 20px 20px; }
+    .model-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; }
+    .model-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .model-name { font-weight: 600; color: #e6edf3; font-size: 0.95rem; }
+    .lifecycle-badge { padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; }
+    .lifecycle-badge.live { background: #0d4429; color: #3fb950; }
+    .lifecycle-badge.cold_start { background: #1c2d4a; color: #58a6ff; }
+    .lifecycle-badge.trained_no_inference { background: #3d1f00; color: #d29922; }
+    .lifecycle-badge.not_trained { background: #3d1010; color: #f85149; }
+    .model-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .metric { }
+    .metric-label { font-size: 0.7rem; color: #6e7681; }
+    .metric-value { font-size: 0.9rem; color: #8b949e; font-weight: 500; }
+    .nn-section-title { padding: 16px 20px 8px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6e7681; border-top: 1px solid #21262d; margin-top: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { text-align: left; padding: 6px 10px; color: #6e7681; border-bottom: 1px solid #21262d; }
+    td { padding: 6px 10px; border-bottom: 1px solid #21262d; }
+    tr:hover td { background: #1c2128; }
+    .score-bar { height: 4px; background: #21262d; border-radius: 2px; margin-top: 4px; }
+    .score-bar-fill { height: 100%; background: #58a6ff; border-radius: 2px; transition: width 0.3s; }
+    .error-text { color: #f85149; }
+    .ok-text { color: #3fb950; }
+    .warn-text { color: #d29922; }
+    .refresh-btn { background: #238636; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+    .refresh-btn:hover { background: #2ea043; }
+    .loading { display: flex; align-items: center; justify-content: center; height: 200px; color: #6e7681; }
+    .spinner { width: 24px; height: 24px; border: 2px solid #30363d; border-top-color: #58a6ff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 10px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .nav-back { color: #58a6ff; text-decoration: none; font-size: 0.85rem; }
+    .nav-back:hover { text-decoration: underline; }
+    .label-progress { height: 6px; background: #21262d; border-radius: 3px; margin-top: 6px; }
+    .label-progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+    .label-progress-fill.ready { background: #3fb950; }
+    .label-progress-fill.approaching { background: #58a6ff; }
+    .label-progress-fill.cold { background: #6e7681; }
+    .admin-section { padding: 0 20px 20px; }
+    .admin-section h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6e7681; border-top: 1px solid #21262d; margin-top: 16px; padding-top: 16px; }
+    .label-form { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .label-form label { display: flex; flex-direction: column; font-size: 0.75rem; color: #8b949e; }
+    .label-form input, .label-form select { background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #e6edf3; padding: 5px 8px; font-size: 0.85rem; margin-top: 3px; }
+    .label-form button { grid-column: 1 / -1; background: #238636; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .label-form button:hover { background: #2ea043; }
+    .admin-badge { background: #d29922; color: #0a0e14; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; }
+    .recent-labels { margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div class="nn-header">
+    <a href="/" class="nav-back">← Map</a>
+    <h1>Neural Network</h1>
+    <span id="overall-badge" class="badge">Loading…</span>
+    <button class="refresh-btn" onclick="loadStatus()">Refresh</button>
+  </div>
+
+  <div id="overview-grid" class="nn-grid"></div>
+
+  <div class="nn-section-title">Models</div>
+  <div id="model-grid" class="model-grid"></div>
+
+  <div class="nn-section-title">Training Runs</div>
+  <div id="training-table" style="padding: 0 20px 20px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th><th>Version</th><th>Status</th><th>Started</th><th>Loss</th><th>Rows</th><th>Error</th>
+        </tr>
+      </thead>
+      <tbody id="training-body"></tbody>
+    </table>
+  </div>
+
+  <div class="nn-section-title">Prediction Cache</div>
+  <div id="cache-table" style="padding: 0 20px 20px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th><th>Total</th><th>Active</th><th>Stale</th><th>Unique Entities</th><th>Newest</th>
+        </tr>
+      </thead>
+      <tbody id="cache-body"></tbody>
+    </table>
+  </div>
+
+  <div class="nn-section-title">User Corrections</div>
+  <div id="feedback-table" style="padding: 0 20px 20px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th><th>24h</th><th>7d</th><th>30d</th><th>Used in Training</th>
+        </tr>
+      </thead>
+      <tbody id="feedback-body"></tbody>
+    </table>
+  </div>
+
+  <div class="nn-section-title">Labeling <span class="admin-badge">ADMIN</span></div>
+  <div class="admin-section">
+    <div id="label-status"></div>
+
+    <div class="label-form">
+      <label>Model
+        <select id="lf-model">
+          <option value="event_matching">event_matching</option>
+          <option value="entity_extraction">entity_extraction</option>
+          <option value="article_understanding">article_understanding</option>
+          <option value="relationship">relationship</option>
+          <option value="ranking">ranking</option>
+          <option value="coverage">coverage</option>
+        </select>
+      </label>
+      <label>Entity Type
+        <select id="lf-entity-type">
+          <option value="article">article</option>
+          <option value="event">event</option>
+          <option value="location">location</option>
+          <option value="source">source</option>
+        </select>
+      </label>
+      <label>Entity ID
+        <input id="lf-entity-id" type="number" placeholder="article_id" />
+      </label>
+      <label>Article ID (if applicable)
+        <input id="lf-article-id" type="number" placeholder="optional" />
+      </label>
+      <label>Correction Type
+        <select id="lf-correction">
+          <option value="location_confirm">location_confirm</option>
+          <option value="location_move">location_move</option>
+          <option value="location_reject">location_reject</option>
+          <option value="event_merge">event_merge</option>
+          <option value="event_split">event_split</option>
+          <option value="event_confirm">event_confirm</option>
+          <option value="ranking_up">ranking_up</option>
+          <option value="ranking_down">ranking_down</option>
+          <option value="entity_add">entity_add</option>
+          <option value="entity_remove">entity_remove</option>
+        </select>
+      </label>
+      <label>Original Score
+        <input id="lf-orig-score" type="number" step="0.01" min="0" max="1" placeholder="0.00" />
+      </label>
+      <label>Corrected Score
+        <input id="lf-corrected-score" type="number" step="0.01" min="0" max="1" placeholder="0.00" />
+      </label>
+      <button type="button" onclick="submitLabel()">Submit Label</button>
+    </div>
+
+    <div id="label-result" style="margin-top:10px;font-size:0.85rem;"></div>
+
+    <div class="recent-labels">
+      <div style="font-size:0.75rem;color:#6e7681;margin-bottom:8px;">RECENT LABELS (requires admin key)</div>
+      <div id="recent-labels-list" style="font-size:0.8rem;color:#8b949e;">Sign in with admin key to view</div>
+    </div>
+  </div>
+
+<script>
+const API = window.location.origin;
+
+async function loadStatus() {
+  try {
+    const res = await fetch(`${API}/api/nn/status`);
+    if (!res.ok) throw new Error(`status ${res.status}`);
+    const data = await res.json();
+    renderStatus(data);
+  } catch (e) {
+    document.getElementById('overview-grid').innerHTML =
+      `<div class="loading"><div class="spinner"></div>Failed to load: ${e.message}</div>`;
+  }
+}
+
+function renderStatus(data) {
+  // Overall badge
+  const badge = document.getElementById('overall-badge');
+  badge.textContent = data.overall;
+  badge.className = `badge ${data.overall}`;
+
+  // Overview cards
+  const totalModels = data.models.length;
+  const liveModels = data.models.filter(m => m.lifecycle === 'live').length;
+  const totalCorrections = data.feedback.reduce((s, f) => s + f.corrections_24h, 0);
+  const totalPredictions = data.cache.reduce((s, c) => s + c.active_predictions, 0);
+  const overviewGrid = document.getElementById('overview-grid');
+  overviewGrid.innerHTML = `
+    <div class="nn-card">
+      <div class="nn-card-title">Active Models</div>
+      <div class="nn-card-value">${liveModels} / ${totalModels}</div>
+      <div class="nn-card-sub">models live</div>
+    </div>
+    <div class="nn-card">
+      <div class="nn-card-title">Corrections (24h)</div>
+      <div class="nn-card-value">${totalCorrections}</div>
+      <div class="nn-card-sub">user corrections</div>
+    </div>
+    <div class="nn-card">
+      <div class="nn-card-title">Active Predictions</div>
+      <div class="nn-card-value">${totalPredictions.toLocaleString()}</div>
+      <div class="nn-card-sub">cached in DB</div>
+    </div>
+    <div class="nn-card">
+      <div class="nn-card-title">Training Runs</div>
+      <div class="nn-card-value">${data.training_runs.length}</div>
+      <div class="nn-card-sub">last 20 runs</div>
+    </div>
+  `;
+
+  // Models
+  const modelGrid = document.getElementById('model-grid');
+  modelGrid.innerHTML = data.models.map(m => `
+    <div class="model-card">
+      <div class="model-card-header">
+        <span class="model-name">${m.name}</span>
+        <span class="lifecycle-badge ${m.lifecycle}">${m.lifecycle.replace('_', ' ')}</span>
+      </div>
+      <div class="model-metrics">
+        <div class="metric">
+          <div class="metric-label">Version</div>
+          <div class="metric-value">${m.version ?? '—'}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Trained</div>
+          <div class="metric-value">${m.trained_at ? new Date(m.trained_at).toLocaleDateString() : '—'}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Labels</div>
+          <div class="metric-value">${m.labeled_rows.toLocaleString()}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Embeddings</div>
+          <div class="metric-value">${m.cached_embeddings.toLocaleString()}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Predictions</div>
+          <div class="metric-value">${m.predictions_in_cache.toLocaleString()}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Feedback</div>
+          <div class="metric-value">${m.feedback_since_train}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Training runs
+  const trainingBody = document.getElementById('training-body');
+  trainingBody.innerHTML = data.training_runs.map(r => `
+    <tr>
+      <td>${r.model}</td>
+      <td>${r.version ?? '—'}</td>
+      <td class="${r.status === 'completed' ? 'ok-text' : r.status === 'failed' ? 'error-text' : 'warn-text'}">${r.status}</td>
+      <td>${new Date(r.started_at).toLocaleString()}</td>
+      <td>${r.final_loss != null ? r.final_loss.toFixed(4) : '—'}</td>
+      <td>${r.rows_total?.toLocaleString() ?? '—'}</td>
+      <td class="error-text">${r.error ?? ''}</td>
+    </tr>
+  `).join('');
+
+  // Cache
+  const cacheBody = document.getElementById('cache-body');
+  cacheBody.innerHTML = data.cache.map(c => `
+    <tr>
+      <td>${c.model}</td>
+      <td>${c.total_predictions.toLocaleString()}</td>
+      <td class="ok-text">${c.active_predictions.toLocaleString()}</td>
+      <td class="${c.stale_predictions > 0 ? 'warn-text' : ''}">${c.stale_predictions.toLocaleString()}</td>
+      <td>${c.unique_entities.toLocaleString()}</td>
+      <td>${c.newest_prediction ? new Date(c.newest_prediction).toLocaleString() : '—'}</td>
+    </tr>
+  `).join('');
+
+  // Feedback
+  const feedbackBody = document.getElementById('feedback-body');
+  feedbackBody.innerHTML = data.feedback.map(f => `
+    <tr>
+      <td>${f.model}</td>
+      <td>${f.corrections_24h}</td>
+      <td>${f.corrections_7d}</td>
+      <td>${f.corrections_30d}</td>
+      <td>${f.used_in_training}</td>
+    </tr>
+  `).join('');
+}
+
+loadStatus();
+setInterval(loadStatus, 30000);
+
+// ── Admin key helpers ─────────────────────────────────────────────
+function getAdminKey() {
+  return localStorage.getItem('xyzo_admin_key') || prompt('Enter admin key:');
+}
+
+function setAdminKey(k) {
+  localStorage.setItem('xyzo_admin_key', k);
+}
+
+// ── Labeling helpers ───────────────────────────────────────────────
+async function loadLabelStatus() {
+  const el = document.getElementById('label-status');
+  el.innerHTML = '<div style="color:#6e7681;font-size:0.8rem;">Sign in with admin key to view model progress</div>';
+}
+
+async function submitLabel() {
+  const resultEl = document.getElementById('label-result');
+  const key = getAdminKey();
+  if (!key) { resultEl.innerHTML = '<span class="error-text">Admin key required</span>'; return; }
+  setAdminKey(key);
+
+  const payload = {
+    model_name:      document.getElementById('lf-model').value,
+    entity_type:     document.getElementById('lf-entity-type').value,
+    entity_id:       parseInt(document.getElementById('lf-entity-id').value) || null,
+    article_id:      parseInt(document.getElementById('lf-article-id').value) || null,
+    correction_type: document.getElementById('lf-correction').value,
+    original: {
+      score: parseFloat(document.getElementById('lf-orig-score').value) || null,
+    },
+    corrected: {
+      score: parseFloat(document.getElementById('lf-corrected-score').value) || null,
+    },
+  };
+
+  resultEl.innerHTML = '<span style="color:#6e7681;">Submitting…</span>';
+  try {
+    const res = await fetch('/api/admin/nn/labels', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': key },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      resultEl.innerHTML = `<span class="ok-text">Label saved! ID: ${data.id} — ${data.correction_type}</span>`;
+      loadRecentLabels(key);
+    } else {
+      resultEl.innerHTML = `<span class="error-text">Error: ${data.error || res.status}</span>`;
+    }
+  } catch (e) {
+    resultEl.innerHTML = `<span class="error-text">Failed: ${e.message}</span>`;
+  }
+}
+
+async function loadRecentLabels(key) {
+  if (!key) return;
+  const el = document.getElementById('recent-labels-list');
+  try {
+    const res = await fetch('/api/admin/nn/labels?limit=10', {
+      headers: { 'X-Admin-Key': key },
+    });
+    if (!res.ok) { el.innerHTML = '<span class="error-text">Failed to load labels</span>'; return; }
+    const data = await res.json();
+    if (!data.items.length) { el.innerHTML = '<span style="color:#6e7681">No labels yet</span>'; return; }
+    el.innerHTML = '<table style="width:100%;font-size:0.8rem;"><thead><tr><th>Model</th><th>Type</th><th>Entity</th><th>When</th></tr></thead><tbody>' +
+      data.items.map(l => `
+        <tr>
+          <td>${l.model_name}</td>
+          <td>${l.correction_type}</td>
+          <td>${l.entity_type}:${l.entity_id ?? '—'}</td>
+          <td>${new Date(l.created_at).toLocaleString()}</td>
+        </tr>`).join('') + '</tbody></table>';
+  } catch (e) {
+    el.innerHTML = `<span class="error-text">${e.message}</span>`;
+  }
+}
+
+// Auto-load recent labels if admin key exists
+const savedKey = localStorage.getItem('xyzo_admin_key');
+if (savedKey) loadRecentLabels(savedKey);
+loadLabelStatus();
+</script>
+</body>
+</html>

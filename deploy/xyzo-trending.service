@@ -1,0 +1,15 @@
+[Unit]
+Description=Xyzo trending producers (event velocity, stats, TF-IDF, PMI)
+Documentation=docs/FIX_NOTES_2026-09-26.md#110
+After=postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/xyzo.org
+EnvironmentFile=/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.event_velocity --limit 5000
+ExecStart=/usr/bin/python3 -m worker.compute_event_stats --limit 5000
+ExecStart=/usr/bin/python3 -m worker.compute_tfidf --limit 500
+ExecStart=/usr/bin/python3 -m worker.compute_pmi --limit 3000
+MemoryMax=1G

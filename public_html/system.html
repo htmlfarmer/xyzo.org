@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>System Logs — Newsium</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --success: #22c55e;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    header h1 {
+      margin: 0;
+      font-family: ui-monospace, monospace;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    header a:hover { color: var(--fg); }
+
+    /* Filters */
+    .filters {
+      display: flex; gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* Log table */
+    .log-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .log-table th {
+      text-align: left;
+      padding: 8px 12px;
+      background: rgba(94, 234, 212, 0.05);
+      border-bottom: 1px solid var(--border);
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .log-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+      vertical-align: top;
+    }
+    .log-table tr:hover td {
+      background: rgba(94, 234, 212, 0.03);
+    }
+
+    /* Log type badges */
+    .log-type {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: ui-monospace, monospace;
+      text-transform: uppercase;
+    }
+    .log-type.request { background: rgba(94, 234, 212, 0.15); color: var(--accent); }
+    .log-type.vote { background: rgba(168, 85, 247, 0.15); color: var(--purple); }
+    .log-type.reply { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+    /* Status badges */
+    .status {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .status-queued { background: rgba(100, 116, 139, 0.2); color: var(--muted); }
+    .status-running { background: rgba(94, 234, 212, 0.2); color: var(--accent); }
+    .status-completed { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+    .status-failed { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+    .status-skipped { background: rgba(100, 116, 139, 0.2); color: var(--muted); }
+    .status-open { background: rgba(94, 234, 212, 0.15); color: var(--accent); }
+    .status-validated { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+    .status-rejected { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+    .status-confirm { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+    .status-reject { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+    .status-needs_info { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+    /* Text styles */
+    .text-muted { color: var(--muted); }
+    .text-accent { color: var(--accent); }
+    .text-small { font-size: 11px; }
+    .text-mono { font-family: ui-monospace, monospace; }
+    .text-truncate {
+      max-width: 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+    .spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(94, 234, 212, 0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+
+    /* Auto-refresh toggle */
+    .auto-refresh {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .auto-refresh input { accent-color: var(--accent); }
+
+    /* Reply form */
+    .reply-form {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(94, 234, 212, 0.05);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      border-radius: 8px;
+    }
+    .reply-form h3 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: var(--accent);
+    }
+    .reply-form-row {
+      display: flex; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .reply-form input, .reply-form textarea, .reply-form select {
+      background: var(--bg);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      border-radius: 4px;
+      font: inherit;
+      font-size: 12px;
+    }
+    .reply-form input:focus, .reply-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .reply-form textarea {
+      width: 100%;
+      min-height: 60px;
+      resize: vertical;
+    }
+    .reply-form button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .reply-form button:hover { filter: brightness(1.1); }
+    .reply-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>System Logs</h1>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <label class="auto-refresh">
+          <input type="checkbox" id="auto-refresh" checked>
+          Auto-refresh (30s)
+        </label>
+        <a href="/">← Map</a>
+        <a href="/requests.html">Requests</a>
+      </div>
+    </header>
+
+    <div class="filters">
+      <button class="filter-btn active" data-type="all">All</button>
+      <button class="filter-btn" data-type="requests">Requests</button>
+      <button class="filter-btn" data-type="votes">Votes</button>
+      <button class="filter-btn" data-type="replies">Replies</button>
+    </div>
+
+    <div id="logs">
+      <div class="loading"><span class="spinner"></span> Loading logs…</div>
+    </div>
+
+    <div class="reply-form">
+      <h3>Add Reply to Request</h3>
+      <div class="reply-form-row">
+        <input type="number" id="reply-request-id" placeholder="Request ID" min="1" style="width: 120px;">
+        <select id="reply-type">
+          <option value="admin">Admin</option>
+          <option value="ai">AI</option>
+          <option value="system">System</option>
+        </select>
+      </div>
+      <textarea id="reply-text" placeholder="Reply text…"></textarea>
+      <button id="reply-submit">Send Reply</button>
+    </div>
+  </div>
+
+  <script>
+    const API = '';
+    let currentType = 'all';
+    let autoRefreshInterval = null;
+
+    // Load logs
+    async function loadLogs() {
+      const container = document.getElementById('logs');
+      try {
+        const res = await fetch(`${API}/api/system/logs?type=${currentType}&limit=200`);
+        const data = await res.json();
+
+        if (data.logs.length === 0) {
+          container.innerHTML = '<div class="empty">No logs found.</div>';
+          return;
+        }
+
+        let html = '<table class="log-table">';
+        html += '<thead><tr>';
+        html += '<th>Type</th><th>Time</th><th>Status</th><th>Details</th><th>ID</th>';
+        html += '</tr></thead><tbody>';
+
+        for (const log of data.logs) {
+          const time = formatTime(log.timestamp);
+          const typeClass = log.log_type;
+          const statusClass = `status-${log.status || 'unknown'}`;
+
+          let details = '';
+          if (log.log_type === 'request') {
+            details = `
+              <div class="text-truncate">${escapeHtml(log.user_place || '-')}</div>
+              <div class="text-small text-muted">Pin #${log.pin_id}${log.article_id ? ` · Article #${log.article_id}` : ''}</div>
+            `;
+          } else if (log.log_type === 'vote') {
+            details = `
+              <div>${escapeHtml(log.reason || '-')}</div>
+              <div class="text-small text-muted">Request #${log.request_id} · Pin #${log.pin_id}</div>
+            `;
+          } else if (log.log_type === 'reply') {
+            details = `
+              <div class="text-truncate">${escapeHtml(log.reason || '-')}</div>
+              <div class="text-small text-muted">Request #${log.request_id}</div>
+            `;
+          }
+
+          html += `<tr>
+            <td><span class="log-type ${typeClass}">${log.log_type}</span></td>
+            <td class="text-mono text-small">${time}</td>
+            <td><span class="status ${statusClass}">${log.status || '-'}</span></td>
+            <td>${details}</td>
+            <td class="text-mono text-muted">#${log.id}</td>
+          </tr>`;
+        }
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="empty">Failed to load logs.</div>';
+        console.error('Failed to load logs:', e);
+      }
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentType = btn.dataset.type;
+        loadLogs();
+      });
+    });
+
+    // Auto-refresh
+    document.getElementById('auto-refresh').addEventListener('change', (e) => {
+      if (e.target.checked) {
+        autoRefreshInterval = setInterval(loadLogs, 30000);
+      } else {
+        clearInterval(autoRefreshInterval);
+      }
+    });
+
+    // Reply form
+    document.getElementById('reply-submit').addEventListener('click', async () => {
+      const requestId = document.getElementById('reply-request-id').value;
+      const replyType = document.getElementById('reply-type').value;
+      const replyText = document.getElementById('reply-text').value.trim();
+
+      if (!requestId || !replyText) {
+        alert('Please enter a request ID and reply text.');
+        return;
+      }
+
+      const btn = document.getElementById('reply-submit');
+      btn.disabled = true;
+      try {
+        const res = await fetch(`${API}/api/system/reply?request_id=${requestId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reply_type: replyType, reply_text: replyText }),
+        });
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          alert(`Error: ${err.error}`);
+          return;
+        }
+
+        document.getElementById('reply-text').value = '';
+        loadLogs();
+      } catch (e) {
+        alert('Network error — try again.');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // Helpers
+    function formatTime(iso) {
+      const d = new Date(iso);
+      return d.toLocaleString();
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // Initial load
+    loadLogs();
+    autoRefreshInterval = setInterval(loadLogs, 30000);
+  </script>
+</body>
+</html>

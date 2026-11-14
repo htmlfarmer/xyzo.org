@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — global news map",
+  "search.placeholder": "Search city or news…",
+  "search.button": "Search",
+  "search.clear": "Clear",
+
+  "panel.title": "Live status",
+  "panel.toggle": "Toggle live status panel",
+  "panel.loading": "loading…",
+  "tab.hot": "Hot",
+  "tab.new": "New",
+  "tab.near": "Near me",
+  "tab.local": "Local",
+  "tab.trending": "Trending",
+
+  "time.24h": "24h",
+  "time.7d": "Past Week",
+  "time.30d": "Past Month",
+  "time.365d": "Past Year",
+  "time.custom": "All",
+
+  "mode.markers": "Markers",
+  "mode.heatmap": "Heatmap",
+  "mode.clusters": "Clusters",
+  "mode.links": "Links",
+  "mode.wiki": "Wiki",
+
+  "explore.button": "Explore",
+  "explore.title": "Discover news sources in this area",
+
+  "location.placeholder": "City, address, country…",
+  "location.use_my": "Use your browser's location",
+  "location.clear": "Clear location",
+
+  "pin.events": "events",
+  "pin.sources": "sources",
+  "pin.nearby": "Nearby cities",
+  "pin.details": "Details",
+  "pin.share": "Share",
+  "pin.hide": "Hide",
+  "pin.report": "Report",
+
+  "filter.all": "All",
+  "filter.categories": "Categories",
+  "filter.sources": "Sources",
+
+  "status.online": "Online",
+  "status.offline": "Offline",
+  "status.updating": "Updating…",
+  "status.last_update": "Last update",
+
+  "help.title": "Help",
+  "help.about": "About XYZO",
+  "help.shortcuts": "Keyboard shortcuts",
+
+  "lang.switcher": "Language",
+
+  "category.politics": "Politics",
+  "category.business": "Business",
+  "category.crime": "Crime",
+  "category.weather": "Weather",
+  "category.science": "Science",
+  "category.technology": "Technology",
+  "category.sports": "Sports",
+  "category.culture": "Culture",
+  "category.environment": "Environment",
+  "category.conflict": "Conflict",
+  "category.health": "Health",
+  "category.other": "Other",
+
+  "event.earthquake": "Earthquake",
+  "event.flood": "Flood",
+  "event.storm": "Storm",
+  "event.wildfire": "Wildfire",
+  "event.shooting": "Shooting",
+  "event.protest": "Protest",
+  "event.election": "Election",
+  "event.accident": "Accident"
+}

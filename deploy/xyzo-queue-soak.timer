@@ -1,0 +1,11 @@
+[Unit]
+Description=Run xyzo queue soak monitor daily at 09:30
+Requires=xyzo-queue-soak.service
+
+[Timer]
+OnCalendar=*-*-* 09:30:00
+RandomizedDelaySec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target

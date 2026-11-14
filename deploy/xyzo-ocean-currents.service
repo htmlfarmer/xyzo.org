@@ -1,0 +1,27 @@
+[Unit]
+Description=XYZO ocean-current overlay - saves the OSCAR surface-current u/v pair to our own disk
+After=network.target
+
+[Service]
+Type=oneshot
+# The browser must NEVER poll a weather service for this either. OSCAR
+# is served through NOAA CoastWatch's ERDDAP files endpoint, which
+# needs no account and no key.
+ExecStart=/usr/bin/python3 /var/www/vhosts/xyzo.org/scripts/ocean_currents_build.py
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# OSCAR is a five-day composite of a satellite-derived product
+# (ESR / NASA PO.DAAC), public domain.
+
+# THE FRESHNESS GATE (2026-11-04). This unit is EXPECTED TO GO RED.
+#
+# The ERDDAP that serves OSCAR was loaded in February 2015 and its
+# newest composite is 26 September 2014, so the build's freshness gate
+# (MAX_AGE_DAYS = 45) refuses to publish it and this unit exits
+# non-zero. That is the ALARM: the overlay is called "live" and it is
+# not. The published grid is left alone and the meta keeps the date,
+# so the layer's legend tells the reader how old the field is.
+#
+# It goes green again when the builder is pointed at OSCAR v2.0's NRT
+# product (a NASA Earthdata token) — see README Known Issues Q-N1.

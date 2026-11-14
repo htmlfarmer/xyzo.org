@@ -1,0 +1,602 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-23T10:18:06.482498+00:00",
+ "window_hours": 24,
+ "story_count": 9,
+ "stories": [
+  {
+   "rank": 1,
+   "event_id": 750435,
+   "headline": "AI can strengthen Japan-US deterrence, says former top American general",
+   "headline_en": "AI can strengthen Japan-US deterrence, says former top American general",
+   "summary": "AI can strengthen Japan-US deterrence, says former top American general",
+   "why": "A former top general suggests artificial intelligence will enhance Japan-US military defense.",
+   "narration": "A former top American general believes artificial intelligence can significantly boost Japan-US deterrence capabilities.",
+   "interest": 8.0,
+   "international": "yes",
+   "category": "tech",
+   "event_type": "ai",
+   "place": "Greater Tokyo Area, JP, JP",
+   "ai_place": "Greater Tokyo Area",
+   "country": "JP",
+   "lat": 35.689722222,
+   "lng": 139.691666666,
+   "score": 84.03,
+   "signals": {
+    "momentum": 0.683,
+    "acceleration": 1.0,
+    "corroboration": 0.6986,
+    "spread": 0.7325,
+    "novelty": 0.8992,
+    "undercoverage": 0.4352,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 5.1,
+   "outlets": 5,
+   "countries": 4,
+   "articles": 7,
+   "linked_events": 107,
+   "outlet_names": [],
+   "sources": [
+    {
+     "title": "Bank of Japan warns of risks from AI market shock, cyberattacks",
+     "url": "https://www.channelnewsasia.com/business/bank-japan-warns-risks-ai-market-shock-cyberattacks-6485781",
+     "source": "Channel NewsAsia Indonesia",
+     "country": "ID",
+     "published_at": "2026-10-23T01:45:41-07:00"
+    },
+    {
+     "title": "Bank of Japan warns of risks from AI market shock, cyberattacks",
+     "url": "https://www.channelnewsasia.com/business/bank-japan-warns-risks-ai-market-shock-cyberattacks-6485781",
+     "source": "CNA",
+     "country": "SG",
+     "published_at": "2026-10-23T01:45:41-07:00"
+    },
+    {
+     "title": "AI can strengthen Japan-US deterrence, says former top American general",
+     "url": "https://asia.nikkei.com/politics/defense/ai-can-strengthen-japan-us-deterrence-says-former-top-american-general",
+     "source": "Nikkei Asia",
+     "country": "JP",
+     "published_at": null
+    },
+    {
+     "title": "Asia's AI data center boom faces 'reality check' from public markets",
+     "url": "https://asia.nikkei.com/business/technology/artificial-intelligence/asia-s-ai-data-center-boom-faces-reality-check-from-public-markets",
+     "source": "Nikkei Asia",
+     "country": "JP",
+     "published_at": null
+    }
+   ]
+  },
+  {
+   "rank": 2,
+   "event_id": 746982,
+   "headline": "Putin says talks must focus on security for Russia, Ukraine and Europe overall",
+   "headline_en": "",
+   "summary": "Putin says talks must focus on security for Russia, Ukraine and Europe overall",
+   "why": "First reported 15 hours ago; picked up by 11 outlets in 4 countries.",
+   "narration": "Putin says talks must focus on security for Russia, Ukraine and Europe overall",
+   "interest": 5.0,
+   "international": "yes",
+   "category": "politics",
+   "event_type": "politics",
+   "place": "Moscow, RU",
+   "ai_place": "",
+   "country": "RU",
+   "lat": 55.75204,
+   "lng": 37.61781,
+   "score": 77.09,
+   "signals": {
+    "momentum": 0.3881,
+    "acceleration": 0.9147,
+    "corroboration": 0.9688,
+    "spread": 0.7325,
+    "novelty": 0.7265,
+    "undercoverage": 0.0,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 15.34,
+   "outlets": 11,
+   "countries": 4,
+   "articles": 12,
+   "linked_events": 306,
+   "outlet_names": [
+    "Free Malaysia Today",
+    "Gulf News Business",
+    "KDAL 610 AM News Duluth"
+   ],
+   "sources": [
+    {
+     "title": "Putin says talks must focus on security for Russia, Ukraine and Europe overall",
+     "url": "https://northlandnewsradio.com/2026/10/22/putin-says-talks-must-focus-on-security-for-russia-ukraine-and-europe-overall/",
+     "source": "KDAL 610 AM News Duluth",
+     "country": "US",
+     "published_at": "2026-10-22T14:27:52-07:00"
+    },
+    {
+     "title": "Putin says talks must focus on security for Russia, Ukraine and Europe",
+     "url": "https://www.freemalaysiatoday.com/category/highlight/2026/10/23/putin-says-talks-must-focus-on-security-for-russia-ukraine-and-europe",
+     "source": "Free Malaysia Today",
+     "country": "MY",
+     "published_at": "2026-10-22T15:10:25-07:00"
+    },
+    {
+     "title": "'Europe cannot defeat Russia strategically, their fearmongering is political schizophrenia': Putin",
+     "url": "https://gulfnews.com/world/europe/europe-cannot-defeat-russia-strategically-their-fearmongering-is-political-schizophrenia-putin-1.500720468",
+     "source": "Gulf News Business",
+     "country": "AE",
+     "published_at": "2026-10-22T16:24:26-07:00"
+    },
+    {
+     "title": "Putin: Russia has told US it is ready to resume trilateral talks",
+     "url": "https://www.pravda.com.ua/eng/news/2026/10/22/8059305/",
+     "source": "Ukrainska Pravda",
+     "country": "UA",
+     "published_at": "2026-10-22T11:58:00-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 3,
+   "event_id": 735595,
+   "headline": "Saudi Civil Aviation: One Dead, 8 Injured in Attack on King Fahd Airport",
+   "headline_en": "Saudi Civil Aviation: One Dead, 8 Injured in Attack on King Fahd Airport",
+   "summary": "Saudi Civil Aviation: One Dead, 8 Injured in Attack on King Fahd Airport",
+   "why": "An attack on the King Fahd Airport resulted in one fatality and eight injuries.",
+   "narration": "An attack on the King Fahd Airport in Saudi Arabia has caused one death and eight injuries.",
+   "interest": 8.0,
+   "international": "yes",
+   "category": "conflict",
+   "event_type": "aviation",
+   "place": "Dammam",
+   "ai_place": "Dammam",
+   "country": "SA",
+   "lat": 26.4367824,
+   "lng": 50.1039991,
+   "score": 74.5,
+   "signals": {
+    "momentum": 0.3168,
+    "acceleration": 1.0,
+    "corroboration": 1.0,
+    "spread": 0.5,
+    "novelty": 0.5631,
+    "undercoverage": 0.0,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 27.57,
+   "outlets": 14,
+   "countries": 2,
+   "articles": 62,
+   "linked_events": 1002,
+   "outlet_names": [
+    "Latest News, Breaking News Today - Entertainment, Cricket, Business, Politics - India Today",
+    "Times of India"
+   ],
+   "sources": [
+    {
+     "title": "Indian killed, three injured in Saudi airport and oilfield attacks",
+     "url": "https://www.indiatoday.in/world/story/saudi-arabia-attacks-indian-killed-dammam-airport-shaybah-oilfield-ptag-3022825-2026-10-22?utm_source=rssfeed",
+     "source": "Latest News, Breaking News Today - Entertainment, Cricket, Business, Politics - India Today",
+     "country": "IN",
+     "published_at": "2026-10-22T04:42:29-07:00"
+    },
+    {
+     "title": "Indian killed, two injured in attack on Saudi Arabia's Dammam airport",
+     "url": "https://www.indiatoday.in/world/story/dammam-airport-attack-indian-killed-two-injured-saudi-arabia-ptag-3022606-2026-10-22?utm_source=rssfeed",
+     "source": "Latest News, Breaking News Today - Entertainment, Cricket, Business, Politics - India Today",
+     "country": "IN",
+     "published_at": "2026-10-22T01:28:23-07:00"
+    },
+    {
+     "title": "Indian national among 2 killed in attack on Saudi Arabia's Dammam airport",
+     "url": "https://timesofindia.indiatimes.com/india/1-indian-killed-2-injured-in-dammam-airport-attack-in-saudi-arabia/articleshow/135112073.cms",
+     "source": "Times of India",
+     "country": "IN",
+     "published_at": "2026-10-22T00:55:41-07:00"
+    },
+    {
+     "title": "Indian among 2 killed in attack on Saudi Arabia’s Dammam airport",
+     "url": "https://indianexpress.com/article/india/indian-national-among-two-killed-in-saudi-arabias-dammam-airport-attack-yemen-houthi-10931971/",
+     "source": "Indian Express",
+     "country": "IN",
+     "published_at": "2026-10-22T00:36:19-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 4,
+   "event_id": 751889,
+   "headline": "Ukraine-Krieg: Nach Starlink-Streit holt Kiew Nokia und Iceye an Bord",
+   "headline_en": "Ukraine War: After Starlink Dispute, Kyiv Brings Nokia and Iceye On Board",
+   "summary": "Ukraine-Krieg: Nach Starlink-Streit holt Kiew Nokia und Iceye an Bord",
+   "why": "Nokia and Iceye joining Ukraine signals a shift in technological support for the conflict.",
+   "narration": "Following a Starlink dispute, Kyiv has secured Nokia and Iceye to bolster its technological capabilities in the war.",
+   "interest": 7.0,
+   "international": "yes",
+   "category": "politics",
+   "event_type": "politics",
+   "place": "Kyiv",
+   "ai_place": "Kyiv",
+   "country": "UA",
+   "lat": 50.4500336,
+   "lng": 30.5241361,
+   "score": 74.29,
+   "signals": {
+    "momentum": 0.5341,
+    "acceleration": 0.5,
+    "corroboration": 0.9688,
+    "spread": 0.8155,
+    "novelty": 0.8284,
+    "undercoverage": 0.0,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 9.04,
+   "outlets": 11,
+   "countries": 5,
+   "articles": 13,
+   "linked_events": 336,
+   "outlet_names": [
+    "The Guardian Australia"
+   ],
+   "sources": [
+    {
+     "title": "Starlink access for Ukraine limited after Trump’s claims satellite service restored, officials say – Europe live",
+     "url": "https://www.theguardian.com/world/live/2026/oct/23/starlink-ukraine-musk-trump-russia-black-sea-strikes-france-milan-europe-protests-latest-news-updates",
+     "source": "The Guardian Australia",
+     "country": "AU",
+     "published_at": "2026-10-23T01:08:00-07:00"
+    },
+    {
+     "title": "Ukraine has not confirmed lifting of Starlink/Starshield speed limits",
+     "url": "https://www.pravda.com.ua/eng/news/2026/10/23/8059366/",
+     "source": "Ukrainska Pravda",
+     "country": "UA",
+     "published_at": "2026-10-23T01:22:00-07:00"
+    },
+    {
+     "title": "AP: Trump's administration gives conflicting accounts of restrictions on Ukraine's Starshield access",
+     "url": "https://www.pravda.com.ua/eng/news/2026/10/23/8059323/",
+     "source": "Ukrainska Pravda",
+     "country": "UA",
+     "published_at": "2026-10-22T18:16:00-07:00"
+    },
+    {
+     "title": "Starlink still restricted for Ukraine despite Trump saying Musk lifted speed limits",
+     "url": "https://www.politico.eu/article/starlink-still-restricted-for-ukraine-donald-trump-elon-musk-lifted-speed-limits/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication",
+     "source": "Politico EU",
+     "country": "EU",
+     "published_at": "2026-10-23T01:09:47-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 5,
+   "event_id": 739080,
+   "headline": "Tchad : quatre morts dans une attaque de drone au Wadi Fira, le gouvernement dément toute implication de l’armée",
+   "headline_en": "Chad: Four killed in drone attack in Wadi Fira, government denies army involvement",
+   "summary": "Tchad : quatre morts dans une attaque de drone au Wadi Fira, le gouvernement dément toute implication de l’armée",
+   "why": "Four people died in a drone attack, and the government denies military involvement.",
+   "narration": "Four people were killed in a drone attack in Tchad, prompting a denial from the government regarding the army's role.",
+   "interest": 6.0,
+   "international": "yes",
+   "category": "conflict",
+   "event_type": "news",
+   "place": "Wadi Fira",
+   "ai_place": "Wadi Fira",
+   "country": "TD",
+   "lat": 15.0191449,
+   "lng": 21.467319,
+   "score": 64.38,
+   "signals": {
+    "momentum": 0.1563,
+    "acceleration": 0.8802,
+    "corroboration": 0.8977,
+    "spread": 0.3155,
+    "novelty": 0.6138,
+    "undercoverage": 0.0199,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 23.43,
+   "outlets": 9,
+   "countries": 1,
+   "articles": 41,
+   "linked_events": 763,
+   "outlet_names": [],
+   "sources": [
+    {
+     "title": "Burkina Faso : Un recueil pour valoriser les mets du terroir en phase de validation",
+     "url": "https://burkina24.com/2026/10/22/burkina-faso-un-recueil-pour-valoriser-les-mets-du-terroir-en-phase-de-validation/",
+     "source": "Burkina 24",
+     "country": "BF",
+     "published_at": "2026-10-22T06:45:28-07:00"
+    },
+    {
+     "title": "SIAO 2026 : La LONAB apporte un soutien de 50 millions de F CFA et devient sponsor officiel",
+     "url": "https://burkina24.com/2026/10/22/siao-2026-la-lonab-apporte-un-soutien-de-50-millions-de-f-cfa-et-devient-sponsor-officiel/",
+     "source": "Burkina 24",
+     "country": "BF",
+     "published_at": "2026-10-22T05:46:21-07:00"
+    },
+    {
+     "title": "Cameroon Business Forum 2026 : la ZLECaF au cœur de la transformation économique",
+     "url": "https://www.alwihdainfo.com/cameroon-business-forum-2026-la-zlecaf-au-coeur-de-la-transformation-economique/",
+     "source": "Alwihda Info",
+     "country": "AF",
+     "published_at": "2026-10-22T09:45:00-07:00"
+    },
+    {
+     "title": "Opération Serengeti III : vaste coup de filet contre la cybercriminalité en Afrique",
+     "url": "https://www.alwihdainfo.com/operation-serengeti-iii-vaste-coup-de-filet-contre-la-cybercriminalite-en-afrique/",
+     "source": "Alwihda Info",
+     "country": "AF",
+     "published_at": "2026-10-22T08:45:00-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 6,
+   "event_id": 739829,
+   "headline": "Canal de Panamá eleva sus ingresos a $6,600 millones",
+   "headline_en": "Panama Canal raises revenues to $6.6 billion",
+   "summary": "Canal de Panamá eleva sus ingresos a $6,600 millones",
+   "why": "The Panama Canal's revenue reached $6.6 billion, marking a significant financial milestone.",
+   "narration": "The Panama Canal has raised its revenue to $6.6 billion, a major financial achievement for the waterway.",
+   "interest": 0.0,
+   "international": "no",
+   "category": "economy",
+   "event_type": "other",
+   "place": "Guarapuava, Paraná, Brasil",
+   "ai_place": "Guarapuava, Paraná, Brasil",
+   "country": "BR",
+   "lat": -25.3950986,
+   "lng": -51.4622016,
+   "score": 61.48,
+   "signals": {
+    "momentum": 0.4983,
+    "acceleration": 0.9603,
+    "corroboration": 0.8566,
+    "spread": 0.3155,
+    "novelty": 0.6254,
+    "undercoverage": 0.127,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 22.53,
+   "outlets": 8,
+   "countries": 1,
+   "articles": 30,
+   "linked_events": 683,
+   "outlet_names": [],
+   "sources": [
+    {
+     "title": "El país que también somos",
+     "url": "https://www.prensa.com/opinion/el-pais-que-tambien-somos/",
+     "source": "La Prensa Panamá",
+     "country": "PA",
+     "published_at": "2026-10-22T08:45:13-07:00"
+    },
+    {
+     "title": "Fe de errata: 22 de octubre de 2026",
+     "url": "https://www.prensa.com/opinion/fe-de-errata-22-de-octubre-de-2026/",
+     "source": "La Prensa Panamá",
+     "country": "PA",
+     "published_at": "2026-10-22T07:18:24-07:00"
+    },
+    {
+     "title": "Aeropuerto de Tocumen pone en subasta material metálico de 11 aeronaves declaradas en abandono",
+     "url": "https://www.tvn-2.com/nacionales/aeropuerto-tocumen-pone-subasta-material-metalico-aeronaves-abandono_1_2267459.html",
+     "source": "TVN Panamá",
+     "country": "PA",
+     "published_at": "2026-10-22T08:40:28-07:00"
+    },
+    {
+     "title": "A 13 días del Temblor, Panamá registra más de 37 mil afectados y 11 mil viviendas evaluadas; 2,890 son pérdida total",
+     "url": "https://www.tvn-2.com/nacionales/terremoto-panama-registra-37-mil-afectados-viviendas-evaluadas_1_2267458.html",
+     "source": "TVN Panamá",
+     "country": "PA",
+     "published_at": "2026-10-22T08:34:22-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 7,
+   "event_id": 734980,
+   "headline": "Man Utd humiliated by Como as Arsenal deny Bayern in Champions League",
+   "headline_en": "Man Utd humiliated by Como as Arsenal deny Bayern in Champions League",
+   "summary": "Man Utd humiliated by Como as Arsenal deny Bayern in Champions League",
+   "why": "The match between Manchester United and Como was a significant clash for the Champions League, highlighting the differences in performance between the two teams.",
+   "narration": "..., Manchester United humiliated by Como as Arsenal denied Bayern in Champions League, a significant clash for the Champions League.",
+   "interest": 10.0,
+   "international": "yes",
+   "category": "climate",
+   "event_type": "agriculture",
+   "place": "Munich, DE",
+   "ai_place": "Munich, DE",
+   "country": "DE",
+   "lat": 48.1371079,
+   "lng": 11.5753822,
+   "score": 58.48,
+   "signals": {
+    "momentum": 0.1872,
+    "acceleration": 1.0,
+    "corroboration": 0.8566,
+    "spread": 0.3155,
+    "novelty": 0.5438,
+    "undercoverage": 0.0477,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 29.24,
+   "outlets": 8,
+   "countries": 1,
+   "articles": 8,
+   "linked_events": 139,
+   "outlet_names": [],
+   "sources": [
+    {
+     "title": "2026 Ballon d'Or: He's the clear winner - Declan Rice picks player to take award",
+     "url": "https://dailypost.ng/2026/10/22/2026-ballon-dor-hes-the-clear-winner-declan-rice-picks-player-to-take-award/",
+     "source": "Daily Post",
+     "country": "NG",
+     "published_at": "2026-10-21T22:18:51-07:00"
+    },
+    {
+     "title": "Rice backs Kane to win 2026 Ballon d’Or",
+     "url": "https://punchng.com/rice-backs-kane-to-win-2026-ballon-dor/?utm_source=rss.punchng.com&utm_medium=web",
+     "source": "Punch Nigeria",
+     "country": "NG",
+     "published_at": "2026-10-22T02:16:06-07:00"
+    },
+    {
+     "title": "Rice backs Kane to win 2026 Ballon d’Or",
+     "url": "https://punchng.com/rice-backs-kane-to-win-2026-ballon-dor/?utm_source=rss.punchng.com&utm_medium=web",
+     "source": "Punch",
+     "country": "NG",
+     "published_at": "2026-10-22T02:16:06-07:00"
+    },
+    {
+     "title": "Rice backs Kane to win 2026 Ballon d’Or",
+     "url": "https://punchng.com/rice-backs-kane-to-win-2026-ballon-dor/?utm_source=rss.punchng.com&utm_medium=web",
+     "source": "Punch Nigeria",
+     "country": "NG",
+     "published_at": "2026-10-22T02:16:06-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 8,
+   "event_id": 737697,
+   "headline": "Ex Indonesian trade minister calls on S'pore to scrutinise S'pore companies that control land concessions",
+   "headline_en": "Ex Indonesian trade minister calls on S'pore to scrutinise S'pore companies that control land concessions",
+   "summary": "Ex Indonesian trade minister calls on S'pore to scrutinise S'pore companies that control land concessions",
+   "why": "The former Indonesian trade minister urged Singapore to examine land concession-holding companies.",
+   "narration": "An ex-Indonesian trade minister has requested Singapore to closely examine companies controlling land concessions.",
+   "interest": 6.0,
+   "international": "yes",
+   "category": "politics",
+   "event_type": "politics",
+   "place": "Singapore",
+   "ai_place": "Singapore",
+   "country": "SG",
+   "lat": 1.3521,
+   "lng": 103.8198,
+   "score": 72.72,
+   "signals": {
+    "momentum": 0.522,
+    "acceleration": 1.0,
+    "corroboration": 0.7587,
+    "spread": 0.5,
+    "novelty": 0.5939,
+    "undercoverage": 0.2661,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 25.01,
+   "outlets": 6,
+   "countries": 2,
+   "articles": 13,
+   "linked_events": 306,
+   "outlet_names": [],
+   "sources": [
+    {
+     "title": "Singaporeans aged 60 and above eligible for free haze masks from Oct 23",
+     "url": "https://www.malaymail.com/news/singapore/2026/10/22/singaporeans-aged-60-and-above-eligible-for-free-haze-masks-from-oct-23/240205",
+     "source": "Malay Mail  -  All",
+     "country": "MY",
+     "published_at": "2026-10-22T02:17:21-07:00"
+    },
+    {
+     "title": "Trump says LeBron James showed disrespect during US national anthem",
+     "url": "https://www.channelnewsasia.com/sport/trump-says-lebron-james-showed-disrespect-during-us-national-anthem-6483726",
+     "source": "CNA",
+     "country": "SG",
+     "published_at": "2026-10-22T11:01:17-07:00"
+    },
+    {
+     "title": "Teen arrested over axe attack on Sarawak teacher; minister urges public not to shame him",
+     "url": "https://www.channelnewsasia.com/asia/teen-axe-attack-sarawak-teacher-6482341",
+     "source": "CNA",
+     "country": "SG",
+     "published_at": "2026-10-22T04:43:14-07:00"
+    },
+    {
+     "title": "Paraguay's central bank under pressure over politically connected lender",
+     "url": "https://www.straitstimes.com/world/paraguays-central-bank-under-pressure-over-politically-connected-lender",
+     "source": "Straits Times",
+     "country": "SG",
+     "published_at": "2026-10-22T10:56:39-07:00"
+    }
+   ]
+  },
+  {
+   "rank": 9,
+   "event_id": 746026,
+   "headline": "El presupuesto no miente: dime en qué gastas y te diré qué defiendes",
+   "headline_en": "The budget doesn't lie: tell me where you spend and I will tell you what you defend",
+   "summary": "El presupuesto no miente: dime en qué gastas y te diré qué defiendes",
+   "why": "Independent outlets are revealing spending details and policy stances in Costa Rica.",
+   "narration": "Eight independent news sources are breaking down the national budget, showing where funds are allocated and what policies are being defended.",
+   "interest": 1.0,
+   "international": "no",
+   "category": "politics",
+   "event_type": "news",
+   "place": "San José, CR",
+   "ai_place": "San José, CR",
+   "country": "CR",
+   "lat": 9.9327373,
+   "lng": -84.0796683,
+   "score": 61.57,
+   "signals": {
+    "momentum": 0.2885,
+    "acceleration": 1.0,
+    "corroboration": 0.8566,
+    "spread": 0.3155,
+    "novelty": 0.7431,
+    "undercoverage": 0.0735,
+    "graph": 1.0,
+    "independence": 1.0
+   },
+   "hours_old": 14.25,
+   "outlets": 8,
+   "countries": 1,
+   "articles": 59,
+   "linked_events": 1602,
+   "outlet_names": [],
+   "sources": [
+    {
+     "title": "\"Macho\" Artavia le canta a las bellezas naturales de Boca Tapada de San Carlos",
+     "url": "https://www.teletica.com/masqn/macho-artavia-le-canta-a-las-bellezas-naturales-de-boca-tapada-de-san-carlos_419435",
+     "source": "Teletica Noticias",
+     "country": "CR",
+     "published_at": "2026-10-22T17:55:00-07:00"
+    },
+    {
+     "title": "David encuentra esperanza y apoyo en la Fundación Pro Unidad de Cuidados Paliativos",
+     "url": "https://www.teletica.com/masqn/david-encuentra-esperanza-y-apoyo-en-la-fundacion-pro-unidad-de-cuidados-paliativos_419448",
+     "source": "Teletica Noticias",
+     "country": "CR",
+     "published_at": "2026-10-22T17:55:00-07:00"
+    },
+    {
+     "title": "¡A cocinar se ha dicho! Rubén McAdam prueba suerte en la cocina",
+     "url": "https://www.teletica.com/masqn/a-cocinar-se-ha-dicho-ruben-mcadam-prueba-suerte-en-la-cocina_419452",
+     "source": "Teletica Noticias",
+     "country": "CR",
+     "published_at": "2026-10-22T17:54:00-07:00"
+    },
+    {
+     "title": "Detienen a mensajero sospechoso de clonar tarjetas y realizar compras en internet",
+     "url": "https://www.teletica.com/sucesos/detienen-a-mensajero-sospechoso-de-clonar-tarjetas-y-realizar-compras-en-internet_419749",
+     "source": "Teletica Noticias",
+     "country": "CR",
+     "published_at": "2026-10-22T17:01:03-07:00"
+    }
+   ]
+  }
+ ]
+}

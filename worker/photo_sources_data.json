@@ -1,0 +1,4822 @@
+[
+  {
+    "name": "World Press Photo",
+    "domain": "worldpressphoto.org",
+    "url": "https://www.worldpressphoto.org",
+    "source_type": "photojournalism",
+    "category": "global_photo",
+    "country": "NL",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "ZEKE Magazine",
+    "domain": "docamericana.org",
+    "url": "https://www.docamericana.org/zeke",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Magnum Photos",
+    "domain": "magnumphotos.com",
+    "url": "https://www.magnumphotos.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "LensCulture",
+    "domain": "lensculture.com",
+    "url": "https://www.lensculture.com",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "NL",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "The Everyday Projects",
+    "domain": "theeverydayprojects.com",
+    "url": "https://theeverydayprojects.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "African Photojournalism Database",
+    "domain": "africanphotojournalismdatabase.org",
+    "url": "https://africanphotojournalismdatabase.org",
+    "source_type": "archive",
+    "category": "global_photo",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "POY Latam",
+    "domain": "poylatam.org",
+    "url": "https://poylatam.org",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "MX",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "VII Photo Agency",
+    "domain": "viiphoto.com",
+    "url": "https://www.viiphoto.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "NOOR Images",
+    "domain": "noorimages.com",
+    "url": "https://www.noorimages.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "NL",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Panos Pictures",
+    "domain": "panos.co.uk",
+    "url": "https://www.panos.co.uk",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Redux Pictures",
+    "domain": "reduxpictures.com",
+    "url": "https://www.reduxpictures.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Sipa Press",
+    "domain": "sipapress.com",
+    "url": "https://www.sipapress.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "EPA Images",
+    "domain": "epa.eu",
+    "url": "https://www.epa.eu",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "BE",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Reuters Pictures",
+    "domain": "reuters.com",
+    "url": "https://www.reuters.com/pictures/",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "AP Images",
+    "domain": "apimages.com",
+    "url": "https://www.apimages.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Getty Images Editorial",
+    "domain": "gettyimages.com",
+    "url": "https://www.gettyimages.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Alamy Editorial",
+    "domain": "alamy.com",
+    "url": "https://www.alamy.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Zuma Press",
+    "domain": "zumapress.com",
+    "url": "https://www.zumapress.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "NurPhoto",
+    "domain": "nurphoto.com",
+    "url": "https://www.nurphoto.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "IT",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Anadolu Images",
+    "domain": "aa.com.tr",
+    "url": "https://www.aa.com.tr/en/photo",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "TR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "AFP Forum",
+    "domain": "afp.com",
+    "url": "https://www.afp.com/en/products/photo",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Polaris Images",
+    "domain": "polarisimages.com",
+    "url": "https://www.polarisimages.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Contact Press Images",
+    "domain": "contactpressimages.com",
+    "url": "https://www.contactpressimages.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "VII Foundation",
+    "domain": "viifoundation.org",
+    "url": "https://www.viiphoto.com/foundation",
+    "source_type": "archive",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Verbatim Agency",
+    "domain": "verbatimagency.com",
+    "url": "https://www.verbatimagency.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Everyday Africa",
+    "domain": "everydayafrica.com",
+    "url": "https://www.everydayafrica.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Asia",
+    "domain": "everydayasia.com",
+    "url": "https://www.everydayasia.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "asia"
+  },
+  {
+    "name": "Everyday Middle East",
+    "domain": "everydaymiddleeast.com",
+    "url": "https://www.everydaymiddleeast.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Everyday Latin America",
+    "domain": "everydaylatinamerica.com",
+    "url": "https://www.everydaylatinamerica.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "latin-america"
+  },
+  {
+    "name": "Everyday Iran",
+    "domain": "everydayiran.org",
+    "url": "https://www.everydayiran.org",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Everyday Russia",
+    "domain": "everydayrussia.com",
+    "url": "https://www.everydayrussia.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Everyday Balkans",
+    "domain": "everydaybalkans.com",
+    "url": "https://www.everydaybalkans.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Everyday India",
+    "domain": "everydayindia.com",
+    "url": "https://www.everydayindia.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Everyday Refugees",
+    "domain": "everydayrefugees.com",
+    "url": "https://www.everydayrefugees.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Everyday Climate",
+    "domain": "everydayclimate.com",
+    "url": "https://www.everydayclimate.com",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Social Documentary Network",
+    "domain": "socialdocumentary.net",
+    "url": "https://www.socialdocumentary.net",
+    "source_type": "collective",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Burn Magazine",
+    "domain": "burnmagazine.org",
+    "url": "https://www.burnmagazine.org",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "F-Stop Magazine",
+    "domain": "fstopmagazine.com",
+    "url": "https://www.fstopmagazine.com",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Dodho Magazine",
+    "domain": "dodho.com",
+    "url": "https://www.dodho.com",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "ES",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "GUP Magazine",
+    "domain": "gup-magazine.com",
+    "url": "https://www.gup-magazine.com",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "NL",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "British Journal of Photography",
+    "domain": "bjphoto.co.uk",
+    "url": "https://www.bjphoto.co.uk",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "6Mois",
+    "domain": "6mois.fr",
+    "url": "https://www.6mois.fr",
+    "source_type": "photojournalism",
+    "category": "global_photo",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Polka Magazine",
+    "domain": "polka.fr",
+    "url": "https://www.polka.fr",
+    "source_type": "photojournalism",
+    "category": "global_photo",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "PhotoEvidence",
+    "domain": "photoevidence.org",
+    "url": "https://www.photoevidence.org",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Foto8",
+    "domain": "foto8.com",
+    "url": "https://www.foto8.com",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Daylight Books",
+    "domain": "daylightbooks.org",
+    "url": "https://www.daylightbooks.org",
+    "source_type": "archive",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Point.51",
+    "domain": "point51.com",
+    "url": "https://www.point51.com",
+    "source_type": "documentary",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "54Journal",
+    "domain": "54journal.com",
+    "url": "https://www.54journal.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Africazine",
+    "domain": "africazine.com",
+    "url": "https://www.africazine.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Africa Is a Country",
+    "domain": "africaisacountry.com",
+    "url": "https://africaisacountry.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "OkayAfrica",
+    "domain": "okayafrica.com",
+    "url": "https://www.okayafrica.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "US",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "This Is Africa",
+    "domain": "thisisafrica.co.ke",
+    "url": "https://www.thisisafrica.co.ke",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "KE",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Continent",
+    "domain": "thecontinent.org",
+    "url": "https://thecontinent.org",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Mail & Guardian Photos",
+    "domain": "mg.co.za",
+    "url": "https://www.mg.co.za",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Daily Maverick Photos",
+    "domain": "dailymaverick.co.za",
+    "url": "https://www.dailymaverick.co.za",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "GroundUp",
+    "domain": "groundup.org.za",
+    "url": "https://www.groundup.org.za",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "News24 Photos",
+    "domain": "news24.com",
+    "url": "https://www.news24.com/news24/photos",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "TimesLIVE Photos",
+    "domain": "timeslive.co.za",
+    "url": "https://www.timeslive.co.za/photos",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Daily Dispatch",
+    "domain": "dispatch.co.za",
+    "url": "https://www.dispatch.co.za",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "IOL Photos",
+    "domain": "iol.co.za",
+    "url": "https://www.iol.co.za/photos",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Eyewitness News",
+    "domain": "ewn.co.za",
+    "url": "https://www.ewn.co.za",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Outlier",
+    "domain": "theoutlier.co.za",
+    "url": "https://theoutlier.co.za",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Africa Geographic",
+    "domain": "africageographic.com",
+    "url": "https://www.africageographic.com",
+    "source_type": "nature",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Getaway",
+    "domain": "getaway.co.za",
+    "url": "https://www.getaway.co.za",
+    "source_type": "travel",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Afropunk",
+    "domain": "afropunk.com",
+    "url": "https://www.afropunk.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "US",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Nataal",
+    "domain": "nataal.com",
+    "url": "https://www.nataal.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Ruum",
+    "domain": "theruum.com",
+    "url": "https://www.theruum.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "LagosPhoto",
+    "domain": "lagosphoto.com",
+    "url": "https://www.lagosphoto.com",
+    "source_type": "festival",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "African Artists Foundation",
+    "domain": "africanartists.org",
+    "url": "https://www.africanartists.org",
+    "source_type": "archive",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Nubuke Foundation",
+    "domain": "nubukefoundation.org",
+    "url": "https://www.nubukefoundation.org",
+    "source_type": "archive",
+    "category": "africa",
+    "country": "GH",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Addis Foto Fest",
+    "domain": "addisfotofest.org",
+    "url": "https://www.addisfotofest.org",
+    "source_type": "festival",
+    "category": "africa",
+    "country": "ET",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Market Photo Workshop",
+    "domain": "marketphotoworkshop.com",
+    "url": "https://www.marketphotoworkshop.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Photojournalism Hub",
+    "domain": "photojournalismhub.org",
+    "url": "https://www.photojournalismhub.org",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "UG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Lens on Life",
+    "domain": "lensonlife.org",
+    "url": "https://www.lensonlife.org",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "US",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Ghana",
+    "domain": "everydayghana.com",
+    "url": "https://www.everydayghana.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "GH",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Nigeria",
+    "domain": "everydaynigeria.com",
+    "url": "https://www.everydaynigeria.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday South Africa",
+    "domain": "everydaysouthafrica.com",
+    "url": "https://www.everydaysouthafrica.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "ZA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Kenya",
+    "domain": "everydaykenya.com",
+    "url": "https://www.everydaykenya.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "KE",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Ethiopia",
+    "domain": "everydayethiopia.com",
+    "url": "https://www.everydayethiopia.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "ET",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Tanzania",
+    "domain": "everydaytanzania.com",
+    "url": "https://www.everydaytanzania.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "TZ",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Uganda",
+    "domain": "everydayuganda.com",
+    "url": "https://www.everydayuganda.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "UG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Rwanda",
+    "domain": "everydayrwanda.com",
+    "url": "https://www.everydayrwanda.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "RW",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Senegal",
+    "domain": "everydaysenegal.com",
+    "url": "https://www.everydaysenegal.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "SN",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Morocco",
+    "domain": "everydaymorocco.com",
+    "url": "https://www.everydaymorocco.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "MA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Everyday Egypt",
+    "domain": "everydayegypt.com",
+    "url": "https://www.everydayegypt.com",
+    "source_type": "collective",
+    "category": "africa",
+    "country": "EG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Republic",
+    "domain": "africarepublic.com",
+    "url": "https://www.africarepublic.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "GH",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Culture Custodian",
+    "domain": "culturecustodian.com",
+    "url": "https://www.culturecustodian.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "BellaNaija",
+    "domain": "bellanaija.com",
+    "url": "https://www.bellanaija.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Zikoko",
+    "domain": "zikoko.com",
+    "url": "https://www.zikoko.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Pulse Nigeria",
+    "domain": "pulse.ng",
+    "url": "https://www.pulse.ng",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Premium Times",
+    "domain": "premiumtimesng.com",
+    "url": "https://www.premiumtimesng.com",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Daily Trust",
+    "domain": "dailytrust.com",
+    "url": "https://www.dailytrust.com",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The EastAfrican",
+    "domain": "theeastafrican.co.ke",
+    "url": "https://www.theeastafrican.co.ke",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "KE",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Mada Masr",
+    "domain": "madamasr.com",
+    "url": "https://madamasr.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "EG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Ahram Online Photos",
+    "domain": "english.ahram.org.eg",
+    "url": "https://english.ahram.org.eg",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "EG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Revista Gatopardo",
+    "domain": "gatopardo.com",
+    "url": "https://www.gatopardo.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "MX",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Zona Docs",
+    "domain": "zonadocs.com",
+    "url": "https://www.zonadocs.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "MX",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Pie de Pagina",
+    "domain": "piedepagina.org",
+    "url": "https://www.piedepagina.org",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "MX",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Animal Politico",
+    "domain": "animalpolitico.com",
+    "url": "https://www.animalpolitico.com",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "MX",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Proceso",
+    "domain": "proceso.com.mx",
+    "url": "https://www.proceso.com.mx",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "MX",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "BBC Mundo",
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/mundo",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "GB",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Revista Anfibia",
+    "domain": "revistaanfibia.com",
+    "url": "https://www.revistaanfibia.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Cosecha Roja",
+    "domain": "cosecharoja.com",
+    "url": "https://www.cosecharoja.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Agencia Presentes",
+    "domain": "agenciapresentes.org",
+    "url": "https://agenciapresentes.org",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Revista Crisis",
+    "domain": "revistacrisis.com.ar",
+    "url": "https://www.revistacrisis.com.ar",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "070",
+    "domain": "revista070.com",
+    "url": "https://revista070.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "La Silla Vacia",
+    "domain": "lasillavacia.com",
+    "url": "https://www.lasillavacia.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "GK",
+    "domain": "gk.city",
+    "url": "https://gk.city",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "EC",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Plan V",
+    "domain": "planv.com.ec",
+    "url": "https://www.planv.com.ec",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "EC",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Connectas",
+    "domain": "connectas.org",
+    "url": "https://www.connectas.org",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Agencia Publica",
+    "domain": "apublica.org",
+    "url": "https://apublica.org",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Nexo Jornal",
+    "domain": "nexojornal.com.br",
+    "url": "https://www.nexojornal.com.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Revista Piaui",
+    "domain": "piaui.folha.uol.com.br",
+    "url": "https://piaui.folha.uol.com.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Agencia Brasil",
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Brasil de Fato",
+    "domain": "brasildefato.com.br",
+    "url": "https://www.brasildefato.com.br",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Mongabay Brasil",
+    "domain": "brasil.mongabay.com",
+    "url": "https://brasil.mongabay.com",
+    "source_type": "nature",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Amazonia Real",
+    "domain": "amazoniareal.com.br",
+    "url": "https://amazoniareal.com.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "InfoAmazonia",
+    "domain": "infoamazonia.org",
+    "url": "https://www.infoamazonia.org",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Reporter Brasil",
+    "domain": "reporterbrasil.org.br",
+    "url": "https://reporterbrasil.org.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Revista Zum",
+    "domain": "revistazum.com.br",
+    "url": "https://www.revistazum.com.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "FotoRio",
+    "domain": "fotorio.org.br",
+    "url": "https://fotorio.org.br",
+    "source_type": "festival",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Fhox",
+    "domain": "fhox.com.br",
+    "url": "https://fhox.com.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Revista OLD",
+    "domain": "revistaold.com.br",
+    "url": "https://revistaold.com.br",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Ojo Publico",
+    "domain": "ojo-publico.com",
+    "url": "https://ojo-publico.com",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "PE",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Convoca",
+    "domain": "convoca.pe",
+    "url": "https://convoca.pe",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "PE",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "La Nacion Fotos",
+    "domain": "lanacion.com.ar",
+    "url": "https://www.lanacion.com.ar/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Clarin Fotos",
+    "domain": "clarin.com",
+    "url": "https://www.clarin.com/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "El Tiempo Fotos",
+    "domain": "eltiempo.com",
+    "url": "https://www.eltiempo.com/fotos",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "El Espectador Fotos",
+    "domain": "elespectador.com",
+    "url": "https://www.elespectador.com/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "El Comercio Peru Fotos",
+    "domain": "elcomercio.pe",
+    "url": "https://elcomercio.pe/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "PE",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "El Universo Fotos",
+    "domain": "eluniverso.com",
+    "url": "https://www.eluniverso.com/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "EC",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "La Republica Fotos",
+    "domain": "larepublica.pe",
+    "url": "https://larepublica.pe/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "PE",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Infobae Fotos",
+    "domain": "infobae.com",
+    "url": "https://www.infobae.com/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Pagina 12 Fotos",
+    "domain": "pagina12.com.ar",
+    "url": "https://www.pagina12.com.ar/fotos",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "AR",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Revista Semana Fotos",
+    "domain": "semana.com",
+    "url": "https://www.semana.com/fotos/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Folha Fotos",
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/fotografia/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Estadao Fotos",
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/fotografia/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "O Globo Fotos",
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/fotografias/",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "BR",
+    "language": "pt",
+    "region": "latin-america"
+  },
+  {
+    "name": "Primicias",
+    "domain": "primicias.ec",
+    "url": "https://www.primicias.ec",
+    "source_type": "photojournalism",
+    "category": "latin_america",
+    "country": "EC",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Le Monde Photographies",
+    "domain": "lemonde.fr",
+    "url": "https://www.lemonde.fr/photo/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Liberation Photos",
+    "domain": "liberation.fr",
+    "url": "https://www.liberation.fr/photos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Le Figaro Photo",
+    "domain": "lefigaro.fr",
+    "url": "https://www.lefigaro.fr/photo/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Mediapart",
+    "domain": "mediapart.fr",
+    "url": "https://www.mediapart.fr",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Fisheye Magazine",
+    "domain": "fisheye-magazine.com",
+    "url": "https://www.fisheye-magazine.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "LOeil de la Photographie",
+    "domain": "loeildelaphotographie.com",
+    "url": "https://loeildelaphotographie.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Reponses Photo",
+    "domain": "reponsesphoto.com",
+    "url": "https://www.reponsesphoto.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Chasseur d Images",
+    "domain": "chasseurdimages.com",
+    "url": "https://www.chasseurdimages.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "FR",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Le Temps Photos",
+    "domain": "letemps.ch",
+    "url": "https://www.letemps.ch/photos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "CH",
+    "language": "fr",
+    "region": "europe"
+  },
+  {
+    "name": "Neue Zurichcher Zeitung Visual",
+    "domain": "nzz.ch",
+    "url": "https://www.nzz.ch/visual-stories",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "CH",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Republik",
+    "domain": "republik.ch",
+    "url": "https://www.republik.ch",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "CH",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Tages-Anzeiger Bilder",
+    "domain": "tagesanzeiger.ch",
+    "url": "https://www.tagesanzeiger.ch/bilder",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "CH",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Der Spiegel Fotos",
+    "domain": "spiegel.de",
+    "url": "https://www.spiegel.de/fotostrecke/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Die Zeit Fotos",
+    "domain": "zeit.de",
+    "url": "https://www.zeit.de/foto",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Suddeutsche Zeitung Fotos",
+    "domain": "sueddeutsche.de",
+    "url": "https://www.sueddeutsche.de/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Frankfurter Allgemeine Bilder",
+    "domain": "faz.net",
+    "url": "https://www.faz.net/fotos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "GEO Germany",
+    "domain": "geo.de",
+    "url": "https://www.geo.de",
+    "source_type": "nature",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "stern Fotografie",
+    "domain": "stern.de",
+    "url": "https://www.stern.de/fotografie",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Photonews",
+    "domain": "photonews.de",
+    "url": "https://www.photonews.de",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Docma",
+    "domain": "docma.com",
+    "url": "https://www.docma.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Fotomagazin",
+    "domain": "fotomagazin.de",
+    "url": "https://www.fotomagazin.de",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Der Standard Fotos",
+    "domain": "derstandard.at",
+    "url": "https://www.derstandard.at/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "AT",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Falter",
+    "domain": "falter.at",
+    "url": "https://www.falter.at",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "AT",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Profil Fotos",
+    "domain": "profil.at",
+    "url": "https://www.profil.at/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "AT",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Die Presse Fotos",
+    "domain": "diepresse.com",
+    "url": "https://www.diepresse.com/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "AT",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Internazionale Foto",
+    "domain": "internazionale.it",
+    "url": "https://www.internazionale.it/foto",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "La Repubblica Foto",
+    "domain": "repubblica.it",
+    "url": "https://www.repubblica.it/fotografie/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "Corriere Foto",
+    "domain": "corriere.it",
+    "url": "https://www.corriere.it/fotogallery/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "LEspresso",
+    "domain": "espresso.repubblica.it",
+    "url": "https://espresso.repubblica.it",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "Doppiozero",
+    "domain": "doppiozero.com",
+    "url": "https://www.doppiozero.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "Witness Journal",
+    "domain": "witnessjournal.com",
+    "url": "https://www.witnessjournal.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "IT",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Fotografia Europea",
+    "domain": "fotografiaeuropea.it",
+    "url": "https://www.fotografiaeuropea.it",
+    "source_type": "festival",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "El Mundo Fotos",
+    "domain": "elmundo.es",
+    "url": "https://www.elmundo.es/fotos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "La Vanguardia Fotos",
+    "domain": "lavanguardia.com",
+    "url": "https://www.lavanguardia.com/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "ES",
+    "language": "ca",
+    "region": "europe"
+  },
+  {
+    "name": "Ara Fotos",
+    "domain": "ara.cat",
+    "url": "https://www.ara.cat/fotos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "ES",
+    "language": "ca",
+    "region": "europe"
+  },
+  {
+    "name": "5W Magazine",
+    "domain": "revista5w.com",
+    "url": "https://www.revista5w.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "Altair Magazine",
+    "domain": "altair.com.es",
+    "url": "https://www.altair.com.es",
+    "source_type": "travel",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "Clavoardiendo",
+    "domain": "clavoardiendo.com",
+    "url": "https://www.clavoardiendo.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "Exit Magazine",
+    "domain": "exitimaging.org",
+    "url": "https://www.exitimaging.org",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "OjodePez",
+    "domain": "ojodepez.com",
+    "url": "https://www.ojodepez.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "El Pais Fotografia",
+    "domain": "elpais.com",
+    "url": "https://elpais.com/fotografia/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "Publico Portugal",
+    "domain": "publico.pt",
+    "url": "https://www.publico.pt",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "PT",
+    "language": "pt",
+    "region": "europe"
+  },
+  {
+    "name": "Expresso Fotos",
+    "domain": "expresso.pt",
+    "url": "https://expresso.pt/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "PT",
+    "language": "pt",
+    "region": "europe"
+  },
+  {
+    "name": "Visao",
+    "domain": "visao.sapo.pt",
+    "url": "https://visao.sapo.pt",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "PT",
+    "language": "pt",
+    "region": "europe"
+  },
+  {
+    "name": "Observador",
+    "domain": "observador.pt",
+    "url": "https://observador.pt",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "PT",
+    "language": "pt",
+    "region": "europe"
+  },
+  {
+    "name": "Sabado",
+    "domain": "sabado.pt",
+    "url": "https://www.sabado.pt",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "PT",
+    "language": "pt",
+    "region": "europe"
+  },
+  {
+    "name": "Aftenposten Photos",
+    "domain": "aftenposten.no",
+    "url": "https://www.aftenposten.no/bilder",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "NO",
+    "language": "no",
+    "region": "europe"
+  },
+  {
+    "name": "VG Fotos",
+    "domain": "vg.no",
+    "url": "https://www.vg.no/fotball",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "NO",
+    "language": "no",
+    "region": "europe"
+  },
+  {
+    "name": "NRK Foto",
+    "domain": "nrk.no",
+    "url": "https://www.nrk.no/bilder/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "NO",
+    "language": "no",
+    "region": "europe"
+  },
+  {
+    "name": "Dagens Nyheter Bild",
+    "domain": "dn.se",
+    "url": "https://www.dn.se/bilder/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "SE",
+    "language": "sv",
+    "region": "europe"
+  },
+  {
+    "name": "Svenska Dagbladet Foto",
+    "domain": "svd.se",
+    "url": "https://www.svd.se/foton",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "SE",
+    "language": "sv",
+    "region": "europe"
+  },
+  {
+    "name": "Filter",
+    "domain": "filtermagasin.se",
+    "url": "https://www.filtermagasin.se",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "SE",
+    "language": "sv",
+    "region": "europe"
+  },
+  {
+    "name": "Politiken Fotos",
+    "domain": "politiken.dk",
+    "url": "https://politiken.dk/fotos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DK",
+    "language": "da",
+    "region": "europe"
+  },
+  {
+    "name": "Berlingske Fotos",
+    "domain": "berlingske.dk",
+    "url": "https://www.berlingske.dk/fotos",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DK",
+    "language": "da",
+    "region": "europe"
+  },
+  {
+    "name": "Information",
+    "domain": "information.dk",
+    "url": "https://www.information.dk",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "DK",
+    "language": "da",
+    "region": "europe"
+  },
+  {
+    "name": "DR Foto",
+    "domain": "dr.dk",
+    "url": "https://www.dr.dk/madplanen/foto",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "DK",
+    "language": "da",
+    "region": "europe"
+  },
+  {
+    "name": "Helsingin Sanomat",
+    "domain": "hs.fi",
+    "url": "https://www.hs.fi",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "FI",
+    "language": "fi",
+    "region": "europe"
+  },
+  {
+    "name": "Yle Kuvapalvelu",
+    "domain": "yle.fi",
+    "url": "https://yle.fi/uutiset",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "FI",
+    "language": "fi",
+    "region": "europe"
+  },
+  {
+    "name": "Hufvudstadsbladet",
+    "domain": "hbl.fi",
+    "url": "https://www.hbl.fi",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "FI",
+    "language": "sv",
+    "region": "europe"
+  },
+  {
+    "name": "Delo Fotografija",
+    "domain": "delo.si",
+    "url": "https://www.delo.si/fotografije/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "SI",
+    "language": "sl",
+    "region": "europe"
+  },
+  {
+    "name": "Oslobodjenje Foto",
+    "domain": "oslobodjenje.ba",
+    "url": "https://www.oslobodjenje.ba/fotografije",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "BA",
+    "language": "bs",
+    "region": "europe"
+  },
+  {
+    "name": "Balkan Insight",
+    "domain": "balkaninsight.com",
+    "url": "https://www.balkaninsight.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "RS",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Kosovo 2.0",
+    "domain": "kosovotwopoint0.com",
+    "url": "https://kosovotwopoint0.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "XK",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Vreme",
+    "domain": "vreme.com",
+    "url": "https://www.vreme.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "RS",
+    "language": "sr",
+    "region": "europe"
+  },
+  {
+    "name": "Nova.rs",
+    "domain": "nova.rs",
+    "url": "https://nova.rs",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "RS",
+    "language": "sr",
+    "region": "europe"
+  },
+  {
+    "name": "B92",
+    "domain": "b92.net",
+    "url": "https://www.b92.net",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "RS",
+    "language": "sr",
+    "region": "europe"
+  },
+  {
+    "name": "Hotnews",
+    "domain": "hotnews.ro",
+    "url": "https://www.hotnews.ro",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "RO",
+    "language": "ro",
+    "region": "europe"
+  },
+  {
+    "name": "Scena9",
+    "domain": "scena9.ro",
+    "url": "https://www.scena9.ro",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "RO",
+    "language": "ro",
+    "region": "europe"
+  },
+  {
+    "name": "Recorder",
+    "domain": "recorder.ro",
+    "url": "https://recorder.ro",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "RO",
+    "language": "ro",
+    "region": "europe"
+  },
+  {
+    "name": "Gazeta Wyborcza",
+    "domain": "wyborcza.pl",
+    "url": "https://wyborcza.pl",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "PL",
+    "language": "pl",
+    "region": "europe"
+  },
+  {
+    "name": "Kultura Liberalna",
+    "domain": "kulturaliberalna.pl",
+    "url": "https://kulturaliberalna.pl",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "PL",
+    "language": "pl",
+    "region": "europe"
+  },
+  {
+    "name": "Bellingcat",
+    "domain": "bellingcat.com",
+    "url": "https://www.bellingcat.com",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "NL",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "De Correspondent",
+    "domain": "decorrespondent.nl",
+    "url": "https://decorrespondent.nl",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "NL",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "NRC Foto",
+    "domain": "nrc.nl",
+    "url": "https://www.nrc.nl/fotos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "NL",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "De Groene Amsterdammer",
+    "domain": "groene.nl",
+    "url": "https://www.groene.nl",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "NL",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "De Morgen",
+    "domain": "demorgen.be",
+    "url": "https://www.demorgen.be",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "BE",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "De Standaard",
+    "domain": "standaard.be",
+    "url": "https://www.standaard.be",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "BE",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "Apache",
+    "domain": "apache.be",
+    "url": "https://www.apache.be",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "BE",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "Knack",
+    "domain": "knack.be",
+    "url": "https://www.knack.be",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "BE",
+    "language": "nl",
+    "region": "europe"
+  },
+  {
+    "name": "Monopol",
+    "domain": "monopol-magazin.de",
+    "url": "https://www.monopol-magazin.de",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "DE",
+    "language": "de",
+    "region": "europe"
+  },
+  {
+    "name": "Tygodnik Powszechny",
+    "domain": "tygodnikpowszechny.pl",
+    "url": "https://www.tygodnikpowszechny.pl",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "PL",
+    "language": "pl",
+    "region": "europe"
+  },
+  {
+    "name": "Publico Fotos",
+    "domain": "publico.es",
+    "url": "https://www.publico.es/fotos/",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "ES",
+    "language": "es",
+    "region": "europe"
+  },
+  {
+    "name": "The Third Pole",
+    "domain": "thethirdpole.net",
+    "url": "https://www.thethirdpole.net",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Himal Southasian",
+    "domain": "himalmag.com",
+    "url": "https://himalmag.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "NP",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Caravan",
+    "domain": "thecaravan.in",
+    "url": "https://www.thecaravan.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Wire",
+    "domain": "thewire.in",
+    "url": "https://thewire.in",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Scroll.in",
+    "domain": "scroll.in",
+    "url": "https://scroll.in",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Article 14",
+    "domain": "article-14.com",
+    "url": "https://article-14.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "PARI",
+    "domain": "pari.org.in",
+    "url": "https://pari.org.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Fountain Ink",
+    "domain": "fountainink.in",
+    "url": "https://fountainink.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Goya Journal",
+    "domain": "goyajournal.com",
+    "url": "https://www.goyajournal.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Platform Magazine",
+    "domain": "platformindia.in",
+    "url": "https://platformindia.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "PhotoKlass",
+    "domain": "photoklass.in",
+    "url": "https://www.photoklass.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Better Photography",
+    "domain": "betterphotography.in",
+    "url": "https://www.betterphotography.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Smart Photography",
+    "domain": "smartphotographymag.com",
+    "url": "https://www.smartphotographymag.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Quint",
+    "domain": "thequint.com",
+    "url": "https://www.thequint.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "EastMojo",
+    "domain": "eastmojo.com",
+    "url": "https://eastmojo.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Gaon Connection",
+    "domain": "gaonconnection.com",
+    "url": "https://www.gaonconnection.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Mongabay India",
+    "domain": "india.mongabay.com",
+    "url": "https://india.mongabay.com",
+    "source_type": "nature",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Bastion",
+    "domain": "thebastion.co.in",
+    "url": "https://thebastion.co.in",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Newslaundry",
+    "domain": "newslaundry.com",
+    "url": "https://www.newslaundry.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Nepali Times",
+    "domain": "nepalitimes.com",
+    "url": "https://www.nepalitimes.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "NP",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Record Nepal",
+    "domain": "recordnepal.com",
+    "url": "https://recordnepal.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "NP",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Setopati",
+    "domain": "setopati.com",
+    "url": "https://www.setopati.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "NP",
+    "language": "ne",
+    "region": "south-asia"
+  },
+  {
+    "name": "Onlinekhabar",
+    "domain": "onlinekhabar.com",
+    "url": "https://www.onlinekhabar.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "NP",
+    "language": "ne",
+    "region": "south-asia"
+  },
+  {
+    "name": "Himalaya Times",
+    "domain": "thehimalayatimes.com",
+    "url": "https://www.thehimalayatimes.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "NP",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Daily Star",
+    "domain": "thedailystar.net",
+    "url": "https://www.thedailystar.net",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "BD",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Dhaka Tribune",
+    "domain": "dhakatribune.com",
+    "url": "https://www.dhakatribune.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "BD",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Prothom Alo",
+    "domain": "prothomalo.com",
+    "url": "https://www.prothomalo.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "BD",
+    "language": "bn",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Business Standard",
+    "domain": "thebusinessstandard.com",
+    "url": "https://www.thebusinessstandard.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "BD",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Netra News",
+    "domain": "netra.news",
+    "url": "https://netra.news",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "BD",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Mongabay Bangladesh",
+    "domain": "bd.mongabay.com",
+    "url": "https://bd.mongabay.com",
+    "source_type": "nature",
+    "category": "asia",
+    "country": "BD",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Dawn Images",
+    "domain": "dawn.com",
+    "url": "https://www.dawn.com/news/images",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "PK",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Herald",
+    "domain": "herald.com.pk",
+    "url": "https://herald.com.pk",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "PK",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Friday Times",
+    "domain": "fridaytimes.com",
+    "url": "https://www.fridaytimes.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "PK",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Profit Pakistan",
+    "domain": "profit.pakistantoday.com.pk",
+    "url": "https://profit.pakistantoday.com.pk",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "PK",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Mangobaaz",
+    "domain": "mangobaaz.com",
+    "url": "https://mangobaaz.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "PK",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Arab News Photos",
+    "domain": "arabnews.com",
+    "url": "https://www.arabnews.com/photos",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "SA",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Al Arabiya Pictures",
+    "domain": "english.alarabiya.net",
+    "url": "https://english.alarabiya.net/photos",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "SA",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Al Jazeera Pictures",
+    "domain": "aljazeera.com",
+    "url": "https://www.aljazeera.com/pictures/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "QA",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Raseef22",
+    "domain": "raseef22.com",
+    "url": "https://raseef22.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "LB",
+    "language": "ar",
+    "region": "middle-east"
+  },
+  {
+    "name": "Daraj",
+    "domain": "darajmedia.com",
+    "url": "https://darajmedia.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "LB",
+    "language": "ar",
+    "region": "middle-east"
+  },
+  {
+    "name": "7iber",
+    "domain": "7iber.com",
+    "url": "https://7iber.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "JO",
+    "language": "ar",
+    "region": "middle-east"
+  },
+  {
+    "name": "Al Jumhuriya",
+    "domain": "aljumhuriya.net",
+    "url": "https://aljumhuriya.net",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "SY",
+    "language": "ar",
+    "region": "middle-east"
+  },
+  {
+    "name": "Megaphone",
+    "domain": "megaphone.news",
+    "url": "https://megaphone.news",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "LB",
+    "language": "ar",
+    "region": "middle-east"
+  },
+  {
+    "name": "Mashallah News",
+    "domain": "mashallahnews.com",
+    "url": "https://mashallahnews.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "LB",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Arab Image Foundation",
+    "domain": "arabimagefoundation.com",
+    "url": "https://www.arabimagefoundation.com",
+    "source_type": "archive",
+    "category": "asia",
+    "country": "LB",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Gulf Photo Plus",
+    "domain": "gulfphotoplus.com",
+    "url": "https://www.gulfphotoplus.com",
+    "source_type": "collective",
+    "category": "asia",
+    "country": "AE",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Tribe",
+    "domain": "tribemagazine.com",
+    "url": "https://www.tribemagazine.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "AE",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "The National Photos",
+    "domain": "thenationalnews.com",
+    "url": "https://www.thenationalnews.com/photos",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "AE",
+    "language": "en",
+    "region": "middle-east"
+  },
+  {
+    "name": "Nippon.com",
+    "domain": "nippon.com",
+    "url": "https://www.nippon.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "JP",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Tokyo Art Beat",
+    "domain": "tokyoartbeat.com",
+    "url": "https://www.tokyoartbeat.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "JP",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "IMA Magazine",
+    "domain": "imaonline.jp",
+    "url": "https://www.imaonline.jp",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "JP",
+    "language": "ja",
+    "region": "east-asia"
+  },
+  {
+    "name": "Kyodo News Images",
+    "domain": "english.kyodonews.net",
+    "url": "https://english.kyodonews.net",
+    "source_type": "agency",
+    "category": "asia",
+    "country": "JP",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Koreana",
+    "domain": "koreana.org",
+    "url": "https://www.koreana.org",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "KR",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Yonhap Photos",
+    "domain": "yna.co.kr",
+    "url": "https://en.yna.co.kr/photos",
+    "source_type": "agency",
+    "category": "asia",
+    "country": "KR",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Hankyoreh Photos",
+    "domain": "hani.co.kr",
+    "url": "https://www.hani.co.kr/arti/PHOTOS",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "KR",
+    "language": "ko",
+    "region": "east-asia"
+  },
+  {
+    "name": "Korea JoongAng Daily",
+    "domain": "koreajoongangdaily.joins.com",
+    "url": "https://koreajoongangdaily.joins.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "KR",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Gwangju Biennale",
+    "domain": "gwangjubiennale.org",
+    "url": "https://www.gwangjubiennale.org",
+    "source_type": "festival",
+    "category": "asia",
+    "country": "KR",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Sixth Tone",
+    "domain": "sixthtone.com",
+    "url": "https://www.sixthtone.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "CN",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "The World of Chinese",
+    "domain": "theworldofchinese.com",
+    "url": "https://www.theworldofchinese.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "CN",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "China Dialogue",
+    "domain": "chinadialogue.net",
+    "url": "https://www.chinadialogue.net",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "CN",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Initium Media",
+    "domain": "theinitium.com",
+    "url": "https://theinitium.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "HK",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "Hong Kong Free Press",
+    "domain": "hongkongfp.com",
+    "url": "https://www.hongkongfp.com",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "HK",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "The News Lens",
+    "domain": "thenewslens.com",
+    "url": "https://www.thenewslens.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "TW",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "CommonWealth Magazine",
+    "domain": "cw.com.tw",
+    "url": "https://www.cw.com.tw",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "TW",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "The Reporter",
+    "domain": "tnl.news",
+    "url": "https://tnl.news",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "TW",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "Central News Agency",
+    "domain": "cna.com.tw",
+    "url": "https://www.cna.com.tw",
+    "source_type": "agency",
+    "category": "asia",
+    "country": "TW",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "Rice Media",
+    "domain": "ricemedia.co",
+    "url": "https://ricemedia.co",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "SG",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "New Naratif",
+    "domain": "newnaratif.com",
+    "url": "https://newnaratif.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "SG",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Rappler",
+    "domain": "rappler.com",
+    "url": "https://www.rappler.com",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Philippine Daily Inquirer Photos",
+    "domain": "inquirer.net",
+    "url": "https://www.inquirer.net/photos/",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "ABS-CBN News Photos",
+    "domain": "abs-cbn.com",
+    "url": "https://news.abs-cbn.com/photos",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "GMA News Photos",
+    "domain": "gmanetwork.com",
+    "url": "https://www.gmanetwork.com/news/photos/",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Vera Files",
+    "domain": "verfiles.org",
+    "url": "https://verfiles.org",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "PCIJ",
+    "domain": "pcij.org",
+    "url": "https://pcij.org",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "The Jakarta Post Photos",
+    "domain": "thejakartapost.com",
+    "url": "https://www.thejakartapost.com/photos",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Kompas Foto",
+    "domain": "kompas.com",
+    "url": "https://www.kompas.com/foto",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Tempo Photos",
+    "domain": "tempo.co",
+    "url": "https://www.tempo.co/foto",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Project Multatuli",
+    "domain": "projectmultatuli.org",
+    "url": "https://www.projectmultatuli.org",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Narasi",
+    "domain": "narasi.tv",
+    "url": "https://www.narasi.tv",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Tirto",
+    "domain": "tirto.id",
+    "url": "https://tirto.id",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Mongabay Indonesia",
+    "domain": "indonesia.mongabay.com",
+    "url": "https://indonesia.mongabay.com",
+    "source_type": "nature",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "The Gecko Project",
+    "domain": "thegeckoproject.org",
+    "url": "https://www.thegeckoproject.org",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Remotivi",
+    "domain": "remotivi.or.id",
+    "url": "https://remotivi.or.id",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "ID",
+    "language": "id",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Malaysiakini Photos",
+    "domain": "malaysiakini.com",
+    "url": "https://www.malaysiakini.com/photos",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "MY",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Prachatai",
+    "domain": "prachatai.com",
+    "url": "https://www.prachatai.com",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Bangkok Post Photos",
+    "domain": "bangkokpost.com",
+    "url": "https://www.bangkokpost.com/photos",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Khaosod English",
+    "domain": "khaosodenglish.com",
+    "url": "https://www.khaosodenglish.com",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Frontier Myanmar",
+    "domain": "frontiermyanmar.net",
+    "url": "https://www.frontiermyanmar.net",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "MM",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Myanmar Now",
+    "domain": "myanmar-now.org",
+    "url": "https://myanmar-now.org",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "MM",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Mekong Eye",
+    "domain": "mekongeye.com",
+    "url": "https://www.mekongeye.com",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Southeast Asia Globe",
+    "domain": "southeastasiaglobe.com",
+    "url": "https://southeastasiaglobe.com",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "KH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "The Diplomat",
+    "domain": "thediplomat.com",
+    "url": "https://thediplomat.com",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "US",
+    "language": "en",
+    "region": "asia-pacific"
+  },
+  {
+    "name": "New Mandala",
+    "domain": "newmandala.org",
+    "url": "https://www.newmandala.org",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "AU",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "RNZ Pacific",
+    "domain": "rnz.co.nz",
+    "url": "https://www.rnz.co.nz/international/pacific-news",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "NZ",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "ABC Pacific",
+    "domain": "abc.net.au",
+    "url": "https://www.abc.net.au/news/pacific",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "AU",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Fiji Times",
+    "domain": "fijitimes.com",
+    "url": "https://www.fijitimes.com",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "FJ",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Fiji Sun",
+    "domain": "fijisun.com.fj",
+    "url": "https://www.fijisun.com.fj",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "FJ",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Samoa Observer",
+    "domain": "observer.ws",
+    "url": "https://www.observer.ws",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "WS",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Tonga Daily News",
+    "domain": "matangitonga.to",
+    "url": "https://www.matangitonga.to",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "TO",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Vanuatu Daily Post",
+    "domain": "dailypost.vu",
+    "url": "https://www.dailypost.vu",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "VU",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "PNG Post-Courier",
+    "domain": "postcourier.com.pg",
+    "url": "https://www.postcourier.com.pg",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "PG",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "National Geographic",
+    "domain": "nationalgeographic.com",
+    "url": "https://www.nationalgeographic.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "National Geographic Traveller",
+    "domain": "natgeotraveller.com",
+    "url": "https://www.natgeotraveller.com",
+    "source_type": "travel",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Mongabay",
+    "domain": "mongabay.com",
+    "url": "https://news.mongabay.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Yale Environment 360",
+    "domain": "e360.yale.edu",
+    "url": "https://e360.yale.edu",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Hakai Magazine",
+    "domain": "hakaimagazine.com",
+    "url": "https://www.hakaimagazine.com",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "CA",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "bioGraphic",
+    "domain": "biographic.com",
+    "url": "https://www.biographic.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Oceanographic Magazine",
+    "domain": "oceanographicmagazine.com",
+    "url": "https://www.oceanographicmagazine.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Earth.Org",
+    "domain": "earth.org",
+    "url": "https://earth.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "HK",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Atmos",
+    "domain": "atmos.earth",
+    "url": "https://atmos.earth",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Emergence Magazine",
+    "domain": "emergencemagazine.org",
+    "url": "https://www.emergencemagazine.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Ensia",
+    "domain": "ensia.com",
+    "url": "https://ensia.com",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "The Revelator",
+    "domain": "therevelator.org",
+    "url": "https://therevelator.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Grist",
+    "domain": "grist.org",
+    "url": "https://grist.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Climate Visuals",
+    "domain": "climatevisuals.org",
+    "url": "https://climatevisuals.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Inside Climate News",
+    "domain": "insideclimatenews.org",
+    "url": "https://insideclimatenews.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "High Country News",
+    "domain": "hcn.org",
+    "url": "https://www.hcn.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Outdoor Photographer",
+    "domain": "outdoorphotographer.com",
+    "url": "https://www.outdoorphotographer.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Adventure Journal",
+    "domain": "adventure-journal.com",
+    "url": "https://www.adventure-journal.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Sidetracked Magazine",
+    "domain": "sidetracked.com",
+    "url": "https://www.sidetracked.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Alpinist",
+    "domain": "alpinist.com",
+    "url": "https://www.alpinist.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Mountain Gazette",
+    "domain": "mountaingazette.com",
+    "url": "https://www.mountaingazette.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Patagonia Stories",
+    "domain": "patagonia.com",
+    "url": "https://www.patagonia.com/stories/",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Climate Outreach",
+    "domain": "climateoutreach.org",
+    "url": "https://www.climateoutreach.org",
+    "source_type": "documentary",
+    "category": "nature_wildlife",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Street Photography Magazine",
+    "domain": "streetphotographymagazine.com",
+    "url": "https://www.streetphotographymagazine.com",
+    "source_type": "street",
+    "category": "street",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Street Photography International",
+    "domain": "streetphotographyinternational.com",
+    "url": "https://www.streetphotographyinternational.com",
+    "source_type": "street",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Burn My Eye",
+    "domain": "burnmyeye.com",
+    "url": "https://www.burnmyeye.com",
+    "source_type": "street",
+    "category": "street",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "In-Public",
+    "domain": "in-public.com",
+    "url": "https://www.in-public.com",
+    "source_type": "collective",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Street Level Photoworks",
+    "domain": "streetlevelphotoworks.org",
+    "url": "https://www.streetlevelphotoworks.org",
+    "source_type": "archive",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "The Photo Society",
+    "domain": "thephotosociety.org",
+    "url": "https://www.thephotosociety.org",
+    "source_type": "collective",
+    "category": "street",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Huck Magazine",
+    "domain": "huckmag.com",
+    "url": "https://www.huckmag.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "The Gentlewoman",
+    "domain": "thegentlewoman.com",
+    "url": "https://www.thegentlewoman.com",
+    "source_type": "fashion",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "AnOther Magazine",
+    "domain": "anothermag.com",
+    "url": "https://www.anothermag.com",
+    "source_type": "fashion",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "i-D",
+    "domain": "i-d.co",
+    "url": "https://i-d.co",
+    "source_type": "fashion",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Dazed",
+    "domain": "dazeddigital.com",
+    "url": "https://www.dazeddigital.com",
+    "source_type": "fashion",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Purple",
+    "domain": "purplefrance.com",
+    "url": "https://www.purplefrance.com",
+    "source_type": "fashion",
+    "category": "street",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Kaleidoscope",
+    "domain": "kaleidoscope-mag.com",
+    "url": "https://www.kaleidoscope-mag.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "IT",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "WePresent",
+    "domain": "wepresent.wetransfer.com",
+    "url": "https://wepresent.wetransfer.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "NL",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Nowness",
+    "domain": "nowness.com",
+    "url": "https://www.nowness.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Its Nice That",
+    "domain": "itsnicethat.com",
+    "url": "https://www.itsnicethat.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Creative Boom",
+    "domain": "creativeboom.com",
+    "url": "https://www.creativeboom.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Ignant",
+    "domain": "ignant.com",
+    "url": "https://www.ignant.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "DE",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Booooooom",
+    "domain": "booooooom.com",
+    "url": "https://www.booooooom.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "CA",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Juxtapoz",
+    "domain": "juxtapoz.com",
+    "url": "https://www.juxtapoz.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Colossal",
+    "domain": "thisiscolossal.com",
+    "url": "https://www.thisiscolossal.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Beautiful Bizarre",
+    "domain": "beautifulbizarre.net",
+    "url": "https://www.beautifulbizarre.net",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "AU",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Aesthetica",
+    "domain": "aestheticaonline.com",
+    "url": "https://www.aestheticaonline.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Creative Review",
+    "domain": "creativerreview.com",
+    "url": "https://www.creativereview.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Feature Shoot",
+    "domain": "featureshoot.com",
+    "url": "https://www.featureshoot.com",
+    "source_type": "documentary",
+    "category": "street",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Street Photography Now",
+    "domain": "streetphotographynow.com",
+    "url": "https://www.streetphotographynow.com",
+    "source_type": "collective",
+    "category": "street",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "NASA Images",
+    "domain": "images.nasa.gov",
+    "url": "https://images.nasa.gov",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "NASA Earth Observatory",
+    "domain": "earthobservatory.nasa.gov",
+    "url": "https://earthobservatory.nasa.gov",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "NASA Astronomy Picture of the Day",
+    "domain": "apod.nasa.gov",
+    "url": "https://apod.nasa.gov",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "ESA Multimedia",
+    "domain": "esa.int",
+    "url": "https://www.esa.int/ESA_Multimedia",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "DE",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "European Southern Observatory",
+    "domain": "eso.org",
+    "url": "https://www.eso.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "DE",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "NOIRLab",
+    "domain": "noirlab.edu",
+    "url": "https://noirlab.edu",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Space Telescope Science Institute",
+    "domain": "stsci.edu",
+    "url": "https://hubblesite.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "HubbleSite",
+    "domain": "hubblesite.org",
+    "url": "https://hubblesite.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Webb Telescope",
+    "domain": "webbtelescope.org",
+    "url": "https://webbtelescope.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Sky & Telescope",
+    "domain": "skyandtelescope.org",
+    "url": "https://skyandtelescope.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Astronomy Magazine",
+    "domain": "astronomy.com",
+    "url": "https://astronomy.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Sky at Night Magazine",
+    "domain": "skyatnightmagazine.com",
+    "url": "https://www.skyatnightmagazine.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Universe Today",
+    "domain": "universetoday.com",
+    "url": "https://www.universetoday.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "CA",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Space.com",
+    "domain": "space.com",
+    "url": "https://www.space.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Spaceflight Now",
+    "domain": "spaceflightnow.com",
+    "url": "https://spaceflightnow.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "SpaceNews",
+    "domain": "spacenews.com",
+    "url": "https://spacenews.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "EarthSky",
+    "domain": "earthsky.org",
+    "url": "https://earthsky.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Live Science",
+    "domain": "livescience.com",
+    "url": "https://www.livescience.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Science News",
+    "domain": "sciencenews.org",
+    "url": "https://www.sciencenews.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Scientific American",
+    "domain": "scientificamerican.com",
+    "url": "https://www.scientificamerican.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "New Scientist",
+    "domain": "newscientist.com",
+    "url": "https://www.newscientist.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Quanta Magazine",
+    "domain": "quantamagazine.org",
+    "url": "https://www.quantamagazine.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Nautilus",
+    "domain": "nautil.us",
+    "url": "https://nautil.us",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Massive Science",
+    "domain": "massivesci.com",
+    "url": "https://massivesci.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Knowable Magazine",
+    "domain": "knowablemagazine.org",
+    "url": "https://knowablemagazine.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "The Conversation",
+    "domain": "theconversation.com",
+    "url": "https://theconversation.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "PhotoVogue",
+    "domain": "photovogue.com",
+    "url": "https://www.photovogue.com",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "IT",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Vogue Italia Photography",
+    "domain": "vogue.it",
+    "url": "https://www.vogue.it/fotografia",
+    "source_type": "fashion",
+    "category": "museums_festivals",
+    "country": "IT",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Aperture",
+    "domain": "aperture.org",
+    "url": "https://aperture.org",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "International Center of Photography",
+    "domain": "icp.org",
+    "url": "https://www.icp.org",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Fotografiska",
+    "domain": "fotografiska.com",
+    "url": "https://www.fotografiska.com",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "SE",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Foam Fotografiemuseum",
+    "domain": "foam.org",
+    "url": "https://www.foam.org",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "NL",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Rencontres d'Arles",
+    "domain": "rencontres-arles.com",
+    "url": "https://www.rencontres-arles.com",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Paris Photo",
+    "domain": "parisphoto.com",
+    "url": "https://www.parisphoto.com",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Photo London",
+    "domain": "photolondon.org.uk",
+    "url": "https://www.photolondon.org.uk",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Visa pour l'Image",
+    "domain": "visapourlimage.com",
+    "url": "https://www.visapourlimage.com",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "FR",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Cortona On The Move",
+    "domain": "cortonaonthemove.com",
+    "url": "https://www.cortonaonthemove.com",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "IT",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Photoville",
+    "domain": "photoville.com",
+    "url": "https://photoville.com",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "LOOK3 Festival",
+    "domain": "look3.org",
+    "url": "https://www.look3.org",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Head On Photo Festival",
+    "domain": "headon.com.au",
+    "url": "https://www.headon.com.au",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "AU",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Ballarat International Foto Biennale",
+    "domain": "fbi.org.au",
+    "url": "https://www.fbi.org.au",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "AU",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "FORMAT Photography Festival",
+    "domain": "formatfestival.com",
+    "url": "https://www.formatfestival.com",
+    "source_type": "festival",
+    "category": "museums_festivals",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Fotomuseum Winterthur",
+    "domain": "fotomuseum.ch",
+    "url": "https://www.fotomuseum.ch",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "CH",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Museum of Photography Braunschweig",
+    "domain": "museum-kunst-palast.de",
+    "url": "https://www.museum-kunst-palast.de",
+    "source_type": "archive",
+    "category": "museums_festivals",
+    "country": "DE",
+    "language": "de",
+    "region": "global"
+  },
+  {
+    "name": "The Hindu Photos",
+    "domain": "thehindu.com",
+    "url": "https://www.thehindu.com/photos/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Indian Express Photos",
+    "domain": "indianexpress.com",
+    "url": "https://indianexpress.com/photos/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "Hindustan Times Photos",
+    "domain": "hindustantimes.com",
+    "url": "https://www.hindustantimes.com/photos",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "The Telegraph India Photos",
+    "domain": "telegraphindia.com",
+    "url": "https://www.telegraphindia.com/photos",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "IN",
+    "language": "en",
+    "region": "south-asia"
+  },
+  {
+    "name": "China Daily Photos",
+    "domain": "chinadaily.com.cn",
+    "url": "https://www.chinadaily.com.cn/photos",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "CN",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Asahi Shimbun Photos",
+    "domain": "asahi.com",
+    "url": "https://www.asahi.com/topics/photo/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "JP",
+    "language": "ja",
+    "region": "east-asia"
+  },
+  {
+    "name": "Mainichi Shimbun Photos",
+    "domain": "mainichi.jp",
+    "url": "https://mainichi.jp/photos/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "JP",
+    "language": "ja",
+    "region": "east-asia"
+  },
+  {
+    "name": "Yomiuri Shimbun Photos",
+    "domain": "yomiuri.co.jp",
+    "url": "https://www.yomiuri.co.jp/photo/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "JP",
+    "language": "ja",
+    "region": "east-asia"
+  },
+  {
+    "name": "NHK World Photos",
+    "domain": "nhk.or.jp",
+    "url": "https://www3.nhk.or.jp/nhkworld/en/photos/",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "JP",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Shiseido Hanatsubaki",
+    "domain": "hanatsubaki.shiseido.com",
+    "url": "https://hanatsubaki.shiseido.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "JP",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "KBS World",
+    "domain": "world.kbs.co.kr",
+    "url": "https://world.kbs.co.kr",
+    "source_type": "photojournalism",
+    "category": "asia",
+    "country": "KR",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Korea.net Photos",
+    "domain": "korea.net",
+    "url": "https://www.korea.net/PhotoGallery",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "KR",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Stand News Archive",
+    "domain": "thestandnews.com",
+    "url": "https://www.thestandnews.com",
+    "source_type": "archive",
+    "category": "asia",
+    "country": "HK",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "Taiwan Today",
+    "domain": "taiwantoday.tw",
+    "url": "https://www.taiwantoday.tw",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "TW",
+    "language": "en",
+    "region": "east-asia"
+  },
+  {
+    "name": "Jiazazhi",
+    "domain": "jiazazhi.com",
+    "url": "https://www.jiazazhi.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "CN",
+    "language": "zh",
+    "region": "east-asia"
+  },
+  {
+    "name": "PetaPixel Asia",
+    "domain": "petapixel.com",
+    "url": "https://petapixel.com",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "US",
+    "language": "en",
+    "region": "asia"
+  },
+  {
+    "name": "VICE Asia",
+    "domain": "vice.com",
+    "url": "https://www.vice.com/en-asia",
+    "source_type": "documentary",
+    "category": "asia",
+    "country": "US",
+    "language": "en",
+    "region": "asia"
+  },
+  {
+    "name": "Esquire Philippines",
+    "domain": "esquiremag.ph",
+    "url": "https://www.esquiremag.ph",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "CNN Philippines Archive",
+    "domain": "cnnphilippines.com",
+    "url": "https://www.cnnphilippines.com/photos",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "PH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "The Star Photos",
+    "domain": "thestar.com.my",
+    "url": "https://www.thestar.com.my/news/photos",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "MY",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Free Malaysia Today",
+    "domain": "freemalaysiatoday.com",
+    "url": "https://www.freemalaysiatoday.com",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "MY",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "BFM",
+    "domain": "bfm.my",
+    "url": "https://www.bfm.my",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "MY",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Coconuts",
+    "domain": "coconuts.co",
+    "url": "https://coconuts.co",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "SG",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "The Reporters",
+    "domain": "thereporters.io",
+    "url": "https://thereporters.io",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Thai PBS",
+    "domain": "thaipbs.or.th",
+    "url": "https://www.thaipbs.or.th",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "th",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "The Isaan Record",
+    "domain": "isaanrecord.com",
+    "url": "https://isaanrecord.com",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "TH",
+    "language": "en",
+    "region": "southeast-asia"
+  },
+  {
+    "name": "Pacific Media Network",
+    "domain": "pacificmedianetwork.com",
+    "url": "https://www.pacificmedianetwork.com",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "FJ",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Islands Business",
+    "domain": "islandsbusiness.com",
+    "url": "https://www.islandsbusiness.com",
+    "source_type": "documentary",
+    "category": "southeast_asia_pacific",
+    "country": "FJ",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Solomon Star",
+    "domain": "solomonstarnews.com",
+    "url": "https://www.solomonstarnews.com",
+    "source_type": "photojournalism",
+    "category": "southeast_asia_pacific",
+    "country": "SB",
+    "language": "en",
+    "region": "pacific"
+  },
+  {
+    "name": "Outdoor Journal",
+    "domain": "theoutdoorjournal.com",
+    "url": "https://www.theoutdoorjournal.com",
+    "source_type": "nature",
+    "category": "nature_wildlife",
+    "country": "IN",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Adventure.com",
+    "domain": "adventure.com",
+    "url": "https://www.adventure.com",
+    "source_type": "travel",
+    "category": "nature_wildlife",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "BBC Sky at Night",
+    "domain": "bbc.co.uk",
+    "url": "https://www.bbc.co.uk/programmes/p05n1w76",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "New Vision Uganda",
+    "domain": "newvision.co.ug",
+    "url": "https://www.newvision.co.ug",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "UG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Citizen Tanzania",
+    "domain": "citizen.co.tz",
+    "url": "https://www.citizen.co.tz",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "TZ",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "New Times Rwanda",
+    "domain": "newtimes.co.rw",
+    "url": "https://www.newtimes.co.rw",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "RW",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Namibian",
+    "domain": "namibian.com.na",
+    "url": "https://www.namibian.com.na",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NA",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Mmegi Online",
+    "domain": "mmegi.bw",
+    "url": "https://www.mmegi.bw",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "BW",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Zambia Daily Mail",
+    "domain": "daily-mail.co.zm",
+    "url": "https://www.daily-mail.co.zm",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZM",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Post Zambia",
+    "domain": "postzambia.com",
+    "url": "https://www.postzambia.com",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZM",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Standard Zimbabwe",
+    "domain": "thestandard.co.zw",
+    "url": "https://www.thestandard.co.zw",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZW",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "NewsDay Zimbabwe",
+    "domain": "newsday.co.zw",
+    "url": "https://www.newsday.co.zw",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "ZW",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Cameroon Tribune",
+    "domain": "cameroon-info.net",
+    "url": "https://www.cameroon-info.net",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "CM",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "The Guardian Gambia",
+    "domain": "guardian.gm",
+    "url": "https://www.guardian.gm",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "GM",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Baudo AP",
+    "domain": "baudoap.co",
+    "url": "https://www.baudoap.co",
+    "source_type": "documentary",
+    "category": "latin_america",
+    "country": "CO",
+    "language": "es",
+    "region": "latin-america"
+  },
+  {
+    "name": "Il Post",
+    "domain": "ilpost.it",
+    "url": "https://www.ilpost.it",
+    "source_type": "documentary",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "Quotidiano Net",
+    "domain": "quotidiano.net",
+    "url": "https://www.quotidiano.net",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "Fanpage Italia",
+    "domain": "fanpage.it",
+    "url": "https://www.fanpage.it",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "IT",
+    "language": "it",
+    "region": "europe"
+  },
+  {
+    "name": "Metro UK",
+    "domain": "metro.co.uk",
+    "url": "https://www.metro.co.uk",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "GB",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "Evening Standard",
+    "domain": "standard.co.uk",
+    "url": "https://www.standard.co.uk",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "GB",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "The Independent",
+    "domain": "independent.co.uk",
+    "url": "https://www.independent.co.uk",
+    "source_type": "photojournalism",
+    "category": "europe",
+    "country": "GB",
+    "language": "en",
+    "region": "europe"
+  },
+  {
+    "name": "New York Times International",
+    "domain": "nytimes.com",
+    "url": "https://www.nytimes.com/international/",
+    "source_type": "photojournalism",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Washington Post Pictures",
+    "domain": "washingtonpost.com",
+    "url": "https://www.washingtonpost.com/pictures/",
+    "source_type": "photojournalism",
+    "category": "global_photo",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "The Guardian Pictures",
+    "domain": "theguardian.com",
+    "url": "https://www.theguardian.com/pictures",
+    "source_type": "photojournalism",
+    "category": "global_photo",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Xinhua News Photos",
+    "domain": "xinhuanet.com",
+    "url": "https://www.xinhuanet.com/english/photos/",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "CN",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "TASS",
+    "domain": "tass.com",
+    "url": "https://tass.com",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "RU",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Ria Novosti Photos",
+    "domain": "ria.ru",
+    "url": "https://ria.ru/photos/",
+    "source_type": "agency",
+    "category": "global_photo",
+    "country": "RU",
+    "language": "ru",
+    "region": "europe"
+  },
+  {
+    "name": "Punch Nigeria",
+    "domain": "punchng.com",
+    "url": "https://www.punchng.com",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Vanguard Nigeria",
+    "domain": "vanguardngr.com",
+    "url": "https://www.vanguardngr.com",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Sahara Reporters",
+    "domain": "saharareporters.com",
+    "url": "https://saharareporters.com",
+    "source_type": "photojournalism",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "TechCabal",
+    "domain": "techcabal.com",
+    "url": "https://www.techcabal.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Nairaland",
+    "domain": "nairaland.com",
+    "url": "https://www.nairaland.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "NG",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Africa Report",
+    "domain": "africa-report.com",
+    "url": "https://www.africa-report.com",
+    "source_type": "documentary",
+    "category": "africa",
+    "country": "FR",
+    "language": "en",
+    "region": "africa"
+  },
+  {
+    "name": "Cosmos Magazine",
+    "domain": "cosmosmagazine.com",
+    "url": "https://cosmosmagazine.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "AU",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Nature News",
+    "domain": "nature.com",
+    "url": "https://www.nature.com/news",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Physics World",
+    "domain": "physicsworld.com",
+    "url": "https://physicsworld.com",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "GB",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Ars Technica Science",
+    "domain": "arstechnica.com",
+    "url": "https://arstechnica.com/science/",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  },
+  {
+    "name": "Phys.org",
+    "domain": "phys.org",
+    "url": "https://phys.org",
+    "source_type": "science",
+    "category": "science_space",
+    "country": "US",
+    "language": "en",
+    "region": "global"
+  }
+]

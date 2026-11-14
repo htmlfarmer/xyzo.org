@@ -1,0 +1,12 @@
+[Unit]
+Description=Graph interconnection features refresh (hourly)
+# Runs every hour; refreshes events that have had link changes in the last 6h.
+# A full refresh can be done manually with: python -m worker.compute_event_graph_features --full
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=60min
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target

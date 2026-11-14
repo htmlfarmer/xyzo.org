@@ -1,0 +1,25 @@
+# Dev site for XYZO — runs alongside production
+# Serves frontend from public_html_dev/, proxies API to port 3009
+# Access at: http://localhost:3009 (or add dev.xyzo.org DNS)
+
+http://localhost:3009 {
+    root * /var/www/vhosts/xyzo.org/public_html_dev
+    encode zstd gzip
+
+    handle /search/results {
+        reverse_proxy localhost:3009
+    }
+
+    file_server
+    reverse_proxy /api/* localhost:3009 {
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Real-IP {remote_host}
+        flush_interval -1
+    }
+    header {
+        Content-Security-Policy "frame-ancestors 'none'"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+}

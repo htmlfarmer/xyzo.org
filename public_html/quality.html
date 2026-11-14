@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quality Reports — Newsium</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    header h1 {
+      margin: 0;
+      font-family: ui-monospace, monospace;
+      font-size: 20px;
+      color: var(--warning);
+    }
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    header a:hover { color: var(--fg); }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat {
+      padding: 16px;
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--warning);
+      font-family: ui-monospace, monospace;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Article cards */
+    .articles {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .article-card {
+      background: rgba(11, 15, 20, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color 0.15s;
+    }
+    .article-card:hover {
+      border-color: var(--warning);
+    }
+    .article-card.hidden {
+      opacity: 0.6;
+      border-color: var(--error);
+    }
+    .article-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .article-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      margin: 0;
+      flex: 1;
+    }
+    .article-title a {
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .article-title a:hover {
+      color: var(--accent);
+    }
+    .article-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+      margin-top: 4px;
+    }
+    .article-badges {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: ui-monospace, monospace;
+    }
+    .badge-reports {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--error);
+    }
+    .badge-quality {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+    .badge-hidden {
+      background: rgba(239, 68, 68, 0.3);
+      color: var(--error);
+    }
+
+    /* Quality bar */
+    .quality-bar {
+      width: 100px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .quality-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+    .quality-fill.good { background: var(--success); }
+    .quality-fill.warning { background: var(--warning); }
+    .quality-fill.danger { background: var(--error); }
+
+    /* Reports list */
+    .reports {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .report-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 12px;
+    }
+    .report-type {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: ui-monospace, monospace;
+      text-transform: uppercase;
+    }
+    .report-type.misleading { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .report-type.false_info { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+    .report-type.spam { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+    .report-type.outdated { background: rgba(100, 116, 139, 0.2); color: var(--muted); }
+    .report-type.low_quality { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .report-type.offensive { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+    .report-type.duplicate { background: rgba(100, 116, 139, 0.2); color: var(--muted); }
+    .report-type.other { background: rgba(100, 116, 139, 0.2); color: var(--muted); }
+    .report-reason {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .report-time {
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+      font-size: 10px;
+    }
+
+    /* Actions */
+    .article-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .action-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .action-btn:hover {
+      border-color: var(--fg);
+      color: var(--fg);
+    }
+    .action-btn.hide {
+      color: var(--error);
+      border-color: var(--error);
+    }
+    .action-btn.hide:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+    .action-btn.restore {
+      color: var(--success);
+      border-color: var(--success);
+    }
+    .action-btn.restore:hover {
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+    .spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(245, 158, 11, 0.3);
+      border-top-color: var(--warning);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚠️ Quality Reports</h1>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="/">← Map</a>
+        <a href="/system.html">System</a>
+      </div>
+    </header>
+
+    <div class="stats" id="stats">
+      <div class="stat">
+        <div class="stat-value" id="stat-total">-</div>
+        <div class="stat-label">Total Reports</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-24h">-</div>
+        <div class="stat-label">Reports (24h)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-articles">-</div>
+        <div class="stat-label">Articles Reported</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-hidden">-</div>
+        <div class="stat-label">Articles Hidden</div>
+      </div>
+    </div>
+
+    <div id="articles">
+      <div class="loading"><span class="spinner"></span> Loading reported articles…</div>
+    </div>
+  </div>
+
+  <script>
+    const API = '';
+
+    // Load stats
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API}/api/analytics/quality-stats`);
+        const data = await res.json();
+        document.getElementById('stat-total').textContent = data.total_reports;
+        document.getElementById('stat-24h').textContent = data.reports_24h;
+        document.getElementById('stat-articles').textContent = data.articles_reported;
+        document.getElementById('stat-hidden').textContent = data.articles_hidden;
+      } catch (e) {
+        console.error('Failed to load stats:', e);
+      }
+    }
+
+    // Load reported articles
+    async function loadArticles() {
+      const container = document.getElementById('articles');
+      container.innerHTML = '<div class="loading"><span class="spinner"></span> Loading reported articles…</div>';
+
+      try {
+        const res = await fetch(`${API}/api/analytics/reported-articles?limit=50`);
+        const data = await res.json();
+
+        if (data.articles.length === 0) {
+          container.innerHTML = '<div class="empty">No quality reports yet.</div>';
+          return;
+        }
+
+        container.innerHTML = data.articles.map(renderArticle).join('');
+        setupActionButtons();
+      } catch (e) {
+        container.innerHTML = '<div class="empty">Failed to load reported articles.</div>';
+        console.error('Failed to load articles:', e);
+      }
+    }
+
+    // Render an article card
+    function renderArticle(a) {
+      const qualityPercent = Math.round(a.quality_score * 100);
+      const qualityClass = qualityPercent >= 70 ? 'good' : qualityPercent >= 40 ? 'warning' : 'danger';
+      const isHidden = a.hidden;
+
+      const reportsHtml = (a.recent_reports || []).map(r => `
+        <div class="report-item">
+          <span class="report-type ${r.type}">${r.type}</span>
+          ${r.reason ? `<span class="report-reason">"${escapeHtml(r.reason)}"</span>` : ''}
+          <span class="report-time">${formatTime(r.created_at)}</span>
+        </div>
+      `).join('');
+
+      return `
+        <div class="article-card ${isHidden ? 'hidden' : ''}" data-id="${a.id}">
+          <div class="article-header">
+            <div>
+              <div class="article-title">
+                <a href="${escapeHtml(a.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(a.title)}</a>
+              </div>
+              <div class="article-meta">
+                ${a.source?.name || 'Unknown'} · ${a.source?.country || '?'} · ${formatTime(a.fetched_at)}
+              </div>
+            </div>
+            <div class="article-badges">
+              <span class="badge badge-reports">${a.report_count} reports</span>
+              <span class="badge badge-quality">
+                <span class="quality-bar"><span class="quality-fill ${qualityClass}" style="width:${qualityPercent}%"></span></span>
+                ${qualityPercent}%
+              </span>
+              ${isHidden ? '<span class="badge badge-hidden">HIDDEN</span>' : ''}
+            </div>
+          </div>
+
+          <div class="reports">
+            ${reportsHtml}
+          </div>
+
+          <div class="article-actions">
+            ${isHidden
+              ? `<button class="action-btn restore" data-id="${a.id}">Restore Article</button>`
+              : `<button class="action-btn hide" data-id="${a.id}">Hide Article</button>`
+            }
+            <a href="${escapeHtml(a.url)}" target="_blank" rel="noopener noreferrer" class="action-btn">View Source</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Setup action buttons
+    function setupActionButtons() {
+      document.querySelectorAll('.action-btn.hide').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const articleId = btn.dataset.id;
+          const reason = prompt('Reason for hiding:');
+          if (!reason) return;
+
+          try {
+            await fetch(`${API}/api/analytics/hide-article`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ article_id: Number(articleId), reason }),
+            });
+            loadArticles();
+          } catch (e) {
+            alert('Failed to hide article');
+          }
+        });
+      });
+
+      document.querySelectorAll('.action-btn.restore').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const articleId = btn.dataset.id;
+
+          try {
+            await fetch(`${API}/api/analytics/unhide-article`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ article_id: Number(articleId) }),
+            });
+            loadArticles();
+          } catch (e) {
+            alert('Failed to restore article');
+          }
+        });
+      });
+    }
+
+    // Helpers
+    function formatTime(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      const now = new Date();
+      const diff = now - d;
+      const mins = Math.floor(diff / 60000);
+      if (mins < 1) return 'just now';
+      if (mins < 60) return `${mins}m ago`;
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return `${hours}h ago`;
+      const days = Math.floor(hours / 24);
+      return `${days}d ago`;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // Initial load
+    loadStats();
+    loadArticles();
+  </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+{
+ "view": "20,10,3",
+ "url": "https://xyzo.org/",
+ "layers": [
+  {
+   "slug": "wind-gfs",
+   "painted": true,
+   "delta_pct": 7.087,
+   "errors": []
+  },
+  {
+   "slug": "basins",
+   "painted": true,
+   "delta_pct": 38.891,
+   "errors": []
+  },
+  {
+   "slug": "koppen",
+   "painted": true,
+   "delta_pct": 39.176,
+   "errors": []
+  },
+  {
+   "slug": "soil-soilgrids",
+   "painted": true,
+   "delta_pct": 3.053,
+   "errors": []
+  },
+  {
+   "slug": "rivers",
+   "painted": true,
+   "delta_pct": 2.195,
+   "errors": []
+  },
+  {
+   "slug": "population-density-worldpop-1-km",
+   "painted": true,
+   "delta_pct": 8.76,
+   "errors": []
+  },
+  {
+   "slug": "cropland-esa",
+   "painted": true,
+   "delta_pct": 4.02,
+   "errors": []
+  },
+  {
+   "slug": "land-cover-esa",
+   "painted": true,
+   "delta_pct": 36.889,
+   "errors": []
+  },
+  {
+   "slug": "ocean-currents-live",
+   "painted": true,
+   "delta_pct": 9.233,
+   "errors": []
+  },
+  {
+   "slug": "geology-macrostrat",
+   "painted": true,
+   "delta_pct": 53.03,
+   "errors": []
+  },
+  {
+   "slug": "nasa-rain",
+   "painted": true,
+   "delta_pct": 16.89,
+   "errors": []
+  },
+  {
+   "slug": "rivers-fao-2026",
+   "painted": true,
+   "delta_pct": 11.442,
+   "errors": []
+  },
+  {
+   "slug": "soil-type-hwsd-v2-2",
+   "painted": true,
+   "delta_pct": 44.668,
+   "errors": []
+  },
+  {
+   "slug": "tectonic-faults-usgs",
+   "painted": true,
+   "delta_pct": 6.039,
+   "errors": [
+    "Failed to load resource: the server responded with a status of 500 ()"
+   ]
+  },
+  {
+   "slug": "temperature",
+   "painted": true,
+   "delta_pct": 92.204,
+   "errors": []
+  },
+  {
+   "slug": "wind-speed-gfs",
+   "painted": true,
+   "delta_pct": 92.748,
+   "errors": []
+  },
+  {
+   "slug": "earthquakes-usgs",
+   "painted": true,
+   "delta_pct": 8.933,
+   "errors": []
+  },
+  {
+   "slug": "waves",
+   "painted": true,
+   "delta_pct": 53.507,
+   "errors": [
+    "Failed to load resource: the server responded with a status of 500 ()"
+   ]
+  },
+  {
+   "slug": "lightning",
+   "painted": true,
+   "delta_pct": 32.947,
+   "errors": [
+    "Failed to load resource: the server responded with a status of 500 ()"
+   ]
+  },
+  {
+   "slug": "city-names",
+   "painted": true,
+   "delta_pct": 4.977,
+   "errors": []
+  },
+  {
+   "slug": "ocean-currents-ecco",
+   "painted": true,
+   "delta_pct": 54.733,
+   "errors": []
+  },
+  {
+   "slug": "phytoplankton",
+   "painted": true,
+   "delta_pct": 23.87,
+   "errors": []
+  },
+  {
+   "slug": "languages",
+   "painted": true,
+   "delta_pct": 8.082,
+   "errors": []
+  },
+  {
+   "slug": "language-regions",
+   "painted": true,
+   "delta_pct": 39.436,
+   "errors": []
+  },
+  {
+   "slug": "moisture-transport-ivt",
+   "painted": true,
+   "delta_pct": 93.412,
+   "errors": []
+  },
+  {
+   "slug": "sea-surface-salinity",
+   "painted": true,
+   "delta_pct": 60.452,
+   "errors": [
+    "Failed to load resource: the server responded with a status of 500 ()"
+   ]
+  },
+  {
+   "slug": "geologic-contacts-usgs",
+   "painted": true,
+   "delta_pct": 17.527,
+   "errors": []
+  },
+  {
+   "slug": "facebook",
+   "painted": true,
+   "delta_pct": 13.845,
+   "errors": []
+  },
+  {
+   "slug": "etopo",
+   "painted": true,
+   "delta_pct": 90.42,
+   "errors": []
+  },
+  {
+   "slug": "convective-instability-cape",
+   "painted": true,
+   "delta_pct": 90.439,
+   "errors": []
+  },
+  {
+   "slug": "human-transportation",
+   "painted": true,
+   "delta_pct": 90.452,
+   "errors": [
+    "Failed to load resource: the server responded with a status of 500 ()"
+   ]
+  },
+  {
+   "slug": "nasa-night",
+   "painted": true,
+   "delta_pct": 91.232,
+   "errors": [
+    "Failed to load resource: the server responded with a status of 500 ()"
+   ]
+  },
+  {
+   "slug": "magnetic",
+   "painted": true,
+   "delta_pct": 3.835,
+   "errors": []
+  },
+  {
+   "slug": "nasa-sat",
+   "painted": true,
+   "delta_pct": 92.137,
+   "errors": []
+  },
+  {
+   "slug": "isobars",
+   "painted": true,
+   "delta_pct": 8.042,
+   "errors": []
+  }
+ ]
+}

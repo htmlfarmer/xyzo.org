@@ -1,0 +1,11 @@
+[Unit]
+Description=Graph interconnection features refresh (news_event_graph_features)
+After=postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/xyzo.org
+EnvironmentFile=/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.compute_event_graph_features
+MemoryMax=512M

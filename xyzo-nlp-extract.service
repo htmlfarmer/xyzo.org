@@ -1,0 +1,16 @@
+[Unit]
+Description=XYZO NLP extraction worker - processes recent articles through NLP extractors hourly
+After=network.target postgresql.service
+
+[Service]
+Type=oneshot
+Environment=XYZO_DB_DSN=postgresql://xyzo_app:CHANGE_ME@localhost:5432/xyzo
+# The DSN above is a PLACEHOLDER — the repo carries no credentials.
+# The real value lives outside the repo; EnvironmentFile= overrides Environment=.
+EnvironmentFile=-/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.extract_nlp --since-hours 2 --limit 500 --batch-size 50
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+[Install]
+WantedBy=multi-user.target

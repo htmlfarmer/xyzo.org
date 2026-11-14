@@ -1,0 +1,1270 @@
+{
+  "generated_at": "2026-09-21T22:42:22Z",
+  "summary": {
+    "total_cities": 45191,
+    "valid": 45039,
+    "wrong_country": 25,
+    "outside_bbox": 116,
+    "swapped_coords": 11,
+    "invalid_range": 0,
+    "island_territory": 125,
+    "disputed": 40,
+    "fixes_applied": 0
+  },
+  "wrong_country_codes": [
+    {
+      "id": 37145,
+      "name": "George Town",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.2866,
+      "longitude": -81.37436,
+      "population": 29370,
+      "dist_m": 485038.32917435
+    },
+    {
+      "id": 37140,
+      "name": "Pedro",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.27581,
+      "longitude": -81.27487,
+      "population": 10394,
+      "dist_m": 483027.4170167
+    },
+    {
+      "id": 37144,
+      "name": "Lower Valley",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.2804,
+      "longitude": -81.28431,
+      "population": 10125,
+      "dist_m": 482842.13738191
+    },
+    {
+      "id": 37137,
+      "name": "Whitehall Estates",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.31313,
+      "longitude": -81.38208,
+      "population": 10768,
+      "dist_m": 482481.69281974
+    },
+    {
+      "id": 37150,
+      "name": "Bodden Town",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.27647,
+      "longitude": -81.2542,
+      "population": 14845,
+      "dist_m": 482302.46033271
+    },
+    {
+      "id": 37142,
+      "name": "North Sound Estates",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.29303,
+      "longitude": -81.30242,
+      "population": 11249,
+      "dist_m": 482082.79249677
+    },
+    {
+      "id": 37141,
+      "name": "North Ward",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.28439,
+      "longitude": -81.27053,
+      "population": 10394,
+      "dist_m": 481984.29078409
+    },
+    {
+      "id": 37143,
+      "name": "Midland Acres",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.29862,
+      "longitude": -81.22061,
+      "population": 12410,
+      "dist_m": 478899.40168546
+    },
+    {
+      "id": 37149,
+      "name": "Breakers",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.2961,
+      "longitude": -81.19844,
+      "population": 11247,
+      "dist_m": 478461.74523148
+    },
+    {
+      "id": 37147,
+      "name": "Frank Sound",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.30239,
+      "longitude": -81.18194,
+      "population": 11007,
+      "dist_m": 477274.13245469
+    },
+    {
+      "id": 37138,
+      "name": "West Bay",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.38197,
+      "longitude": -81.39281,
+      "population": 15335,
+      "dist_m": 475553.21336656
+    },
+    {
+      "id": 37139,
+      "name": "The Mountain",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.3309,
+      "longitude": -81.19905,
+      "population": 12028,
+      "dist_m": 474808.75564619
+    },
+    {
+      "id": 37148,
+      "name": "Channel Land",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.34365,
+      "longitude": -81.21762,
+      "population": 12623,
+      "dist_m": 474052.43098435
+    },
+    {
+      "id": 37146,
+      "name": "Further Ground",
+      "country_code": "KY",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.34149,
+      "longitude": -81.19896,
+      "population": 12028,
+      "dist_m": 473688.35869551
+    },
+    {
+      "id": 38503,
+      "name": "Isla Mujeres",
+      "country_code": "MX",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 21.23114,
+      "longitude": -86.73105,
+      "population": 12642,
+      "dist_m": 436577.67635494
+    },
+    {
+      "id": 40594,
+      "name": "Sanchez-Mira",
+      "country_code": "PH",
+      "actual_country": "CN",
+      "actual_country_name": "China",
+      "latitude": 18.56163,
+      "longitude": 121.23189,
+      "population": 26292,
+      "dist_m": 168298.53812099
+    },
+    {
+      "id": 40848,
+      "name": "Claveria",
+      "country_code": "PH",
+      "actual_country": "CN",
+      "actual_country_name": "China",
+      "latitude": 18.60742,
+      "longitude": 121.08322,
+      "population": 10618,
+      "dist_m": 164867.89922852
+    },
+    {
+      "id": 22400,
+      "name": "Maisi",
+      "country_code": "CU",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 20.24673,
+      "longitude": -74.15181,
+      "population": 28276,
+      "dist_m": 139403.62900012
+    },
+    {
+      "id": 29196,
+      "name": "Ti Port-De-Paix",
+      "country_code": "HT",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.93333,
+      "longitude": -72.83333,
+      "population": 34657,
+      "dist_m": 123652.20361906
+    },
+    {
+      "id": 12050,
+      "name": "Port-de-Paix",
+      "country_code": "HT",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.93984,
+      "longitude": -72.83037,
+      "population": 306217,
+      "dist_m": 122868.49497301
+    },
+    {
+      "id": 29185,
+      "name": "Saint-Louis Du Nord",
+      "country_code": "HT",
+      "actual_country": "US",
+      "actual_country_name": "United States of America",
+      "latitude": 19.93397,
+      "longitude": -72.72138,
+      "population": 11849,
+      "dist_m": 119435.510953
+    },
+    {
+      "id": 42966,
+      "name": "Krasnoarmeyskaya",
+      "country_code": "RU",
+      "actual_country": "UA",
+      "actual_country_name": "Ukraine",
+      "latitude": 45.36551,
+      "longitude": 38.21194,
+      "population": 29009,
+      "dist_m": 6661.60102697
+    },
+    {
+      "id": 42597,
+      "name": "Sol'tsy",
+      "country_code": "RU",
+      "actual_country": "NO",
+      "actual_country_name": "Norway",
+      "latitude": 58.12229,
+      "longitude": 30.31831,
+      "population": 10625,
+      "dist_m": 6008.30513528
+    },
+    {
+      "id": 42577,
+      "name": "Staronizhestebliyevskaya",
+      "country_code": "RU",
+      "actual_country": "UA",
+      "actual_country_name": "Ukraine",
+      "latitude": 45.38315,
+      "longitude": 38.44304,
+      "population": 10478,
+      "dist_m": 3082.12583038
+    },
+    {
+      "id": 42578,
+      "name": "Staromyshastovskaya",
+      "country_code": "RU",
+      "actual_country": "UA",
+      "actual_country_name": "Ukraine",
+      "latitude": 45.34329,
+      "longitude": 39.07608,
+      "population": 10625,
+      "dist_m": 2770.28004526
+    }
+  ],
+  "outside_bbox_cities": [
+    {
+      "id": 9013,
+      "name": "Katowice-Ostrava Metropolitan Area",
+      "country_code": "CZ",
+      "latitude": 50.25,
+      "longitude": 19.0,
+      "population": 5008000,
+      "country_name": "Czechia"
+    },
+    {
+      "id": 9331,
+      "name": "Tangier",
+      "country_code": "MA",
+      "latitude": 35.76727,
+      "longitude": -5.79975,
+      "population": 1275428,
+      "country_name": "Morocco"
+    },
+    {
+      "id": 9703,
+      "name": "Gaza City",
+      "country_code": "PS",
+      "latitude": 31.5075,
+      "longitude": 34.459722222,
+      "population": 590481,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 8039,
+      "name": "Gaza",
+      "country_code": "PS",
+      "latitude": 31.50161,
+      "longitude": 34.46672,
+      "population": 410000,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 12050,
+      "name": "Port-de-Paix",
+      "country_code": "HT",
+      "latitude": 19.93984,
+      "longitude": -72.83037,
+      "population": 306217,
+      "country_name": "Haiti"
+    },
+    {
+      "id": 6333,
+      "name": "Malabo",
+      "country_code": "GQ",
+      "latitude": 3.75578,
+      "longitude": 8.78166,
+      "population": 297000,
+      "country_name": "Eq. Guinea"
+    },
+    {
+      "id": 10595,
+      "name": "Banda Aceh",
+      "country_code": "ID",
+      "latitude": 5.54167,
+      "longitude": 95.33333,
+      "population": 267962,
+      "country_name": "Indonesia"
+    },
+    {
+      "id": 8324,
+      "name": "El Dibir",
+      "country_code": "DJ",
+      "latitude": 11.76667,
+      "longitude": 51.21667,
+      "population": 200000,
+      "country_name": "Djibouti"
+    },
+    {
+      "id": 10815,
+      "name": "Seogwipo",
+      "country_code": "KR",
+      "latitude": 33.25333,
+      "longitude": 126.56181,
+      "population": 183858,
+      "country_name": "South Korea"
+    },
+    {
+      "id": 11604,
+      "name": "Khān Yūnis",
+      "country_code": "PS",
+      "latitude": 31.34018,
+      "longitude": 34.30627,
+      "population": 173183,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 11210,
+      "name": "Rafaḩ",
+      "country_code": "PS",
+      "latitude": 31.29722,
+      "longitude": 34.24357,
+      "population": 171889,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 8038,
+      "name": "Jabālyā",
+      "country_code": "PS",
+      "latitude": 31.5272,
+      "longitude": 34.48347,
+      "population": 168568,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 6210,
+      "name": "Port-Gentil",
+      "country_code": "GA",
+      "latitude": -0.71933,
+      "longitude": 8.78151,
+      "population": 164018,
+      "country_name": "Gabon"
+    },
+    {
+      "id": 11684,
+      "name": "Rafah Camp",
+      "country_code": "IL",
+      "latitude": 31.283019444,
+      "longitude": 34.2532,
+      "population": 138969,
+      "country_name": "Israel"
+    },
+    {
+      "id": 11895,
+      "name": "Dededo–Apotgan–Tamuning Urban Area",
+      "country_code": "US",
+      "latitude": 13.504776,
+      "longitude": 144.82927,
+      "population": 128164,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 7321,
+      "name": "Mandera",
+      "country_code": "KE",
+      "latitude": 3.93726,
+      "longitude": 41.85688,
+      "population": 114718,
+      "country_name": "Kenya"
+    },
+    {
+      "id": 7409,
+      "name": "Kalmunai",
+      "country_code": "LK",
+      "latitude": 7.40902,
+      "longitude": 81.83472,
+      "population": 100171,
+      "country_name": "Sri Lanka"
+    },
+    {
+      "id": 37581,
+      "name": "Fnidek",
+      "country_code": "MA",
+      "latitude": 35.84906,
+      "longitude": -5.35747,
+      "population": 84558,
+      "country_name": "Morocco"
+    },
+    {
+      "id": 37306,
+      "name": "Matara",
+      "country_code": "LK",
+      "latitude": 5.94851,
+      "longitude": 80.53528,
+      "population": 76254,
+      "country_name": "Sri Lanka"
+    },
+    {
+      "id": 27634,
+      "name": "Lowestoft",
+      "country_code": "GB",
+      "latitude": 52.47523,
+      "longitude": 1.75167,
+      "population": 71327,
+      "country_name": "United Kingdom"
+    },
+    {
+      "id": 37432,
+      "name": "Liepaja",
+      "country_code": "LV",
+      "latitude": 56.50474,
+      "longitude": 21.01085,
+      "population": 67421,
+      "country_name": "Latvia"
+    },
+    {
+      "id": 28473,
+      "name": "Aflao",
+      "country_code": "GH",
+      "latitude": 6.11982,
+      "longitude": 1.19012,
+      "population": 66546,
+      "country_name": "Ghana"
+    },
+    {
+      "id": 37269,
+      "name": "Ban Khoan",
+      "country_code": "LA",
+      "latitude": 20.35008,
+      "longitude": 100.09022,
+      "population": 65348,
+      "country_name": "Laos"
+    },
+    {
+      "id": 27809,
+      "name": "Great Yarmouth",
+      "country_code": "GB",
+      "latitude": 52.60831,
+      "longitude": 1.73052,
+      "population": 63434,
+      "country_name": "United Kingdom"
+    },
+    {
+      "id": 41732,
+      "name": "Dayr Al Balah",
+      "country_code": "PS",
+      "latitude": 31.41834,
+      "longitude": 34.34933,
+      "population": 59504,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 22031,
+      "name": "San Andres",
+      "country_code": "CO",
+      "latitude": 12.57858,
+      "longitude": -81.69973,
+      "population": 58257,
+      "country_name": "Colombia"
+    },
+    {
+      "id": 41733,
+      "name": "Bayt Lahya",
+      "country_code": "PS",
+      "latitude": 31.5464,
+      "longitude": 34.49514,
+      "population": 56919,
+      "country_name": "Palestine"
+    },
+    {
+      "id": 37052,
+      "name": "Tallang-Dong",
+      "country_code": "KR",
+      "latitude": 33.49028,
+      "longitude": 126.47528,
+      "population": 54954,
+      "country_name": "South Korea"
+    },
+    {
+      "id": 36356,
+      "name": "Miyakojima",
+      "country_code": "JP",
+      "latitude": 24.79016,
+      "longitude": 125.31109,
+      "population": 54908,
+      "country_name": "Japan"
+    },
+    {
+      "id": 24822,
+      "name": "Narva",
+      "country_code": "EE",
+      "latitude": 59.37722,
+      "longitude": 28.19028,
+      "population": 54409,
+      "country_name": "Estonia"
+    }
+  ],
+  "swapped_coords": [
+    {
+      "id": 12282,
+      "name": "Akçakale",
+      "country_code": "TR",
+      "latitude": 36.710833333,
+      "longitude": 38.947777777,
+      "population": 113194,
+      "swapped_country": "TR",
+      "swapped_country_name": "Turkey"
+    },
+    {
+      "id": 43040,
+      "name": "Kaspiysk",
+      "country_code": "RU",
+      "latitude": 42.88165,
+      "longitude": 47.63919,
+      "population": 81752,
+      "swapped_country": "RU",
+      "swapped_country_name": "Russia"
+    },
+    {
+      "id": 24953,
+      "name": "Al Burj",
+      "country_code": "EG",
+      "latitude": 31.58229,
+      "longitude": 30.98095,
+      "population": 60320,
+      "swapped_country": "EG",
+      "swapped_country_name": "Egypt"
+    },
+    {
+      "id": 24914,
+      "name": "Baltim",
+      "country_code": "EG",
+      "latitude": 31.55582,
+      "longitude": 31.08918,
+      "population": 51280,
+      "swapped_country": "EG",
+      "swapped_country_name": "Egypt"
+    },
+    {
+      "id": 24845,
+      "name": "Sidi Barani",
+      "country_code": "EG",
+      "latitude": 31.61166,
+      "longitude": 25.92539,
+      "population": 38253,
+      "swapped_country": "EG",
+      "swapped_country_name": "Egypt"
+    },
+    {
+      "id": 45278,
+      "name": "Ceylanpinar",
+      "country_code": "TR",
+      "latitude": 36.84722,
+      "longitude": 40.05,
+      "population": 31488,
+      "swapped_country": "TR",
+      "swapped_country_name": "Turkey"
+    },
+    {
+      "id": 24964,
+      "name": "El Dabaa",
+      "country_code": "EG",
+      "latitude": 31.02819,
+      "longitude": 28.44498,
+      "population": 27697,
+      "swapped_country": "EG",
+      "swapped_country_name": "Egypt"
+    },
+    {
+      "id": 39648,
+      "name": "Gembu",
+      "country_code": "NG",
+      "latitude": 6.72556,
+      "longitude": 11.25652,
+      "population": 19881,
+      "swapped_country": "NG",
+      "swapped_country_name": "Nigeria"
+    },
+    {
+      "id": 39691,
+      "name": "Bonny",
+      "country_code": "NG",
+      "latitude": 4.4516,
+      "longitude": 7.17074,
+      "population": 16868,
+      "swapped_country": "NG",
+      "swapped_country_name": "Nigeria"
+    },
+    {
+      "id": 39618,
+      "name": "Ikang",
+      "country_code": "NG",
+      "latitude": 4.78978,
+      "longitude": 8.5316,
+      "population": 13305,
+      "swapped_country": "NG",
+      "swapped_country_name": "Nigeria"
+    }
+  ],
+  "island_territories": [
+    {
+      "id": 9225,
+      "name": "San Juan Urban Area",
+      "country_code": "US",
+      "latitude": 18.284277,
+      "longitude": -66.103198,
+      "population": 1844410,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 9519,
+      "name": "Naha Metropolitan Area",
+      "country_code": "JP",
+      "latitude": 26.216666666,
+      "longitude": 127.683333333,
+      "population": 830532,
+      "country_name": "Japan"
+    },
+    {
+      "id": 9601,
+      "name": "Jeju",
+      "country_code": "KR",
+      "latitude": 33.509722222,
+      "longitude": 126.521944444,
+      "population": 698358,
+      "country_name": "South Korea"
+    },
+    {
+      "id": 7379,
+      "name": "Jeju City",
+      "country_code": "KR",
+      "latitude": 33.50972,
+      "longitude": 126.52194,
+      "population": 488844,
+      "country_name": "South Korea"
+    },
+    {
+      "id": 6036,
+      "name": "Las Palmas de Gran Canaria",
+      "country_code": "ES",
+      "latitude": 28.10178,
+      "longitude": -15.41573,
+      "population": 383516,
+      "country_name": "Spain"
+    },
+    {
+      "id": 10103,
+      "name": "San Juan",
+      "country_code": "US",
+      "latitude": 18.465277777,
+      "longitude": -66.116666666,
+      "population": 342259,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 10198,
+      "name": "Naha",
+      "country_code": "JP",
+      "latitude": 26.213,
+      "longitude": 127.67851,
+      "population": 317625,
+      "country_name": "Japan"
+    },
+    {
+      "id": 10615,
+      "name": "Aguadilla–Isabela–San Sebastián Urban Area",
+      "country_code": "US",
+      "latitude": 18.391426,
+      "longitude": -67.091325,
+      "population": 232573,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 6030,
+      "name": "Santa Cruz de Tenerife",
+      "country_code": "ES",
+      "latitude": 28.46824,
+      "longitude": -16.25462,
+      "population": 211359,
+      "country_name": "Spain"
+    },
+    {
+      "id": 10886,
+      "name": "Bayamón",
+      "country_code": "US",
+      "latitude": 18.379361,
+      "longitude": -66.163489,
+      "population": 165368,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 10950,
+      "name": "San Cristóbal De La Laguna",
+      "country_code": "ES",
+      "latitude": 28.485277777,
+      "longitude": -16.316666666,
+      "population": 161108,
+      "country_name": "Spain"
+    },
+    {
+      "id": 6031,
+      "name": "La Laguna",
+      "country_code": "ES",
+      "latitude": 28.4853,
+      "longitude": -16.32014,
+      "population": 150661,
+      "country_name": "Spain"
+    },
+    {
+      "id": 11618,
+      "name": "Okinawa",
+      "country_code": "JP",
+      "latitude": 26.33583,
+      "longitude": 127.80139,
+      "population": 142752,
+      "country_name": "Japan"
+    },
+    {
+      "id": 11697,
+      "name": "Carolina",
+      "country_code": "US",
+      "latitude": 18.407654,
+      "longitude": -65.980994,
+      "population": 138304,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 11714,
+      "name": "Ponce",
+      "country_code": "US",
+      "latitude": 18.010833333,
+      "longitude": -66.613611111,
+      "population": 137491,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 11916,
+      "name": "Caguas",
+      "country_code": "US",
+      "latitude": 18.233333333,
+      "longitude": -66.033333333,
+      "population": 127244,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 12020,
+      "name": "Uruma",
+      "country_code": "JP",
+      "latitude": 26.37609,
+      "longitude": 127.85908,
+      "population": 125303,
+      "country_name": "Japan"
+    },
+    {
+      "id": 12000,
+      "name": "Arecibo Urban Area",
+      "country_code": "US",
+      "latitude": 18.454313,
+      "longitude": -66.810062,
+      "population": 123724,
+      "country_name": "United States of America"
+    },
+    {
+      "id": 6028,
+      "name": "Telde",
+      "country_code": "ES",
+      "latitude": 27.99243,
+      "longitude": -15.41915,
+      "population": 123265,
+      "country_name": "Spain"
+    },
+    {
+      "id": 12135,
+      "name": "Ponce Urban Area",
+      "country_code": "US",
+      "latitude": 18.018742,
+      "longitude": -66.626424,
+      "population": 118345,
+      "country_name": "United States of America"
+    }
+  ],
+  "disputed_territories": [
+    {
+      "id": 46095,
+      "name": "Haspra",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.43633,
+      "longitude": 34.1125,
+      "population": 10310,
+      "dist_m": 5908420.1626519,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46158,
+      "name": "Balaklava",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.51118,
+      "longitude": 33.59942,
+      "population": 18649,
+      "dist_m": 5904489.3979669,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 45839,
+      "name": "Yalta",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.50218,
+      "longitude": 34.16624,
+      "population": 77003,
+      "dist_m": 5900686.90153949,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46062,
+      "name": "Komyshova Bukhta",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.58442,
+      "longitude": 33.44095,
+      "population": 10205,
+      "dist_m": 5897723.86316608,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 8510,
+      "name": "Sevastopol",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.60795,
+      "longitude": 33.52134,
+      "population": 547820,
+      "dist_m": 5894450.98184447,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46039,
+      "name": "Korabelna Storona",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.60948,
+      "longitude": 33.54348,
+      "population": 66686,
+      "dist_m": 5894096.3951332,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46148,
+      "name": "Inkerman",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.61391,
+      "longitude": 33.6098,
+      "population": 10204,
+      "dist_m": 5893050.49517871,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 11547,
+      "name": "Nakhimov Raion",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.7,
+      "longitude": 33.6,
+      "population": 146872,
+      "dist_m": 5883619.72799748,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46171,
+      "name": "Alushta",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.67728,
+      "longitude": 34.4097,
+      "population": 29586,
+      "dist_m": 5879260.14780865,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46160,
+      "name": "Bakhchysaray",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.75525,
+      "longitude": 33.85782,
+      "population": 27448,
+      "dist_m": 5875343.89005423,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 45887,
+      "name": "Sudak",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.84924,
+      "longitude": 34.97471,
+      "population": 16597,
+      "dist_m": 5855384.15212667,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 10129,
+      "name": "Simferopol",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 44.95719,
+      "longitude": 34.11079,
+      "population": 336460,
+      "dist_m": 5850888.17090701,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46149,
+      "name": "Bilohirsk",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.05679,
+      "longitude": 34.60386,
+      "population": 16428,
+      "dist_m": 5835667.2190129,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 45919,
+      "name": "Saky",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.13424,
+      "longitude": 33.59996,
+      "population": 28322,
+      "dist_m": 5835635.71836008,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46083,
+      "name": "Hvardiyske",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.11692,
+      "longitude": 34.02188,
+      "population": 12589,
+      "dist_m": 5833994.76033583,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46097,
+      "name": "Feodosiya",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.03199,
+      "longitude": 35.38153,
+      "population": 68562,
+      "dist_m": 5831643.61632725,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 8505,
+      "name": "Yevpatoriya",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.20091,
+      "longitude": 33.36655,
+      "population": 107040,
+      "dist_m": 5830216.94636721,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 46268,
+      "name": "Krymskyi",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.05418,
+      "longitude": 35.37374,
+      "population": 12850,
+      "dist_m": 5829261.37644636,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 45932,
+      "name": "Primorskyi",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.11201,
+      "longitude": 35.4786,
+      "population": 12560,
+      "dist_m": 5821952.72900777,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 45959,
+      "name": "Biyuk-Onlar",
+      "country_code": "UA",
+      "actual_country": "RU",
+      "actual_country_name": "Russia",
+      "latitude": 45.28866,
+      "longitude": 34.13521,
+      "population": 10244,
+      "dist_m": 5814058.46817923,
+      "reason": "crimea_disputed"
+    },
+    {
+      "id": 8510,
+      "name": "Sevastopol",
+      "country_code": "UA",
+      "latitude": 44.60795,
+      "longitude": 33.52134,
+      "population": 547820,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 10129,
+      "name": "Simferopol",
+      "country_code": "UA",
+      "latitude": 44.95719,
+      "longitude": 34.11079,
+      "population": 336460,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 11547,
+      "name": "Nakhimov Raion",
+      "country_code": "UA",
+      "latitude": 44.7,
+      "longitude": 33.6,
+      "population": 146872,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 8505,
+      "name": "Yevpatoriya",
+      "country_code": "UA",
+      "latitude": 45.20091,
+      "longitude": 33.36655,
+      "population": 107040,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 45839,
+      "name": "Yalta",
+      "country_code": "UA",
+      "latitude": 44.50218,
+      "longitude": 34.16624,
+      "population": 77003,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46097,
+      "name": "Feodosiya",
+      "country_code": "UA",
+      "latitude": 45.03199,
+      "longitude": 35.38153,
+      "population": 68562,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46039,
+      "name": "Korabelna Storona",
+      "country_code": "UA",
+      "latitude": 44.60948,
+      "longitude": 33.54348,
+      "population": 66686,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46171,
+      "name": "Alushta",
+      "country_code": "UA",
+      "latitude": 44.67728,
+      "longitude": 34.4097,
+      "population": 29586,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 45919,
+      "name": "Saky",
+      "country_code": "UA",
+      "latitude": 45.13424,
+      "longitude": 33.59996,
+      "population": 28322,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46160,
+      "name": "Bakhchysaray",
+      "country_code": "UA",
+      "latitude": 44.75525,
+      "longitude": 33.85782,
+      "population": 27448,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46158,
+      "name": "Balaklava",
+      "country_code": "UA",
+      "latitude": 44.51118,
+      "longitude": 33.59942,
+      "population": 18649,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 45887,
+      "name": "Sudak",
+      "country_code": "UA",
+      "latitude": 44.84924,
+      "longitude": 34.97471,
+      "population": 16597,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46149,
+      "name": "Bilohirsk",
+      "country_code": "UA",
+      "latitude": 45.05679,
+      "longitude": 34.60386,
+      "population": 16428,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46268,
+      "name": "Krymskyi",
+      "country_code": "UA",
+      "latitude": 45.05418,
+      "longitude": 35.37374,
+      "population": 12850,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46083,
+      "name": "Hvardiyske",
+      "country_code": "UA",
+      "latitude": 45.11692,
+      "longitude": 34.02188,
+      "population": 12589,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 45932,
+      "name": "Primorskyi",
+      "country_code": "UA",
+      "latitude": 45.11201,
+      "longitude": 35.4786,
+      "population": 12560,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46095,
+      "name": "Haspra",
+      "country_code": "UA",
+      "latitude": 44.43633,
+      "longitude": 34.1125,
+      "population": 10310,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 45959,
+      "name": "Biyuk-Onlar",
+      "country_code": "UA",
+      "latitude": 45.28866,
+      "longitude": 34.13521,
+      "population": 10244,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46062,
+      "name": "Komyshova Bukhta",
+      "country_code": "UA",
+      "latitude": 44.58442,
+      "longitude": 33.44095,
+      "population": 10205,
+      "country_name": "Ukraine"
+    },
+    {
+      "id": 46148,
+      "name": "Inkerman",
+      "country_code": "UA",
+      "latitude": 44.61391,
+      "longitude": 33.6098,
+      "population": 10204,
+      "country_name": "Ukraine"
+    }
+  ],
+  "fix_details": []
+}

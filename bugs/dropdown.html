@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown stacking repro</title>
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --panel: rgba(11,15,20,0.85);
+        --border: #1f2937;
+        --fg: #e5e7eb;
+        --muted: #94a3b8;
+        --accent: #5eead4;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: #111827;
+        color: var(--fg);
+        font-family: Arial, sans-serif;
+      }
+
+      #map {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        z-index: 0;
+      }
+
+      #bottom-bar {
+        position: fixed;
+        left: 50%;
+        bottom: 12px;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        z-index: 500;
+        overflow: visible;
+      }
+
+      .time-dropdown {
+        position: relative;
+      }
+
+      .time-dropdown-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.03);
+        color: var(--fg);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .time-dropdown-menu {
+        position: fixed;
+        left: 50%;
+        bottom: 52px;
+        transform: translateX(-50%);
+        min-width: 180px;
+        background: rgba(11,15,20,0.97);
+        border: 1px solid #334155;
+        border-radius: 6px;
+        padding: 6px 0;
+        z-index: 10000;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        display: none;
+      }
+
+      .time-dropdown-menu button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        border: none;
+        color: var(--fg);
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      .time-dropdown-menu button:hover {
+        background: rgba(255,255,255,0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <div id="bottom-bar">
+      <div class="time-dropdown">
+        <button id="time-dropdown-btn" class="time-dropdown-btn" type="button" aria-expanded="false">
+          <span id="time-dropdown-label">24h</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+
+        <div id="time-dropdown-menu" class="time-dropdown-menu" aria-hidden="true">
+          <button type="button">24 hours (55k)</button>
+          <button type="button">3 days (148k)</button>
+          <button type="button">7 days (278k)</button>
+          <button type="button">30 days (431k)</button>
+          <button type="button">All time</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const btn = document.getElementById('time-dropdown-btn');
+      const menu = document.getElementById('time-dropdown-menu');
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = menu.style.display === 'block';
+        menu.style.display = isOpen ? 'none' : 'block';
+        menu.setAttribute('aria-hidden', String(!isOpen));
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+          menu.style.display = 'none';
+          menu.setAttribute('aria-hidden', 'true');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    </script>
+  </body>
+</html>

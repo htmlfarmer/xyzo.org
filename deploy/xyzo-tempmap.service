@@ -1,0 +1,14 @@
+[Unit]
+Description=XYZO temperature overlay - renders the GFS 2 m temperature into the map grid
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -m worker.tempmap
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# The worker is idempotent: it compares the analysis run_time in
+# public_html/data/temp/meta.json and writes nothing when GFS has not
+# advanced, so a timer tick that lands early is a no-op rather than a
+# pointless rewrite that busts every client's cache.

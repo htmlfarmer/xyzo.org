@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh the ocean-current overlay daily (OSCAR publishes a five-day composite)
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=24h
+Persistent=true
+
+[Install]
+WantedBy=timers.target

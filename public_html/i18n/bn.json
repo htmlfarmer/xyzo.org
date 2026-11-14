@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — বৈশ্বিক সংবাদ মানচিত্র",
+  "search.placeholder": "শহর বা সংবাদ খুঁজুন…",
+  "search.button": "খুঁজুন",
+  "search.clear": "মুছুন",
+
+  "panel.title": "লাইভ অবস্থা",
+  "panel.toggle": "লাইভ অবস্থা প্যানেল টগল",
+  "panel.loading": "লোড হচ্ছে…",
+  "tab.hot": "জনপ্রিয়",
+  "tab.new": "নতুন",
+  "tab.near": "আমার কাছে",
+  "tab.local": "স্থানীয়",
+  "tab.trending": "ট্রেন্ডিং",
+
+  "time.24h": "২৪ ঘণ্টা",
+  "time.7d": "গত সপ্তাহ",
+  "time.30d": "গত মাস",
+  "time.365d": "গত বছর",
+  "time.custom": "সব",
+
+  "mode.markers": "মার্কার",
+  "mode.heatmap": "হিটম্যাপ",
+  "mode.clusters": "ক্লাস্টার",
+  "mode.links": "লিংক",
+  "mode.wiki": "উইকি",
+
+  "explore.button": "অন্বেষণ",
+  "explore.title": "এই এলাকায় সংবাদ উৎস আবিষ্কার করুন",
+
+  "location.placeholder": "শহর, ঠিকানা, দেশ…",
+  "location.use_my": "ব্রাউজারের অবস্থান ব্যবহার করুন",
+  "location.clear": "অবস্থান মুছুন",
+
+  "pin.events": "ইভেন্ট",
+  "pin.sources": "উৎস",
+  "pin.nearby": "কাছের শহর",
+  "pin.details": "বিস্তারিত",
+  "pin.share": "শেয়ার",
+  "pin.hide": "লুকান",
+  "pin.report": "রিপোর্ট",
+
+  "filter.all": "সব",
+  "filter.categories": "বিভাগ",
+  "filter.sources": "উৎস",
+
+  "status.online": "অনলাইন",
+  "status.offline": "অফলাইন",
+  "status.updating": "আপডেট হচ্ছে…",
+  "status.last_update": "সর্বশেষ আপডেট",
+
+  "help.title": "সাহায্য",
+  "help.about": "XYZO সম্পর্কে",
+  "help.shortcuts": "কীবোর্ড শর্টকাট",
+
+  "lang.switcher": "ভাষা",
+
+  "category.politics": "রাজনীতি",
+  "category.business": "ব্যবসা",
+  "category.crime": "অপরাধ",
+  "category.weather": "আবহাওয়া",
+  "category.science": "বিজ্ঞান",
+  "category.technology": "প্রযুক্তি",
+  "category.sports": "খেলা",
+  "category.culture": "সংস্কৃতি",
+  "category.environment": "পরিবেশ",
+  "category.conflict": "সংঘাত",
+  "category.health": "স্বাস্থ্য",
+  "category.other": "অন্যান্য",
+
+  "event.earthquake": "ভূমিকম্প",
+  "event.flood": "বন্যা",
+  "event.storm": "ঝড়",
+  "event.wildfire": "জঙ্গলের আগুন",
+  "event.shooting": "গুলিচালনা",
+  "event.protest": "বিক্ষোভ",
+  "event.election": "নির্বাচন",
+  "event.accident": "দুর্ঘটনা"
+}

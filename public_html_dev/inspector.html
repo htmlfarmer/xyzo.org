@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XYZO — Marker & Spatial Inspector</title>
+  <script src="console-guard.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --panel-bg: #1e293b;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+    .stats-bar { display: flex; gap: 16px; font-size: 0.85rem; }
+    .stat-pill {
+      background: rgba(255,255,255,0.05);
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .stat-val { font-weight: 700; color: var(--accent); }
+    #container { display: flex; flex: 1; height: calc(100vh - 57px); }
+    #map { flex: 1; height: 100%; }
+    #sidebar {
+      width: 380px;
+      background: var(--panel-bg);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-section { padding: 16px; border-bottom: 1px solid var(--border); }
+    .sidebar-section h2 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px; }
+    .filter-btn {
+      background: #334155;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      margin-right: 6px;
+    }
+    .filter-btn.active { background: var(--accent); color: #000; font-weight: 600; }
+    #inspector-details {
+      padding: 16px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .detail-card {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .detail-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; color: #fff; }
+    .meta-row { display: flex; justify-content: space-between; margin-bottom: 4px; color: var(--text-muted); }
+    .meta-val { color: var(--text-main); font-weight: 500; }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-high { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+    .badge-medium { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .badge-low { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔍 XYZO Spatial & Marker Inspector</h1>
+    <div class="stats-bar">
+      <div class="stat-pill">Total Pins: <span id="stat-total" class="stat-val">0</span></div>
+      <div class="stat-pill">Low Conf (&lt;0.5): <span id="stat-low" class="stat-val">0</span></div>
+      <div class="stat-pill">User Learned: <span id="stat-learned" class="stat-val">0</span></div>
+    </div>
+  </header>
+  <div id="container">
+    <div id="map"></div>
+    <div id="sidebar">
+      <div class="sidebar-section">
+        <h2>Marker Inspection Controls</h2>
+        <div>
+          <button class="filter-btn active" onclick="loadPins('all')">All Pins</button>
+          <button class="filter-btn" onclick="loadPins('low_conf')">Low Confidence</button>
+          <button class="filter-btn" onclick="loadPins('rss')">RSS Only</button>
+        </div>
+      </div>
+      <div id="inspector-details">
+        <div class="detail-card">
+          <p style="color: var(--text-muted);">Click any map marker to inspect PostGIS coordinates, confidence scores, provenance, and community feedback.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const map = L.map('map').setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    let markersGroup = L.layerGroup().addTo(map);
+    let allPins = [];
+
+    async function loadPins(filter = 'all') {
+      markersGroup.clearLayers();
+      try {
+        const res = await fetch('/api/pins?limit=500');
+        const data = await res.json();
+        allPins = data.pins || [];
+
+        let filtered = allPins;
+        if (filter === 'low_conf') filtered = allPins.filter(p => (p.confidence_score || 0) < 0.5);
+        if (filter === 'rss') filtered = allPins.filter(p => p.source_type === 'rss');
+
+        document.getElementById('stat-total').innerText = allPins.length;
+        document.getElementById('stat-low').innerText = allPins.filter(p => (p.confidence_score || 0) < 0.5).length;
+
+        filtered.forEach(pin => {
+          const conf = pin.confidence_score || 0;
+          let color = '#10b981';
+          if (conf < 0.85) color = '#f59e0b';
+          if (conf < 0.5) color = '#ef4444';
+
+          const marker = L.circleMarker([pin.location.lat, pin.location.lng], {
+            radius: 7,
+            fillColor: color,
+            color: '#fff',
+            weight: 1.5,
+            opacity: 1,
+            fillOpacity: 0.8
+          });
+
+          marker.on('click', () => inspectPin(pin));
+          markersGroup.addLayer(marker);
+        });
+      } catch (err) {
+        console.error("Failed to load pins:", err);
+      }
+    }
+
+    function inspectPin(pin) {
+      const conf = pin.confidence_score || 0;
+      let badgeClass = 'badge-high';
+      if (conf < 0.85) badgeClass = 'badge-medium';
+      if (conf < 0.5) badgeClass = 'badge-low';
+
+      const html = `
+        <div class="detail-card">
+          <div class="detail-title">${pin.title}</div>
+          <div class="meta-row"><span>ID:</span> <span class="meta-val">#${pin.id}</span></div>
+          <div class="meta-row"><span>Source Type:</span> <span class="meta-val">${pin.source_type}</span></div>
+          <div class="meta-row"><span>Category:</span> <span class="meta-val">${pin.category || 'other'}</span></div>
+          <div class="meta-row"><span>Precision:</span> <span class="meta-val">${pin.location_precision || 'city'}</span></div>
+          <div class="meta-row">
+            <span>Confidence:</span>
+            <span class="badge ${badgeClass}">${(conf * 100).toFixed(0)}%</span>
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-title">PostGIS Coordinates</div>
+          <div class="meta-row"><span>Latitude:</span> <span class="meta-val">${pin.location.lat.toFixed(6)}</span></div>
+          <div class="meta-row"><span>Longitude:</span> <span class="meta-val">${pin.location.lng.toFixed(6)}</span></div>
+          <div class="meta-row"><span>SRID:</span> <span class="meta-val">4326 (WGS 84)</span></div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-title">Provenance</div>
+          <div class="meta-row"><span>Published:</span> <span class="meta-val">${new Date(pin.published_at).toLocaleString()}</span></div>
+          ${pin.canonical_url ? `<div class="meta-row"><span>URL:</span> <a href="${pin.canonical_url}" target="_blank" style="color: var(--accent);">Link</a></div>` : ''}
+        </div>
+      `;
+      document.getElementById('inspector-details').innerHTML = html;
+    }
+
+    loadPins();
+  </script>
+</body>
+</html>

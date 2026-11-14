@@ -1,0 +1,14 @@
+[Unit]
+Description=XYZO CAPE overlay - renders the GFS surface CAPE into the map grid
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -m worker.cape
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# The worker is idempotent: it compares the analysis run_time in
+# public_html/data/cape/meta.json and writes nothing when GFS has not
+# advanced, so a timer tick that lands early is a no-op rather than a
+# pointless rewrite that busts every client's cache.

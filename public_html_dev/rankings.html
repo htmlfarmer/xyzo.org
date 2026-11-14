@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Source Rankings — Newsium</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --gold: #f59e0b;
+      --silver: #94a3b8;
+      --bronze: #b45309;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    header h1 {
+      margin: 0;
+      font-family: ui-monospace, monospace;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    header a:hover { color: var(--fg); }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat {
+      padding: 16px;
+      background: rgba(94, 234, 212, 0.05);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .filter-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { color: var(--fg); border-color: var(--fg); }
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* Rankings table */
+    .rankings-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .rankings-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: rgba(94, 234, 212, 0.05);
+      border-bottom: 1px solid var(--border);
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .rankings-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+    }
+    .rankings-table tr:hover td {
+      background: rgba(94, 234, 212, 0.03);
+    }
+
+    /* Rank badges */
+    .rank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .rank-1 { background: var(--gold); color: #000; }
+    .rank-2 { background: var(--silver); color: #000; }
+    .rank-3 { background: var(--bronze); color: #fff; }
+    .rank-other { background: var(--border); color: var(--muted); }
+
+    /* Source info */
+    .source-name {
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .source-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, monospace;
+    }
+
+    /* Score bar */
+    .score-bar {
+      width: 100px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .score-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+    .score-value {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Metrics */
+    .metric {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+    }
+    .metric-value {
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .metric-label {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+    .spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(94, 234, 212, 0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tab {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 10px 16px;
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab:hover { color: var(--fg); }
+    .tab.active {
+      color: var(--fg);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Heatmap preview */
+    .heatmap-section {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .heatmap-section h2 {
+      font-family: ui-monospace, monospace;
+      font-size: 16px;
+      color: var(--accent);
+      margin: 0 0 16px;
+    }
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      gap: 4px;
+    }
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-family: ui-monospace, monospace;
+      color: var(--fg);
+      position: relative;
+    }
+    .heatmap-cell .tooltip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .heatmap-cell:hover .tooltip { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Source Rankings</h1>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="/">← Map</a>
+        <a href="/requests.html">Requests</a>
+        <a href="/system.html">System</a>
+      </div>
+    </header>
+
+    <div class="stats" id="stats">
+      <div class="stat">
+        <div class="stat-value" id="stat-sources">-</div>
+        <div class="stat-label">Active Sources</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-articles">-</div>
+        <div class="stat-label">Articles (24h)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-users">-</div>
+        <div class="stat-label">Users (24h)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-clicks">-</div>
+        <div class="stat-label">Pin Clicks (24h)</div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="rankings">Rankings</button>
+      <button class="tab" data-tab="locations">Top Locations</button>
+      <button class="tab" data-tab="heatmap">Geographic Interest</button>
+      <button class="tab" data-tab="trending">Trending</button>
+    </div>
+
+    <div id="tab-rankings">
+      <div class="filters">
+        <button class="filter-btn active" data-region="all">All Regions</button>
+        <button class="filter-btn" data-region="americas">Americas</button>
+        <button class="filter-btn" data-region="europe">Europe</button>
+        <button class="filter-btn" data-region="asia">Asia</button>
+        <button class="filter-btn" data-region="africa">Africa</button>
+        <button class="filter-btn" data-region="middle-east">Middle East</button>
+      </div>
+
+      <div id="rankings">
+        <div class="loading"><span class="spinner"></span> Loading rankings…</div>
+      </div>
+    </div>
+
+    <div id="tab-locations" hidden>
+      <div class="locations-section">
+        <h2>Top Viewed Locations (Last 24h)</h2>
+        <p style="color: var(--muted); font-size: 12px; margin-bottom: 16px;">
+          Cities and areas where users are looking at news. High-demand areas with low coverage are prioritized for source discovery.
+        </p>
+        <div id="locations">
+          <div class="loading"><span class="spinner"></span> Loading locations…</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-heatmap" hidden>
+      <div class="heatmap-section">
+        <h2>Geographic Interest (Last 24h)</h2>
+        <div id="heatmap" class="heatmap-grid">
+          <div class="loading"><span class="spinner"></span> Loading heatmap…</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-trending" hidden>
+      <div id="trending">
+        <div class="loading"><span class="spinner"></span> Loading trending topics…</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = '';
+    let currentRegion = 'all';
+    let currentTab = 'rankings';
+
+    // Load stats
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API}/api/analytics/stats`);
+        const data = await res.json();
+        document.getElementById('stat-sources').textContent = data.active_sources || '-';
+        document.getElementById('stat-articles').textContent = data.articles_24h || '-';
+        document.getElementById('stat-users').textContent = data.users_24h || '-';
+        document.getElementById('stat-clicks').textContent = data.pin_clicks_24h || '-';
+      } catch (e) {
+        console.error('Failed to load stats:', e);
+      }
+    }
+
+    // Load rankings
+    async function loadRankings() {
+      const container = document.getElementById('rankings');
+      container.innerHTML = '<div class="loading"><span class="spinner"></span> Loading rankings…</div>';
+
+      try {
+        const regionParam = currentRegion !== 'all' ? `?region=${currentRegion}` : '';
+        const res = await fetch(`${API}/api/analytics/rankings/sources${regionParam}`);
+        const data = await res.json();
+
+        if (data.rankings.length === 0) {
+          container.innerHTML = '<div class="loading">No ranking data available yet.</div>';
+          return;
+        }
+
+        const maxScore = Math.max(...data.rankings.map(r => r.score));
+
+        let html = '<table class="rankings-table">';
+        html += '<thead><tr>';
+        html += '<th>Rank</th><th>Source</th><th>Score</th><th>Clicks (7d)</th><th>Views (7d)</th><th>Users (7d)</th><th>Countries</th><th>Articles</th>';
+        html += '</tr></thead><tbody>';
+
+        for (const r of data.rankings) {
+          const rankClass = r.rank <= 3 ? `rank-${r.rank}` : 'rank-other';
+          const scorePercent = maxScore > 0 ? (r.score / maxScore * 100) : 0;
+
+          html += `<tr>
+            <td><span class="rank ${rankClass}">${r.rank}</span></td>
+            <td>
+              <div class="source-name"><a href="/source-coverage.html?id=${r.source_id}">${escapeHtml(r.name)}</a></div>
+              <div class="source-meta">${r.country || '?'} · ${r.region || 'global'}</div>
+            </td>
+            <td>
+              <div class="score-bar"><div class="score-fill" style="width:${scorePercent}%"></div></div>
+              <span class="score-value">${r.score.toFixed(1)}</span>
+            </td>
+            <td><span class="metric-value">${r.clicks_7d}</span></td>
+            <td><span class="metric-value">${r.views_7d}</span></td>
+            <td><span class="metric-value">${r.users_7d}</span></td>
+            <td><span class="metric-value">${r.countries}</span></td>
+            <td><span class="metric-value">${r.articles}</span></td>
+          </tr>`;
+        }
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="loading">Failed to load rankings.</div>';
+        console.error('Failed to load rankings:', e);
+      }
+    }
+
+    // Load heatmap
+    async function loadHeatmap() {
+      const container = document.getElementById('heatmap');
+      container.innerHTML = '<div class="loading"><span class="spinner"></span> Loading heatmap…</div>';
+
+      try {
+        const res = await fetch(`${API}/api/analytics/heatmap?hours=24&limit=100`);
+        const data = await res.json();
+
+        if (data.heatmap.length === 0) {
+          container.innerHTML = '<div class="loading">No geographic data available yet.</div>';
+          return;
+        }
+
+        const maxScore = Math.max(...data.heatmap.map(h => h.score));
+
+        let html = '';
+        for (const h of data.heatmap) {
+          const intensity = maxScore > 0 ? (h.score / maxScore) : 0;
+          const hue = 170 - (intensity * 170); // Green to red
+          const color = `hsla(${hue}, 80%, 50%, ${0.3 + intensity * 0.7})`;
+
+          html += `<div class="heatmap-cell" style="background:${color}">
+            <span>${h.clicks}</span>
+            <div class="tooltip">
+              ${h.lat.toFixed(1)}, ${h.lng.toFixed(1)}<br>
+              Clicks: ${h.clicks} · Views: ${h.views}<br>
+              Users: ${h.users}
+            </div>
+          </div>`;
+        }
+
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="loading">Failed to load heatmap.</div>';
+        console.error('Failed to load heatmap:', e);
+      }
+    }
+
+    // Load trending
+    async function loadTrending() {
+      const container = document.getElementById('trending');
+      container.innerHTML = '<div class="loading"><span class="spinner"></span> Loading trending topics…</div>';
+
+      try {
+        const res = await fetch(`${API}/api/analytics/trending?hours=24&limit=20`);
+        const data = await res.json();
+
+        if (data.trending.length === 0) {
+          container.innerHTML = '<div class="loading">No trending data available yet.</div>';
+          return;
+        }
+
+        let html = '<table class="rankings-table">';
+        html += '<thead><tr><th>Topic</th><th>Articles</th><th>Users</th><th>Clicks</th></tr></thead><tbody>';
+
+        for (const t of data.trending) {
+          html += `<tr>
+            <td><span class="source-name">${escapeHtml(t.topic)}</span></td>
+            <td><span class="metric-value">${t.articles}</span></td>
+            <td><span class="metric-value">${t.users}</span></td>
+            <td><span class="metric-value">${t.clicks}</span></td>
+          </tr>`;
+        }
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="loading">Failed to load trending topics.</div>';
+        console.error('Failed to load trending:', e);
+      }
+    }
+
+    // Load top locations
+    async function loadLocations() {
+      const container = document.getElementById('locations');
+      container.innerHTML = '<div class="loading"><span class="spinner"></span> Loading locations…</div>';
+
+      try {
+        const res = await fetch(`${API}/api/location-views/trending?hours=24&limit=30`);
+        const data = await res.json();
+
+        if (data.trending.length === 0) {
+          container.innerHTML = '<div class="loading">No location data available yet. Start viewing areas on the map!</div>';
+          return;
+        }
+
+        // Also fetch coverage gaps
+        let gaps = [];
+        try {
+          const gapsRes = await fetch(`${API}/api/location-views/coverage-gaps?limit=10`);
+          const gapsData = await gapsRes.json();
+          gaps = gapsData.gaps || [];
+        } catch (e) {}
+
+        const maxViews = Math.max(...data.trending.map(l => l.views));
+
+        let html = '<table class="rankings-table">';
+        html += '<thead><tr>';
+        html += '<th>Rank</th><th>City</th><th>Views</th><th>Users</th><th>Clicks</th><th>Searches</th><th>Trend Score</th><th>Status</th>';
+        html += '</tr></thead><tbody>';
+
+        for (let i = 0; i < data.trending.length; i++) {
+          const l = data.trending[i];
+          const rankClass = i < 3 ? `rank-${i + 1}` : 'rank-other';
+          const viewsPercent = maxViews > 0 ? (l.views / maxViews * 100) : 0;
+          
+          // Check if this city has coverage
+          const gap = gaps.find(g => g.city === l.city && g.country === l.country);
+          const hasCoverage = gap ? gap.has_coverage : true;
+          const statusHtml = hasCoverage 
+            ? '<span style="color: #22c55e;">✓ Covered</span>'
+            : '<span style="color: #f59e0b;">⚠ Gap</span>';
+
+          // Country flag
+          const flag = l.country && l.country.length === 2
+            ? String.fromCodePoint(...[...l.country.toUpperCase()].map(c => 127397 + c.charCodeAt(0)))
+            : '';
+
+          html += `<tr>
+            <td><span class="rank ${rankClass}">${i + 1}</span></td>
+            <td>
+              <div class="source-name">${flag} ${escapeHtml(l.city)}</div>
+              <div class="source-meta">${l.country || '?'} · ${l.lat.toFixed(2)}, ${l.lng.toFixed(2)}</div>
+            </td>
+            <td>
+              <div class="score-bar"><div class="score-fill" style="width:${viewsPercent}%"></div></div>
+              <span class="score-value">${l.views}</span>
+            </td>
+            <td><span class="metric-value">${l.users}</span></td>
+            <td><span class="metric-value">${l.clicks}</span></td>
+            <td><span class="metric-value">${l.searches}</span></td>
+            <td><span class="metric-value">${l.trend_score}</span></td>
+            <td>${statusHtml}</td>
+          </tr>`;
+        }
+
+        html += '</tbody></table>';
+
+        // Add coverage gaps section if any
+        if (gaps.length > 0) {
+          html += '<div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">';
+          html += '<h3 style="color: var(--accent); font-family: ui-monospace, monospace; font-size: 14px; margin-bottom: 12px;">Coverage Gaps (High Demand, Low Coverage)</h3>';
+          html += '<table class="rankings-table">';
+          html += '<thead><tr><th>City</th><th>Views (24h)</th><th>Users</th><th>Articles</th><th>Gap Score</th></tr></thead><tbody>';
+          
+          for (const g of gaps) {
+            if (g.has_coverage) continue;
+            const flag = g.country && g.country.length === 2
+              ? String.fromCodePoint(...[...g.country.toUpperCase()].map(c => 127397 + c.charCodeAt(0)))
+              : '';
+            
+            html += `<tr>
+              <td>
+                <div class="source-name">${flag} ${escapeHtml(g.city)}</div>
+                <div class="source-meta">${g.country || '?'}</div>
+              </td>
+              <td><span class="metric-value">${g.views_24h}</span></td>
+              <td><span class="metric-value">${g.users_24h}</span></td>
+              <td><span class="metric-value">${g.article_count}</span></td>
+              <td><span class="score-value" style="color: #f59e0b;">${g.gap_score.toFixed(1)}</span></td>
+            </tr>`;
+          }
+          
+          html += '</tbody></table></div>';
+        }
+
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="loading">Failed to load locations.</div>';
+        console.error('Failed to load locations:', e);
+      }
+    }
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentTab = tab.dataset.tab;
+
+        document.getElementById('tab-rankings').hidden = currentTab !== 'rankings';
+        document.getElementById('tab-locations').hidden = currentTab !== 'locations';
+        document.getElementById('tab-heatmap').hidden = currentTab !== 'heatmap';
+        document.getElementById('tab-trending').hidden = currentTab !== 'trending';
+
+        if (currentTab === 'rankings') loadRankings();
+        if (currentTab === 'locations') loadLocations();
+        if (currentTab === 'heatmap') loadHeatmap();
+        if (currentTab === 'trending') loadTrending();
+      });
+    });
+
+    // Region filters
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentRegion = btn.dataset.region;
+        loadRankings();
+      });
+    });
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // Initial load
+    loadStats();
+    loadRankings();
+  </script>
+</body>
+</html>

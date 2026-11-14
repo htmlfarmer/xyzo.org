@@ -1,0 +1,37 @@
+[Unit]
+Description=XYZO weather archive - keep a copy of every GFS analysis cycle
+After=network.target postgresql.service xyzo-windmap.service xyzo-tempmap.service xyzo-isobars.service
+
+[Service]
+Type=oneshot
+# The database password lives in the root-only env file, not in the
+# unit. A unit file is world-readable; a committed one is a published
+# password.
+EnvironmentFile=/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.weather_archive --archive
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# WHAT IT DOES. The three weather workers publish the wind grid, the
+# temperature grid and the pressure contours, and each of them REPLACES
+# the previous cycle when the next one lands. This worker copies the
+# published files into data/weather_archive/<cycle>/, so "what did the
+# weather look like on 3 March last year?" has an answer.
+#
+# IT COPIES, IT DOES NOT RE-COMPUTE. The archive is a copy of what the
+# site is already serving — there is no second implementation of a field.
+#
+# WHY EVERY 15 MINUTES. The analyses are six-hourly, but the three
+# workers publish on their own timers and their cycles can differ by one
+# analysis, so the archive polls: it archives the cycle that is standing
+# right now, and it does nothing if that cycle is already stored.
+#
+# WHAT IT COSTS. 369 KB a cycle — the 1° wind grid, the 1° temperature
+# grid and the classic 4 hPa pressure chart, gzipped — so a year is
+# about 550 MB. The 0.25° grids would be 8.8 GB a year, which is why
+# the archive keeps the 1° ones (the same grids the 3D globe draws).
+#
+# The archive lives OUTSIDE the web root and outside git
+# (data/weather_archive/): it is a runtime artefact, like
+# data/nn_models/, and it is served through the API rather than as
+# static files.

@@ -1,0 +1,19 @@
+[Unit]
+Description=Xyzo fast cycle (no AI) — fetch, auto-categorize, geocode, cluster
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/xyzo.org
+# DB credentials come from the operator-managed env file — no in-unit default.
+EnvironmentFile=/etc/xyzo/xyzo.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m worker.run --fast
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=xyzo-fast-fetcher
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

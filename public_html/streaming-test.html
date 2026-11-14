@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>SSE Streaming Test</title>
+<style>
+  body { font-family: monospace; max-width: 900px; margin: 20px auto; padding: 0 12px; }
+  #out { background: #111; color: #0f0; padding: 12px; border-radius: 6px; white-space: pre-wrap; font-size: 12px; max-height: 70vh; overflow-y: auto; }
+  .chunk { display: block; padding: 2px 0; border-bottom: 1px dashed #333; }
+  .reasoning { color: #888; }
+  .content { color: #0f0; }
+  .meta { color: #ff0; }
+  button { padding: 8px 16px; font-size: 14px; }
+</style></head>
+<body>
+<h2>xyzo /api/ai/chat streaming test</h2>
+<input id="msg" value="what is photosynthesis" style="width: 300px; padding: 6px;">
+<button id="go">Send</button>
+<p>Live chunks arriving from server:</p>
+<div id="out"></div>
+<script>
+const out = document.getElementById('out');
+const msg = document.getElementById('msg');
+const btn = document.getElementById('go');
+
+function log(text, cls = '') {
+  const span = document.createElement('span');
+  span.className = 'chunk ' + cls;
+  const t = ((performance.now()) / 1000).toFixed(3);
+  span.textContent = `[${t}s] ${text}`;
+  out.appendChild(span);
+  out.scrollTop = out.scrollHeight;
+}
+
+btn.onclick = async () => {
+  out.innerHTML = '';
+  const t0 = performance.now();
+  log('POST /api/ai/chat message=' + JSON.stringify(msg.value));
+  const res = await fetch('/api/ai/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg.value, stream: true, max_tokens: 200 }),
+  });
+  log(`response headers: content-type=${res.headers.get('content-type')} content-encoding=${res.headers.get('content-encoding') || 'none'}`, 'meta');
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buf = '', contentCount = 0, reasoningCount = 0, lineCount = 0;
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    const t = ((performance.now() - t0) / 1000).toFixed(3);
+    log(`read(): ${value.length}B @${t}s preview=${JSON.stringify(decoder.decode(value.slice(0, 80)))}`, 'meta');
+    buf += decoder.decode(value, { stream: true });
+    let idx;
+    while ((idx = buf.indexOf('\n')) !== -1) {
+      const line = buf.slice(0, idx).trim();
+      buf = buf.slice(idx + 1);
+      if (!line.startsWith('data:')) continue;
+      const payload = line.slice(5).trim();
+      if (payload === '[DONE]' || payload === '') continue;
+      try {
+        const obj = JSON.parse(payload);
+        const delta = obj?.choices?.[0]?.delta || {};
+        const content = delta.content;
+        const reasoning = delta.reasoning_content;
+        if (typeof content === 'string') {
+          contentCount++;
+          log(`content[${contentCount}]: ${JSON.stringify(content)}`, 'content');
+        }
+        if (typeof reasoning === 'string') {
+          reasoningCount++;
+          if (reasoningCount <= 5 || reasoningCount % 10 === 0) {
+            log(`reasoning[${reasoningCount}]: ${JSON.stringify(reasoning)}`, 'reasoning');
+          }
+        }
+        lineCount++;
+      } catch (e) {}
+    }
+  }
+  log(`=== DONE === total lines=${lineCount} content_tokens=${contentCount} reasoning_tokens=${reasoningCount} total_time=${((performance.now() - t0)/1000).toFixed(2)}s`, 'meta');
+};
+</script></body></html>

@@ -1,0 +1,21 @@
+[Unit]
+Description=Newsium event-centric ingestion cycle
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/newsium.org
+Environment=NEWSIUM_DB_DSN=postgresql://newsium_app:CHANGE_ME@localhost:5432/newsium
+# The DSN above is a PLACEHOLDER — the repo carries no credentials.
+# The real value lives outside the repo; EnvironmentFile= overrides Environment=.
+EnvironmentFile=-/etc/xyzo/xyzo.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m worker.run --limit 60
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=newsium-fetcher
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

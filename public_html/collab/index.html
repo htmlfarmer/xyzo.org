@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>collab — run your computer for xyzo.org</title>
+<meta name="description" content="One-line onboarding: turn your laptop or server into a collaborator node for the xyzo / hivv / blnq network. Pull jobs, serve models, contribute content." />
+<link rel="stylesheet" href="/collab/collab.css" />
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <p class="kicker">collab · PR-1 · scripts mode</p>
+    <h1>Run your computer for<br/><span class="accent">xyzo · hivv · blnq</span></h1>
+    <p class="lede">
+      One line. Your laptop becomes a worker for the news map (xyzo),
+      the AI gateway (hivv), and the free-tools directory (blnq).
+      Stdlib Python, no daemon dependencies, systemd or launchd service
+      installed for you.
+    </p>
+
+    <div class="cmd-row">
+      <code id="install-cmd">curl -sSL https://xyzo.org/install-collab.sh | bash</code>
+      <button id="copy-cmd" type="button" aria-label="copy install command">copy</button>
+    </div>
+
+    <p class="flags">
+      Flags:
+      <code>--name="asher's macbook"</code>
+      <code>--role=scripts</code>
+      <code>--role=scripts,gateway</code>
+      <code>--no-service</code>
+    </p>
+
+    <div class="cta-row">
+      <a href="/collab/nodes" class="cta">browse active nodes →</a>
+      <a href="#how-it-works" class="cta cta-secondary">how it works</a>
+    </div>
+  </div>
+</header>
+
+<section class="container" id="how-it-works">
+  <h2>how it works</h2>
+  <ol class="steps">
+    <li>
+      <span class="step-num">1</span>
+      <h3>curl | bash</h3>
+      <p>install-collab.sh detects your OS, installs python3 if missing, generates an RSA keypair locally, and POSTs the public key to <code>xyzo.org/api/collab/register</code>.</p>
+    </li>
+    <li>
+      <span class="step-num">2</span>
+      <h3>register</h3>
+      <p>xyzo returns a 12-char <code>node_id</code> + a 24-byte bearer token. Both are persisted to <code>~/.collab/config.toml</code> with mode 0600.</p>
+    </li>
+    <li>
+      <span class="step-num">3</span>
+      <h3>service installed</h3>
+      <p>macOS gets a LaunchAgent; Linux/WSL gets a <code>systemd --user</code> unit. Daemon restarts on crash, heartbeats every 30s.</p>
+    </li>
+    <li>
+      <span class="step-num">4</span>
+      <h3>work starts</h3>
+      <p>Your node polls <code>/api/collab/jobs</code>, claims one, runs it in a sandboxed subprocess, and POSTs the result back. All visible on this dashboard.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="container">
+  <h2>active nodes</h2>
+  <p class="section-sub">live list. refreshes every 30s. heartbeat freshness shown per row.</p>
+  <div id="nodes-table-wrap">
+    <table id="nodes-table">
+      <thead>
+        <tr>
+          <th>node</th>
+          <th>os</th>
+          <th>roles</th>
+          <th>version</th>
+          <th>jobs (7d)</th>
+          <th>last heartbeat</th>
+        </tr>
+      </thead>
+      <tbody id="nodes-body">
+        <tr><td colspan="6" class="loading">loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="container">
+  <h2>what's coming</h2>
+  <p class="section-sub">PR-1 ships scripts mode. The remaining modes are on the roadmap.</p>
+  <ul class="roadmap">
+    <li><strong>PR-1 (now):</strong> <code>scripts</code> — pull jobs from xyzo, run them, report results.</li>
+    <li><strong>PR-2:</strong> <code>gateway</code> + <code>model_serve</code> — install hivv SDK, register local Ollama / LM Studio / vLLM endpoint with hivv's AIRouter.</li>
+    <li><strong>PR-3:</strong> <code>content</code> — submit free tools to blnq, vote, propose edits.</li>
+    <li><strong>PR-4:</strong> <code>discovery</code> + <code>self_improve</code> — scan HN / GitHub / arXiv for collab opportunities; nightly auto-update.</li>
+  </ul>
+</section>
+
+<footer class="container">
+  <p class="meta">
+    Source: <a href="https://github.com/xyzo/collab">github.com/xyzo/collab</a> ·
+    API: <a href="/api/collab/nodes">/api/collab/nodes</a> ·
+    <a href="/collab/index.html">index</a>
+  </p>
+</footer>
+
+<script src="/collab/collab.js"></script>
+</body>
+</html>

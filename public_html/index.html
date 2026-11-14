@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-i18n="app.title">XYZO — The Living Map of Earth</title>
+  <meta name="description" content="XYZO — The World&apos;s Most Comprehensive Real-Time News Map. 2,970+ sources · 220 countries &amp; territories · 50,000+ stories daily. Every heartbeat of the planet, visible at last.">
+  <meta name="keywords" content="news map, global news, AI news, geolocated news, news aggregator, world news, real-time news, interactive map, breaking news, live news">
+  <meta name="author" content="XYZO">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://xyzo.org/">
+  <!-- Text size: apply the stored preference BEFORE first paint so the
+       page never flashes at the wrong size. Default is A+ (115 %) — a
+       class is only needed for the non-default steps. -->
+  <script>try{var t=localStorage.getItem("xyzo.textSize");if(t&&t!=="115")document.documentElement.className+=(document.documentElement.className?" ":"")+"ts-"+t;}catch(e){}</script>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://xyzo.org/">
+  <meta property="og:title" content="XYZO — The Living Map of Earth">
+  <meta property="og:description" content="The planet&apos;s living news map — 2,970+ sources, 220 countries, 50,000+ stories every 24 hours. Powered by AI geolocation. See what the world is feeling right now.">
+  <meta property="og:image" content="https://xyzo.org/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="XYZO — The world&apos;s most comprehensive AI-powered news map, spanning 220 countries">
+  <meta property="og:site_name" content="XYZO">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://xyzo.org/">
+  <meta name="twitter:title" content="XYZO — The Living Map of Earth">
+  <meta name="twitter:description" content="The world&apos;s most comprehensive news map. 2,970+ sources · 220 countries · 50,000+ daily stories. AI-powered real-time geolocation.">
+  <meta name="twitter:image" content="https://xyzo.org/og-image.svg">
+  <meta name="twitter:image:alt" content="XYZO — Interactive global news map">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "XYZO",
+    "alternateName": ["XYZO News Map", "Xyzo"],
+    "url": "https://xyzo.org",
+    "description": "The world&apos;s most comprehensive AI-powered news map. Real-time stories from 220 countries, 2,970+ sources, 50,000+ updates daily.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://xyzo.org/?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "mainEntity": {
+      "@type": "SoftwareApplication",
+      "name": "XYZO News Map",
+      "applicationCategory": "NewsApplication",
+      "operatingSystem": "Web",
+      "description": "AI-powered global news aggregation and geolocation platform",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "2943",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "XYZO",
+      "url": "https://xyzo.org",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://xyzo.org/favicon.svg"
+      }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is XYZO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "XYZO is the world's most comprehensive AI-powered news map, aggregating real-time news from 2,970+ sources across 220 countries and territories. It uses artificial intelligence to geolocate, categorize, and rank news stories, presenting them on an interactive map for geographic discovery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many news sources does XYZO cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "XYZO covers 2,970+ active news sources across 220 countries and territories, processing 50,000+ stories every 24 hours. Sources include RSS feeds, web scrapers, and API integrations spanning every continent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does XYZO's AI work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "XYZO uses a multi-layer AI system: (1) Gemma-4 LLM extracts location, summary, and event type from articles, (2) Nominatim geocoding converts locations to precise coordinates, (3) Neural networks rank articles by relevance and predict user engagement, (4) Coverage gap detection identifies under-reported regions and topics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes XYZO different from other news aggregators?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "XYZO is unique because it: (1) Presents news on an interactive map for geographic discovery, (2) Uses AI to geolocate every story with precision coordinates, (3) Covers 220 countries and territories including under-reported regions, (4) Uses neural networks for intelligent ranking, (5) Evaluates source quality before publication using heuristics and AI, (6) Detects coverage gaps to surface stories from neglected areas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which regions does XYZO cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "XYZO covers 59 regions worldwide: Latin America (342 sources across 19 countries), Southeast Asia (141 sources across 11 countries), Africa (179 sources across 40+ countries), Middle East & North Africa (220 sources across 20+ countries), Eastern Europe & Central Asia (307 sources across 30+ countries), plus North America, Western Europe, Asia-Pacific, and more."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.css">
+  <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="styles.css?v=202611142000" media="print" onload="this.media='all'">
+  <!-- THE CITY DATASET IS NOT PRELOADED. It used to be, with a comment
+       saying the point was to start the 1.16 MB fetch "during idle time
+       (after initial render)" — but a <link rel="preload"> in the HEAD
+       does not wait for idle: the browser starts it as soon as it parses
+       the HTML. Measured 2026-11-12, it was the FIRST request on the
+       page (t=0.30 s, before app.js) and it competed with app.js and the
+       map's 280 tiles for a slow connection's bandwidth — and the markers
+       cannot start until app.js lands.
+
+       The index is now fetched when it is actually needed: when the
+       reader touches the search box, or the map. See city-engine.js and
+       the warm in app.js. -->
+  <!-- Lazy-loaded chunks. The chunks themselves are loaded on demand
+       by app.js wrappers the first time the user clicks the trigger.
+       Use `prefetch` (not `preload`) — prefetch fetches at idle
+       priority with no time deadline, so the browser stops complaining
+       when most users never click the trigger within the first few
+       seconds. The chunks weigh 28 KB and 8 KB so the cache cost is
+       trivial. -->
+  <link rel="prefetch" href="flag-quality.js?v=202611142000" as="script">
+  <link rel="prefetch" href="ai-story-chat.js?v=202611142000" as="script">
+  <script src="console-guard.js?v=202611142000"></script>
+  <script src="i18n.js?v=202611142000" defer></script>
+  <script src="command-bar.js?v=202611142000" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" role="main">
+  <div id="map" role="application" aria-label="Interactive news map. Use arrow keys to pan, plus and minus to zoom, Escape to close popups."></div>
+
+  <!-- Text-mode fallback: shown by default, hidden by JS when app loads -->
+  <div id="text-fallback" style="display:block;background:#0b0f14;color:#e6edf3;font-family:system-ui,sans-serif;padding:0;max-width:900px">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#16213e 0%,#0f172a 100%);border-bottom:2px solid #5eead4;padding:32px 24px;margin:0">
+      <div style="font-size:11px;color:#5eead4;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">🗺️ The Living Map of Earth</div>
+      <h1 style="color:#fff;font-size:32px;margin:0 0 8px;font-weight:800;letter-spacing:-0.5px">XYZO</h1>
+      <p style="color:#94a3b8;font-size:15px;margin:0 0 24px;line-height:1.6">The world's most comprehensive AI-powered news map. <span data-stat="sources">2,970+</span> sources · <span data-stat="countries">220</span> countries &amp; territories · <span data-stat="stories">50,000+</span> stories every 24 hours.</p>
+
+      <!-- Search Hero -->
+      <div style="background:#0b0f14;border:1px solid #1f2937;border-radius:12px;padding:24px;max-width:600px">
+        <form action="/search/results" method="GET" style="margin:0">
+          <div style="color:#e6edf3;font-size:13px;font-weight:600;margin-bottom:12px">🔍 Search the news:</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input type="text" name="q" placeholder="What's happening in the world?" maxlength="500" required
+              style="flex:1;min-width:200px;background:#16213e;color:#e6edf3;border:1px solid #2d3a4a;padding:14px 16px;border-radius:8px;font-size:15px;outline:none">
+            <button type="submit" style="background:linear-gradient(135deg,#5eead4 0%,#22d3ee 100%);color:#0b0f14;border:none;padding:14px 28px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap">Search</button>
+          </div>
+        </form>
+        <div style="margin-top:12px;font-size:12px;color:#64748b">Or browse by region: <a href="/api/pins/map?bbox=20,60,45,100&limit=30" style="color:#5eead4">Asia</a> · <a href="/api/pins/map?bbox=35,-10,72,40&limit=30" style="color:#5eead4">Europe</a> · <a href="/api/pins/map?bbox=-60,-80,15,55&limit=30" style="color:#5eead4">S. America</a> · <a href="/api/pins/map?bbox=5,-20,70,145&limit=30" style="color:#5eead4">Africa</a> · <a href="/api/pins/map?bbox=15,-170,72,-50&limit=30" style="color:#5eead4">N. America</a></div>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div style="display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid #1f2937">
+      <div style="flex:1;min-width:120px;padding:20px 24px;border-right:1px solid #1f2937;text-align:center">
+        <div style="color:#5eead4;font-size:28px;font-weight:800;margin-bottom:4px" id="stat-sources">2,970+</div>
+        <div style="color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:1px">News Sources</div>
+      </div>
+      <div style="flex:1;min-width:120px;padding:20px 24px;border-right:1px solid #1f2937;text-align:center">
+        <div style="color:#5eead4;font-size:28px;font-weight:800;margin-bottom:4px" id="stat-countries">220</div>
+        <div style="color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:1px">Countries &amp; Territories</div>
+      </div>
+      <div style="flex:1;min-width:120px;padding:20px 24px;border-right:1px solid #1f2937;text-align:center">
+        <div style="color:#5eead4;font-size:28px;font-weight:800;margin-bottom:4px" id="stat-stories">50K+</div>
+        <div style="color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:1px">Stories/Day</div>
+      </div>
+      <div style="flex:1;min-width:120px;padding:20px 24px;text-align:center">
+        <div style="color:#5eead4;font-size:28px;font-weight:800;margin-bottom:4px">AI</div>
+        <div style="color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:1px">Geolocation</div>
+      </div>
+    </div>
+
+    <!-- Sitemap Grid -->
+    <div style="padding:24px">
+
+      <!-- Quick Access -->
+      <div style="margin-bottom:32px">
+        <h2 style="color:#5eead4;font-size:16px;font-weight:700;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #1f2937">⚡ Quick Access</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="/" style="background:#1a1a2e;border:1px solid #2d3a4a;border-radius:8px;padding:12px 16px;color:#e6edf3;text-decoration:none;font-size:14px;font-weight:500">🗺️ Interactive Map</a>
+          <a href="/help/" style="background:#1a1a2e;border:1px solid #2d3a4a;border-radius:8px;padding:12px 16px;color:#e6edf3;text-decoration:none;font-size:14px;font-weight:500">❓ Help & Diagnostics</a>
+          <a href="/search/" style="background:#1a1a2e;border:1px solid #2d3a4a;border-radius:8px;padding:12px 16px;color:#e6edf3;text-decoration:none;font-size:14px;font-weight:500">🔍 Text Search Page</a>
+          <a href="/api/pins/map?bbox=-90,-180,90,180&limit=100" style="background:#1a1a2e;border:1px solid #2d3a4a;border-radius:8px;padding:12px 16px;color:#e6edf3;text-decoration:none;font-size:14px;font-weight:500">📡 Live JSON Data</a>
+        </div>
+      </div>
+
+      <!-- Regions -->
+      <div style="margin-bottom:32px">
+        <h2 style="color:#5eead4;font-size:16px;font-weight:700;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #1f2937">🌍 Regions</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+          <a href="/api/pins/map?bbox=20,60,45,100&limit=50" style="background:#16213e;border:1px solid #1f2937;border-radius:8px;padding:14px;color:#e6edf3;text-decoration:none">
+            <div style="font-size:16px;margin-bottom:4px">🇮🇳 South Asia</div>
+            <div style="color:#64748b;font-size:11px">India, Pakistan, Bangladesh, Sri Lanka</div>
+          </a>
+          <a href="/api/pins/map?bbox=35,-10,72,40&limit=50" style="background:#16213e;border:1px solid #1f2937;border-radius:8px;padding:14px;color:#e6edf3;text-decoration:none">
+            <div style="font-size:16px;margin-bottom:4px">🇪🇺 Europe</div>
+            <div style="color:#64748b;font-size:11px">UK, Germany, France, EU</div>
+          </a>
+          <a href="/api/pins/map?bbox=-60,-80,15,55&limit=50" style="background:#16213e;border:1px solid #1f2937;border-radius:8px;padding:14px;color:#e6edf3;text-decoration:none">
+            <div style="font-size:16px;margin-bottom:4px">🇧🇷 Latin America</div>
+            <div style="color:#64748b;font-size:11px">Brazil, Mexico, Argentina, Colombia</div>
+          </a>
+          <a href="/api/pins/map?bbox=5,-20,70,145&limit=50" style="background:#16213e;border:1px solid #1f2937;border-radius:8px;padding:14px;color:#e6edf3;text-decoration:none">
+            <div style="font-size:16px;margin-bottom:4px">🌍 Africa</div>
+            <div style="color:#64748b;font-size:11px">Nigeria, Kenya, S. Africa, Egypt</div>
+          </a>
+          <a href="/api/pins/map?bbox=15,-170,72,-50&limit=50" style="background:#16213e;border:1px solid #1f2937;border-radius:8px;padding:14px;color:#e6edf3;text-decoration:none">
+            <div style="font-size:16px;margin-bottom:4px">🇺🇸 North America</div>
+            <div style="color:#64748b;font-size:11px">USA, Canada, Mexico</div>
+          </a>
+          <a href="/api/pins/map?bbox=-50,110,-10,180&limit=50" style="background:#16213e;border:1px solid #1f2937;border-radius:8px;padding:14px;color:#e6edf3;text-decoration:none">
+            <div style="font-size:16px;margin-bottom:4px">🇦🇺 Oceania</div>
+            <div style="color:#64748b;font-size:11px">Australia, NZ, Pacific Islands</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div style="margin-bottom:32px">
+        <h2 style="color:#5eead4;font-size:16px;font-weight:700;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #1f2937">📰 Categories</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="/search/results?q=politics" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);border-radius:6px;padding:8px 14px;color:#f87171;text-decoration:none;font-size:13px">⚖️ Politics</a>
+          <a href="/search/results?q=business" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:6px;padding:8px 14px;color:#fbbf24;text-decoration:none;font-size:13px">💰 Business</a>
+          <a href="/search/results?q=technology" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);border-radius:6px;padding:8px 14px;color:#60a5fa;text-decoration:none;font-size:13px">🤖 Technology</a>
+          <a href="/search/results?q=science" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:6px;padding:8px 14px;color:#c084fc;text-decoration:none;font-size:13px">🔬 Science</a>
+          <a href="/search/results?q=sports" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);border-radius:6px;padding:8px 14px;color:#4ade80;text-decoration:none;font-size:13px">⚽ Sports</a>
+          <a href="/search/results?q=culture" style="background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3);border-radius:6px;padding:8px 14px;color:#f472b6;text-decoration:none;font-size:13px">🎭 Culture</a>
+          <a href="/search/results?q=climate" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);border-radius:6px;padding:8px 14px;color:#34d399;text-decoration:none;font-size:13px">🌍 Climate</a>
+          <a href="/search/results?q=health" style="background:rgba(244,63,94,0.15);border:1px solid rgba(244,63,94,0.3);border-radius:6px;padding:8px 14px;color:#fb7185;text-decoration:none;font-size:13px">🏥 Health</a>
+        </div>
+      </div>
+
+      <!-- API -->
+      <div style="background:#1a1a2e;border:1px solid #1f2937;border-radius:12px;padding:20px">
+        <h2 style="color:#5eead4;font-size:16px;font-weight:700;margin:0 0 12px">🔌 Public JSON API — No Key Required</h2>
+        <p style="color:#94a3b8;font-size:13px;margin:0 0 16px">Access structured news data programmatically. Perfect for AI, research, and applications.</p>
+        <pre style="background:#0b0f14;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.7;margin:0">GET /api/pins/map?bbox=<em>W,S,E,N</em>&limit=100   ← News in geographic area
+GET /api/pins?q=<em>topic</em>&limit=20        ← Search news stories
+GET /api/events?lat=<em>Y</em>&lng=<em>X</em>&radius=500 ← Events near location
+POST /api/ai/chat  {"message":"?"}    ← Ask the AI anything</pre>
+        <div style="margin-top:12px;font-size:12px;color:#64748b"><a href="/help/" style="color:#5eead4">Full API documentation →</a></div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#0a0f14;border-top:1px solid #1f2937;padding:20px 24px;color:#64748b;font-size:12px">
+      XYZO © 2026 · <a href="/help/" style="color:#5eead4">Help</a> · <a href="/api/pins/map?bbox=-90,-180,90,180&limit=10" style="color:#5eead4">Live Data</a> · <a href="/search/" style="color:#5eead4">Search</a>
+    </div>
+  </div>
+
+  <script>if(document.getElementById('text-fallback'))document.getElementById('text-fallback').style.display='none';</script>
+
+  <!-- ── Map loading indicator banner ────────────────────────────────── -->
+  <div id="map-loading-banner" class="map-loading-banner hidden" aria-live="polite">
+    <span class="map-loading-spinner"></span>
+    <span id="map-loading-text">📍 Loading news pins…</span>
+  </div>
+
+  <!-- ── Live status side panel ──────────────────────────────────────── -->
+  <aside id="live-panel" class="live-panel collapsed" aria-label="live status panel">
+    <button id="live-panel-toggle" class="live-panel-toggle" data-i18n-aria="panel.toggle" aria-label="Toggle live status panel" title="Toggle panel">‹</button>
+    <header class="live-panel-header">
+      <h2>🔴 Live Feed</h2>
+      <div class="live-panel-tabs" role="tablist">
+        <button type="button" class="live-panel-tab active" data-tab="hot" role="tab" aria-selected="true">🔥 Hot & Latest</button>
+        <button type="button" class="live-panel-tab" data-tab="your" role="tab" aria-selected="false">👤 Your News</button>
+        <button type="button" class="live-panel-tab" data-tab="near" role="tab" aria-selected="false">📍 Near Me</button>
+        <button type="button" class="live-panel-tab" data-tab="local" role="tab" aria-selected="false">🌆 Viewport</button>
+        <button type="button" class="live-panel-tab" data-tab="neural" role="tab" aria-selected="false">🤖 AI Suggested</button>
+      </div>
+      <div class="live-panel-meta" id="live-panel-meta" data-i18n="panel.loading">loading…</div>
+      <!-- The feed's OPTIONS. Two of them are real API parameters the
+           panel never exposed: how far "Near Me" reaches, and how many
+           stories come back. Both are remembered. -->
+      <div class="live-panel-options" id="live-panel-options">
+        <label class="live-opt">
+          <span>Near me</span>
+          <select id="live-opt-radius" aria-label="Radius for the Near Me tab">
+            <option value="50">50 km</option>
+            <option value="100">100 km</option>
+            <option value="250">250 km</option>
+            <option value="500" selected>500 km</option>
+            <option value="1000">1000 km</option>
+            <option value="2000">2000 km</option>
+          </select>
+        </label>
+        <label class="live-opt">
+          <span>Stories</span>
+          <select id="live-opt-limit" aria-label="How many stories to show">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="100">100</option>
+          </select>
+        </label>
+        <button type="button" id="live-opt-refresh" class="live-opt-btn" title="Fetch the feed now">↻</button>
+      </div>
+      <div class="live-panel-loc">
+        <input id="live-panel-loc-input" type="text" aria-label="Location — city, address or country" data-i18n="location.placeholder" placeholder="City, address, country…" maxlength="200" autocomplete="off" class="live-panel-loc-input">
+        <button type="button" id="live-panel-set-loc" class="live-panel-loc-btn" data-i18n-aria="location.use_my" title="Use your browser's location">📍</button>
+        <button type="button" id="live-panel-clear-loc" class="live-panel-loc-btn" data-i18n-aria="location.clear" title="Clear location">×</button>
+      </div>
+      <div id="live-panel-loc-results" class="live-panel-loc-results" hidden role="listbox"></div>
+    </header>
+    <div class="live-panel-body" id="live-panel-body" role="tabpanel">
+      <div class="live-panel-list" id="live-panel-list" aria-live="polite"></div>
+      <div id="live-panel-wiki" class="live-panel-wiki" hidden></div>
+    </div>
+    <footer class="live-panel-status live-panel-status--ok" id="live-panel-status" role="status" aria-live="polite"></footer>
+  </aside>
+
+  <!-- ── Top bar: search only ───────────────────────────────────────── -->
+  <div id="top-bar">
+    <div id="search-bar">
+      <span class="search-icon">⌘</span>
+      <input id="search-input" type="search" aria-label="Search news, ask AI, or paste a URL" data-i18n="search.placeholder" placeholder="Ask AI, search news, or paste a URL…" maxlength="200" autocomplete="off">
+      <button id="search-btn" type="button" data-i18n="search.button">Ask AI</button>
+      <button id="search-clear" type="button" hidden data-i18n="search.clear">× Clear</button>
+    </div>
+    <div id="search-hint" class="search-hint" style="
+      font-size: 10px; color: #475569; font-family: ui-monospace, monospace;
+      margin-top: 2px; text-align: center; opacity: 0.7; display: none;
+    ">
+      Type <span style="color:#5eead4;">/</span> for commands · <span style="color:#5eead4;">⌘K</span> to focus
+    </div>
+    <div id="active-filter-indicator" class="active-filter-pill" hidden role="status" aria-live="polite">
+      <span id="active-filter-text"></span>
+      <button type="button" id="active-filter-clear-btn" onclick="clearCategoryFilters(); if (typeof setActiveTag === 'function') setActiveTag(null);" aria-label="Clear active filter">Clear filter ✕</button>
+    </div>
+    <div id="wiki-search-results" class="wiki-search-results" hidden></div>
+    <div id="search-suggestions" class="search-suggestions" hidden></div>
+  </div>
+  <!-- ── Bottom bar: cockpit-style 5-button control bar ────────────────── -->
+  <div id="bottom-bar">
+    <!-- Language selector -->
+    <div id="lang-container" class="lang-container"></div>
+
+    <!-- Time range — single button with dropdown -->
+    <button type="button" id="time-dropdown-btn" class="bar-btn bar-btn--icon-label" aria-haspopup="true" aria-expanded="false" title="Time range">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span id="time-dropdown-label">24h</span>
+    </button>
+
+    <!-- Explore button -->
+    <button type="button" id="explore-region-btn" class="bar-btn bar-btn--icon-label" data-i18n-aria="explore.title" title="Discover news sources in this area">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="m11 8v6"/><path d="m8 11h6"/></svg>
+      <span data-i18n="explore.button">Explore</span>
+    </button>
+
+    <!-- View modes dropdown (Markers / Heatmap / Clusters) -->
+    <button type="button" id="markers-dropdown-btn" class="bar-btn bar-btn--icon-label" aria-haspopup="true" aria-expanded="false" title="View mode">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span id="markers-dropdown-label">Markers</span>
+    </button>
+
+    <!-- The DEFAULT MAP — one click back to the site's own view.
+         Owner spec 2026-11-13: *"can you have a easy way to 'clear the
+         map to a default satellite only view'"*. It sits beside the ⚙
+         because it is the same kind of thing: a control, not a layer. -->
+    <button type="button" id="default-map-btn" class="bar-btn bar-btn--icon-only" aria-label="Clear the map — satellite view, no overlays" title="Clear the map — satellite view, no overlays">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10a12 12 0 0 0 14 14"/><path d="m4 20 10-10"/><path d="M12.5 6.5l3 3L21 4l-5.5-1.5"/></svg>
+    </button>
+
+    <!-- Control menu (More) -->
+    <button type="button" id="control-menu-btn" class="bar-btn bar-btn--icon-only" aria-haspopup="true" aria-expanded="false" aria-label="Map controls and tools" title="Map controls and tools">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+    </button>
+
+    <button id="show-all-btn" class="show-all-btn" hidden onclick="doShowAll()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Show all
+    </button>
+  </div><!-- /bottom-bar -->
+  <div id="time-custom-popover" class="time-custom-popover" hidden role="dialog" aria-label="Custom time range">
+    <div class="time-custom-header">
+      <span>Custom range</span>
+      <button type="button" id="time-custom-cancel" class="time-custom-close" aria-label="Close">×</button>
+    </div>
+    <label for="time-custom-input">Past <strong id="time-custom-label">7</strong>&nbsp;days</label>
+    <div class="time-custom-controls">
+      <button type="button" data-delta="-1" aria-label="One day fewer">−</button>
+      <input id="time-custom-input" type="number" aria-label="Custom time range in days" min="1" max="90" step="1" value="7" inputmode="numeric">
+      <button type="button" data-delta="1" aria-label="One day more">+</button>
+    </div>
+    <p class="time-custom-hint">1–90 days</p>
+    <div class="time-custom-actions">
+      <button type="button" id="time-custom-apply" class="primary">Apply</button>
+    </div>
+  </div>
+
+  <div id="explore-panel" class="explore-panel" hidden role="dialog" aria-modal="true" aria-label="Discover news sources in this area">
+    <div class="explore-panel-header">
+      <h3>Discover</h3>
+      <button type="button" id="explore-close" class="explore-close" aria-label="Close explore panel">×</button>
+    </div>
+    <div class="explore-panel-body" id="explore-panel-body">
+      <div class="explore-city-search">
+        <input type="text" id="explore-city-search-input" class="explore-city-search-input"
+               placeholder="Search cities (e.g. Fresno, London, Tokyo...)" autocomplete="off" />
+      </div>
+      <div id="explore-city-results" class="explore-city-results"></div>
+      <div id="explore-city-actions" class="explore-city-actions" hidden>
+        <div class="explore-city-selected-name" id="explore-city-selected-name"></div>
+        <button type="button" id="explore-fly-btn" class="explore-fly-btn">Fly to City</button>
+        <button type="button" id="explore-discover-btn" class="explore-discover-btn">Discover News Here</button>
+      </div>
+      <div class="explore-divider"></div>
+      <p class="explore-hint">Or explore the current map view for news sources and coverage.</p>
+      <div id="explore-results" class="explore-results" hidden></div>
+      <div id="explore-status" class="explore-status" hidden></div>
+      <div class="explore-actions">
+        <button type="button" id="explore-start" class="explore-start-btn">Explore This Region</button>
+        <label class="explore-auto-add">
+          <input type="checkbox" id="explore-auto-add"> Auto-add validated sources
+        </label>
+      </div>
+      <div class="explore-divider"></div>
+      <div class="explore-request-section">
+        <div class="explore-request-header">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+          <span>Request More Coverage</span>
+        </div>
+        <p class="explore-request-hint">Ask our AI to prioritize finding news in this area.</p>
+        <textarea id="explore-request-message" class="explore-request-textarea" placeholder="What topics interest you? (optional)" maxlength="500" rows="2"></textarea>
+        <button type="button" id="explore-request-submit" class="explore-request-btn">Request News for This Area</button>
+        <div id="explore-request-status" class="explore-request-status" hidden></div>
+      </div>
+      <div class="explore-divider"></div>
+      <div class="explore-submit-section">
+        <div class="explore-request-header">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Submit News</span>
+        </div>
+        <p class="explore-request-hint">Submit a news story to the map.</p>
+        <button type="button" id="explore-submit-btn" class="explore-request-btn">Open Submit Form</button>
+        <div class="explore-divider"></div>
+        <p class="explore-request-hint">Or paste a news article / feed URL — it goes into a review queue (nothing is published automatically).</p>
+        <input type="url" id="submit-news-url" class="explore-city-search-input"
+               placeholder="https://example.com/story-or-feed" maxlength="2048" autocomplete="off"
+               aria-label="News URL to submit" />
+        <input type="text" id="submit-news-title" class="explore-city-search-input"
+               placeholder="Title (optional)" maxlength="300" autocomplete="off"
+               aria-label="Optional title for the submitted URL" style="margin-top:6px;" />
+        <textarea id="submit-news-note" class="explore-request-textarea"
+                  placeholder="Why is this worth adding? (optional)" maxlength="1000" rows="2"
+                  aria-label="Optional note for the submitted URL"></textarea>
+        <button type="button" id="submit-news-send" class="explore-request-btn">Submit Link for Review</button>
+        <div id="submit-news-status" class="explore-request-status" role="status" aria-live="polite" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Panel: Map analysis and AI assistance -->
+  <div id="help-panel" class="explore-panel" hidden role="dialog" aria-modal="true" aria-label="Map analysis and AI help">
+    <div class="explore-panel-header">
+      <h3>Map Analysis</h3>
+      <button type="button" id="help-close" class="explore-close" aria-label="Close help panel">×</button>
+    </div>
+    <div class="explore-panel-body" id="help-panel-body">
+      <p class="explore-hint">Study the current map view for density issues, mislocated pins, and coverage gaps.</p>
+      <div class="explore-actions">
+        <button type="button" id="help-study-btn" class="explore-start-btn">Study This Map</button>
+        <button type="button" id="help-tour-btn" class="explore-start-btn">Show me how this works</button>
+      </div>
+      <div id="help-study-results" class="explore-results" hidden></div>
+      <div id="help-study-status" class="explore-status" hidden></div>
+      <div class="explore-divider"></div>
+      <div class="explore-request-section">
+        <div class="explore-request-header">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          <span>AI Map Help</span>
+        </div>
+        <p class="explore-request-hint">Ask AI to analyze this area and suggest fixes.</p>
+        <textarea id="help-ai-question" class="explore-request-textarea" placeholder="What would you like to know about this area? (optional)" maxlength="500" rows="2"></textarea>
+        <button type="button" id="help-ai-btn" class="explore-request-btn">Ask AI</button>
+        <div id="help-ai-status" class="explore-request-status" hidden></div>
+        <div id="help-ai-response" class="explore-results" hidden></div>
+      </div>
+      <div class="explore-divider"></div>
+      <div class="explore-request-section" id="help-source-section">
+        <div class="explore-request-header">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <span>Suggest a News Source</span>
+        </div>
+        <p class="explore-request-hint">Know a news source we should include? Submit the URL and we'll review it.</p>
+        <input type="url" id="help-source-url" class="explore-request-textarea" placeholder="https://example.com/feed" maxlength="2000" style="width:100%;padding:6px 8px;margin-bottom:6px;background:rgba(15,23,42,0.8);border:1px solid #334155;color:#e2e8f0;border-radius:6px;font-size:12px;box-sizing:border-box;" />
+        <input type="text" id="help-source-name" class="explore-request-textarea" placeholder="Source name (optional)" maxlength="200" style="width:100%;padding:6px 8px;margin-bottom:6px;background:rgba(15,23,42,0.8);border:1px solid #334155;color:#e2e8f0;border-radius:6px;font-size:12px;box-sizing:border-box;" />
+        <input type="text" id="help-source-country" class="explore-request-textarea" placeholder="Country code (e.g., US, GB, AU)" maxlength="2" style="width:80px;padding:6px 8px;margin-bottom:6px;background:rgba(15,23,42,0.8);border:1px solid #334155;color:#e2e8f0;border-radius:6px;font-size:12px;" />
+        <textarea id="help-source-desc" class="explore-request-textarea" placeholder="Brief description or notes (optional)" maxlength="1000" rows="2" style="width:100%;padding:6px 8px;margin-bottom:6px;background:rgba(15,23,42,0.8);border:1px solid #334155;color:#e2e8f0;border-radius:6px;font-size:12px;box-sizing:border-box;resize:vertical;"></textarea>
+        <button type="button" id="help-source-submit-btn" class="explore-request-btn" style="background:#5eead4;color:#0f172a;font-weight:600;">Submit Source</button>
+        <div id="help-source-status" class="explore-request-status" hidden></div>
+      </div>
+      <div class="explore-divider"></div>
+      <div class="explore-request-section" id="help-complaint-section" style="border: 1px solid rgba(255,107,107,0.3); border-radius: 8px; padding: 12px; background: rgba(255,107,107,0.05);">
+        <div class="explore-request-header" style="color: #ff6b6b;">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Report a Serious Issue</span>
+        </div>
+        <p class="explore-request-hint" style="color: #cc8888;">
+          If the site is experiencing a major problem affecting many users, file a complaint here.
+          If complaints exceed 10% of active users, the site will temporarily go offline for review.
+        </p>
+        <textarea id="help-complaint-text" class="explore-request-textarea" placeholder="Describe the serious issue..." maxlength="2000" rows="2" style="width:100%;padding:6px 8px;margin-bottom:6px;background:rgba(15,23,42,0.8);border:1px solid #ff6b6b33;color:#e2e8f0;border-radius:6px;font-size:12px;box-sizing:border-box;resize:vertical;"></textarea>
+        <button type="button" id="help-complaint-submit-btn" class="explore-request-btn" style="background:#ff6b6b;color:#0f172a;font-weight:600;">⚠️ File Complaint</button>
+        <div id="help-complaint-status" class="explore-request-status" hidden></div>
+      </div>
+      <div class="explore-divider"></div>
+      <div class="explore-request-section" id="help-bug-report-section">
+        <div class="explore-request-header">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          <span>Report a Bug / Map Issue</span>
+        </div>
+        <p class="explore-request-hint">Encountered missing markers, mislocated stories, or a map issue? Submit a report directly to our development team.</p>
+        <select id="help-bug-type" class="explore-request-select" style="width:100%;padding:6px 8px;margin-bottom:8px;background:rgba(15,23,42,0.8);border:1px solid #334155;color:#e2e8f0;border-radius:6px;font-size:12px;">
+          <option value="missing_markers">Missing markers or missing stories</option>
+          <option value="wrong_location">Story pinned in wrong location</option>
+          <option value="map_glitch">Map rendering or display glitch</option>
+          <option value="filter_issue">Category or search filter issue</option>
+          <option value="other_bug">Other bug or suggestion</option>
+        </select>
+        <textarea id="help-bug-text" class="explore-request-textarea" placeholder="Describe the issue in detail (e.g. 'Only computer stories showing in Chicago' or 'Zooming in hides markers')..." maxlength="1000" rows="3"></textarea>
+        <button type="button" id="help-bug-submit-btn" class="explore-request-btn" style="background:#f59e0b;color:#0f172a;font-weight:600;margin-top:6px;">Submit Bug Report</button>
+        <div id="help-bug-status" class="explore-request-status" hidden></div>
+
+        <!-- System & Map State Diagnostics Inspector -->
+        <div style="margin-top:12px;border-top:1px dashed #334155;padding-top:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <button type="button" id="help-toggle-diag-btn" style="background:none;border:none;color:var(--accent);font-size:12px;font-weight:600;cursor:pointer;padding:0;display:flex;align-items:center;gap:4px;">
+              <span>💻 View Browser & State Diagnostics</span>
+              <span id="help-diag-arrow">▼</span>
+            </button>
+            <button type="button" id="help-copy-diag-btn" style="background:rgba(94,234,212,0.1);border:1px solid var(--accent);color:var(--accent);font-size:10px;padding:2px 8px;border-radius:4px;cursor:pointer;" title="Copy details to clipboard">Copy</button>
+          </div>
+          <div id="help-diag-container" style="background:rgba(15,23,42,0.9);border:1px solid #334155;border-radius:6px;padding:10px;font-size:11px;font-family:ui-monospace,monospace;color:#94a3b8;max-height:220px;overflow-y:auto;line-height:1.4;" hidden>
+            <div id="help-diag-content">Loading system diagnostics...</div>
+          </div>
+        </div>
+      </div>
+      <div class="explore-divider"></div>
+      <div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center;">
+        <a href="/help/" style="color:var(--accent);font-size:12px;text-decoration:none;">Open full Help page →</a>
+        <a href="/about.html" style="color:var(--accent);font-size:12px;text-decoration:none;">About XYZO →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color legend for connection arcs. Hidden until links are enabled. -->
+  <div id="links-legend" class="links-legend" hidden aria-hidden="true">
+    <div class="links-legend-row"><span class="links-swatch" style="background:#4ade80"></span>AI story match</div>
+    <div class="links-legend-row"><span class="links-swatch" style="background:#5eead4"></span>shared source</div>
+    <div class="links-legend-row"><span class="links-swatch" style="background:#f59e0b"></span>shared location</div>
+    <div class="links-legend-row"><span class="links-swatch" style="background:#e879f9"></span>shared entity</div>
+    <div class="links-legend-row"><span class="links-swatch" style="background:#60a5fa"></span>shared topic</div>
+  </div>
+
+  <!-- Shown while the story-connection arcs are being fetched. The
+       viewport query can take 20-30s cold; without this the map shows
+       nothing at all and the layer looks broken rather than slow. -->
+  <div id="links-loading" class="links-loading" role="status" aria-live="polite" hidden>Loading story connections…</div>
+
+  <!-- Connection detail panel. Opens when user clicks a connection arc. -->
+  <div id="link-panel" class="link-panel" hidden></div>
+
+  <!-- Banner shown during "add link" flow. -->
+  <div id="add-link-banner" class="add-link-banner" hidden></div>
+  <details id="legend" class="legend" hidden>
+    <summary class="legend-toggle" aria-label="Toggle icon legend">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+      Legend
+    </summary>
+    <button type="button" id="legend-close" class="legend-close" aria-label="Close legend" style="position:absolute;top:4px;right:4px;background:none;border:none;color:inherit;cursor:pointer;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <!-- Trending topics — dynamic names extracted by AI per article. -->
+    <!-- 533 distinct tags in DB today (see /api/tags/stats).              -->
+    <!-- Click a chip to filter pins; click again to clear.                  -->
+    <div class="topics-chips-section">
+      <div class="topics-chips-header">
+        <span class="topics-chips-title">Trending topics</span>
+        <span class="topics-chips-clear" id="topics-chips-clear" hidden>
+          Clear filter
+        </span>
+      </div>
+      <div id="topics-chips" class="topics-chips" role="group" aria-label="Filter pins by topic tag">
+        <span class="topics-chips-loading">Loading…</span>
+      </div>
+    </div>
+    <div class="legend-body" id="legend-body"></div>
+  </details>
+
+  <!-- Daily digest — the day's most interesting stories, curated by
+       worker/daily_digest.py. Same artifact the daily video is built from. -->
+  <div id="digest-panel" class="digest-panel" hidden role="dialog" aria-modal="false" aria-label="Today's digest">
+    <div class="digest-panel-header">
+      <h3>Today</h3>
+      <button type="button" id="digest-close" class="digest-close" aria-label="Close digest">×</button>
+    </div>
+    <div class="digest-panel-meta" id="digest-meta"></div>
+    <div class="digest-panel-body" id="digest-body"></div>
+  </div>
+
+  <p id="search-status" aria-live="polite"></p>
+  <button id="live-panel-reopen" class="live-panel-reopen visible" aria-label="Show live status panel">Live status ›</button>
+  </main>
+  <div id="submitter-overlay" hidden role="dialog" aria-modal="true" aria-label="Submit news story">
+    <div class="overlay-card">
+      <button type="button" id="card-close-btn" aria-label="Close submit form" title="Close">×</button>
+      <h2>Submit News</h2>
+      <form id="submit-form">
+        <label>Story title / idea <input name="title" maxlength="200" required placeholder="What is happening here?"></label>
+        <label>Story details or topic (optional)
+          <textarea name="story_note" maxlength="2000" rows="3" placeholder="Describe the story idea, topic, or what you witnessed…"></textarea>
+        </label>
+        <label>Name (optional) <input name="submitter_name" maxlength="100" placeholder="Anonymous"></label>
+        <label>Email (optional) <input name="submitter_email" type="email" maxlength="254"></label>
+        <label>URL (optional) <input name="canonical_url" id="canonical-url-input" type="url"></label>
+        <div id="sniff-hint" class="sniff-hint" hidden></div>
+        <label>Category
+          <select name="category">
+            <option value="">— auto-detect —</option>
+            <option>politics</option><option>business</option><option>crime</option>
+            <option>weather</option><option>science</option><option>technology</option>
+            <option>sports</option><option>culture</option><option>environment</option>
+            <option>conflict</option><option>health</option><option>other</option>
+          </select>
+        </label>
+        <input name="hp_company" type="text" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-9999px" aria-hidden="true">
+        <label>Place name
+          <div class="place-row">
+            <input name="place" id="place-input" placeholder="e.g. Karachi, Pakistan" maxlength="500" autocomplete="off">
+            <button type="button" id="find-btn">Find</button>
+          </div>
+        </label>
+        <p id="place-status" class="coord-display" aria-live="polite"></p>
+        <div id="mini-map-layers" role="group" aria-label="Map style">
+          <button type="button" data-layer="Street" class="mini-layer-btn" aria-pressed="true">🗺️ Street</button>
+          <button type="button" data-layer="Satellite" class="mini-layer-btn" aria-pressed="false">🛰️ Satellite</button>
+        </div>
+        <div id="mini-map" aria-label="click to set location"></div>
+        <p class="coord-display">lat: <span id="lat-display">—</span> lng: <span id="lng-display">—</span></p>
+        <div id="submit-form-error" class="explore-request-status error" role="alert" hidden></div>
+        <div class="overlay-actions">
+          <button type="button" id="cancel-btn">Cancel</button>
+          <button type="submit" id="confirm-btn">Submit</button>
+        </div>
+      </form>
+      <div id="submit-verdict" hidden>
+        <h3>✓ Submitted</h3>
+        <p id="submit-verdict-text" class="coord-display" aria-live="polite"></p>
+        <p id="submit-verdict-meta" class="coord-display" style="opacity:0.75;"></p>
+        <div class="overlay-actions">
+          <button type="button" id="submit-verdict-done" class="explore-request-btn">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="vendor/leaflet/leaflet.js?v=202611142000" defer></script>
+  <script src="vendor/leaflet.heat/leaflet-heat.js?v=202611142000" defer></script>
+  <script src="vendor/leaflet.markercluster/leaflet.markercluster.js?v=202611142000" defer></script>
+  <script src="vendor/marked/marked.umd.min.js?v=202611142000" defer></script>
+  <script src="vendor/dompurify/purify.min.js?v=202611142000" defer></script>
+  <script src="analytics.js?v=202611142000" defer></script>
+  <script src="perf-report.js?v=202611142000" defer></script>
+  <script src="presence.js?v=202611142000" defer></script>
+  <script src="city-engine.js?v=202611142000" defer></script>
+  <script src="submit-sniff.js?v=202611142000" defer></script>
+  <!-- offline.js registers /sw.js and shows an honest offline banner.
+       It has no dependency on app.js and guards everything itself, but
+       it must load so the worker is registered on the first visit — a
+       service worker installed only after a successful online visit is
+       the whole point. -->
+  <script src="offline.js?v=202611142000" defer></script>
+  <!-- ramp-styles.js holds the palettes; overlay-palette.js mounts the
+       picker that uses them. ramp-styles FIRST — without it
+       window.RampStyles is undefined and the picker returns silently,
+       which is exactly how this first shipped with no controls at all. -->
+  <script src="ramp-styles.js?v=202611142000" defer></script>
+  <!-- overlay-palette.js adds the colour-style picker to each overlay
+       row. It is called BY overlay-opacity.js (which already walks those
+       rows), so it must be loaded before it — and both before app.js,
+       which never mentions it (app.js is 8 bytes under its ceiling). -->
+  <script src="overlay-palette.js?v=202611142000" defer></script>
+  <script src="overlay-opacity.js?v=202611090822" defer></script>
+  <!-- map-presets.js: curated "cool map" presets, the first-visit
+       showcase load and the ⭐ default / last-used map. Must load
+       BEFORE app.js — app.js reads window.MapPresets at boot. -->
+  <script src="map-presets.js?v=202611142000" defer></script>
+  <!-- Export: the contract, the writers and the engine load BEFORE the
+       layer modules, because each layer module registers its export
+       surface into the contract as it loads. -->
+  <script src="export-contract.js?v=202611142000" defer></script>
+  <script src="export-writers.js?v=202611142000" defer></script>
+  <script src="export-engine.js?v=202611142000" defer></script>
+  <script src="climate-layer.js?v=202611142000" defer></script>
+  <!-- weather-archive.js (the TIME MACHINE) loads BEFORE the weather
+       layers: they ask it where their grid comes from. -->
+  <script src="weather-archive.js?v=202611142000" defer></script>
+  <!-- delta-contour.js: the client-side contouring of the CHANGE
+       map. It must load BEFORE isobar-layer.js, which asks it. -->
+  <script src="delta-contour.js?v=202611142000"></script>
+  <script src="isobar-layer.js?v=202611142000" defer></script>
+  <!-- field-bake.js owns the canonical Web-Mercator bake and the ramp
+       arithmetic. temp-layer.js reads it, and globe.js reads it too, so
+       the flat map and the 3D globe paint the SAME picture from the
+       SAME grid instead of two implementations that can drift. -->
+  <script src="field-bake.js?v=202611142000" defer></script>
+  <!-- hover-ring.js owns the ONE hover circle on the map: the story
+       pins, the earthquakes and every other point overlay ask it to
+       move, so there is never more than one ring under the cursor. -->
+  <script src="hover-ring.js?v=202611142000" defer></script>
+  <!-- probe-stack.js owns the ONE positioner for every readout on the
+       map. Each layer used to place its own probe at "cursor + 14px",
+       so two or three of them landed on the same 14px and covered each
+       other; the stacker lays them out in one column and keeps the
+       hover card out of their way. It must load BEFORE the layer
+       modules so their probes are stacked from the first frame. -->
+  <script src="probe-stack.js?v=202611142000" defer></script>
+  <!-- saved-searches.js keeps the previous answer for a search so a
+       repeat search shows it at once (the query itself takes 3–50 s)
+       and the fresh answer replaces it when it lands. It only defines a
+       store, so it can load anywhere before app.js uses it. -->
+  <script src="saved-searches.js?v=202611142000" defer></script>
+  <script src="temp-layer.js?v=202611142000" defer></script>
+  <!-- field-layer.js must load BEFORE cape-layer.js and ivt-layer.js:
+       they are thin wrappers around the shared factory it exports. -->
+  <script src="field-layer.js?v=202611142000" defer></script>
+  <!-- cape-layer.js and ivt-layer.js must load BEFORE app.js: app.js
+       registers the overlays from window.CapeLayer / window.IvtLayer at
+       parse time. -->
+  <script src="cape-layer.js?v=202611142000" defer></script>
+  <script src="ivt-layer.js?v=202611142000" defer></script>
+  <!-- wind-speed-layer.js must load BEFORE app.js (app.js registers the
+       overlay from window.WindSpeedLayer at parse time) and AFTER
+       field-layer.js (it is a thin wrapper around the shared factory). -->
+  <script src="wind-speed-layer.js?v=202611142000" defer></script>
+  <script src="soil-layer.js?v=202611142000" defer></script>
+  <script src="cropland-layer.js?v=202611142000" defer></script>
+  <script src="river-layer.js?v=202611142000" defer></script>
+  <script src="fao-rivers-layer.js?v=202611142000" defer></script>
+  <!-- mag-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.MagLayer at parse time. -->
+  <script src="mag-layer.js?v=202611142000" defer></script>
+  <!-- basin-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.BasinLayer at parse time. -->
+  <script src="basin-layer.js?v=202611142000" defer></script>
+  <!-- geology-layer.js must load BEFORE app.js: app.js registers the
+       Macrostrat bedrock + USGS contacts overlays at parse time. -->
+  <script src="geology-layer.js?v=202611142000" defer></script>
+  <!-- wind-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.WindLayer at parse time. -->
+  <!-- city-labels.js must load BEFORE app.js: app.js registers the
+       overlay from window.CityLabels at parse time. -->
+  <!-- etopo-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.EtopoLayer at parse time. -->
+  <!-- wave-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.WaveLayer at parse time. -->
+  <script src="wave-layer.js?v=202611142000" defer></script>
+  <script src="etopo-layer.js?v=202611142000" defer></script>
+  <script src="city-labels.js?v=202611142000" defer></script>
+  <script src="wind-layer.js?v=202611142000" defer></script>
+  <!-- lightning-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.LightningLayer at parse time. -->
+  <script src="lightning-layer.js?v=202611142000" defer></script>
+  <!-- phytoplankton-layer.js must load BEFORE app.js: app.js registers
+       the overlay from window.PhytoplanktonLayer at parse time. -->
+  <script src="phytoplankton-layer.js?v=202611142000" defer></script>
+  <!-- languages-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.LanguagesLayer at parse time. -->
+  <script src="languages-layer.js?v=202611142000" defer></script>
+  <!-- languages-regions-layer.js must load BEFORE app.js: the REGION
+       version of the language overlay (one polygon per country, with
+       the languages spoken there). -->
+  <script src="languages-regions-layer.js?v=202611142000" defer></script>
+  <!-- earthquake-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.EarthquakeLayer at parse time. -->
+  <script src="earthquake-layer.js?v=202611142000" defer></script>
+  <!-- ocean-current-layer.js must load BEFORE app.js: app.js registers
+       the overlay from window.OceanCurrentLayer at parse time. -->
+  <script src="ocean-current-layer.js?v=202611142000" defer></script>
+  <!-- fault-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.FaultLayer at parse time. -->
+  <script src="fault-layer.js?v=202611142000" defer></script>
+  <!-- transport-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.TransportLayer at parse time. -->
+  <script src="transport-layer.js?v=202611142000" defer></script>
+  <!-- salinity-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.SalinityLayer at parse time. -->
+  <script src="salinity-layer.js?v=202611142000" defer></script>
+  <!-- ocean-layer.js must load BEFORE app.js: app.js registers the
+       overlay from window.OceanLayer at parse time. -->
+  <script src="ocean-layer.js?v=202611142000" defer></script>
+  <script src="hover-info.js?v=202611142000" defer></script>
+  <script src="digest-panel.js?v=202611142000" defer></script>
+  <script src="export-panel.js?v=202611142000" defer></script>
+  <!-- feedback-dialog.js must load BEFORE app.js: app.js's pin popup
+       calls showFeedbackDialog(pin) at click time, and the file had
+       never been linked here — the dialog was complete, styled and
+       waiting, but unreachable, so its combined Report/Fix button
+       never made it into a popup. -->
+  <script src="feedback-dialog.js?v=202611142000" defer></script>
+  <!-- view-handoff.js carries overlay state between the flat map and
+       /globe. It must load BEFORE app.js (which builds the globe
+       button's href from it), and it also loads on globe.html. -->
+  <script src="view-handoff.js?v=202611142000" defer></script>
+  <!-- generic-layers.js names the window.*Layer modules app.js registers
+       through its shared loop — it must load BEFORE app.js reads it.
+       population-layer.js (WorldPop 1 km, hotlinked WMTS) is one of
+       them and likewise loads first; app.js only calls getTileLayer(). -->
+  <script src="generic-layers.js?v=202611142000" defer></script>
+  <script src="population-layer.js?v=202611142000" defer></script>
+  <!-- hwsd-layer.js: the FAO/IIASA Harmonized World Soils Database v2.2
+       (34 WRB soil groups at ~1 km). Must load BEFORE app.js — app.js
+       reads window.XYZO_GENERIC_LAYERS and calls getTileLayer() on each
+       name at parse time, so a module that arrives later is silently
+       skipped and the overlay never appears in the dropdown. -->
+  <script src="hwsd-layer.js?v=202611142000" defer></script>
+  <script src="tour.js?v=202611142000" defer></script>
+  <script src="app.js?v=202611142000" defer></script>
+  <script src="debug-panel.js?v=202611142000" defer></script>
+  <script src="update-check.js?v=202611142000" defer></script>
+  <script src="viewport-nudge.js?v=202611142000" defer></script>
+  <script src="map-debug.js?v=202611142000" defer></script>
+  <script src="cache-debug.js?v=202611142000" defer></script>
+  <script src="help-me-chat.js?v=202611142000" defer></script>
+
+  <!-- ── Help Me Floating Button ─────────────────────────────────── -->
+  <button id="help-me-btn" aria-label="Help Me — ask about problems and what to do"
+          title="Ask what's happening and what you can do about it">
+    <span class="pulse-dot"></span>
+    🆘 Help Me
+  </button>
+  <script>
+    (function() {
+      function getUserLocation() {
+        // Get map center first — what user is actually looking at
+        var mapCenter = null;
+        try {
+          if (typeof map !== 'undefined' && map && map.getCenter) {
+            var center = map.getCenter();
+            var zoom = map.getZoom ? map.getZoom() : 0;
+            if (Number.isFinite(center.lat) && Number.isFinite(center.lng)) {
+              mapCenter = { lat: center.lat, lng: center.lng, zoom: zoom };
+            }
+          }
+        } catch(e) {}
+
+        // Get cached home
+        var home = null;
+        try {
+          var cached = localStorage.getItem("newsium.home");
+          if (cached) {
+            var parsed = JSON.parse(cached);
+            if (parsed && Number.isFinite(parsed.lat) && Number.isFinite(parsed.lng)) {
+              home = parsed;
+            }
+          }
+        } catch(e) {}
+
+        // If map is zoomed in (zoom >= 5), always use map center
+        // — user is clearly looking at a specific region
+        if (mapCenter && mapCenter.zoom >= 5) {
+          return {
+            lat: mapCenter.lat,
+            lng: mapCenter.lng,
+            name: "your current map view",
+            source: "map_center"
+          };
+        }
+
+        // Otherwise, if we have a cached home, use it
+        if (home) {
+          // But if map center is far from home (>500km), prefer map center
+          if (mapCenter) {
+            var dist = Math.sqrt(
+              Math.pow((mapCenter.lat - home.lat) * 111, 2) +
+              Math.pow((mapCenter.lng - home.lng) * 111 * Math.cos(mapCenter.lat * Math.PI / 180), 2)
+            );
+            if (dist > 500) {
+              return {
+                lat: mapCenter.lat,
+                lng: mapCenter.lng,
+                name: "your current map view",
+                source: "map_center"
+              };
+            }
+          }
+          return {
+            lat: home.lat,
+            lng: home.lng,
+            name: home.city || home.country || "your location",
+            city: home.city || null,
+            country: home.country || null,
+            source: "home_set"
+          };
+        }
+
+        // Fallback: map center
+        if (mapCenter) {
+          return {
+            lat: mapCenter.lat,
+            lng: mapCenter.lng,
+            name: "your current map view",
+            source: "map_center"
+          };
+        }
+
+        return { lat: null, lng: null, name: null, source: "unknown" };
+      }
+
+      document.getElementById("help-me-btn")?.addEventListener("click", function() {
+        var userContext = getUserLocation();
+        
+        // Include the currently open popup story so AI knows what user is looking at
+        try {
+          var activePin = null;
+
+          // Method 1: Direct DOM check for open popup — simplest and most reliable
+          try {
+            var popupEl = document.querySelector(".leaflet-popup-content");
+            if (popupEl && popupEl.querySelector(".popup-title")) {
+              var tEl = popupEl.querySelector(".popup-title a") || popupEl.querySelector(".popup-title");
+              var uEl = popupEl.querySelector(".popup-source-url a");
+              var cEl = popupEl.querySelector(".popup-city-badge");
+              var ctEl = popupEl.querySelector(".popup-cat-badge");
+              var kwEls = popupEl.querySelectorAll(".popup-keyword-chip");
+              var kwList = [];
+              kwEls.forEach(function(k) { if (k.dataset.keyword) kwList.push(k.dataset.keyword); });
+              if (tEl) {
+                activePin = {
+                  title: (tEl.textContent || "").trim(),
+                  canonical_url: (uEl && uEl.href) || (tEl && tEl.href) || "",
+                  place_name: cEl ? cEl.textContent.replace(/[^\w\s]/g, "").trim().replace(/\s+/g, " ") : "",
+                  category: ctEl ? ctEl.textContent.replace(/[▾\s]/g, "").trim() : "",
+                  summary: kwList.length ? "Keywords: " + kwList.join(", ") : "",
+                  source_count: 1
+                };
+              }
+            }
+          } catch(e) {}
+
+          // Method 2: Pin data from pinMarkers or canvasRenderer using _activePinId
+          if (!activePin && typeof _activePinId !== "undefined" && _activePinId) {
+            if (typeof pinMarkers !== "undefined") {
+              var marker = pinMarkers.get(_activePinId);
+              if (marker && marker._pinData) activePin = marker._pinData;
+            }
+            if (!activePin && typeof canvasRenderer !== "undefined" && canvasRenderer._pins) {
+              activePin = canvasRenderer._pins.find(function(p) { return p.id === _activePinId; });
+            }
+          }
+
+          // Set activeStory if we found anything
+          if (activePin) {
+            userContext.activeStory = {
+              id: activePin.id || _activePinId || null,
+              title: activePin.title || activePin.headline || "",
+              category: activePin.category || activePin.event_type || "",
+              source_count: activePin.source_count || 1,
+              location: activePin.location || null,
+              place_name: activePin.place_name || "",
+              canonical_url: activePin.canonical_url || "",
+              summary: (activePin.summary || "").substring(0, 200)
+            };
+          }
+        } catch(e) {}
+        
+        if (window.XyzoHelpMe) {
+          window.XyzoHelpMe.open(userContext);
+        } else {
+          // Fallback: load the chunk on demand
+          var script = document.createElement("script");
+          script.src = "help-me-chat.js?v=202611142000";
+          script.onload = function() { window.XyzoHelpMe.open(userContext); };
+          document.head.appendChild(script);
+        }
+      });
+    })();
+  </script>
+  <script>
+  (function(){
+    function updateStats(data) {
+      if (!data) return;
+      var sources = data.sources || 0;
+      var countries = data.countries || 0;
+      var stories = data.stories_today || 0;
+
+      // Format helpers
+      function fmt(n) {
+        if (n >= 1000) return n.toLocaleString('en-US');
+        return String(n);
+      }
+
+      // Map stats bar
+      var sEl = document.getElementById('stat-sources');
+      if (sEl) sEl.textContent = fmt(sources) + '+';
+
+      var cEl = document.getElementById('stat-countries');
+      if (cEl) cEl.textContent = fmt(countries);
+
+      var stEl = document.getElementById('stat-stories');
+      if (stEl) {
+        if (stories >= 1000) stEl.textContent = Math.round(stories / 1000) + 'K+';
+        else stEl.textContent = fmt(stories) + '+';
+      }
+
+      // Text-mode fallback stats (id="text-fallback")
+      var tf = document.getElementById('text-fallback');
+      if (tf) {
+        var els = tf.querySelectorAll ? tf.querySelectorAll('[data-stat]') : [];
+        for (var i = 0; i < els.length; i++) {
+          var key = els[i].getAttribute('data-stat');
+          if (key === 'sources') els[i].textContent = fmt(sources) + '+';
+          else if (key === 'countries') els[i].textContent = fmt(countries);
+          else if (key === 'stories') {
+            if (stories >= 1000) els[i].textContent = Math.round(stories / 1000) + 'K+';
+            else els[i].textContent = fmt(stories) + '+';
+          }
+        }
+      }
+    }
+
+    // Fetch live stats
+    fetch('/api/stats')
+      .then(function(r) { return r.json(); })
+      .then(updateStats)
+      .catch(function() {});
+  })();
+  </script>
+  <!-- Dropdown menus moved outside #bottom-bar to escape transform-containing-block trap -->
+  <div id="time-dropdown-menu" class="bar-dropdown" style="display:none;">
+    <div class="bar-dropdown-header">📍 <span id="time-pin-count-label">Loading…</span></div>
+    <button type="button" data-time="24h" class="active">24 hours</button>
+    <button type="button" data-time="3d">3 days</button>
+    <button type="button" data-time="7d">7 days</button>
+    <button type="button" data-time="30d">30 days</button>
+    <button type="button" data-time="all">All time</button>
+  </div>
+
+  <!-- Markers submenu: View modes (Markers / Heatmap / Clusters) -->
+  <div id="markers-dropdown-menu" class="bar-dropdown" style="display:none;">
+    <div class="bar-dropdown-header">VIEW MODE</div>
+    <button type="button" data-mode="markers" class="active">
+      <span class="mode-dot">●</span> Markers
+    </button>
+    <button type="button" data-mode="heatmap">
+      <span class="mode-dot">○</span> Heatmap
+    </button>
+    <button type="button" data-mode="clusters">
+      <span class="mode-dot">○</span> Clusters
+    </button>
+  </div>
+
+  <!-- Control menu: hierarchical map controls. No inline display here —
+       .bar-dropdown[hidden] hides it and .bar-dropdown--wide lays it out,
+       so an inline value would outrank the stylesheet's flex/scroll. -->
+  <div id="control-menu" class="bar-dropdown bar-dropdown--wide" hidden>
+    <div class="control-menu-inner">
+      <div class="control-section">
+        <div class="control-section-label">MAP</div>
+        <!-- The DEFAULT MAP. The same action as the 🛰️ button in the
+             bottom bar — which is hidden below 560 px, because the bar
+             has no room on a phone (measured: the ⚙ itself hangs off
+             the right edge at 393 px). This row is reachable on every
+             device. -->
+        <div class="control-row">
+          <span class="control-row-label" title="Clear the map: the satellite basemap, the world view and no overlays">Default map</span>
+          <button type="button" id="ctrl-default-map-btn" class="ctrl-toggle">🛰️ Default map</button>
+        </div>
+        <div class="control-row">
+          <span class="control-row-label">Density</span>
+          <div class="density-picker">
+            <button type="button" data-density="low">Low</button>
+            <button type="button" data-density="medium">Med</button>
+            <button type="button" data-density="high">High</button>
+            <button type="button" data-density="max">Max</button>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-row-label">Wikipedia</span>
+          <button type="button" id="ctrl-wiki-toggle" class="ctrl-toggle" aria-pressed="false">Off</button>
+        </div>
+        <div class="control-row">
+          <span class="control-row-label" title="What follows your cursor">Hover</span>
+          <div class="density-picker" id="hover-mode-picker" role="group" aria-label="Hover tooltip mode">
+            <button type="button" data-hover="off">Off</button>
+            <button type="button" data-hover="pins">Pins</button>
+            <button type="button" data-hover="all">All</button>
+          </div>
+        </div>
+        <div class="control-row control-row--block">
+          <div id="hover-sampler-list" class="hover-sampler-list" hidden></div>
+        </div>
+        <div class="control-row">
+          <span class="control-row-label" title="Text size across the map UI">Text size</span>
+          <div class="density-picker" id="text-size-picker" role="group" aria-label="Text size">
+            <button type="button" data-size="100">A</button>
+            <button type="button" data-size="115">A+</button>
+            <button type="button" data-size="130">A++</button>
+          </div>
+        </div>
+      </div>
+      <div class="control-section" id="weather-archive-section" hidden>
+        <div class="control-section-label">TIME MACHINE</div>
+        <div class="control-row control-row--block">
+          <div class="control-row-label" title="See the map as it was on a past day">Past moment</div>
+          <div class="archive-picker">
+            <input type="date" id="archive-date" class="ctrl-input" aria-label="Date" />
+            <select id="archive-time" class="ctrl-input" aria-label="Analysis time">
+              <option value="00">00:00 UTC</option>
+              <option value="06">06:00 UTC</option>
+              <option value="12" selected>12:00 UTC</option>
+              <option value="18">18:00 UTC</option>
+            </select>
+          </div>
+        </div>
+        <div class="control-row">
+          <button type="button" id="archive-apply" class="ctrl-toggle">⏱ Show that moment</button>
+          <button type="button" id="archive-now" class="ctrl-toggle" hidden>↩ Back to now</button>
+        </div>
+        <div id="archive-status" class="default-style-status"></div>
+      </div>
+      <div class="control-section">
+        <div class="control-section-label">MY STYLE</div>
+        <div class="control-row">
+          <span class="control-row-label" title="Save the current view, overlays and opacities">Save this view</span>
+          <button type="button" id="ctrl-save-style" class="ctrl-toggle">☆ Save this view</button>
+        </div>
+        <div id="saved-styles-list" class="saved-styles-list"></div>
+        <div class="control-row">
+          <span class="control-row-label" title="What opens the next time you visit the site">Next visit</span>
+          <div class="density-picker" id="default-mode-picker" role="group" aria-label="What opens next visit">
+            <button type="button" data-next-map="auto">Last used</button>
+            <button type="button" data-next-map="saved">My default</button>
+            <button type="button" data-next-map="cool">✨ Cool</button>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-row-label" title="Save the map on screen as the one that opens next visit">My default map</span>
+          <button type="button" id="ctrl-save-default" class="ctrl-toggle">⭐ Save as default</button>
+        </div>
+        <div id="default-style-status" class="default-style-status"></div>
+      </div>
+      <div class="control-section">
+        <div class="control-section-label">LAYERS</div>
+        <div class="control-row">
+          <span class="control-row-label">News</span>
+          <button type="button" id="ctrl-news-toggle" class="ctrl-toggle active" aria-pressed="true">On</button>
+        </div>
+        <div class="control-row">
+          <span class="control-row-label">Community</span>
+          <button type="button" id="ctrl-community-toggle" class="ctrl-toggle active" aria-pressed="true">On</button>
+        </div>
+      </div>
+      <div class="control-section">
+        <div class="control-section-label">EXPORT</div>
+        <div class="control-row">
+          <span class="control-row-label" title="Download the map as an image, or the data as GeoTIFF / GeoJSON / KML / CSV">Save or download</span>
+          <button type="button" id="ctrl-export-btn" class="ctrl-toggle">⬇ Export</button>
+        </div>
+      </div>
+      <div class="control-section">
+        <div class="control-section-label">TOOLS</div>
+        <button type="button" id="ctrl-digest-btn" class="ctrl-action" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+          Today’s digest
+        </button>
+        <button type="button" id="ctrl-legend-btn" class="ctrl-action">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Legend
+        </button>
+        <button type="button" id="ctrl-help-btn" class="ctrl-action">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          AI / Help
+        </button>
+        <!-- The guided tour. It shows itself on a FIRST visit and
+             remembers that it did; this button brings it back for
+             anyone who wants to be shown again. -->
+        <button type="button" id="ctrl-tour-btn" class="ctrl-action">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          How to
+        </button>
+        <!-- Hard refresh. `*.js` is served `immutable` for a year, so a
+             normal reload CANNOT replace a stale app.js: the browser
+             holds `app.js?v=X` and never asks for it again. This pulls
+             every script and stylesheet from the NETWORK first
+             (`cache: "reload"` bypasses the HTTP cache and replaces the
+             stored bytes), drops the service worker's shell so it
+             re-precaches, and only then reloads — which is what
+             Ctrl+Shift+R does by hand. It is also the button support
+             points at when a map looks out of date after an update. -->
+        <button type="button" id="ctrl-refresh-btn" class="ctrl-action">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+          Hard refresh<span id="ctrl-refresh-badge" class="ctrl-refresh-badge" hidden></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+[test]
+# bun test loads .env by default. Override with .env.test so tests
+# hit the isolated xyzo_test database instead of production.
+envfile = ".env.test"

@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — グローバルニュースマップ",
+  "search.placeholder": "都市やニュースを検索…",
+  "search.button": "検索",
+  "search.clear": "クリア",
+
+  "panel.title": "ライブステータス",
+  "panel.toggle": "ライブステータスパネル切替",
+  "panel.loading": "読み込み中…",
+  "tab.hot": "注目",
+  "tab.new": "新着",
+  "tab.near": "近く",
+  "tab.local": "ローカル",
+  "tab.trending": "トレンド",
+
+  "time.24h": "24時間",
+  "time.7d": "過去1週間",
+  "time.30d": "過去1ヶ月",
+  "time.365d": "過去1年",
+  "time.custom": "すべて",
+
+  "mode.markers": "マーカー",
+  "mode.heatmap": "ヒートマップ",
+  "mode.clusters": "クラスター",
+  "mode.links": "リンク",
+  "mode.wiki": "ウィキ",
+
+  "explore.button": "探索",
+  "explore.title": "このエリアのニュースソースを探す",
+
+  "location.placeholder": "都市、住所、国…",
+  "location.use_my": "ブラウザの位置情報を使用",
+  "location.clear": "位置をクリア",
+
+  "pin.events": "イベント",
+  "pin.sources": "ソース",
+  "pin.nearby": "近隣の都市",
+  "pin.details": "詳細",
+  "pin.share": "共有",
+  "pin.hide": "非表示",
+  "pin.report": "報告",
+
+  "filter.all": "すべて",
+  "filter.categories": "カテゴリ",
+  "filter.sources": "ソース",
+
+  "status.online": "オンライン",
+  "status.offline": "オフライン",
+  "status.updating": "更新中…",
+  "status.last_update": "最終更新",
+
+  "help.title": "ヘルプ",
+  "help.about": "XYZOについて",
+  "help.shortcuts": "キーボードショートカット",
+
+  "lang.switcher": "言語",
+
+  "category.politics": "政治",
+  "category.business": "ビジネス",
+  "category.crime": "事件",
+  "category.weather": "天気",
+  "category.science": "科学",
+  "category.technology": "テクノロジー",
+  "category.sports": "スポーツ",
+  "category.culture": "文化",
+  "category.environment": "環境",
+  "category.conflict": "紛争",
+  "category.health": "健康",
+  "category.other": "その他",
+
+  "event.earthquake": "地震",
+  "event.flood": "洪水",
+  "event.storm": "嵐",
+  "event.wildfire": "山火事",
+  "event.shooting": "銃撃",
+  "event.protest": "抗議",
+  "event.election": "選挙",
+  "event.accident": "事故"
+}

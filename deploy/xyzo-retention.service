@@ -1,0 +1,9 @@
+[Unit]
+Description=Xyzo retention pruning (telemetry tables)
+After=postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/xyzo.org
+ExecStart=/usr/bin/python3 scripts/retention_prune.py

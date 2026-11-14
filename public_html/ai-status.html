@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Status — Newsium</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --success: #22c55e;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    /* Header */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px;
+    }
+    header h1 { font-family: ui-monospace, monospace; font-size: 20px; color: var(--accent); }
+    header .nav { display: flex; gap: 12px; align-items: center; }
+    header a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    header a:hover { color: var(--fg); }
+
+    /* Grid layout */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .grid-full { grid-column: 1 / -1; }
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .card {
+      background: rgba(11, 15, 20, 0.8); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; backdrop-filter: blur(8px);
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(31,41,55,0.5);
+    }
+    .card-title {
+      font-family: ui-monospace, monospace; font-size: 13px; font-weight: 600;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .card-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700;
+      font-family: ui-monospace, monospace; text-transform: uppercase;
+    }
+    .badge-ok { background: rgba(34,197,94,0.15); color: var(--success); }
+    .badge-warn { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .badge-error { background: rgba(239,68,68,0.15); color: var(--error); }
+    .badge-info { background: rgba(59,130,246,0.15); color: var(--blue); }
+
+    /* Stats */
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 0; border-bottom: 1px solid rgba(31,41,55,0.3);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label { font-size: 12px; color: var(--muted); }
+    .stat-value { font-family: ui-monospace, monospace; font-size: 13px; font-weight: 600; }
+    .stat-value.ok { color: var(--success); }
+    .stat-value.warn { color: var(--warning); }
+    .stat-value.error { color: var(--error); }
+    .stat-value.info { color: var(--blue); }
+
+    /* Progress bars */
+    .progress-bar {
+      width: 100%; height: 8px; background: rgba(31,41,55,0.5);
+      border-radius: 4px; overflow: hidden; margin-top: 4px;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 4px; transition: width 0.5s ease;
+    }
+    .progress-fill.green { background: var(--success); }
+    .progress-fill.yellow { background: var(--warning); }
+    .progress-fill.red { background: var(--error); }
+    .progress-fill.blue { background: var(--blue); }
+
+    /* Gauge */
+    .gauge-row { display: flex; gap: 16px; margin-bottom: 12px; }
+    .gauge { flex: 1; }
+    .gauge-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
+    .gauge-value { font-family: ui-monospace, monospace; font-weight: 600; }
+
+    /* Log stream */
+    .log-stream {
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 6px; padding: 12px; max-height: 300px; overflow-y: auto;
+      font-family: ui-monospace, monospace; font-size: 11px; line-height: 1.6;
+    }
+    .log-line { padding: 2px 0; }
+    .log-line .time { color: var(--muted); margin-right: 8px; }
+    .log-line .level-info { color: var(--accent); }
+    .log-line .level-warn { color: var(--warning); }
+    .log-line .level-error { color: var(--error); }
+    .log-line .level-debug { color: var(--muted); }
+
+    /* Recent articles table */
+    .recent-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .recent-table th {
+      text-align: left; padding: 6px 8px; font-size: 10px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border);
+    }
+    .recent-table td { padding: 6px 8px; border-bottom: 1px solid rgba(31,41,55,0.3); }
+    .recent-table tr:hover td { background: rgba(94,234,212,0.03); }
+
+    /* Category badge */
+    .cat-badge {
+      display: inline-block; padding: 1px 6px; border-radius: 3px;
+      font-size: 10px; font-weight: 600; background: rgba(94,234,212,0.1); color: var(--accent);
+    }
+
+    /* Method badge */
+    .method-badge {
+      display: inline-block; padding: 1px 5px; border-radius: 3px;
+      font-size: 9px; font-weight: 600;
+    }
+    .method-fast_path { background: rgba(34,197,94,0.15); color: var(--success); }
+    .method-source_fallback { background: rgba(59,130,246,0.15); color: var(--blue); }
+    .method-ai { background: rgba(168,85,247,0.15); color: var(--purple); }
+    .method-client_apply { background: rgba(236,72,153,0.15); color: #f472b6; }
+
+    /* Buttons */
+    .btn {
+      background: transparent; color: var(--muted); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
+      font-family: ui-monospace, monospace; transition: all 0.15s;
+    }
+    .btn:hover { color: var(--fg); border-color: var(--fg); }
+    .btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn-danger { border-color: rgba(239,68,68,0.3); color: var(--error); }
+    .btn-danger:hover { background: rgba(239,68,68,0.1); border-color: var(--error); }
+
+    /* Pulse animation */
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .pulse { animation: pulse 2s ease-in-out infinite; }
+
+    /* Empty state */
+    .empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; }
+
+    /* Timestamp */
+    .timestamp { font-size: 11px; color: var(--muted); font-family: ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI System Status</h1>
+      <div class="nav">
+        <span class="timestamp" id="last-updated">Loading...</span>
+        <a href="/">← Map</a>
+        <a href="/system.html">System Logs</a>
+      </div>
+    </header>
+
+    <!-- Top row: Overall status + Circuit breaker -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Overall Status</span>
+          <span class="card-badge" id="overall-badge">Loading</span>
+        </div>
+        <div id="overall-stats">
+          <div class="stat-row"><span class="stat-label">Mode</span><span class="stat-value" id="stat-mode">—</span></div>
+          <div class="stat-row"><span class="stat-label">AI Endpoint</span><span class="stat-value" id="stat-endpoint">—</span></div>
+          <div class="stat-row"><span class="stat-label">Last Latency</span><span class="stat-value" id="stat-latency">—</span></div>
+          <div class="stat-row"><span class="stat-label">Uptime Check</span><span class="stat-value" id="stat-uptime">—</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Circuit Breaker</span>
+          <span class="card-badge" id="breaker-badge">—</span>
+        </div>
+        <div id="breaker-stats">
+          <div class="stat-row"><span class="stat-label">State</span><span class="stat-value" id="breaker-state">—</span></div>
+          <div class="stat-row"><span class="stat-label">Recent Failures</span><span class="stat-value" id="breaker-failures">—</span></div>
+          <div class="stat-row"><span class="stat-label">Total Calls</span><span class="stat-value" id="breaker-calls">—</span></div>
+          <div class="stat-row"><span class="stat-label">Total Failures</span><span class="stat-value" id="breaker-total-failures">—</span></div>
+          <div class="stat-row"><span class="stat-label">Short-circuits</span><span class="stat-value" id="breaker-short">—</span></div>
+          <div class="stat-row"><span class="stat-label">Cooldown</span><span class="stat-value" id="breaker-cooldown">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Pin Health & Timeframe Status -->
+    <div class="grid">
+      <div class="card grid-full">
+        <div class="card-header">
+          <span class="card-title">Map Pin Health & Timeframe Stats</span>
+          <span class="card-badge badge-ok" id="pin-health-badge">Loading</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 12px;">
+          <div>
+            <div class="stat-label">24 Hours Pins</div>
+            <div class="stat-value ok" id="pin-stat-24h" style="font-size: 22px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">Past Week (7d)</div>
+            <div class="stat-value info" id="pin-stat-7d" style="font-size: 22px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">Past Month (30d)</div>
+            <div class="stat-value info" id="pin-stat-30d" style="font-size: 22px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">All Time Pins</div>
+            <div class="stat-value" id="pin-stat-all" style="font-size: 22px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">Active Sources</div>
+            <div class="stat-value ok" id="pin-stat-sources" style="font-size: 22px;">0</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Latest Ingested Pin Timestamp</span>
+          <span class="stat-value info" id="pin-latest-timestamp">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GPU + CPU gauges -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">GPU</span>
+          <span class="card-badge" id="gpu-badge">—</span>
+        </div>
+        <div id="gpu-info">
+          <div class="stat-row"><span class="stat-label">Name</span><span class="stat-value" id="gpu-name">—</span></div>
+          <div class="gauge">
+            <div class="gauge-label"><span>Utilization</span><span class="gauge-value" id="gpu-util-val">—</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="gpu-util-bar" style="width:0%"></div></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-label"><span>Memory</span><span class="gauge-value" id="gpu-mem-val">—</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="gpu-mem-bar" style="width:0%"></div></div>
+          </div>
+          <div class="stat-row"><span class="stat-label">Temperature</span><span class="stat-value" id="gpu-temp">—</span></div>
+          <div class="stat-row"><span class="stat-label">VRAM Used</span><span class="stat-value" id="gpu-vram">—</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">CPU</span>
+          <span class="card-badge" id="cpu-badge">—</span>
+        </div>
+        <div id="cpu-info">
+          <div class="stat-row"><span class="stat-label">Cores</span><span class="stat-value" id="cpu-cores">—</span></div>
+          <div class="gauge">
+            <div class="gauge-label"><span>Usage</span><span class="gauge-value" id="cpu-usage-val">—</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="cpu-usage-bar" style="width:0%"></div></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-label"><span>Idle</span><span class="gauge-value" id="cpu-idle-val">—</span></div>
+            <div class="progress-bar"><div class="progress-fill green" id="cpu-idle-bar" style="width:0%"></div></div>
+          </div>
+          <div class="stat-row"><span class="stat-label">User %</span><span class="stat-value" id="cpu-user">—</span></div>
+          <div class="stat-row"><span class="stat-label">System %</span><span class="stat-value" id="cpu-sys">—</span></div>
+          <div class="stat-row"><span class="stat-label">I/O Wait</span><span class="stat-value" id="cpu-iowait">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline stats -->
+    <div class="grid">
+      <div class="card grid-full">
+        <div class="card-header">
+          <span class="card-title">Pipeline Stats (Current Cycle)</span>
+          <span class="card-badge badge-info" id="pipeline-badge">—</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+          <div>
+            <div class="stat-label">Fetched</div>
+            <div class="stat-value info" id="pipe-fetched" style="font-size: 20px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">Fast-path</div>
+            <div class="stat-value ok" id="pipe-fastpath" style="font-size: 20px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">Source Fallback</div>
+            <div class="stat-value info" id="pipe-srcfb" style="font-size: 20px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">AI Extracted</div>
+            <div class="stat-value" id="pipe-extracted" style="font-size: 20px;">0</div>
+          </div>
+          <div>
+            <div class="stat-label">Geocoded</div>
+            <div class="stat-value" id="pipe-geocoded" style="font-size: 20px;">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent articles + Log stream -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Recent Articles</span>
+          <span class="card-badge badge-info" id="articles-count">0</span>
+        </div>
+        <div id="recent-articles" style="max-height: 250px; overflow-y: auto;">
+          <div class="empty">No recent articles</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Worker Log</span>
+          <button class="btn" id="clear-log-btn" style="font-size:10px;padding:3px 8px;">Clear</button>
+        </div>
+        <div class="log-stream" id="log-stream">
+          <div class="log-line"><span class="time">--:--:--</span><span class="level-info">Waiting for log data...</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="grid">
+      <div class="card grid-full">
+        <div class="card-header">
+          <span class="card-title">Actions</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn" id="btn-refresh" onclick="fetchAll()">Refresh Now</button>
+          <button class="btn" id="btn-auto" onclick="toggleAutoRefresh()">Auto-refresh: ON</button>
+          <button class="btn btn-danger" id="btn-reset-breaker" onclick="resetBreaker()">Reset Circuit Breaker</button>
+          <button class="btn" id="btn-test-ai" onclick="testAI()">Test AI Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = '';
+    let autoRefresh = true;
+    let refreshTimer = null;
+    let logLines = [];
+    const MAX_LOG_LINES = 100;
+
+    // Fetch all data
+    async function fetchAll() {
+      const t0 = Date.now();
+      try {
+        const [aiRes, sysRes, pinStatsRes] = await Promise.all([
+          fetch(`${API}/api/ai-status`),
+          fetch(`${API}/api/sysload`).catch(() => null),
+          fetch(`${API}/api/pins/stats`).catch(() => null),
+        ]);
+        const latency = Date.now() - t0;
+
+        if (aiRes.ok) {
+          const ai = await aiRes.json();
+          updateAIStatus(ai, latency);
+        }
+        if (sysRes && sysRes.ok) {
+          const sys = await sysRes.json();
+          updateSysload(sys);
+        }
+        if (pinStatsRes && pinStatsRes.ok) {
+          const pinStats = await pinStatsRes.json();
+          updatePinStatsDisplay(pinStats);
+        }
+
+        document.getElementById('last-updated').textContent =
+          `Updated ${new Date().toLocaleTimeString()}`;
+      } catch (e) {
+        console.error('Fetch failed:', e);
+      }
+    }
+
+    function updatePinStatsDisplay(ps) {
+      const counts = ps.counts || {};
+      document.getElementById('pin-stat-24h').textContent = counts['24h'] ?? 0;
+      document.getElementById('pin-stat-7d').textContent = counts['7d'] ?? 0;
+      document.getElementById('pin-stat-30d').textContent = counts['30d'] ?? 0;
+      document.getElementById('pin-stat-all').textContent = counts['all'] ?? 0;
+      document.getElementById('pin-stat-sources').textContent = ps.active_sources ?? 0;
+
+      const latestEl = document.getElementById('pin-latest-timestamp');
+      if (ps.latest_timestamp) {
+        latestEl.textContent = new Date(ps.latest_timestamp).toLocaleString();
+      } else {
+        latestEl.textContent = 'No pins found';
+      }
+
+      const badge = document.getElementById('pin-health-badge');
+      if (ps.healthy) {
+        badge.textContent = 'HEALTHY';
+        badge.className = 'card-badge badge-ok';
+      } else {
+        badge.textContent = 'NO PINS IN 7 DAYS';
+        badge.className = 'card-badge badge-warn pulse';
+      }
+    }
+    }
+
+    function updateAIStatus(s, latencyMs) {
+      // Overall
+      const modeEl = document.getElementById('stat-mode');
+      const badgeEl = document.getElementById('overall-badge');
+      if (s.healthy) {
+        modeEl.textContent = 'Healthy';
+        modeEl.className = 'stat-value ok';
+        badgeEl.textContent = 'OK';
+        badgeEl.className = 'card-badge badge-ok';
+      } else {
+        modeEl.textContent = 'Degraded';
+        modeEl.className = 'stat-value warn';
+        badgeEl.textContent = 'DEGRADED';
+        badgeEl.className = 'card-badge badge-warn pulse';
+      }
+
+      document.getElementById('stat-endpoint').textContent = 'Local Gemma-4';
+      document.getElementById('stat-latency').textContent = `${latencyMs}ms`;
+
+      // Circuit breaker
+      const bState = document.getElementById('breaker-state');
+      const bBadge = document.getElementById('breaker-badge');
+      if (s.open) {
+        bState.textContent = `OPEN (retry in ${Math.round(s.retry_after_ms / 1000)}s)`;
+        bState.className = 'stat-value error';
+        bBadge.textContent = 'OPEN';
+        bBadge.className = 'card-badge badge-error pulse';
+      } else {
+        bState.textContent = 'CLOSED';
+        bState.className = 'stat-value ok';
+        bBadge.textContent = 'CLOSED';
+        bBadge.className = 'card-badge badge-ok';
+      }
+      document.getElementById('breaker-failures').textContent = s.recent_failures ?? '—';
+      document.getElementById('breaker-calls').textContent = s.total_calls ?? '—';
+      document.getElementById('breaker-total-failures').textContent = s.total_failures ?? '—';
+      document.getElementById('breaker-short').textContent = s.total_short_circuits ?? '—';
+      document.getElementById('breaker-cooldown').textContent =
+        s.cooldown_ms ? `${s.cooldown_ms / 1000}s` : '—';
+    }
+
+    function updateSysload(sys) {
+      // GPU
+      const gpu = sys.gpu || {};
+      const gpuBadge = document.getElementById('gpu-badge');
+      document.getElementById('gpu-name').textContent = gpu.name || 'Not available';
+
+      if (gpu.available) {
+        const utilPct = gpu.util_pct || 0;
+        const memPct = gpu.mem_pct || 0;
+
+        document.getElementById('gpu-util-val').textContent = `${utilPct}%`;
+        document.getElementById('gpu-util-bar').style.width = `${utilPct}%`;
+        document.getElementById('gpu-util-bar').className =
+          `progress-fill ${utilPct > 90 ? 'red' : utilPct > 70 ? 'yellow' : 'green'}`;
+
+        document.getElementById('gpu-mem-val').textContent = `${memPct}%`;
+        document.getElementById('gpu-mem-bar').style.width = `${memPct}%`;
+        document.getElementById('gpu-mem-bar').className =
+          `progress-fill ${memPct > 85 ? 'red' : memPct > 70 ? 'yellow' : 'blue'}`;
+
+        document.getElementById('gpu-temp').textContent = `${gpu.temp_c || 0}°C`;
+        document.getElementById('gpu-vram').textContent =
+          `${gpu.mem_used_mb || 0} / ${gpu.mem_total_mb || 0} MB`;
+
+        if (gpu.busy) {
+          gpuBadge.textContent = 'BUSY';
+          gpuBadge.className = 'card-badge badge-warn pulse';
+        } else {
+          gpuBadge.textContent = 'READY';
+          gpuBadge.className = 'card-badge badge-ok';
+        }
+      } else {
+        gpuBadge.textContent = 'N/A';
+        gpuBadge.className = 'card-badge badge-info';
+      }
+
+      // CPU
+      const cpu = sys.cpu || {};
+      const cpuBadge = document.getElementById('cpu-badge');
+      const idlePct = cpu.idle_pct || 0;
+      const usagePct = 100 - idlePct;
+
+      document.getElementById('cpu-cores').textContent = cpu.count || '—';
+      document.getElementById('cpu-usage-val').textContent = `${usagePct.toFixed(1)}%`;
+      document.getElementById('cpu-usage-bar').style.width = `${usagePct}%`;
+      document.getElementById('cpu-usage-bar').className =
+        `progress-fill ${usagePct > 80 ? 'red' : usagePct > 50 ? 'yellow' : 'green'}`;
+
+      document.getElementById('cpu-idle-val').textContent = `${idlePct.toFixed(1)}%`;
+      document.getElementById('cpu-idle-bar').style.width = `${idlePct}%`;
+
+      document.getElementById('cpu-user').textContent = `${(cpu.user_pct || 0).toFixed(1)}%`;
+      document.getElementById('cpu-sys').textContent = `${(cpu.sys_pct || 0).toFixed(1)}%`;
+      document.getElementById('cpu-iowait').textContent = `${(cpu.iowait_pct || 0).toFixed(1)}%`;
+
+      if (cpu.free) {
+        cpuBadge.textContent = 'FREE';
+        cpuBadge.className = 'card-badge badge-ok';
+      } else {
+        cpuBadge.textContent = 'BUSY';
+        cpuBadge.className = 'card-badge badge-warn';
+      }
+
+      // Update mode
+      const modeMap = { full: 'Full (AI enabled)', cpu_only: 'CPU Only (GPU busy)', throttle: 'Throttled' };
+      document.getElementById('stat-mode').textContent = modeMap[sys.mode] || sys.mode;
+    }
+
+    function addLogLine(level, msg) {
+      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      logLines.unshift({ time: now, level, msg });
+      if (logLines.length > MAX_LOG_LINES) logLines.pop();
+      renderLog();
+    }
+
+    function renderLog() {
+      const el = document.getElementById('log-stream');
+      el.innerHTML = logLines.map(l =>
+        `<div class="log-line"><span class="time">${l.time}</span><span class="level-${l.level}">${escapeHtml(l.msg)}</span></div>`
+      ).join('');
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c]));
+    }
+
+    async function resetBreaker() {
+      if (!confirm('Reset the AI circuit breaker?')) return;
+      try {
+        const res = await fetch(`${API}/api/admin/ai-status/reset`, { method: 'POST' });
+        if (res.ok) {
+          addLogLine('info', 'Circuit breaker reset successfully');
+          fetchAll();
+        } else {
+          addLogLine('error', 'Failed to reset breaker (need admin key?)');
+        }
+      } catch (e) {
+        addLogLine('error', `Reset failed: ${e.message}`);
+      }
+    }
+
+    async function testAI() {
+      addLogLine('info', 'Testing AI endpoint...');
+      const t0 = Date.now();
+      try {
+        const res = await fetch(`${API}/api/ai-status`);
+        const latency = Date.now() - t0;
+        if (res.ok) {
+          addLogLine('info', `AI endpoint responded in ${latency}ms`);
+        } else {
+          addLogLine('warn', `AI endpoint returned ${res.status}`);
+        }
+      } catch (e) {
+        addLogLine('error', `AI endpoint unreachable: ${e.message}`);
+      }
+    }
+
+    function toggleAutoRefresh() {
+      autoRefresh = !autoRefresh;
+      const btn = document.getElementById('btn-auto');
+      btn.textContent = `Auto-refresh: ${autoRefresh ? 'ON' : 'OFF'}`;
+      btn.classList.toggle('active', autoRefresh);
+      if (autoRefresh) {
+        refreshTimer = setInterval(fetchAll, 5000);
+      } else {
+        clearInterval(refreshTimer);
+      }
+    }
+
+    document.getElementById('clear-log-btn').addEventListener('click', () => {
+      logLines = [];
+      renderLog();
+    });
+
+    // Initial load
+    fetchAll();
+    addLogLine('info', 'AI Status page loaded');
+    refreshTimer = setInterval(fetchAll, 5000);
+  </script>
+</body>
+</html>

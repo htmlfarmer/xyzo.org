@@ -1,0 +1,10 @@
+[Unit]
+Description=Trending metrics refresh (velocity/stats/tfidf/pmi)
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=60min
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target

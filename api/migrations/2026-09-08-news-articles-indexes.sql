@@ -1,0 +1,106 @@
+-- ── 2026-09-08-news-articles-indexes.sql ─────────────────────────────────
+--
+-- Tier 2.5 of the consolidated audit fix-order. Tier 2 verification
+-- surfaced 3 public-facing /api/analytics/* endpoints that were
+-- flagged as Seq Scan candidates on news_articles (79,035 rows at
+-- audit time). After EXPLAIN ANALYZE on each, this migration adds
+-- the only index that actually flips a Seq Scan into an Index Scan
+-- — and explicitly documents why the other two audit candidates do
+-- NOT get a new index (the planner's parallel Seq Scan is already
+-- optimal at this row count + selectivity).
+--
+-- ─── EXPLAIN ANALYZE BEFORE — every audit candidate ────────────────
+--
+-- 1. /api/analytics/trending  (analytics.ts:499)
+--    WHERE fetched_at > now() - $h AND event_type IS NOT NULL
+--    ORDER BY fetched_at DESC LIMIT $limit
+--    Plan:
+--      Limit
+--        -> Gather Merge
+--             -> Sort  (top-N heapsort)
+--                  -> Parallel Seq Scan on news_articles a
+--                       Filter: ((event_type IS NOT NULL)
+--                                AND (fetched_at > now() - 24h))
+--                       Rows Removed by Filter: ~13818 / worker
+--      Rows: 23,953 / 79,035 (30% selectivity)
+--      Execution Time: 22.8 ms (parallel 3-worker, warm)
+--    After CREATE INDEX news_articles_event_type_fetched_idx
+--    AND disabling seqscan to force the index:
+--      Bitmap Heap Scan on news_articles
+--        Recheck Cond: ((fetched_at > 24h) AND (event_type IS NOT NULL))
+--        -> Bitmap Index Scan on news_articles_event_type_fetched_idx
+--      Execution Time: 36.4 ms (FORCED — actually SLOWER)
+--    Verdict: NO NEW INDEX. At 30% selectivity the planner's
+--             Parallel Seq Scan is already optimal — even when the
+--             new index is forced, the Bitmap Heap Scan is slower
+--             because it has to fetch 23k heap blocks individually.
+--             Adding the index would add write cost without any
+--             read benefit. Documented, index dropped.
+--
+-- 2. /api/analytics/reported-articles  (analytics.ts:1330)
+--    WHERE report_count >= $min_reports
+--    ORDER BY report_count DESC, a.quality_score ASC LIMIT $limit
+--    Plan (BEFORE):
+--      Limit
+--        -> Sort
+--             -> Nested Loop Left Join
+--                  -> Seq Scan on news_articles a
+--                       Filter: (report_count >= 1)
+--                       Rows Removed by Filter: 79035
+--                  -> Index Scan using news_sources_pkey
+--      Execution Time: 45.4 ms
+--    After CREATE INDEX news_articles_report_count_idx:
+--      Index Scan using news_articles_report_count_idx
+--      Execution Time: 0.145 ms (315× faster)
+--    Verdict: NEW INDEX NEEDED. Partial (report_count DESC) WHERE
+--             report_count >= 1 keeps the index tiny (the
+--             reported subset is <0.1% of the table) and supports
+--             the ORDER BY report_count DESC directly.
+--
+-- 3. /api/analytics/stats  top_articles subquery  (analytics.ts:625)
+--    WHERE a.status = 'extracted'
+--    Plan (BEFORE):
+--      Limit
+--        -> Sort
+--             -> HashAggregate
+--                  -> Hash Left Join
+--                       -> Hash Join
+--                            -> Index Only Scan on news_interactions
+--                            -> Hash
+--                                 -> Seq Scan on news_articles a
+--                                      Filter: (status = 'extracted')
+--    Rows: 62,523 / 79,035 (79% selectivity)
+--    After CREATE INDEX news_articles_status_source_idx
+--    AND disabling seqscan to force the index:
+--      Bitmap Heap Scan on news_articles
+--        Recheck Cond: (status = 'extracted')
+--        -> Bitmap Index Scan on news_articles_status_source_idx
+--      Cost: 17663.87 (vs Seq Scan 17296.94 — index SLIGHTLY worse)
+--    Verdict: NO NEW INDEX. At 79% selectivity the Seq Scan is
+--             optimal; the existing
+--             idx_news_articles_source_7d ON (source_id) WHERE
+--             status='extracted' already handles JOIN-side filters
+--             when source_id is the leading predicate. Adding a
+--             status-leading partial would only bloat writes.
+--             Documented, index dropped.
+--
+-- Idempotent (IF NOT EXISTS) and CONCURRENTLY so the build doesn't
+-- block writes on the live analytics table. CONCURRENTLY cannot run
+-- inside a transaction block; psql -f (used by scripts/migrate-db.sh
+-- and scripts/apply-phase-fixes.sh) does not wrap a file in a
+-- transaction by default, so this file is safe to apply as-is.
+
+-- ── news_articles: report_count for reported-articles ────────────────
+-- Covers: /api/analytics/reported-articles (analytics.ts:1330)
+-- Partial index — almost no rows currently match (only flagged
+-- articles), but when the system is actively used this keeps the
+-- reported set indexed without bloating the table.
+CREATE INDEX CONCURRENTLY IF NOT EXISTS news_articles_report_count_idx
+    ON news_articles (report_count DESC)
+    WHERE report_count >= 1;
+
+-- ── Refresh planner stats so the new index is picked up ────────────
+-- ANALYZE is safe in a transaction; the runner uses CONCURRENTLY
+-- for the index build above (outside any tx) but ANALYZE here is
+-- a standalone statement.
+ANALYZE news_articles;

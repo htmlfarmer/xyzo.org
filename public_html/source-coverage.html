@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Source Coverage Map — Newsium</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="console-guard.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --accent: #5eead4;
+      --muted: #64748b;
+      --border: #1f2937;
+      --gold: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    h1 { margin: 0 0 8px; font-size: 24px; color: var(--accent); }
+    h2 { margin: 24px 0 12px; font-size: 18px; color: var(--fg); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .subtitle { color: var(--muted); margin: 0 0 24px; font-size: 14px; }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card {
+      background: #111827; border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px;
+    }
+    .stat-label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .stat-value { color: var(--accent); font-size: 24px; font-weight: 600; }
+    .stat-sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+    .panel { background: #111827; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    #coverage-map { height: 520px; border-radius: 6px; background: #0b0f14; }
+    .city-list { max-height: 520px; overflow-y: auto; }
+    .city-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      padding: 10px 4px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .city-row:last-child { border-bottom: none; }
+    .city-name { color: var(--fg); font-weight: 500; }
+    .city-name .country { color: var(--muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
+    .city-name .flag { display: inline-block; width: 16px; text-align: center; margin-right: 4px; opacity: 0.8; }
+    .city-bar {
+      grid-column: 1 / -1;
+      height: 4px; background: var(--border); border-radius: 2px;
+      overflow: hidden; margin-top: 4px;
+    }
+    .city-bar-fill { height: 100%; background: var(--accent); transition: width 0.6s ease; }
+    .city-count { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { display: inline-block; margin-bottom: 16px; font-size: 14px; }
+    .loading { color: var(--muted); padding: 20px; text-align: center; }
+    .error { color: #ef4444; padding: 20px; text-align: center; }
+    .flag-emoji { display: inline-block; margin-right: 4px; }
+    .gaps-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 8px;
+    }
+    .gap-row {
+      background: #111827;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .gap-country { flex: 1; font-weight: 500; }
+    .gap-events { color: var(--muted); font-size: 12px; font-family: ui-monospace, monospace; }
+    .gap-action { color: var(--accent); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← back to map</a>
+    <h1 id="source-name">Source Coverage Map</h1>
+    <div class="subtitle" id="source-meta">Loading...</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Cities Covered</div>
+        <div class="stat-value" id="stat-cities">—</div>
+        <div class="stat-sub" id="stat-cities-sub"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Countries</div>
+        <div class="stat-value" id="stat-countries">—</div>
+        <div class="stat-sub" id="stat-countries-sub"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Articles (geolocated)</div>
+        <div class="stat-value" id="stat-articles">—</div>
+        <div class="stat-sub" id="stat-articles-sub"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Coverage Type</div>
+        <div class="stat-value" id="stat-coverage">—</div>
+        <div class="stat-sub" id="stat-coverage-sub"></div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="panel">
+        <h2 style="margin-top:0">Geographic distribution</h2>
+        <div id="coverage-map"></div>
+      </div>
+      <div class="panel">
+        <h2 style="margin-top:0">Top cities</h2>
+        <div class="city-list" id="city-list">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Suggested new regions</h2>
+    <p style="color:var(--muted);font-size:13px;margin:0 0 12px">
+      Countries with substantial global news activity but zero coverage from this source.
+      Click a suggestion to find candidate RSS feeds in that country.
+    </p>
+    <div class="gaps-list" id="gaps-list">
+      <div class="loading">Loading suggestions…</div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="city-engine.js"></script>
+  <script>
+  (async function() {
+    // ?id=NNN  (e.g. /source-coverage.html?id=264)
+    const params = new URLSearchParams(location.search);
+    const sourceId = params.get('id');
+    if (!sourceId) {
+      document.body.innerHTML = '<div class="error">Missing ?id= parameter</div>';
+      return;
+    }
+
+    // Wait for CityEngine to load (we use it for emoji flags).
+    await window.CityEngine.load();
+
+    let data;
+    try {
+      const resp = await fetch('/api/sources/' + sourceId + '/coverage?limit=50');
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error || ('HTTP ' + resp.status));
+      }
+      data = await resp.json();
+    } catch (e) {
+      document.body.innerHTML = '<div class="error">Failed to load coverage: ' + e.message + '</div>';
+      return;
+    }
+
+    // Title + meta
+    document.getElementById('source-name').textContent = data.source.name;
+    document.title = data.source.name + ' — Coverage Map';
+    const meta = [
+      data.source.country ? '<span class="flag-emoji">' + flagEmoji(data.source.country) + '</span>' : '',
+      'Source #' + data.source.id,
+    ].filter(Boolean).join(' · ');
+    document.getElementById('source-meta').innerHTML = meta;
+
+    // Gaps panel: countries with global activity but no coverage from this source.
+    try {
+      const gapsResp = await fetch('/api/sources/' + sourceId + '/coverage/gaps?days=30&top=15');
+      if (gapsResp.ok) {
+        const gapsData = await gapsResp.json();
+        renderGaps(gapsData);
+      }
+    } catch (e) {
+      document.getElementById('gaps-list').innerHTML =
+        '<div class="loading">Could not load suggestions.</div>';
+    }
+
+    // Stats
+    const s = data.summary;
+    document.getElementById('stat-cities').textContent = s.cities_count;
+    document.getElementById('stat-cities-sub').textContent =
+      s.cities_count === 0 ? 'No geolocated articles yet' : 'unique places';
+    document.getElementById('stat-countries').textContent = s.countries_count;
+    document.getElementById('stat-countries-sub').textContent =
+      s.is_national ? 'national/international' : 'single-country focus';
+    document.getElementById('stat-articles').textContent = s.total_articles;
+    document.getElementById('stat-articles-sub').textContent = 'with location';
+    document.getElementById('stat-coverage').textContent =
+      Math.round(s.coverage_concentration * 100) + '%';
+    document.getElementById('stat-coverage-sub').textContent = 'top-city concentration';
+
+    // Map
+    const map = L.map('coverage-map', { worldCopyJump: true }).setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap',
+      maxZoom: 8,
+    }).addTo(map);
+
+    if (data.cities.length > 0) {
+      const maxCount = Math.max(...data.cities.map(c => c.article_count));
+      const markers = [];
+      for (const c of data.cities) {
+        const radius = 4 + 8 * Math.sqrt(c.article_count / maxCount);
+        const marker = L.circleMarker([c.lat, c.lng], {
+          radius: radius,
+          fillColor: '#5eead4',
+          color: '#fff',
+          weight: 1,
+          opacity: 0.9,
+          fillOpacity: 0.6,
+        }).bindPopup(
+          '<div style="font-weight:600">' + escapeHtml(c.place_name) + '</div>' +
+          '<div>' + (c.country || '') + '</div>' +
+          '<div style="color:#5eead4;margin-top:4px">' + c.article_count + ' articles</div>'
+        );
+        marker.addTo(map);
+        markers.push(marker);
+      }
+      const group = L.featureGroup(markers);
+      map.fitBounds(group.getBounds().pad(0.2));
+    }
+
+    // City list
+    const list = document.getElementById('city-list');
+    if (data.cities.length === 0) {
+      list.innerHTML = '<div class="loading">No geolocated articles yet</div>';
+    } else {
+      const maxCount = Math.max(...data.cities.map(c => c.article_count));
+      list.innerHTML = data.cities.map((c, i) => (
+        '<div class="city-row" data-idx="' + i + '">' +
+        '  <div class="city-name">' +
+              (c.country ? '<span class="flag-emoji">' + flagEmoji(c.country) + '</span>' : '') +
+        '    <a href="/?country=' + encodeURIComponent(c.country || '') +
+                 '&zoom_to=' + c.lat + ',' + c.lng + '">' +
+                 escapeHtml(c.place_name) + '</a>' +
+        '    <span class="country">' + (c.country || '') + '</span>' +
+        '  </div>' +
+        '  <div class="city-count">' + c.article_count + '</div>' +
+        '  <div class="city-bar"><div class="city-bar-fill" style="width:' +
+                 Math.round(c.article_count / maxCount * 100) + '%"></div></div>' +
+        '</div>'
+      )).join('');
+
+      // Click-to-fly on the row
+      list.querySelectorAll('.city-row').forEach((row) => {
+        row.addEventListener('click', () => {
+          const idx = Number(row.getAttribute('data-idx'));
+          const c = data.cities[idx];
+          if (c && c.lat && c.lng) map.flyTo([c.lat, c.lng], 6, { duration: 0.8 });
+        });
+        row.style.cursor = 'pointer';
+      });
+    }
+
+    function renderGaps(gapsData) {
+      const el = document.getElementById('gaps-list');
+      if (!gapsData.suggestions || gapsData.suggestions.length === 0) {
+        el.innerHTML = '<div class="loading">No coverage gaps detected — this source already covers the top global news countries.</div>';
+        return;
+      }
+      el.innerHTML = gapsData.suggestions.map((s) =>
+        '<div class="gap-row">'
+        + '<span class="flag-emoji">' + flagEmoji(s.country) + '</span>'
+        + '<span class="gap-country">' + escapeHtml(s.country) + '</span>'
+        + '<span class="gap-events">' + s.events_global + ' events (30d)</span>'
+        + '<a class="gap-action" target="_blank" '
+        + 'href="/?country=' + encodeURIComponent(s.country) + '">'
+        + 'view map →</a>'
+        + '</div>'
+      ).join('');
+    }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+    function flagEmoji(cc) {
+      if (!cc || cc.length !== 2) return '';
+      return String.fromCodePoint(...[...cc.toUpperCase()]
+        .map(c => 127397 + c.charCodeAt(0)));
+    }
+  })();
+  </script>
+</body>
+</html>

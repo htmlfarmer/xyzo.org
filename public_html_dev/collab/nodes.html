@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>collab · active nodes</title>
+<link rel="stylesheet" href="/collab/collab.css" />
+</head>
+<body>
+
+<header class="hero compact">
+  <div class="container">
+    <p class="kicker"><a href="/collab/">collab</a> · nodes</p>
+    <h1>active nodes</h1>
+    <p class="lede">live list of every collaborator machine currently heartbeating. refreshes every 30s.</p>
+  </div>
+</header>
+
+<section class="container">
+  <div id="nodes-table-wrap">
+    <table id="nodes-table">
+      <thead>
+        <tr>
+          <th>node</th>
+          <th>os</th>
+          <th>arch</th>
+          <th>roles</th>
+          <th>version</th>
+          <th>jobs (7d)</th>
+          <th>last heartbeat</th>
+        </tr>
+      </thead>
+      <tbody id="nodes-body">
+        <tr><td colspan="7" class="loading">loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="meta"><a href="/collab/">← back</a></p>
+</section>
+
+<script src="/collab/collab.js"></script>
+<script>
+  // Override view: list-only mode.
+  window.collabView = "list";
+</script>
+</body>
+</html>

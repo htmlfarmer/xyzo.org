@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — глобальна карта новин",
+  "search.placeholder": "Пошук міста або новини…",
+  "search.button": "Пошук",
+  "search.clear": "Очистити",
+
+  "panel.title": "Статус наживо",
+  "panel.toggle": "Перемкнути панель статусу наживо",
+  "panel.loading": "завантаження…",
+  "tab.hot": "Популярне",
+  "tab.new": "Нове",
+  "tab.near": "Поруч",
+  "tab.local": "Місцеве",
+  "tab.trending": "У тренді",
+
+  "time.24h": "24 год",
+  "time.7d": "Останній тиждень",
+  "time.30d": "Останній місяць",
+  "time.365d": "Останній рік",
+  "time.custom": "Усе",
+
+  "mode.markers": "Позначки",
+  "mode.heatmap": "Теплова карта",
+  "mode.clusters": "Скупчення",
+  "mode.links": "Посилання",
+  "mode.wiki": "Вікі",
+
+  "explore.button": "Дослідити",
+  "explore.title": "Знайдіть джерела новин у цій області",
+
+  "location.placeholder": "Місто, адреса, країна…",
+  "location.use_my": "Використати місцезнаходження браузера",
+  "location.clear": "Очистити місцезнаходження",
+
+  "pin.events": "події",
+  "pin.sources": "джерела",
+  "pin.nearby": "Найближчі міста",
+  "pin.details": "Деталі",
+  "pin.share": "Поділитися",
+  "pin.hide": "Сховати",
+  "pin.report": "Повідомити",
+
+  "filter.all": "Усе",
+  "filter.categories": "Категорії",
+  "filter.sources": "Джерела",
+
+  "status.online": "Онлайн",
+  "status.offline": "Офлайн",
+  "status.updating": "Оновлення…",
+  "status.last_update": "Останнє оновлення",
+
+  "help.title": "Допомога",
+  "help.about": "Про XYZO",
+  "help.shortcuts": "Комбінації клавіш",
+
+  "lang.switcher": "Мова",
+
+  "category.politics": "Політика",
+  "category.business": "Бізнес",
+  "category.crime": "Злочинність",
+  "category.weather": "Погода",
+  "category.science": "Наука",
+  "category.technology": "Технології",
+  "category.sports": "Спорт",
+  "category.culture": "Культура",
+  "category.environment": "Довкілля",
+  "category.conflict": "Конфлікт",
+  "category.health": "Здоров'я",
+  "category.other": "Інше",
+
+  "event.earthquake": "Землетрус",
+  "event.flood": "Повінь",
+  "event.storm": "Шторм",
+  "event.wildfire": "Лісова пожежа",
+  "event.shooting": "Стрілянина",
+  "event.protest": "Протест",
+  "event.election": "Вибори",
+  "event.accident": "Аварія"
+}

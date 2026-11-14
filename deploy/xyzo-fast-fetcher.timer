@@ -1,0 +1,16 @@
+[Unit]
+Description=Fast news cycle: fetch + parse + geocode + cluster (no AI) every 5 minutes
+Requires=xyzo-fast-fetcher.service
+
+[Timer]
+# Fire every 5 minutes. This is the lightweight cycle that skips AI
+# extraction — articles get on the map via text parsing + source
+# fallback coordinates. The full AI cycle (xyzo-fetcher.timer)
+# still runs every 15 minutes to refine event_type, entities, etc.
+OnCalendar=*:0/5
+Persistent=true
+AccuracySec=30s
+Unit=xyzo-fast-fetcher.service
+
+[Install]
+WantedBy=timers.target

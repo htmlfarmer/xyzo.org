@@ -1,0 +1,15 @@
+[Unit]
+Description=XYZO earthquake overlay - saves the USGS ComCat catalogue to our own disk
+After=network.target
+
+[Service]
+Type=oneshot
+# The browser must NEVER poll USGS: the site serves its own copy, and
+# a reader who opens the map does not become a client of the USGS
+# feed. This job refreshes that copy.
+ExecStart=/usr/bin/python3 /var/www/vhosts/xyzo.org/scripts/earthquake_build.py
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# The USGS summary feeds are public domain (US Government work) and
+# need no key, no account and no login.

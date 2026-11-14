@@ -1,0 +1,19 @@
+[Unit]
+Description=XYZO IVT overlay - computes the GFS moisture transport into the map grid
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -m worker.ivt
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# The worker is idempotent: it compares the analysis run_time in
+# public_html/data/ivt/meta.json and writes nothing when GFS has not
+# advanced, so a timer tick that lands early is a no-op rather than a
+# pointless rewrite that busts every client's cache.
+#
+# IVT is COMPUTED here from the GFS humidity and wind profiles — the
+# GFS publishes no IVT product. All thirteen pressure levels of a
+# variable come back in ONE request, so the whole integral costs three
+# requests.

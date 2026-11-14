@@ -1,0 +1,25 @@
+[Unit]
+Description=Xyzo story linking + PageRank every 6 hours
+Requires=xyzo-story-link.service
+
+[Timer]
+# Fire every 6 hours. The story linker scans a 3-day window of articles
+# and the dispatcher soft cap (queued: 10, running: 3) protects against
+# backlog. 6 hours matches how often a fresh crop of articles has
+# accumulated meaningfully; hourly would be wasteful, daily leaves
+# multi-hour lag in the cluster view.
+#
+# Don't pin to :00 — staggered minutes reduce API thundering-herd risk.
+# 6-hour cycle at minute 17 means fires land at 00:17, 06:17, 12:17,
+# 18:17 instead of competing with other :00-bound timers (fast-fetcher,
+# queue-soak, etc.).
+OnCalendar=*-*-* 00:17:00
+OnCalendar=*-*-* 06:17:00
+OnCalendar=*-*-* 12:17:00
+OnCalendar=*-*-* 18:17:00
+Persistent=true
+AccuracySec=5m
+Unit=xyzo-story-link.service
+
+[Install]
+WantedBy=timers.target

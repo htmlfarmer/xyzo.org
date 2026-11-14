@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T03:41:32.517Z",
+  "endpoints": {
+    "health": {
+      "status": 200,
+      "responseHash": "smxyd7",
+      "keyValues": {
+        "ok": true,
+        "version": "0.0.0",
+        "queue.state": "RUNNING",
+        "queue.poolSize": 4,
+        "queue.activeWorkers": 4
+      }
+    },
+    "stats": {
+      "status": 200,
+      "responseHash": "2dwpqp",
+      "keyValues": {
+        "sources": 4101,
+        "countries": 220,
+        "stories_today": 51193,
+        "timestamp": 1792726784226
+      }
+    },
+    "pins/stats": {
+      "status": 200,
+      "responseHash": "857jnh",
+      "keyValues": {
+        "counts.24h": 57895,
+        "counts.3d": 181322,
+        "counts.7d": 372890,
+        "counts.30d": 1584931,
+        "counts.365d": 2442294,
+        "counts.all": 2484989,
+        "latest_timestamp": "2026-12-03T16:00:00.000Z",
+        "active_sources": 3700,
+        "healthy": true
+      }
+    },
+    "pins/map": {
+      "status": 200,
+      "responseHash": "-9ou9wz",
+      "keyValues": {
+        "count": 1,
+        "widened": false,
+        "actual_bbox": "-180,-85,180,85",
+        "generated_at": "2026-10-23T03:40:38.375Z"
+      }
+    },
+    "cities/search": {
+      "status": 200,
+      "responseHash": "cfvplu",
+      "keyValues": {
+        "query": "london",
+        "count": 1
+      }
+    },
+    "sources/stats": {
+      "status": 200,
+      "responseHash": "-rgynx3",
+      "keyValues": {
+        "total": 4101,
+        "active": 3700,
+        "inactive": 401,
+        "erroring": 1620,
+        "active_24h": 2603,
+        "never_succeeded": 947,
+        "rss": 3092,
+        "web": 1006,
+        "json": 2,
+        "countries": 172,
+        "by_region_capped": true
+      }
+    },
+    "city-value/top": {
+      "status": 200,
+      "responseHash": "-k4gdv6",
+      "keyValues": {
+        "count": 3
+      }
+    },
+    "city-value/surging": {
+      "status": 200,
+      "responseHash": "-k4gdv6",
+      "keyValues": {
+        "count": 3
+      }
+    },
+    "city-value/stats": {
+      "status": 200,
+      "responseHash": "ba3fgd",
+      "keyValues": {
+        "global.total_cities": 936,
+        "global.avg_score": 12.819501094924522,
+        "global.max_score": 36.92067857886106,
+        "surging_count": 161
+      }
+    },
+    "locations/search": {
+      "status": 200,
+      "responseHash": "-zchglu",
+      "keyValues": {
+        "count": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+[Unit]
+Description=XYZO pressure delta - archive the mean-sea-level-pressure field of every cycle
+After=network.target postgresql.service xyzo-isobars.service
+
+[Service]
+Type=oneshot
+# The database password lives in the root-only env file, not in the
+# unit. A unit file is world-readable; a committed one is a published
+# password.
+EnvironmentFile=/etc/xyzo/xyzo.env
+ExecStart=/usr/bin/python3 -m worker.pressure_delta --archive
+User=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+
+# WHAT IT DOES. The isobar worker cuts the pressure of one analysis into
+# contour lines; this one archives the pressure FIELD of every cycle, so
+# the CHANGE between two of them can be drawn — the Δp map, where the
+# pressure rose and where it fell.
+#
+# WHY THE FIELD AND NOT THE LINES. A difference of two sets of contour
+# lines is not a field — you cannot subtract a polyline. So the archive
+# holds the field (1°, 130 KB a cycle, ~190 MB a year) and the API
+# differences two of them on demand, for ANY window and ANY past cycle.
+# Storing the delta per window would cost 1.5 GB a year for a field
+# that is 190 MB.
+#
+# WHY IT BACKFILLS. NOMADS keeps about ten days of GFS analyses, and the
+# 24-hour change is the window everyone asks for — so the last ten days
+# are fetched once. From then on the archive answers every window from
+# 24 hours up to a full year, and the longer windows light up as the
+# archive fills.
+#
+# It is cheap when there is nothing new: the cycle is probed with a HEAD
+# request and an already-archived cycle is skipped.

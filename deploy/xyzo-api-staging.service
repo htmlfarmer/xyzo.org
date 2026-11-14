@@ -1,0 +1,67 @@
+# OPT-IN: this unit is intentionally NOT enabled.
+# To bring up staging when ready:
+#   1. Create /etc/xyzo/xyzo.env.staging (XYZO_PORT=3009 + XYZO_DB_DSN + secrets)
+#   2. sudo cp deploy/xyzo-api-staging.service /etc/systemd/system/
+#   3. sudo systemctl daemon-reload
+#   4. sudo systemctl enable --now xyzo-api-staging.service
+#   5. Uncomment the staging.xyzo.org block in /etc/caddy/Caddyfile and
+#      `sudo systemctl reload caddy` (after DNS for staging.xyzo.org → server IP).
+
+[Unit]
+Description=Xyzo API (STAGING — port 3009, opt-in)
+Documentation=file:/var/www/vhosts/xyzo.org/README.md
+After=network-online.target postgresql.service
+Wants=network-online.target
+# If Caddy comes up first and the API isn't there, it sees 502s until
+# the API is healthy. We don't strictly require Caddy; Caddy will retry.
+
+[Service]
+Type=simple
+User=asher
+Group=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org/api
+# Staging reads its own env file (operator creates it). NOT the prod .env.
+EnvironmentFile=/etc/xyzo/xyzo.env.staging
+# Port override — prod unit uses 3008. Wins over any XYZO_PORT in the
+# EnvironmentFile, so even if the staging env file omits it we still
+# bind 3009. Tagged "[STAGING]" in journalctl so logs are distinguishable.
+Environment=XYZO_PORT=3009
+Environment=XYZO_VERSION=0.1.0-staging
+ExecStart=/home/asher/.bun/bin/bun run src/server.ts
+# Same import validation as prod — prevents crash-loops on missing exports.
+ExecStartPre=/var/www/vhosts/xyzo.org/scripts/validate-api.sh --quick
+Restart=always
+RestartSec=2
+StartLimitIntervalSec=60
+StartLimitBurst=10
+
+# Same resource caps as prod. Bun will be killed and respawned by systemd
+# if it starts to balloon — far better than a server-wide OOM.
+MemoryMax=512M
+MemoryHigh=384M
+OOMPolicy=stop
+OOMScoreAdjust=-200
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=full
+# read-only (not `true`) so the unit can still read /home/asher/.bun where
+# the bun binary lives. With ProtectHome=true the unit can't even launch
+# its own ExecStart — status=203/EXEC. /tmp + /var are still writable via
+# PrivateTmp + ReadWritePaths.
+ProtectHome=read-only
+PrivateTmp=true
+
+# Bun needs to write to these for its internal caches / DNS.
+# /var/www/vhosts/xyzo.org/api is the working dir + read-only mounted
+# code; the writable exception is for any runtime caches Bun creates there.
+ReadWritePaths=/var/www/vhosts/xyzo.org/api /tmp
+
+StandardOutput=journal
+StandardError=journal
+# Different SyslogIdentifier than prod so `journalctl -t xyzo-api-staging`
+# filters cleanly. The "[STAGING]" prefix survives in Description too.
+SyslogIdentifier=xyzo-api-staging
+
+[Install]
+WantedBy=multi-user.target

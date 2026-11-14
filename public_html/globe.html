@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xyzo — 3D globe</title>
+<link rel="stylesheet" href="/vendor/maplibre-gl/maplibre-gl.css?v=202611142000">
+<link rel="stylesheet" href="/globe.css?v=202611142000">
+</head>
+<body>
+  <div id="globe"></div>
+
+  <header id="globe-top">
+    <a class="globe-back" href="/">← Back to the map</a>
+    <span id="globe-title">Xyzo · 3D globe</span>
+    <span id="globe-status">loading stories…</span>
+  </header>
+
+  <aside id="globe-panel">
+    <header id="globe-panel-head">
+      <span id="globe-panel-title">View &amp; layers</span>
+      <button type="button" id="globe-panel-close" aria-label="Hide the layers panel" title="Hide panel">✕</button>
+    </header>
+    <section class="globe-sec">
+      <h3>Projection</h3>
+      <div id="globe-projection" class="globe-proj"></div>
+      <p class="globe-hint">Drag to spin · scroll to zoom · Esc returns to the flat map</p>
+    </section>
+    <section class="globe-sec">
+      <h3>Overlays</h3>
+      <div id="globe-overlays"></div>
+    </section>
+    <section class="globe-sec">
+      <h3>About</h3>
+      <p class="globe-hint">
+        The same overlays as the flat map, reprojected onto a sphere:
+        climate, soil (with a property switcher), cropland, land cover,
+        geology, NASA imagery, rivers, hydrological basins, magnetic
+        lines, isobars and temperature. Wind streamlines and geologic
+        contacts stay on the flat map — the first is a screen-space
+        animation, the second is a WMS layer MapLibre cannot fetch.
+        Click a dot for the story.
+      </p>
+    </section>
+  </aside>
+
+  <!-- Shown in place of the panel once the user hides it. Without this the
+       ✕ would be a one-way door: there is no other way back to the overlay
+       list. On a phone the panel covers ~76 % of the screen, so hiding it
+       is the normal first thing a user wants to do. -->
+  <button type="button" id="globe-panel-open" hidden>☰ Layers</button>
+
+  <script src="/vendor/maplibre-gl/maplibre-gl.js?v=202611142000"></script>
+  <!-- console-guard.js defines window.XLog, which every module on the
+       site logs through. The globe had NO logger at all, so a failure
+       in the wind animation (or in any other globe module) was
+       completely SILENT: the overlay simply did nothing and the
+       console said nothing either. -->
+  <script src="/console-guard.js?v=202611142000"></script>
+  <!-- ramp-styles.js is the ONE source of the site's colour schemes.
+       The globe recolours its isobars with the same `recolor` the flat
+       map uses, so a shared link means the same lines in both views. -->
+  <script src="/ramp-styles.js?v=202611142000"></script>
+  <script src="/view-handoff.js?v=202611142000"></script>
+  <script src="/field-bake.js?v=202611142000"></script>
+  <script src="/globe-wind.js?v=202611142000"></script>
+  <script src="/globe.js?v=202611142000"></script>
+</body>
+</html>

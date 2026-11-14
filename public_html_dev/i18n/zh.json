@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — 全球新闻地图",
+  "search.placeholder": "搜索城市或新闻…",
+  "search.button": "搜索",
+  "search.clear": "清除",
+
+  "panel.title": "实时状态",
+  "panel.toggle": "切换实时状态面板",
+  "panel.loading": "加载中…",
+  "tab.hot": "热门",
+  "tab.new": "最新",
+  "tab.near": "附近",
+  "tab.local": "本地",
+  "tab.trending": "趋势",
+
+  "time.24h": "24小时",
+  "time.7d": "过去一周",
+  "time.30d": "过去一月",
+  "time.365d": "过去一年",
+  "time.custom": "全部",
+
+  "mode.markers": "标记",
+  "mode.heatmap": "热力图",
+  "mode.clusters": "聚类",
+  "mode.links": "链接",
+  "mode.wiki": "百科",
+
+  "explore.button": "探索",
+  "explore.title": "发现此区域的新闻来源",
+
+  "location.placeholder": "城市、地址、国家…",
+  "location.use_my": "使用浏览器定位",
+  "location.clear": "清除位置",
+
+  "pin.events": "事件",
+  "pin.sources": "来源",
+  "pin.nearby": "附近城市",
+  "pin.details": "详情",
+  "pin.share": "分享",
+  "pin.hide": "隐藏",
+  "pin.report": "举报",
+
+  "filter.all": "全部",
+  "filter.categories": "分类",
+  "filter.sources": "来源",
+
+  "status.online": "在线",
+  "status.offline": "离线",
+  "status.updating": "更新中…",
+  "status.last_update": "最后更新",
+
+  "help.title": "帮助",
+  "help.about": "关于 XYZO",
+  "help.shortcuts": "键盘快捷键",
+
+  "lang.switcher": "语言",
+
+  "category.politics": "政治",
+  "category.business": "商业",
+  "category.crime": "犯罪",
+  "category.weather": "天气",
+  "category.science": "科学",
+  "category.technology": "科技",
+  "category.sports": "体育",
+  "category.culture": "文化",
+  "category.environment": "环境",
+  "category.conflict": "冲突",
+  "category.health": "健康",
+  "category.other": "其他",
+
+  "event.earthquake": "地震",
+  "event.flood": "洪水",
+  "event.storm": "风暴",
+  "event.wildfire": "山火",
+  "event.shooting": "枪击",
+  "event.protest": "抗议",
+  "event.election": "选举",
+  "event.accident": "事故"
+}

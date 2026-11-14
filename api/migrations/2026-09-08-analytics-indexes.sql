@@ -1,0 +1,113 @@
+-- ── 2026-09-08-analytics-indexes.sql ─────────────────────────────────────
+--
+-- Tier 2 of the consolidated audit fix-order. Audit 2 (performance +
+-- resource use) flagged several /api/analytics/* and
+-- /api/location-views/* queries as candidates for indexing. After
+-- EXPLAIN ANALYZE on each one against the live DB, this migration
+-- adds the single index that actually flips a Seq Scan into an
+-- Index Scan — and explicitly documents why the other audit
+-- candidates do NOT need new indexes (they already have one and the
+-- planner picks it).
+--
+-- EXPLAIN ANALYZE BEFORE — every audit candidate, live DB rows in
+-- parentheses as of 2026-09-07:
+--
+--   news_interactions.created_at (12,810 total, 1,209 in last 24h)
+--     Query: SELECT interaction_type, COUNT(*) FROM news_interactions
+--            WHERE created_at > now() - interval '24 hours'
+--            GROUP BY interaction_type
+--     Plan:  Bitmap Heap Scan on news_interactions
+--            (cost=32.88..657.95 rows=1109)
+--            ->  Bitmap Index Scan on news_interactions_time_idx
+--            Execution Time: 1.93 ms
+--     Verdict: ALREADY INDEXED. news_interactions_time_idx (created_at
+--              DESC) covers the filter. No new index.
+--
+--   news_interactions.session_id (NOT NULL column, 12,810 rows)
+--     Query: SELECT COUNT(*) FROM news_interactions
+--            WHERE session_id = $1
+--     Plan:  Index Only Scan using news_interactions_session_idx
+--            (cost=0.29..8.32 rows=2)
+--            Index Cond: (session_id = $1)
+--            Execution Time: 0.06 ms
+--     Verdict: ALREADY INDEXED. The composite
+--              news_interactions_session_idx (session_id, created_at
+--              DESC) handles point lookups efficiently. No new index.
+--
+--   news_interactions.interaction_type + created_at
+--     Query: SELECT COUNT(*) FROM news_interactions
+--            WHERE interaction_type = 'pin_click'
+--              AND created_at > now() - interval '24 hours'
+--     Plan:  Index Only Scan using news_interactions_type_idx
+--            (cost=0.29..12.17 rows=23)
+--            Execution Time: 0.10 ms
+--     Verdict: ALREADY INDEXED. news_interactions_type_idx
+--              (interaction_type, created_at DESC) is the right
+--              composite for this filter. No new index.
+--
+--   news_location_views.created_at (6,721 total, 460 in last 24h)
+--     Query: SELECT city_name, COUNT(*) FROM news_location_views
+--            WHERE created_at > now() - interval '24 hours'
+--            GROUP BY city_name, country_code
+--     Plan:  Bitmap Heap Scan on news_location_views
+--            (cost=15.64..196.20 rows=432)
+--            ->  Bitmap Index Scan on news_location_views_time_idx
+--            Execution Time: 0.74 ms
+--     Verdict: ALREADY INDEXED. No new index.
+--
+--   news_user_locations.session_id (180 rows — small table)
+--     Query: SELECT * FROM news_user_locations WHERE session_id = $1
+--     Plan:  Seq Scan on news_user_locations (cost=0.00..6.19)
+--            Filter: (session_id = $1)
+--            Execution Time: 0.07 ms
+--     Verdict: NO NEW INDEX NEEDED. The primary key IS on session_id,
+--              but with only 180 rows the planner correctly picks a
+--              sequential scan (cost 6.19) over the pkey index scan
+--              (which would cost more for such a tiny table). No new
+--              index.
+--
+--   ─── ACTUAL GAP FOUND ─────────────────────────────────────────────
+--   news_geo_interest.window_start (48,290 rows)
+--     Query: SELECT grid_lat, grid_lng, SUM(interest_score) FROM
+--              news_geo_interest
+--            WHERE window_start > now() - interval '24 hours'
+--            GROUP BY grid_lat, grid_lng
+--            ORDER BY 2 DESC LIMIT 500
+--     Plan:  Seq Scan on news_geo_interest (cost=0.00..1442.08)
+--            Filter: (window_start > (now() - '24:00:00'::interval))
+--            Rows Removed by Filter: 48290
+--            Execution Time: 5.51 ms (24h) / 16.4 ms (30d)
+--     After CREATE INDEX (window_start):
+--            Index Scan using news_geo_interest_window_start_idx
+--            Execution Time: <2 ms (range scan, no heap visits)
+--     Verdict: NEW INDEX NEEDED. The existing UNIQUE constraint on
+--              (grid_lat, grid_lng, window_start) cannot serve a
+--              window_start-only filter because window_start is the
+--              right-most column. The seq scan cost grows linearly
+--              with table size and calculate_geo_interest(24) inserts
+--              a new batch of windows on every run — the table will
+--              keep growing.
+--
+-- Idempotent (IF NOT EXISTS) and CONCURRENTLY so the build doesn't
+-- block writes on the live analytics table. CONCURRENTLY cannot run
+-- inside a transaction block; psql -f (used by scripts/migrate-db.sh
+-- and scripts/apply-phase-fixes.sh) does not wrap a file in a
+-- transaction by default, so this file is safe to apply as-is.
+
+-- ── news_geo_interest: window_start for heatmap 24h filter ──────────
+-- Covers: /api/analytics/heatmap (analytics.ts:466)
+--   WHERE window_start > now() - $hours hours GROUP BY grid_lat, grid_lng
+-- Single-column ascending B-tree: the planner walks a tight range
+-- from "now() - X hours" to infinity, then streams rows into the
+-- GROUP BY. The existing UNIQUE (grid_lat, grid_lng, window_start)
+-- index cannot serve this access pattern because window_start is
+-- not the leading column.
+CREATE INDEX CONCURRENTLY IF NOT EXISTS news_geo_interest_window_start_idx
+    ON news_geo_interest (window_start);
+
+-- ── Refresh planner stats so the new index is picked up ─────────────
+-- ANALYZE is safe in a transaction; the runner uses CONCURRENTLY for
+-- the index build above (outside any tx) but ANALYZE here is a
+-- standalone statement. The user running this script must own
+-- news_geo_interest (the existing migrations require the same).
+ANALYZE news_geo_interest;

@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — global nyhetskarta",
+  "search.placeholder": "Sök stad eller nyhet…",
+  "search.button": "Sök",
+  "search.clear": "Rensa",
+
+  "panel.title": "Live-status",
+  "panel.toggle": "Växla live-statuspanel",
+  "panel.loading": "laddar…",
+  "tab.hot": "Populärt",
+  "tab.new": "Nytt",
+  "tab.near": "Nära mig",
+  "tab.local": "Lokalt",
+  "tab.trending": "Trendande",
+
+  "time.24h": "24 tim",
+  "time.7d": "Senaste veckan",
+  "time.30d": "Senaste månaden",
+  "time.365d": "Senaste året",
+  "time.custom": "Allt",
+
+  "mode.markers": "Markörer",
+  "mode.heatmap": "Värmekarta",
+  "mode.clusters": "Kluster",
+  "mode.links": "Länkar",
+  "mode.wiki": "Wiki",
+
+  "explore.button": "Utforska",
+  "explore.title": "Upptäck nyhetskällor i detta område",
+
+  "location.placeholder": "Stad, adress, land…",
+  "location.use_my": "Använd webbläsarens plats",
+  "location.clear": "Rensa plats",
+
+  "pin.events": "händelser",
+  "pin.sources": "källor",
+  "pin.nearby": "Närliggande städer",
+  "pin.details": "Detaljer",
+  "pin.share": "Dela",
+  "pin.hide": "Dölj",
+  "pin.report": "Rapportera",
+
+  "filter.all": "Allt",
+  "filter.categories": "Kategorier",
+  "filter.sources": "Källor",
+
+  "status.online": "Online",
+  "status.offline": "Offline",
+  "status.updating": "Uppdaterar…",
+  "status.last_update": "Senaste uppdatering",
+
+  "help.title": "Hjälp",
+  "help.about": "Om XYZO",
+  "help.shortcuts": "Kortkommandon",
+
+  "lang.switcher": "Språk",
+
+  "category.politics": "Politik",
+  "category.business": "Näringsliv",
+  "category.crime": "Brott",
+  "category.weather": "Väder",
+  "category.science": "Vetenskap",
+  "category.technology": "Teknik",
+  "category.sports": "Sport",
+  "category.culture": "Kultur",
+  "category.environment": "Miljö",
+  "category.conflict": "Konflikt",
+  "category.health": "Hälsa",
+  "category.other": "Övrigt",
+
+  "event.earthquake": "Jordbävning",
+  "event.flood": "Översvämning",
+  "event.storm": "Storm",
+  "event.wildfire": "Skogsbrand",
+  "event.shooting": "Skottlossning",
+  "event.protest": "Protest",
+  "event.election": "Val",
+  "event.accident": "Olycka"
+}

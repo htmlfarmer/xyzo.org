@@ -1,0 +1,13 @@
+[Unit]
+Description=Xyzo queue soak monitor (Phase 5 gate)
+After=xyzo-api.service
+Wants=xyzo-api.service
+
+[Service]
+Type=oneshot
+ExecStart=/var/www/vhosts/xyzo.org/scripts/queue-soak-monitor.sh
+User=asher
+Group=asher
+WorkingDirectory=/var/www/vhosts/xyzo.org
+StandardOutput=journal
+StandardError=journal

@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+"""`collab` — thin wrapper that runs `python -m collabd.cli.main`.
+
+Installed by `install-collab.sh` into ~/collab/collab so it can be invoked
+from PATH after `export PATH="$HOME/collab:$PATH"` (or symlinked).
+"""
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+from collabd.cli import main
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — 글로벌 뉴스 맵",
+  "search.placeholder": "도시 또는 뉴스 검색…",
+  "search.button": "검색",
+  "search.clear": "지우기",
+
+  "panel.title": "실시간 상태",
+  "panel.toggle": "실시간 상태 패널 전환",
+  "panel.loading": "로딩 중…",
+  "tab.hot": "인기",
+  "tab.new": "최신",
+  "tab.near": "근처",
+  "tab.local": "로컬",
+  "tab.trending": "트렌딩",
+
+  "time.24h": "24시간",
+  "time.7d": "지난 주",
+  "time.30d": "지난 달",
+  "time.365d": "지난 해",
+  "time.custom": "전체",
+
+  "mode.markers": "마커",
+  "mode.heatmap": "히트맵",
+  "mode.clusters": "클러스터",
+  "mode.links": "링크",
+  "mode.wiki": "위키",
+
+  "explore.button": "탐색",
+  "explore.title": "이 지역의 뉴스 소스 찾기",
+
+  "location.placeholder": "도시, 주소, 국가…",
+  "location.use_my": "브라우저 위치 사용",
+  "location.clear": "위치 지우기",
+
+  "pin.events": "이벤트",
+  "pin.sources": "소스",
+  "pin.nearby": "근처 도시",
+  "pin.details": "상세",
+  "pin.share": "공유",
+  "pin.hide": "숨기기",
+  "pin.report": "신고",
+
+  "filter.all": "전체",
+  "filter.categories": "카테고리",
+  "filter.sources": "소스",
+
+  "status.online": "온라인",
+  "status.offline": "오프라인",
+  "status.updating": "업데이트 중…",
+  "status.last_update": "마지막 업데이트",
+
+  "help.title": "도움말",
+  "help.about": "XYZO 소개",
+  "help.shortcuts": "키보드 단축키",
+
+  "lang.switcher": "언어",
+
+  "category.politics": "정치",
+  "category.business": "비즈니스",
+  "category.crime": "범죄",
+  "category.weather": "날씨",
+  "category.science": "과학",
+  "category.technology": "기술",
+  "category.sports": "스포츠",
+  "category.culture": "문화",
+  "category.environment": "환경",
+  "category.conflict": "분쟁",
+  "category.health": "건강",
+  "category.other": "기타",
+
+  "event.earthquake": "지진",
+  "event.flood": "홍수",
+  "event.storm": "폭풍",
+  "event.wildfire": "산불",
+  "event.shooting": "총격",
+  "event.protest": "시위",
+  "event.election": "선거",
+  "event.accident": "사고"
+}

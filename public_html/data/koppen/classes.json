@@ -1,0 +1,260 @@
+{
+ "grid": {
+  "width": 7200,
+  "height": 3600,
+  "degrees": 0.05,
+  "bbox": [
+   -180,
+   -90,
+   180,
+   90
+  ],
+  "file": "grid.png"
+ },
+ "classes": [
+  {
+   "code": "Af",
+   "group": "Tropical",
+   "description": "Tropical - Rainforest",
+   "criteria": "precipitation of the driest month = 60",
+   "color": "#0000FF",
+   "index": 1
+  },
+  {
+   "code": "Am",
+   "group": "Tropical",
+   "description": "Tropical - Monsoon",
+   "criteria": "Not (Af) & precipitation of the driest month = 100-mean annual precipitation/25",
+   "color": "#0077FF",
+   "index": 2
+  },
+  {
+   "code": "Aw",
+   "group": "Tropical",
+   "description": "Tropical - Savannah",
+   "criteria": "Not (Af) & precipitation of the driest month",
+   "color": "#46A9FA",
+   "index": 3
+  },
+  {
+   "code": "BSh",
+   "group": "Arid",
+   "description": "Arid - Steppe - Hot Summer",
+   "criteria": "mean annual temperature >= 18",
+   "color": "#F5A300",
+   "index": 4
+  },
+  {
+   "code": "BSk",
+   "group": "Arid",
+   "description": "Arid - Steppe - Cold Summer",
+   "criteria": "mean annual temperature",
+   "color": "#FFDB63",
+   "index": 5
+  },
+  {
+   "code": "BWh",
+   "group": "Arid",
+   "description": "Arid - Desert - Hot",
+   "criteria": "mean annual precipitation",
+   "color": "#FF0000",
+   "index": 6
+  },
+  {
+   "code": "BWk",
+   "group": "Arid",
+   "description": "Arid - Desert - Cold",
+   "criteria": "mean annual precipitation",
+   "color": "#FF9696",
+   "index": 7
+  },
+  {
+   "code": "Cfa",
+   "group": "Temperate",
+   "description": "Temperate - Without dry season- Hot Summer",
+   "criteria": "temperature of the hottest month >= 22",
+   "color": "#C7FF4F",
+   "index": 8
+  },
+  {
+   "code": "Cfb",
+   "group": "Temperate",
+   "description": "Temperate - Without dry season- Warm Summer",
+   "criteria": "Not (a) & number of months where the temperature is above 10 = 4",
+   "color": "#66FF33",
+   "index": 9
+  },
+  {
+   "code": "Cfc",
+   "group": "Temperate",
+   "description": "Temperate - Without dry season- Cold Summer",
+   "criteria": "Not (a or b) & 1 = number of months where the temperature is above 10",
+   "color": "#32C700",
+   "index": 10
+  },
+  {
+   "code": "Csa",
+   "group": "Temperate",
+   "description": "Temperate - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#FFFF00",
+   "index": 11
+  },
+  {
+   "code": "Csb",
+   "group": "Temperate",
+   "description": "Temperate - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#C7C700",
+   "index": 12
+  },
+  {
+   "code": "Csc",
+   "group": "Temperate",
+   "description": "Temperate - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#969600",
+   "index": 13
+  },
+  {
+   "code": "Cwa",
+   "group": "Temperate",
+   "description": "Temperate - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#96FF96",
+   "index": 14
+  },
+  {
+   "code": "Cwb",
+   "group": "Temperate",
+   "description": "Temperate - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#63C763",
+   "index": 15
+  },
+  {
+   "code": "Cwc",
+   "group": "Temperate",
+   "description": "Temperate - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#329632",
+   "index": 16
+  },
+  {
+   "code": "Dfa",
+   "group": "Cold",
+   "description": "Cold - Without dry season - Hot Summer",
+   "criteria": "temperature of the hottest month = 22",
+   "color": "#00FFFF",
+   "index": 17
+  },
+  {
+   "code": "Dfb",
+   "group": "Cold",
+   "description": "Cold - Without dry season - Warm Summer",
+   "criteria": "Not (a) & number of months where the temperature is above 10 = 4",
+   "color": "#38C7FF",
+   "index": 18
+  },
+  {
+   "code": "Dfc",
+   "group": "Cold",
+   "description": "Cold - Without dry season - Cold Summer",
+   "criteria": "Not (a, b or d)",
+   "color": "#007D7D",
+   "index": 19
+  },
+  {
+   "code": "Dfd",
+   "group": "Cold",
+   "description": "Cold - Without dry season - Very Cold Winter",
+   "criteria": "Not (a or b) & temperature of the coldest month",
+   "color": "#00455E",
+   "index": 20
+  },
+  {
+   "code": "Dsa",
+   "group": "Cold",
+   "description": "Cold - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#FF00FF",
+   "index": 21
+  },
+  {
+   "code": "Dsb",
+   "group": "Cold",
+   "description": "Cold - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#C700C7",
+   "index": 22
+  },
+  {
+   "code": "Dsc",
+   "group": "Cold",
+   "description": "Cold - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#963296",
+   "index": 23
+  },
+  {
+   "code": "Dsd",
+   "group": "Cold",
+   "description": "Cold - Dry Summer",
+   "criteria": "precipitation of the driest month in summer",
+   "color": "#966596",
+   "index": 24
+  },
+  {
+   "code": "Dwa",
+   "group": "Cold",
+   "description": "Cold - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#ABB0FF",
+   "index": 25
+  },
+  {
+   "code": "Dwb",
+   "group": "Cold",
+   "description": "Cold - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#5A78DB",
+   "index": 26
+  },
+  {
+   "code": "Dwc",
+   "group": "Cold",
+   "description": "Cold - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#4C51B5",
+   "index": 27
+  },
+  {
+   "code": "Dwd",
+   "group": "Cold",
+   "description": "Cold - Dry Winter",
+   "criteria": "precipitation of the driest month in winter",
+   "color": "#320087",
+   "index": 28
+  },
+  {
+   "code": "EF",
+   "group": "Polar",
+   "description": "Polar - Frost",
+   "criteria": "temperature of the hottest month = 0",
+   "color": "#686868",
+   "index": 29
+  },
+  {
+   "code": "ET",
+   "group": "Polar",
+   "description": "Polar - Tundra",
+   "criteria": "temperature of the hottest month > 0",
+   "color": "#B2B2B2",
+   "index": 30
+  }
+ ],
+ "source": "Beck, H.E., Zimmermann, N.E., McVicar, T.R., Vergopolan, N., Berg, A., Wood, E.F. (2018), Present and future Koppen-Geiger climate classification maps at 1-km resolution, Scientific Data 5, 180214",
+ "note": "Present-day classification (1980-2016), 1 km; derived from Peel et al. (2007) by Beck et al.",
+ "license": "CC BY 4.0",
+ "license_url": "https://doi.org/10.6084/m9.figshare.6396959"
+}

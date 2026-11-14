@@ -1,0 +1,27 @@
+# XYZO — Robots.txt
+# https://xyzo.org
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /help/me-chat.js
+Disallow: /debug-panel.js
+
+# AI crawlers — welcome!
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemaps
+Sitemap: https://xyzo.org/sitemap.xml

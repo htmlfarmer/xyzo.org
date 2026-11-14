@@ -1,0 +1,613 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "name": "Al Jazeera English",
+      "platform": "youtube",
+      "channel_id": "UCNye-wNBqNL5ZzHSJj3l8Bg",
+      "channel_url": "https://www.youtube.com/@AlJazeeraEnglish",
+      "country": "QA",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "conflict"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCNye-wNBqNL5ZzHSJj3l8Bg",
+      "enabled": true
+    },
+    {
+      "name": "BBC News",
+      "platform": "youtube",
+      "channel_id": "UC16niRr50-MSBwiO3YDb3RA",
+      "channel_url": "https://www.youtube.com/@BBCNews",
+      "country": "GB",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "business"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC16niRr50-MSBwiO3YDb3RA",
+      "enabled": true
+    },
+    {
+      "name": "Reuters",
+      "platform": "youtube",
+      "channel_id": "UChqUTb7kYRX8-EiaN3XFrSQ",
+      "channel_url": "https://www.youtube.com/@Reuters",
+      "country": "GB",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "business",
+        "politics"
+      ],
+      "source_type": "agency",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UChqUTb7kYRX8-EiaN3XFrSQ",
+      "enabled": true
+    },
+    {
+      "name": "Associated Press",
+      "platform": "youtube",
+      "channel_id": "UC52X5wxOL_s5yw0dQk7NtgA",
+      "channel_url": "https://www.youtube.com/@AssociatedPress",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "breaking"
+      ],
+      "source_type": "agency",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC52X5wxOL_s5yw0dQk7NtgA",
+      "enabled": true
+    },
+    {
+      "name": "DW News",
+      "platform": "youtube",
+      "channel_id": "UCknLrEdhRCp1aegoMqRaCZg",
+      "channel_url": "https://www.youtube.com/@dwnews",
+      "country": "DE",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "science"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCknLrEdhRCp1aegoMqRaCZg",
+      "enabled": true
+    },
+    {
+      "name": "NBC News",
+      "platform": "youtube",
+      "channel_id": "UCeY0bbntWzzVIaj2z3QigXg",
+      "channel_url": "https://www.youtube.com/@NBCNews",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCeY0bbntWzzVIaj2z3QigXg",
+      "enabled": true
+    },
+    {
+      "name": "ABC News",
+      "platform": "youtube",
+      "channel_id": "UCBi2mrWuNuyYy4gbM6fU18Q",
+      "channel_url": "https://www.youtube.com/@ABCNews",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCBi2mrWuNuyYy4gbM6fU18Q",
+      "enabled": true
+    },
+    {
+      "name": "CBS News",
+      "platform": "youtube",
+      "channel_id": "UC8p1vwvWtl6T73JiExfWs1g",
+      "channel_url": "https://www.youtube.com/@CBSNews",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC8p1vwvWtl6T73JiExfWs1g",
+      "enabled": true
+    },
+    {
+      "name": "Sky News",
+      "platform": "youtube",
+      "channel_id": "UCoMdktPbSTixAyNGwb-UYkQ",
+      "channel_url": "https://www.youtube.com/@SkyNews",
+      "country": "GB",
+      "region": "europe",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "breaking"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCoMdktPbSTixAyNGwb-UYkQ",
+      "enabled": true
+    },
+    {
+      "name": "PBS NewsHour",
+      "platform": "youtube",
+      "channel_id": "UC6ZFN9Tx6xh-skXCuRHCDpQ",
+      "channel_url": "https://www.youtube.com/@PBSNewsHour",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "analysis"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6ZFN9Tx6xh-skXCuRHCDpQ",
+      "enabled": true
+    },
+    {
+      "name": "Bloomberg Television",
+      "platform": "youtube",
+      "channel_id": "UCdK2BueKxC9VxXh7e1Ne4oQ",
+      "channel_url": "https://www.youtube.com/@BloombergTelevision",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "business",
+        "finance",
+        "technology"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCdK2BueKxC9VxXh7e1Ne4oQ",
+      "enabled": true
+    },
+    {
+      "name": "CNBC",
+      "platform": "youtube",
+      "channel_id": "UCvJJ_dzjViJCoLf5uKUTwoA",
+      "channel_url": "https://www.youtube.com/@CNBC",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "business",
+        "finance"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCvJJ_dzjViJCoLf5uKUTwoA",
+      "enabled": true
+    },
+    {
+      "name": "Vox",
+      "platform": "youtube",
+      "channel_id": "UCLXo7UDZvByw2ixzpQCufnA",
+      "channel_url": "https://www.youtube.com/@Vox",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "explainer",
+        "politics",
+        "science"
+      ],
+      "source_type": "creator",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLXo7UDZvByw2ixzpQCufnA",
+      "enabled": true
+    },
+    {
+      "name": "The Guardian",
+      "platform": "youtube",
+      "channel_id": "UCHpw8xwDNhU9gdohEcJu4aA",
+      "channel_url": "https://www.youtube.com/@TheGuardian",
+      "country": "GB",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "investigation"
+      ],
+      "source_type": "newspaper",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCHpw8xwDNhU9gdohEcJu4aA",
+      "enabled": true
+    },
+    {
+      "name": "The Economist",
+      "platform": "youtube",
+      "channel_id": "UC0p5jTq6Xx_DosDFxVXnWaQ",
+      "channel_url": "https://www.youtube.com/@TheEconomist",
+      "country": "GB",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "analysis",
+        "politics"
+      ],
+      "source_type": "newspaper",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC0p5jTq6Xx_DosDFxVXnWaQ",
+      "enabled": true
+    },
+    {
+      "name": "The New York Times",
+      "platform": "youtube",
+      "channel_id": "UCqnbDFdCpuN8CMEg0VuEBqA",
+      "channel_url": "https://www.youtube.com/@nytimes",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "investigation"
+      ],
+      "source_type": "newspaper",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCqnbDFdCpuN8CMEg0VuEBqA",
+      "enabled": true
+    },
+    {
+      "name": "The Washington Post",
+      "platform": "youtube",
+      "channel_id": "UCHd62-u_v4DvJ8TCFtpi4GA",
+      "channel_url": "https://www.youtube.com/@washingtonpost",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "investigation"
+      ],
+      "source_type": "newspaper",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCHd62-u_v4DvJ8TCFtpi4GA",
+      "enabled": true
+    },
+    {
+      "name": "NPR",
+      "platform": "youtube",
+      "channel_id": "UCJnS2EsPfv46u1JR8cnD0NA",
+      "channel_url": "https://www.youtube.com/@NPR",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "culture",
+        "science"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCJnS2EsPfv46u1JR8cnD0NA",
+      "enabled": true
+    },
+    {
+      "name": "C-SPAN",
+      "platform": "youtube",
+      "channel_id": "UCb--64Gl51jIEVE-GLDAVTg",
+      "channel_url": "https://www.youtube.com/@cspan",
+      "country": "US",
+      "region": "north_america",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "government",
+        "politics"
+      ],
+      "source_type": "government",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCb--64Gl51jIEVE-GLDAVTg",
+      "enabled": true
+    },
+    {
+      "name": "NDTV",
+      "platform": "youtube",
+      "channel_id": "UCZFMm1mMw0F81Z37aaEzTUA",
+      "channel_url": "https://www.youtube.com/@ndtv",
+      "country": "IN",
+      "region": "asia",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZFMm1mMw0F81Z37aaEzTUA",
+      "enabled": true
+    },
+    {
+      "name": "WION",
+      "platform": "youtube",
+      "channel_id": "UC_gUM8rL-Lrg6O3adPW9K1g",
+      "channel_url": "https://www.youtube.com/@WION",
+      "country": "IN",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "international"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_gUM8rL-Lrg6O3adPW9K1g",
+      "enabled": true
+    },
+    {
+      "name": "Geo News English",
+      "platform": "youtube",
+      "channel_id": "UCOusOZ-IOhMYQ1yXxOFao8w",
+      "channel_url": "https://www.youtube.com/@GeoNewsEnglish",
+      "country": "PK",
+      "region": "asia",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCOusOZ-IOhMYQ1yXxOFao8w",
+      "enabled": true
+    },
+    {
+      "name": "Dawn News English",
+      "platform": "youtube",
+      "channel_id": "UC_xWTNsx7zA2uI0ydQikViA",
+      "channel_url": "https://www.youtube.com/@DawnNewsEnglish",
+      "country": "PK",
+      "region": "asia",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "newspaper",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_xWTNsx7zA2uI0ydQikViA",
+      "enabled": true
+    },
+    {
+      "name": "Jamuna TV",
+      "platform": "youtube",
+      "channel_id": "UC6cCPydAGBal2qMV3H_gHtw",
+      "channel_url": "https://www.youtube.com/@JamunaTVLimited",
+      "country": "BD",
+      "region": "asia",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6cCPydAGBal2qMV3H_gHtw",
+      "enabled": true
+    },
+    {
+      "name": "Citizen TV Kenya",
+      "platform": "youtube",
+      "channel_id": "UClLuu9p9zMmE4TDg8s2E2cQ",
+      "channel_url": "https://www.youtube.com/@CitizenTVKenya",
+      "country": "KE",
+      "region": "africa",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UClLuu9p9zMmE4TDg8s2E2cQ",
+      "enabled": true
+    },
+    {
+      "name": "Africanews",
+      "platform": "youtube",
+      "channel_id": "UC1_E8NeF5QHY2dtdLRBCCLA",
+      "channel_url": "https://www.youtube.com/@africanews",
+      "country": "FR",
+      "region": "africa",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "broadcaster",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC1_E8NeF5QHY2dtdLRBCCLA",
+      "enabled": true
+    },
+    {
+      "name": "VOA News",
+      "platform": "youtube",
+      "channel_id": "UCVSNOxehfALut52NbkfRBaA",
+      "channel_url": "https://www.youtube.com/@VOANews",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics"
+      ],
+      "source_type": "government",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCVSNOxehfALut52NbkfRBaA",
+      "enabled": true
+    },
+    {
+      "name": "UN News",
+      "platform": "youtube",
+      "channel_id": "UCbuA65064_5-v7HXXGk-Bvw",
+      "channel_url": "https://www.youtube.com/@UNNews",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "politics",
+        "humanitarian"
+      ],
+      "source_type": "government",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCbuA65064_5-v7HXXGk-Bvw",
+      "enabled": true
+    },
+    {
+      "name": "NASA",
+      "platform": "youtube",
+      "channel_id": "UCLA_DiR1FfKNvjuUpBHmylQ",
+      "channel_url": "https://www.youtube.com/@NASA",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "science",
+        "space"
+      ],
+      "source_type": "government",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLA_DiR1FfKNvjuUpBHmylQ",
+      "enabled": true
+    },
+    {
+      "name": "Kurzgesagt",
+      "platform": "youtube",
+      "channel_id": "UCsXVk37bltHxD1rDPwtNM8Q",
+      "channel_url": "https://www.youtube.com/@kurzgesagt",
+      "country": "DE",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "science",
+        "explainer"
+      ],
+      "source_type": "creator",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q",
+      "enabled": true
+    },
+    {
+      "name": "Veritasium",
+      "platform": "youtube",
+      "channel_id": "UCHnyfMqiRRG1u-2MsSQLbXA",
+      "channel_url": "https://www.youtube.com/@veritasium",
+      "country": "AU",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "science",
+        "technology"
+      ],
+      "source_type": "creator",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA",
+      "enabled": true
+    },
+    {
+      "name": "Johnny Harris",
+      "platform": "youtube",
+      "channel_id": "UCmGSJVG3mCRXVOP4yZrU1Dw",
+      "channel_url": "https://www.youtube.com/@johnnyharris",
+      "country": "US",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "explainer",
+        "geography"
+      ],
+      "source_type": "creator",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCmGSJVG3mCRXVOP4yZrU1Dw",
+      "enabled": true
+    },
+    {
+      "name": "TLDR News",
+      "platform": "youtube",
+      "channel_id": "UCSMqateX8OA2s1wsOR2EgJA",
+      "channel_url": "https://www.youtube.com/@TLDRNews",
+      "country": "GB",
+      "region": "global",
+      "languages": [
+        "en"
+      ],
+      "categories": [
+        "news",
+        "explainer"
+      ],
+      "source_type": "creator",
+      "feed_url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCSMqateX8OA2s1wsOR2EgJA",
+      "enabled": true
+    }
+  ]
+}

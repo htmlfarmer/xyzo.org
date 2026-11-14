@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — نقشه جهانی اخبار",
+  "search.placeholder": "جستجوی شهر یا خبر…",
+  "search.button": "جستجو",
+  "search.clear": "پاک کردن",
+
+  "panel.title": "وضعیت زنده",
+  "panel.toggle": "تغییر پنل وضعیت زنده",
+  "panel.loading": "در حال بارگذاری…",
+  "tab.hot": "داغ",
+  "tab.new": "جدید",
+  "tab.near": "نزدیک من",
+  "tab.local": "محلی",
+  "tab.trending": "پرطرفدار",
+
+  "time.24h": "۲۴ ساعت",
+  "time.7d": "هفته گذشته",
+  "time.30d": "ماه گذشته",
+  "time.365d": "سال گذشته",
+  "time.custom": "همه",
+
+  "mode.markers": "نشانگرها",
+  "mode.heatmap": "نقشه حرارتی",
+  "mode.clusters": "خوشه‌ها",
+  "mode.links": "پیوندها",
+  "mode.wiki": "ویکی",
+
+  "explore.button": "کاوش",
+  "explore.title": "منابع خبری این منطقه را کشف کنید",
+
+  "location.placeholder": "شهر، آدرس، کشور…",
+  "location.use_my": "استفاده از موقعیت مرورگر",
+  "location.clear": "پاک کردن موقعیت",
+
+  "pin.events": "رویدادها",
+  "pin.sources": "منابع",
+  "pin.nearby": "شهرهای نزدیک",
+  "pin.details": "جزئیات",
+  "pin.share": "اشتراک‌گذاری",
+  "pin.hide": "پنهان کردن",
+  "pin.report": "گزارش",
+
+  "filter.all": "همه",
+  "filter.categories": "دسته‌بندی‌ها",
+  "filter.sources": "منابع",
+
+  "status.online": "آنلاین",
+  "status.offline": "آفلاین",
+  "status.updating": "در حال به‌روزرسانی…",
+  "status.last_update": "آخرین به‌روزرسانی",
+
+  "help.title": "راهنما",
+  "help.about": "درباره XYZO",
+  "help.shortcuts": "میانبرهای صفحه‌کلید",
+
+  "lang.switcher": "زبان",
+
+  "category.politics": "سیاست",
+  "category.business": "کسب‌وکار",
+  "category.crime": "جرم",
+  "category.weather": "آب‌وهوا",
+  "category.science": "علم",
+  "category.technology": "فناوری",
+  "category.sports": "ورزش",
+  "category.culture": "فرهنگ",
+  "category.environment": "محیط زیست",
+  "category.conflict": "درگیری",
+  "category.health": "سلامت",
+  "category.other": "سایر",
+
+  "event.earthquake": "زلزله",
+  "event.flood": "سیل",
+  "event.storm": "طوفان",
+  "event.wildfire": "آتش‌سوزی جنگل",
+  "event.shooting": "تیراندازی",
+  "event.protest": "اعتراض",
+  "event.election": "انتخابات",
+  "event.accident": "تصادف"
+}

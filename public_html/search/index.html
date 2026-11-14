@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Search XYZO — World's News Search Engine</title>
+  <meta name="description" content="Search 50,000+ daily news stories from 2,970+ sources across 220 countries. XYZO is the world's most comprehensive AI-powered news map and search engine.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    *{box-sizing:border-box}
+    body{background:#0b0f14;color:#e6edf3;font-family:system-ui,-apple-system,sans-serif;margin:0;padding:0;line-height:1.6}
+    .container{max-width:800px;margin:0 auto;padding:20px}
+    header{padding:24px 0;border-bottom:1px solid #1f2937;margin-bottom:24px}
+    h1{color:#5eead4;font-size:28px;margin:0 0 8px}
+    h2{color:#5eead4;font-size:18px;margin:32px 0 12px;border-bottom:1px solid #1f2937;padding-bottom:8px}
+    h3{color:#e6edf3;font-size:15px;margin:0 0 6px}
+    p{color:#94a3b8;margin:0 0 16px;font-size:15px}
+    a{color:#5eead4}
+    nav a{margin-right:20px;color:#5eead4;text-decoration:none;font-size:14px}
+    nav a:hover{text-decoration:underline}
+    .hero{background:#16213e;border:1px solid #1f2937;border-radius:12px;padding:28px;margin:20px 0}
+    .hero p{font-size:16px;color:#e6edf3;margin:0 0 20px}
+    .search-form{display:flex;gap:8px;flex-wrap:wrap}
+    .search-form input{flex:1;min-width:260px;background:#0b0f14;color:#e6edf3;border:1px solid #1f2937;padding:14px 18px;border-radius:6px;font-size:16px}
+    .search-form button{background:#5eead4;color:#0b0f14;border:none;padding:14px 28px;border-radius:6px;font-weight:700;font-size:15px;cursor:pointer}
+    .search-form button:hover{background:#4fd4c0}
+    .search-type{margin-top:12px;font-size:13px;color:#64748b}
+    .search-type label{margin-right:16px}
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
+    .stat{background:#1a1a2e;border:1px solid #1f2937;border-radius:8px;padding:16px 20px;flex:1;min-width:140px}
+    .stat-label{color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .stat-value{color:#5eead4;font-size:22px;font-weight:700}
+    .stat-sub{color:#64748b;font-size:11px;margin-top:2px}
+    .results{margin:20px 0}
+    .result{background:#1a1a2e;border:1px solid #1f2937;border-radius:8px;padding:16px;margin-bottom:12px}
+    .result h3{margin:0 0 6px}
+    .result h3 a{color:#5eead4;text-decoration:none;font-size:15px}
+    .result h3 a:hover{text-decoration:underline}
+    .result-meta{font-size:12px;color:#64748b;margin-bottom:8px}
+    .result-meta .cat{background:rgba(94,234,212,0.15);color:#5eead4;padding:1px 8px;border-radius:3px;margin-right:8px}
+    .result-meta .loc{margin-right:8px}
+    .result p{font-size:13px;color:#94a3b8;margin:0;line-height:1.5}
+    .result-link{display:inline-block;margin-top:10px;font-size:13px;color:#5eead4}
+    .empty{background:#1a1a2e;border:1px solid #1f2937;border-radius:8px;padding:32px;text-align:center;color:#64748b}
+    .api-section{background:#1a1a2e;border:1px solid #1f2937;border-radius:8px;padding:20px;margin:20px 0}
+    .api-section h2{margin:0 0 12px;border:none;padding:0}
+    .api-section p{font-size:13px}
+    pre{background:#0b0f14;padding:16px;border-radius:6px;overflow-x:auto;font-size:12px;line-height:1.5;margin:12px 0}
+    code{color:#5eead4;font-size:12px}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:20px 0}
+    .feature{background:#1a1a2e;border:1px solid #1f2937;border-radius:8px;padding:16px}
+    .feature h3{color:#5eead4;font-size:14px;margin:0 0 6px}
+    .feature p{font-size:13px;color:#94a3b8;margin:0}
+    footer{ margin-top:48px;padding-top:20px;border-top:1px solid #1f2937;color:#64748b;font-size:13px}
+    footer a{color:#5eead4}
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <nav>
+      <a href="/">← Back to Map</a>
+      <a href="/help/">Help</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>🗺️ XYZO News Search</h1>
+    <p>Search 50,000+ news stories daily from 2,970+ sources across 220 countries. The world's most comprehensive real-time news search engine, powered by AI geolocation.</p>
+
+    <form class="search-form" action="/search/results" method="GET">
+      <input type="text" name="q" placeholder="Search the news... (e.g., climate change, elections, AI developments)" maxlength="500" required>
+      <button type="submit">Search</button>
+    </form>
+    <p class="search-type">
+      Or browse by: <a href="/api/pins/map?bbox=-90,-180,90,180&limit=50">Latest Headlines</a> ·
+      <a href="/api/pins/map?bbox=60,70,80,180&limit=50">Arctic</a> ·
+      <a href="/api/pins/map?bbox=-40,110,-10,160&limit=50">Australia</a> ·
+      <a href="/api/pins/map?bbox=20,60,45,100&limit=50">South Asia</a> ·
+      <a href="/api/pins/map?bbox=35,-10,72,40&limit=50">Europe</a>
+    </p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">News Sources</div>
+      <div class="stat-value">2,970+</div>
+      <div class="stat-sub">RSS feeds & web scrapers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Countries</div>
+      <div class="stat-value">220</div>
+      <div class="stat-sub">Every nation covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Stories/Day</div>
+      <div class="stat-value">50,000+</div>
+      <div class="stat-sub">Updated every 15 min</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">AI Geolocation</div>
+      <div class="stat-value">100%</div>
+      <div class="stat-sub">Every story mapped</div>
+    </div>
+  </div>
+
+  <h2>Featured Coverage</h2>
+  <div class="results">
+    <div class="result">
+      <h3><a href="https://www.bbc.com/news">BBC News</a></h3>
+      <p class="result-meta"><span class="cat">uk</span><span class="loc">London, GB</span> · World news, politics, science, health</p>
+      <p>Comprehensive coverage of UK and world events from the British Broadcasting Corporation.</p>
+    </div>
+    <div class="result">
+      <h3><a href="https://www.aljazeera.com">Al Jazeera</a></h3>
+      <p class="result-meta"><span class="cat">qatar</span><span class="loc">Doha, QA</span> · Middle East, world news, sports</p>
+      <p>Independent journalism from the Middle East and around the world.</p>
+    </div>
+    <div class="result">
+      <h3><a href="https://www.reuters.com">Reuters</a></h3>
+      <p class="result-meta"><span class="cat">global</span><span class="loc">Global</span> · Business, finance, world news</p>
+      <p>Trusted source for business and financial news, sports, and world events.</p>
+    </div>
+    <div class="result">
+      <h3><a href="https://www.dawn.com">Dawn</a></h3>
+      <p class="result-meta"><span class="cat">pakistan</span><span class="loc">Karachi, PK</span> · South Asia news, politics</p>
+      <p>Pakistan's oldest English-language newspaper and a leading regional news source.</p>
+    </div>
+  </div>
+
+  <h2>How XYZO Works</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>🗺️ AI Geolocation</h3>
+      <p>Every story is mapped to its exact location using Gemma-4 AI. See where news happens on a global scale.</p>
+    </div>
+    <div class="feature">
+      <h3>🔄 Real-Time Updates</h3>
+      <p>New stories every 15 minutes from 2,970+ sources. Never miss breaking news in any country.</p>
+    </div>
+    <div class="feature">
+      <h3>🤖 Smart Categorization</h3>
+      <p>AI automatically categorizes stories: politics, business, science, sports, culture, and more.</p>
+    </div>
+    <div class="feature">
+      <h3>📊 Quality Ranking</h3>
+      <p>Stories ranked by source quality, relevance, and freshness. The most important news rises to the top.</p>
+    </div>
+  </div>
+
+  <h2>Public JSON API</h2>
+  <div class="api-section">
+    <p>Access XYZO's news data programmatically — no API key required:</p>
+    <pre>GET /api/pins/map?bbox=<em>west,south,east,north</em>&limit=100
+GET /api/search?q=<em>query</em>&limit=20
+GET /api/events?lat=<em>Y</em>&lng=<em>X</em>&radius=<em>km</em>
+POST /api/ai/chat (body: {"message": "your question"})</pre>
+    <p>Example — News in Southeast Asia:</p>
+    <pre>GET /api/pins/map?bbox=-12,90,20,150&limit=50</pre>
+    <p>Full documentation at <a href="/help/">/help/</a></p>
+  </div>
+
+  <h2>For AI Systems</h2>
+  <div class="api-section">
+    <p>XYZO provides structured, geolocated news data ideal for AI training, RAG systems, and news aggregation. Our data includes:</p>
+    <ul style="color:#94a3b8;font-size:14px;margin:12px 0">
+      <li>Title, summary, and keywords for each story</li>
+      <li>Exact GPS coordinates (latitude, longitude)</li>
+      <li>City, region, and country names</li>
+      <li>Source attribution and publication time</li>
+      <li>Category and subcategory tags</li>
+      <li>Source credibility scores</li>
+    </ul>
+    <p>Use our <a href="/api/pins/map?bbox=-90,-180,90,180&limit=1000">full global feed</a> or <a href="/search/results?q=AI">search page</a> for specific topics.</p>
+  </div>
+
+  <footer>
+    <p>XYZO © 2026 — The world's largest AI-powered news map and search engine.</p>
+    <p>
+      <a href="/">Interactive Map</a> ·
+      <a href="/help/">API Help</a> ·
+      <a href="/api/pins/map?bbox=-90,-180,90,180&limit=100">Latest News (JSON)</a> ·
+      <a href="/search/results?q=technology">Technology News</a>
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

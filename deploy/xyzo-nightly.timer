@@ -1,0 +1,10 @@
+[Unit]
+Description=Xyzo Nightly Automation Timer (3 AM daily)
+Requires=xyzo-nightly.service
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

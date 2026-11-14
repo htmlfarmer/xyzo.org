@@ -1,0 +1,22 @@
+{
+  "primary_base_url": "http://localhost:3011",
+  "fallback_base_url": "http://192.168.1.3:8888",
+  "base_url": "http://192.168.1.3:8888",
+  "model": "gemma-3-27b",
+  "rate_limit_per_minute": 60,
+  "extra_headers": {
+    "X-MCP-Safe": "true"
+  },
+  "breaker": {
+    "failure_threshold": 5,
+    "reset_timeout_ms": 30000,
+    "half_open_max": 1
+  },
+  "fallback_strategy": "non_ai_classifier",
+  "fallback": {
+    "enabled": true,
+    "on_status": [502, 503, 504, "connection_error", "timeout"],
+    "warn_on_fallback": true,
+    "cooldown_seconds": 30
+  }
+}

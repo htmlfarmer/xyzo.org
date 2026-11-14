@@ -1,0 +1,16 @@
+{
+  "name": "XYZO — The Living Map of Earth",
+  "short_name": "XYZO",
+  "description": "The world's most comprehensive AI-powered news map. 2,970+ sources, 220 countries, 50,000+ stories daily.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0e1a",
+  "theme_color": "#5eead4",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

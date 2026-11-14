@@ -1,0 +1,13 @@
+[Unit]
+Description=Newsium queue soak monitor (Phase 5 gate)
+After=newsium-api.service
+Wants=newsium-api.service
+
+[Service]
+Type=oneshot
+ExecStart=/var/www/vhosts/newsium.org/scripts/queue-soak-monitor.sh
+User=asher
+Group=asher
+WorkingDirectory=/var/www/vhosts/newsium.org
+StandardOutput=journal
+StandardError=journal

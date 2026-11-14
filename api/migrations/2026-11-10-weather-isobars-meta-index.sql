@@ -1,0 +1,32 @@
+-- Covering index for the isobar METADATA queries.
+--
+-- GET /api/weather/isobars and GET /api/weather/isobars/meta both need
+-- per-source metadata on EVERY request:
+--
+--   SELECT source, MAX(run_time), COUNT(*), COUNT(DISTINCT level_hpa) ...
+--   SELECT ... FROM weather_isobars WHERE source = $1
+--
+-- Neither the existing (source, level_hpa) nor (run_time DESC) index can
+-- answer them without visiting the HEAP, and the heap is where the
+-- geometry lives: 389 MB for 41,266 rows (~9.4 KB a row).
+--
+-- MEASURED on 2026-11-10, before this index:
+--
+--   source query   Seq Scan          36,938 buffers read (288 MB)  1,577 ms
+--   meta query     Bitmap Heap Scan  23,871 buffers read (186 MB)    606 ms
+--
+-- i.e. ~474 MB of I/O for metadata on every isobar request, which is why
+-- the endpoint swings between 1 s and 30 s depending on what else the
+-- box is doing (the same SQL run standalone was 580 ms end to end while
+-- the live route took 30,250 ms).
+--
+-- With (source, run_time, level_hpa) every column those queries read is
+-- IN the index, so they become index-only scans and never touch the
+-- heap. The third column is there for COUNT(DISTINCT level_hpa) and the
+-- /meta endpoint's MIN/MAX(level_hpa).
+--
+-- Applied 2026-11-10. Run:
+--   psql "$XYZO_DB_DSN" -f api/migrations/2026-11-10-weather-isobars-meta-index.sql
+
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_weather_isobars_src_meta
+    ON weather_isobars (source, run_time, level_hpa);

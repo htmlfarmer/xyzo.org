@@ -1,0 +1,79 @@
+{
+  "app.title": "XYZO — wereldwijde nieuwskaart",
+  "search.placeholder": "Zoek stad of nieuws…",
+  "search.button": "Zoeken",
+  "search.clear": "Wissen",
+
+  "panel.title": "Livestatus",
+  "panel.toggle": "Livestatuspaneel in-/uitschakelen",
+  "panel.loading": "laden…",
+  "tab.hot": "Populair",
+  "tab.new": "Nieuw",
+  "tab.near": "Dichtbij",
+  "tab.local": "Lokaal",
+  "tab.trending": "Trending",
+
+  "time.24h": "24u",
+  "time.7d": "Afgelopen week",
+  "time.30d": "Afgelopen maand",
+  "time.365d": "Afgelopen jaar",
+  "time.custom": "Alles",
+
+  "mode.markers": "Markeringen",
+  "mode.heatmap": "Heatmap",
+  "mode.clusters": "Clusters",
+  "mode.links": "Koppelingen",
+  "mode.wiki": "Wiki",
+
+  "explore.button": "Verkennen",
+  "explore.title": "Ontdek nieuwsbronnen in dit gebied",
+
+  "location.placeholder": "Stad, adres, land…",
+  "location.use_my": "Browserlocatie gebruiken",
+  "location.clear": "Locatie wissen",
+
+  "pin.events": "gebeurtenissen",
+  "pin.sources": "bronnen",
+  "pin.nearby": "Steden in de buurt",
+  "pin.details": "Details",
+  "pin.share": "Delen",
+  "pin.hide": "Verbergen",
+  "pin.report": "Melden",
+
+  "filter.all": "Alles",
+  "filter.categories": "Categorieën",
+  "filter.sources": "Bronnen",
+
+  "status.online": "Online",
+  "status.offline": "Offline",
+  "status.updating": "Bijwerken…",
+  "status.last_update": "Laatste update",
+
+  "help.title": "Help",
+  "help.about": "Over XYZO",
+  "help.shortcuts": "Sneltoetsen",
+
+  "lang.switcher": "Taal",
+
+  "category.politics": "Politiek",
+  "category.business": "Zakelijk",
+  "category.crime": "Misdaad",
+  "category.weather": "Weer",
+  "category.science": "Wetenschap",
+  "category.technology": "Technologie",
+  "category.sports": "Sport",
+  "category.culture": "Cultuur",
+  "category.environment": "Milieu",
+  "category.conflict": "Conflict",
+  "category.health": "Gezondheid",
+  "category.other": "Overig",
+
+  "event.earthquake": "Aardbeving",
+  "event.flood": "Overstroming",
+  "event.storm": "Storm",
+  "event.wildfire": "Bosbrand",
+  "event.shooting": "Schietpartij",
+  "event.protest": "Protest",
+  "event.election": "Verkiezing",
+  "event.accident": "Ongeval"
+}

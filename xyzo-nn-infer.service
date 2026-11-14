@@ -1,0 +1,21 @@
+[Unit]
+Description=Xyzo NN inference cycle — embed, geolocate, rank, and assess coverage
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/vhosts/xyzo.org
+Environment=XYZO_DB_DSN=postgresql://xyzo_app:CHANGE_ME@localhost:5432/xyzo
+# The DSN above is a PLACEHOLDER — the repo carries no credentials.
+# The real value lives outside the repo; EnvironmentFile= overrides Environment=.
+EnvironmentFile=-/etc/xyzo/xyzo.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m worker.nn_infer --limit 500
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=xyzo-nn-infer
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=Run NN inference every 5 minutes: embed articles, predict locations, score coverage
+Requires=xyzo-nn-infer.service
+
+[Timer]
+# Fire every 5 minutes. Inference is cheap (CPU fallback) and needed for
+# real-time personalization and ranking. Model training is triggered
+# separately via /api/nn/refresh endpoint once 100+ labels accumulate.
+OnCalendar=*:0/5
+Persistent=true
+AccuracySec=30s
+Unit=xyzo-nn-infer.service
+
+[Install]
+WantedBy=timers.target
