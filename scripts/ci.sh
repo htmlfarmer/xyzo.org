@@ -46,6 +46,10 @@ stage() {  # stage <name> <expected-base> <actual-cmd…>
       actual=${actual:-0}
       # collection/interrupt with no clean summary line → count as failure
       if printf '%s\n' "$out" | grep -q "Interrupted:"; then actual=9999; fi ;;
+    security)
+      # the scanner prints "security-scan: new=N gated=N report=N"
+      actual=$(printf '%s\n' "$out" | grep -oE 'security-scan: new=[0-9]+' | grep -oE '[0-9]+$' | head -1)
+      actual=${actual:-9999} ;;
     *) actual=0 ;;
   esac
   if [ "${actual:-9999}" -le "$base" ]; then
@@ -53,7 +57,7 @@ stage() {  # stage <name> <expected-base> <actual-cmd…>
     RESULTS+=("✅ ${name}: ${actual}/${base}")
   else
     echo -e "  ${RED}❌ ${name}: ${actual} failures > baseline ${base} — NEW breakage${RST}"
-    printf '%s\n' "$out" | grep -E "(fail\)|FAILED|ERROR|error TS" | head -10 | sed 's/^/     /'
+    printf '%s\n' "$out" | grep -E "^\(fail\)|FAILED|ERROR|error TS" | head -10 | sed 's/^/     /'
     RESULTS+=("❌ ${name}: ${actual}/${base}")
     FAILS=$((FAILS+1))
   fi
@@ -72,6 +76,17 @@ stage "worker-py-compile" 0 bash -c '
 stage "frontend-syntax" 0 bash -c '
   for f in public_html/*.js; do node -c "$f" || exit 1; done
   echo "0 failures"'
+
+# The SECURITY GATE. The secrets side is covered by the global git
+# hooks on every commit and every push; this is the other side — the
+# patterns that make a hole (an interpolated query, an unguarded shell
+# call, an unescaped innerHTML). It is a RATCHET like everything else
+# here: the findings that exist today are baselined in
+# scripts/security_baseline.txt and the gate fails only on a NEW one.
+#
+# `--no-secretz` because the git hooks already ran the secrets scan on
+# the very files being committed; this stage is about the code patterns.
+stage "security" 0 bash -c 'python3 scripts/security_check.py --no-secretz'
 
 if [ -z "$ONLY" ] || [ "$ONLY" = "tsc" ]; then
   stage "tsc" $TSC_BASELINE bash -c 'cd api && bun x tsc --noEmit'

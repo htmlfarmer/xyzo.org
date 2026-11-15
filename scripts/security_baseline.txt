@@ -1,0 +1,8 @@
+# The security findings that exist today.
+#
+# A RATCHET: the gate fails only on a NEW finding, so the baseline
+# can only shrink. One line per finding:
+#     <rule>|<file>:<line>|<the line, collapsed>
+#
+# Remove a line when its finding is FIXED — the gate then says so.
+# Do not add a line to silence a new finding.

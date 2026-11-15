@@ -52,6 +52,17 @@ A close-out is **"the docs match the code and the tests are green"** —
 not "I remember what I did". The README is written *during* the change,
 not reconstructed afterwards.
 
+**Latest run (2026-11-14, the security gates — the close-out):**
+frontend **1832 pass / 0 fail** (104 files) · **pytest
+`tests/test_security_check.py` → 8 passed** · **the security gate: 0
+gated findings, 0 new, 28 report-only, secrets ✓ clean** · `bash
+scripts/ci.sh --only security` → **✅ 0 failures (baseline 0)** ·
+`validate-api.sh --quick` → **ALL CHECKS PASSED**. The **secrets** side
+had a real gate all along (the global git hooks on every commit and
+every push, plus `secretz`); the **SQL-injection-and-friends** side did
+not, and now does — see *The Security Gates* below and **Q-N50** for
+what it still does not cover.
+
 **Latest run (2026-11-14, the "clear the map" button + the low-res tier
 + a full review of the day's changes):**
 frontend **1832 pass / 0 fail** (104 files) — the rewritten
@@ -504,6 +515,7 @@ Full-codebase review was completed 2026-09-26. See:
 
 | Area | Status | What it was |
 |---|---|---|
+| 🔐 **THE PASSWORDS HAD A GATE — SQL INJECTION AND ITS NEIGHBOURS DID NOT** | ✅ fixed (11-14) | Owner ask: *"do we have a test case that we use that regularly scans for passwords and security problems like sql and others?"* **THE PASSWORDS HAD A REAL GATE ALREADY** — the global git hooks (`/home/asher/.git-hooks/pre-commit` and `pre-push`, wired in through `core.hooksPath`, so every repo on this box) scan the staged and the PUSHED content for credential-shaped strings and personal paths, with this repo's `.secret-guard-ignore` as the allowlist, and `secretz --code` / `--gate staged` / `--gate tracked` does the same on demand. **That is why this repository can be public**, and both pushes made today went through the pre-push hook untouched. **THE OTHER HALF DID NOT EXIST.** The defences against SQL injection here are STRUCTURAL — postgres.js tagged templates, psycopg `%s` placeholders, a Zod schema on every route, `assertSafeUrl`/`safeFetch` on the routes that fetch a reader's URL — and **structural defences do not fail loudly when someone adds a fourth way in**. Nothing watched for a regression. **`scripts/security_check.py` IS THAT WATCH**: it walks the repository and fails on the patterns that make a hole — an interpolated query (`sql-interp-python`, `sql-unsafe-ts`, `sql-interp-ts`), an unguarded shell call (`shell-injection`), a request value joined into a path (`path-traversal`) — with the **XSS, SSRF and `sql.unsafe(variable)`** rules REPORT-only, because whether `${chips}` is safe is a **data-flow** question a regex cannot answer. **IT IS A RATCHET, NOT A WALL** (the rule `scripts/ci.sh` already follows): `scripts/security_baseline.txt` holds today's findings and the gate fails only on a NEW one. **TODAY THE BASELINE IS EMPTY — ZERO GATED FINDINGS.** The first thing it found was a real one: `scripts/system-status.sh` built a query with an f-string, and it was **FIXED** (`psycopg.sql.Identifier`), not baselined. **AND THE GATE WAS PROVED ABLE TO FAIL**: `tests/test_security_check.py` (8 tests) writes each dangerous pattern into a sandbox inside the repo and asserts the scanner finds it (and that a clean file finds nothing), and an `sql.unsafe(\`… ${tid}\`)` probe injected into `api/src/routes/analytics.ts` took **`bash scripts/ci.sh --only security` RED** and green again on restore. **ALONG THE WAY A PRE-EXISTING BUG IN `ci.sh` WAS FIXED**: the pattern that prints WHY a stage failed was `grep -E "(fail\)\|FAILED\|ERROR\|error TS"` — **an unterminated group**, so grep printed *"Unmatched ( or \("* and a red stage showed **no detail at all**. What it does NOT cover is **Q-N50**. |
 | ⛅ **THE CHANGE MAP RE-FETCHED ITS 130 KB FIELD ON EVERY PAN** | ✅ fixed (11-14) | Found in the review of the `delta=` work. **THE DELTA FIELD IS THE WHOLE WORLD AND DOES NOT CHANGE WITH THE VIEWPORT** — only the CONTOURING does. But `refreshDelta()` fetched it again on every refresh, and it also left `state.loaded` null, so `loadedCovers()` could never short-circuit: **the delta path was the only one that always ran.** **MEASURED ON THE LIVE SITE: four pans of the change map cost FOUR extra fetches of the 130 KB field** (five field fetches for one map). **THE FIELD, ITS GRID, ITS METADATA AND THE COLOUR SCALE ARE NOW CACHED AGAINST THE WINDOW THEY BELONG TO** (`state.deltaField` / `deltaGrid` / `deltaData` / `deltaWin`), and **the box the lines were cut for is RECORDED** (`state.loaded = box`) — so a pan **re-contours from the cache**, the cheap part, instead of going back to the network for the expensive one. **AFTER: ONE field fetch for the whole session**, and the pans still redraw — **395 → 364 lines** as the viewport moved, with the fetch count unchanged. The contouring is the same code on the same field, so **the picture is the same**. A DIFFERENT WINDOW means a different field, and `deltaWin` is what tells them apart. Tests: **`isobar-delta-url.bun.test.js`** (the cache, the guard and the recorded box) and measured by **`scripts/isobar_delta_url_check.py`**, which pans the map and asserts the fetch count does not move. |
 | 🎛️ **THE ✨ COOL MAPS CHIPS RAN OFF THE PANEL ON A PHONE — the last two or three were unreachable** | ✅ fixed (11-14) | Found while measuring the new satellite preset. **THE CHIPS ARE ONE FLEX LINE** (`.leaflet-presets-chips { display: flex }` with **no `flex-wrap`**), so their width is the **SUM** of the chips' widths — and the layers panel is **335 px** on a 393 px phone. **MEASURED: ten chips were 417 px, and the eleventh (🛰️ Satellite) made it 459 px** — the last chip's right edge sat at **435 px against a panel that ends at 353 px**, so the last two or three chips (🌌 Night lights, 🛰️ Satellite, 🌱 Climate skin) were **cut off and unreachable on a phone** without horizontal scrolling. (The defect was there before the eleventh chip; the eleventh made it 42 px worse.) **THE FIX IS ONE LINE**: `flex-wrap: wrap` puts the chips on a second line instead of running off, and `min-width: 0` lets the row shrink inside the flex parent that holds it. **After: the row is 330 px inside the 335 px panel, and all eleven chips are inside the panel AND hit-testable** (verified in a real browser at 393 px and 1440 px). Pinned by **`map-presets.bun.test.js`**. |
 | 🛰️ **THE "CLEAR THE MAP" BUTTON WAS THE OWNER'S 15-OVERLAY MAP — "too slow on some computers" — and the LOW-RES tier was NOT satellite-only either** | ✅ fixed (11-14) | Owner ask: *"for the 'clearned map' i think we just need a sattiltie view.. https://xyzo.org/#19.9733,0.0000,2/density=max … its just too slow on some computers"*, and then: *"we also have some checks to see before loading the page if we should show a low rez version without any overlays except the satellite view correct.. thats already workin but we might need to test it"*. **THE 🛰️ BUTTON RESTORED THE OWNER'S OWN MAP** — satellite, the **wind animation** over the pressure lines (`#1.9771,36.1230,4/density=max/overlay=wind-gfs@100,isobars@100/iso=1:pressure/isoSrc=gfs/wind=particles:speed:100`) — and the wind animation is the most expensive thing on the page: **a canvas that repaints every frame over a field that has to be fetched and contoured first**. It is now the **satellite view**, the owner's own link verbatim: `#19.9733,0.0000,2/density=max` — the world, the satellite basemap, the pins at max, **no overlays at all**. **THE HASH NAMES NO `overlay=` SEGMENT, AND THAT IS THE POINT**: the hash-apply path only ADDS, but `applySavedStyle()` REMOVES every overlay the state does not contain first, so a hash with no overlays list is a hash that says "none" — **and a missing overlays list must NOT be normalised into `[]`**, because an empty array is also what a CORRUPTED state looks like, and `sanitizeState()` rejects that one so it can never reach `applyMapState()` and strip every overlay by accident. **AND THE "LOW REZ" MAP WAS NOT THE SATELLITE VIEW.** The tier check worked; the map it chose for a slow machine was the **"🌱 Climate skin"** — the Köppen wash plus the city names, and **the city names alone pull the 1.16 MB city index**, so the light map was not light. `COOL_ID.low` is **`"plain"`** now: a satellite-only preset at **`density=medium`** (the pins are the heaviest thing a slow machine fetches — 3,000 at max, 1,500 at medium), and the density is a **separate axis** from the overlays. **MEASURED LIVE by the new `scripts/default_map_check.py`** (Playwright, a real browser, a slow machine's `deviceMemory`/`hardwareConcurrency`/`saveData` stubbed before the page's scripts run): the showcase opens with **13 overlays · 250 requests · 4.7 MB**, the satellite view with **0 overlays · 130 requests · 2.6 MB**, and the 🛰️ button on the showcase leaves **0 overlays**, base **🛰️ Satellite**, zoom **2**, centre **(19.9733, 0)**, URL `#19.9733,0.0000,2/density=max` — **0 page errors**. Tests: **`default-map-button.bun.test.js`** (rewritten) and **`map-presets.bun.test.js`** (the tier and the light map). **THE THREE "CLEAR THE MAP" CONTROLS NOW OVERLAP, AND THEY DO NOT MEAN THE SAME THING — see Q-N49.** |
@@ -8168,7 +8180,129 @@ was **not** done.
 
 ---
 
+## The Security Gates — what scans, what watches, what does not (2026-11-14)
+
+**THE QUESTION THIS ANSWERS:** *"do we have a test case that we use
+that regularly scans for passwords and security problems like sql and
+others?"*
+
+**SHORT ANSWER: the passwords had a gate; the SQL and its neighbours did
+not.** They do now.
+
+### The passwords — a gate that was already there, and runs by itself
+
+| what | where | when |
+|---|---|---|
+| **the secret-guard git hooks** | `/home/asher/.git-hooks/pre-commit` + `pre-push` (`core.hooksPath`, so every repo on this box) | **every commit and every push**, on the staged/pushed content |
+| **the per-repo allowlist** | `.secret-guard-ignore` | the idioms that CANNOT hold a credential — never a value that could be one |
+| **`secretz --code` / `--gate staged` / `--gate tracked`** | `/home/asher/helpz/secretz` | on demand, and as the `security` stage of `scripts/ci.sh` |
+| **`secretz`** (the whole-system sweep) | the same tool | shadow hashes, SSH keys, cloud credentials, shell history, process environment |
+
+The hooks are why this repository can be **public**: a credential-shaped
+string cannot reach a commit, and the two pushes made today both went
+through the pre-push hook untouched.
+
+### The rest — a scanner that is part of the regular gate
+
+**`scripts/security_check.py`** walks the repository and fails on the
+patterns that make a hole:
+
+| rule | what it is | gated? |
+|---|---|---|
+| `sql-interp-python` | a value interpolated into a Python query (`execute(f"…")`, a concatenation, a `%`-format) | **gated** |
+| `sql-unsafe-ts` | `sql.unsafe()` with an interpolated template literal | **gated** |
+| `sql-interp-ts` | an interpolation inside a `sql\`…\`` tagged template | **gated** |
+| `shell-injection` | `os.system()`, `shell=True`, a bare `eval()`/`exec()` | **gated** |
+| `path-traversal` | a request value joined into a filesystem path | **gated** |
+| `xss-unescaped` | an `innerHTML` with an interpolated value | report |
+| `ssrf-schema` | a route whose Zod schema takes a URL and whose file has **no** SSRF guard | report |
+| `sql-unsafe-var` | `sql.unsafe()` with a variable | report |
+
+**THE REPORT-ONLY RULES NEED A HUMAN**, and they are kept short on
+purpose — a list of 28 is read, a list of 263 is not. The XSS rule is
+report-only because whether `${chips}` is safe depends on where `chips`
+came from, which is a **data-flow** question a regex cannot answer.
+
+**IT IS A RATCHET, NOT A WALL** — the same rule `scripts/ci.sh` follows
+for every other stage. `scripts/security_baseline.txt` holds the
+findings that exist today, and **the gate fails only on a NEW one**, so
+the baseline can only shrink. **TODAY THE BASELINE IS EMPTY: the
+codebase has ZERO gated findings.** The first thing the scanner found
+was a real one — `scripts/system-status.sh` built a query with an
+f-string — and it was **fixed**, not baselined:
+
+```python
+cur.execute(sql.SQL('SELECT count(*) FROM {}').format(sql.Identifier(table)))
+```
+
+### THE GATE WAS PROVED ABLE TO FAIL
+
+**A GATE THAT PASSES AGAINST BROKEN CODE IS NOT A GATE** — the rule this
+repo learned the hard way on 2026-11-12. So:
+
+- **`tests/test_security_check.py` (8 tests)** writes files that
+  deliberately contain each dangerous pattern into a sandbox **inside
+  the repo** (the rules are scoped to parts of the tree, so a sandbox
+  outside the scope would be scanned and ignored and the test would
+  pass for the wrong reason) and asserts the scanner **finds** them —
+  and asserts a clean file produces **nothing**.
+- **THE CI STAGE WAS PROVED RED.** An `sql.unsafe(\`… ${tid}\`)` probe
+  was injected into `api/src/routes/analytics.ts`; `bash scripts/ci.sh
+  --only security` went **RED** (`❌ security: 1 failures > baseline 0`),
+  and the file was restored and the stage went green again.
+
+**AND A PRE-EXISTING BUG IN `ci.sh` WAS FIXED ALONG THE WAY**: the
+pattern that prints WHY a stage failed was
+`grep -E "(fail\)|FAILED|ERROR|error TS"` — **an unterminated group**,
+so `grep` printed *"Unmatched ( or \("* and the reader saw **no detail
+at all** on a red stage. It is `grep -E "^\(fail\)|FAILED|ERROR|error TS"`
+now.
+
+### Where it runs
+
+```bash
+python3 scripts/security_check.py            # the gate (secrets included)
+python3 scripts/security_check.py --report   # every finding, with the line
+python3 scripts/security_check.py --write-baseline
+bash scripts/ci.sh --only security           # the CI stage
+```
+
+**WHAT IT DOES NOT COVER** is in **Q-N50**.
+
 ## Known Issues & Next Steps (updated 2026-11-14)
+
+Q-N50. **THE SECURITY SCANNER IS A PATTERN SCANNER, NOT A DATA-FLOW
+    ANALYSER — and it does not read the git HISTORY.** (2026-11-14.)
+    `scripts/security_check.py` is the gate for the dangerous SHAPES. It
+    cannot answer the questions that need a human:
+
+    * **IT SCANS THE WORKING TREE, NOT THE HISTORY.** A credential
+      committed and later removed is still in the repository's history —
+      and the public `main` was cut as a fresh single commit, so the
+      public repo does not carry it, but the **local** branches still do
+      (Q-N45). **The scanner will not find that**, and neither will the
+      git hooks: the hooks look at what a commit ADDS, not at what an
+      ancestor did.
+    * **THE XSS RULE IS LINE-BASED.** An `innerHTML` whose interpolated
+      value was escaped three lines earlier is reported (a false
+      positive), and an unescaped value that reaches the DOM through two
+      assignments is **missed**. It is report-only for exactly this
+      reason — 15 hits today, all of them read and all of them benign.
+    * **THE SQL RULES CANNOT TELL AN IDENTIFIER FROM A VALUE.** A table
+      name and a search term are the same shape in a string; only
+      `psycopg.sql.Identifier` vs `%s` tells them apart, and that is a
+      judgement the scanner leaves to the reader.
+    * **IT IS NOT A DEPENDENCY SCANNER.** A CVE in `bun`/`pip` is a
+      different tool and a different cadence.
+    * **THE FOUR `ssrf-schema` REPORTS WERE CHECKED AND ARE FINE** —
+      `agent.ts`, `analytics.ts`, `internal.ts` and `feedback.ts` take a
+      URL and **store** it; they do not fetch it. The two routes that DO
+      fetch a reader-supplied URL are guarded (`news.ts` by
+      `assertSafeUrl`, `sniff.ts` by `safeFetch`), which is why the rule
+      reports four and not six.
+    *Fix if it ever matters:* a data-flow pass (taint analysis) would
+    close the XSS gap; a history scan (`git log -p | secretz --code -`)
+    would close the history gap. **Not fixed.**
 
 Q-N48. **THE CHANGE MAP (`delta=`) IS A FLAT-MAP FEATURE — the globe and
     the time machine draw the ORDINARY chart while the URL says

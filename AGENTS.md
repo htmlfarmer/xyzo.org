@@ -2778,6 +2778,62 @@ page's scripts run) and `scripts/live_panel_audit.py` (desktop ·
 
 ---
 
+## The Security Gates (2026-11-14)
+
+**THE SECRETS SIDE IS COVERED BY A GATE THAT RUNS BY ITSELF.** The
+global git hooks (`/home/asher/.git-hooks/pre-commit` and `pre-push`,
+wired in through `core.hooksPath`) scan the staged and the PUSHED
+content for credential-shaped strings and personal paths, with this
+repo's `.secret-guard-ignore` as the allowlist — **every entry in it is
+an idiom that CANNOT hold a credential, never a value that could be
+one.** `secretz --code` / `--gate staged` / `--gate tracked` does the
+same on demand, and `secretz` alone sweeps the whole machine (shadow
+hashes, SSH keys, cloud credentials, shell history, process
+environment). **That is why this repository can be public.**
+
+**THE OTHER HALF IS `scripts/security_check.py`, AND IT IS PART OF
+`scripts/ci.sh`.** The defences against SQL injection here are
+STRUCTURAL — postgres.js tagged templates, psycopg `%s` placeholders, a
+Zod schema on every route, `assertSafeUrl`/`safeFetch` on the routes
+that fetch a reader's URL — **and structural defences do not fail
+loudly when someone adds a fourth way in.** The scanner watches for
+that regression:
+
+| rule | gated? | what it is |
+|---|---|---|
+| `sql-interp-python` | **yes** | a value interpolated into a Python query |
+| `sql-unsafe-ts` | **yes** | `sql.unsafe()` with an interpolated template literal |
+| `sql-interp-ts` | **yes** | an interpolation inside a `sql\`…\`` tagged template |
+| `shell-injection` | **yes** | `os.system()`, `shell=True`, a bare `eval()`/`exec()` |
+| `path-traversal` | **yes** | a request value joined into a filesystem path |
+| `xss-unescaped` | report | an `innerHTML` with an interpolated value |
+| `ssrf-schema` | report | a route whose schema takes a URL and whose file has no guard |
+| `sql-unsafe-var` | report | `sql.unsafe()` with a variable |
+
+**THE REPORT-ONLY RULES NEED A HUMAN** — whether `${chips}` is safe
+depends on where `chips` came from, which is a DATA-FLOW question. Keep
+that list SHORT: a list of 28 is read, a list of 263 is not.
+
+**IT IS A RATCHET, NOT A WALL** — `scripts/security_baseline.txt` holds
+today's findings and the gate fails only on a NEW one, so the baseline
+can only shrink. **DO NOT ADD A LINE TO SILENCE A NEW FINDING** — fix
+it, or teach the rule what a safe line looks like (the `SAFE_HINTS`
+list). **TODAY THE BASELINE IS EMPTY.**
+
+**A GATE THAT PASSES AGAINST BROKEN CODE IS NOT A GATE.** The scanner
+is tested against files that deliberately contain each dangerous
+pattern (`tests/test_security_check.py`), and the CI stage was proved
+RED by injecting an `sql.unsafe(\`… ${tid}\`)` probe into a route and
+watching `bash scripts/ci.sh --only security` fail. **The sandbox in
+that test lives INSIDE the repo, under the directory the rule is
+scoped to** — a sandbox outside the scope would be scanned and
+ignored, and the test would pass for the wrong reason.
+
+**WHAT IT DOES NOT COVER IS RECORDED IN README Q-N50** — the biggest
+gap is that **it scans the WORKING TREE, not the git HISTORY**: a
+credential committed and later removed is still in the ancestors, and
+neither the scanner nor the git hooks will find it.
+
 ## The NASA Tile Proxy (2026-11-04)
 
 The three NASA GIBS overlays (rain rate, true-colour satellite, night

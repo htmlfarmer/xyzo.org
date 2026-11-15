@@ -28,6 +28,7 @@ echo "── Database Stats ─────────────────�
 python3 - <<'PYEOF'
 import os
 os.environ['XYZO_DB_DSN'] = os.environ.get('XYZO_DB_DSN', 'postgresql://xyzo_app:CHANGE_ME@localhost:5432/xyzo')
+from psycopg import sql
 from worker.db import connect
 with connect() as conn:
     cur = conn.cursor()
@@ -45,7 +46,14 @@ with connect() as conn:
         ('news_problems', 'count'),
     ]:
         try:
-            cur.execute(f'SELECT count(*) FROM {table}')
+            # THE TABLE NAME IS AN IDENTIFIER, NOT A VALUE — so it is
+            # composed with psycopg's Identifier, never interpolated into
+            # the statement text. The table comes from the list above, so
+            # this is not exploitable today; it is written this way so it
+            # cannot become so if the list ever grows a variable in it.
+            # (`scripts/security_check.py` scans for exactly this shape.)
+            cur.execute(
+                sql.SQL('SELECT count(*) FROM {}').format(sql.Identifier(table)))
             stats[table] = cur.fetchone()['count']
         except Exception as e:
             stats[table] = f'ERROR: {e}'
