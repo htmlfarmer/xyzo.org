@@ -732,6 +732,17 @@ html, body { margin: 0; padding: 0; height: 100%; background: var(--bg); color: 
 .leaflet-presets-chips {
   display: flex;
   align-items: center;
+  /* THE CHIPS WRAP. The row is one flex line with no wrap, so the
+     chips' width is the SUM of the chips' widths — and the layers panel
+     is 335 px on a 393 px phone. Measured: ten chips were 417 px and the
+     eleventh (🛰️ Satellite) made it 459 px, so the last two or three
+     chips sat PAST the panel's right edge (the last chip's right edge at
+     435 px against a panel that ends at 353 px) and were unreachable on
+     a phone without horizontal scrolling. `flex-wrap: wrap` puts them on
+     a second line instead, and `min-width: 0` lets the row shrink
+     inside the flex parent that holds it. */
+  flex-wrap: wrap;
+  min-width: 0;
   gap: 3px;
 }
 .leaflet-preset-chip {

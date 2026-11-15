@@ -32,8 +32,8 @@ What it checks, in a real browser:
 
 Run: python3 scripts/default_map_check.py
 """
-import json
 import sys
+import time
 
 from playwright.sync_api import sync_playwright
 
@@ -95,6 +95,29 @@ def map_state(page):
     )
 
 
+def settle(page, quiet_ms=2000, max_ms=45000):
+    """Wait for the network to go quiet.
+
+    The overlay grids are fetched LAZILY — a layer's data arrives when
+    the layer is switched on, and some of them land well after the first
+    paint — so a fixed `wait_for_timeout` measures a page mid-flight and
+    the byte count swings by megabytes between runs. The REQUEST count
+    is stable; the bytes are not, until the network has stopped moving.
+    """
+    t0 = time.time()
+    last = -1
+    stable_since = None
+    while (time.time() - t0) * 1000 < max_ms:
+        count = page.evaluate(
+            "() => performance.getEntriesByType('resource').length")
+        if count != last:
+            last = count
+            stable_since = time.time()
+        elif stable_since and (time.time() - stable_since) * 1000 >= quiet_ms:
+            return
+        page.wait_for_timeout(250)
+
+
 def resources(page):
     return page.evaluate(
         """() => {
@@ -117,7 +140,7 @@ def main():
         # ── 1. a SLOW machine opens the satellite view ───────────────────
         ctx = b.new_context(ignore_https_errors=True, viewport={"width": 1440, "height": 900})
         slow = open_page(ctx, SLOW_DEVICE)
-        slow.wait_for_timeout(9000)
+        settle(slow)
         st = map_state(slow)
         print(f"a slow machine opens: hash={st['hash']}")
         print(f"  overlays on: {st['overlays']}")
@@ -133,7 +156,7 @@ def main():
         # ── 2. a capable machine still opens the showcase ───────────────
         ctx2 = b.new_context(ignore_https_errors=True, viewport={"width": 1440, "height": 900})
         big = open_page(ctx2, BIG_DESKTOP)
-        big.wait_for_timeout(9000)
+        settle(big)
         st2 = map_state(big)
         print(f"a capable machine opens: hash={st2['hash']}")
         if not st2["overlays"]:
@@ -147,11 +170,12 @@ def main():
         # ── 3. the 🛰️ button CLEARS the map ────────────────────────────
         ctx3 = b.new_context(ignore_https_errors=True, viewport={"width": 1440, "height": 900})
         page = open_page(ctx3, BIG_DESKTOP)
-        page.wait_for_timeout(9000)
+        settle(page)
         before = map_state(page)
         print(f"before the button: {len(before['overlays'])} overlays, hash={before['hash'][:70]}")
         page.evaluate("() => document.getElementById('default-map-btn')?.click()")
-        page.wait_for_timeout(7000)
+        page.wait_for_timeout(4000)
+        settle(page)
         after = map_state(page)
         print(f"after  the button: {len(after['overlays'])} overlays, hash={after['hash']}")
         print(f"  base: {after['base']}   zoom: {after['zoom']}   center: {after['center']}")

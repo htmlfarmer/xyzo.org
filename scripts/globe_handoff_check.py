@@ -32,8 +32,14 @@ GLOBE = f"{BASE}/globe"
 # Two overlays with distinctive opacities that use DIFFERENT vocabularies
 # on each side (temperature <-> temp, basins <-> basins). 70/55 are odd
 # enough that a default could never match them by accident.
+#
+# The ISOBARS + `delta=24h` are there for the CHANGE MAP: the window is a
+# FLAT-ONLY setting (the globe draws the ordinary pressure chart — README
+# Q-N48), so it travels as one of the "flat only parts" the globe carries
+# through untouched. It must SURVIVE the round trip: a reader who opened
+# the change map and visited the globe must get it BACK.
 LAT, LNG, ZOOM = 12.3456, 76.5432, 7.0
-FLAT_HASH = f"#{LAT},{LNG},{ZOOM}/overlay=temperature@70,basins@55"
+FLAT_HASH = f"#{LAT},{LNG},{ZOOM}/overlay=temperature@70,basins@55,isobars@100/delta=24h"
 
 
 def fail(msg, errors):
@@ -122,7 +128,9 @@ def main():
             probs.append("basins@55 absent")
         if "temperature@" in href:
             probs.append("untranslated flat slug leaked through")
-        checks.append(ok("globe href carries position + translated overlays")
+        if "delta=24h" not in href:
+            probs.append("the change-map window did not reach the globe href")
+        checks.append(ok("globe href carries position + translated overlays + the change window")
                      if not probs else fail("globe href incomplete", probs))
 
         # ── 2. open the globe from that href ───────────────────────────
@@ -164,6 +172,15 @@ def main():
             probs.append(f"basins opacity {b.get('pct')} != 55")
         checks.append(ok("globe shows the same position + overlays + opacities")
                      if not probs else fail("globe did not receive the flat map's view", probs))
+
+        # The globe REBUILDS its hash from scratch, so a flat-only part it
+        # does not own has to be carried through explicitly — or the
+        # reader loses it on the way home.
+        probs = []
+        if "delta=24h" not in page.evaluate("() => location.hash"):
+            probs.append("the globe's own hash dropped the change-map window")
+        checks.append(ok("the globe's hash still carries the change window")
+                     if not probs else fail("globe dropped a flat-only part", probs))
 
         # is temp actually rendered, with its opacity applied?
         paint = page.evaluate(
@@ -220,8 +237,10 @@ def main():
                 probs.append("overlay added on the globe did not reach the back link")
             if f"{ACT_LAT},{ACT_LNG}" not in back:
                 probs.append("position not carried back")
-        checks.append(ok("back link carries position + overlays (translated)") if not probs
-                     else fail("back link incomplete", probs))
+            if "delta=24h" not in back:
+                probs.append("the change-map window was not carried back")
+        checks.append(ok("back link carries position + overlays (translated) + the change window")
+                     if not probs else fail("back link incomplete", probs))
 
         # ── 4. open it and confirm the flat map agrees ─────────────────
         target = BASE + back if back and back.startswith("/") else (BASE + "/" if not back else back)
@@ -250,7 +269,9 @@ def main():
                 probs.append("basins@55 missing from restored hash")
             if "lightning" not in h:
                 probs.append("lightning (added on the globe) missing from restored hash")
-        checks.append(ok("flat map restored position + overlays + the globe's addition")
+            if "delta=24h" not in h:
+                probs.append("the change-map window missing from the restored hash")
+        checks.append(ok("flat map restored position + overlays + the globe's addition + the change window")
                      if not probs else fail("flat map did not restore", probs))
 
         if args.shots:

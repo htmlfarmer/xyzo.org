@@ -1444,8 +1444,9 @@ its checkbox, so an enabled layer can be dialled independently.
   - **The URL moves BEFORE the archive answers** — the reader pressed a chip; the address bar should say so at once. The layer announces it with a `xyzo:isobar-delta` CustomEvent and app.js turns that into a hash rewrite.
   - **THE SAME GRAMMAR IN ALL THREE READERS** — app.js (the URL), `map-presets.js` (a preset and the auto-saved last-used map) and the saved style ("MY STYLE"), so a preset, a pasted link and a saved style can never diverge.
   - **A PASTED LINK IS A SAME-DOCUMENT NAVIGATION** — the page does not reload, so the boot-time restore never runs and the `hashchange` handler is the only thing that can apply the link. It now applies the step, the colour, the analysis **and** the window; before, it enabled the isobar layer and left every one of its settings behind, so pasting `/iso=0.25:red/delta=24h` into an open tab promised a picture the map was not drawing.
-  - **THE GLOBE AND THE TIME MACHINE DO NOT HONOUR IT** (README Q-N41): the globe carries the segment through as a "flat only part" and draws the ordinary chart, and an archived moment wins over the window by design.
-  Pinned by `public_html/tests/isobar-delta-url.bun.test.js` (15) and measured by `scripts/isobar_delta_url_check.py` (Playwright, the live site).
+  - **THE GLOBE AND THE TIME MACHINE DO NOT HONOUR IT** (README Q-N48): the globe carries the segment through as a "flat only part" and draws the ordinary chart, and an archived moment wins over the window by design.
+  - **THE FIELD IS FETCHED ONCE PER WINDOW, NOT ONCE PER PAN.** The delta FIELD is the whole world and does not change with the viewport — only the CONTOURING does. `refreshDelta()` used to fetch it again on every refresh and left `state.loaded` null, so `loadedCovers()` could never short-circuit: **measured, four pans cost FOUR extra fetches of the 130 KB field.** The field, its grid, its metadata and the colour scale are now **cached against the window they belong to** (`state.deltaField` / `deltaGrid` / `deltaData` / `deltaWin`), and **the box the lines were cut for is recorded** (`state.loaded = box`) — so a pan **re-contours from the cache** and never touches the network. **After: ONE field fetch for the whole session**, and the pans still redraw (395 → 364 lines). A DIFFERENT WINDOW means a different field, and `deltaWin` is what tells them apart.
+  Pinned by `public_html/tests/isobar-delta-url.bun.test.js` (19) and measured by `scripts/isobar_delta_url_check.py` (which pans the map and asserts the fetch count does not move).
 - **THE HASH MUST DESCRIBE THE VIEW, NOT THE PREFERENCE.** `overlayOpacityFor()` reads the **live layer opacity**. The stored opacity is the *preference*, and the two disagree exactly when a shared link set an opacity: the link's value goes on the layer, and the boot snapshot then rolls the stored preference back (a link is a view, not a settings change). Reading the store first is what made the URL describe the preference instead of the map — the picture said 35 % and the link said 85 %. **A link's opacity is a VIEW value too** (`OverlayOpacity.applyView()`): it goes on the layer and the slider, it is remembered so the slider remount cannot clobber it (the remount re-applies the stored value, and it runs a tick after the boot snapshot — so without the override the link's opacities were silently discarded milliseconds after being applied), and it does **not** touch the store. The reader moving a slider ends the override: a choice wins.
 - **The order of the contouring steps is load-bearing.** The field is Gaussian-smoothed (σ = 2 cells) → contoured → **merged → Chaikin-rounded → Douglas-Peucker-thinned**. Three couplings break the result if you reorder them:
   - **The DP tolerance must stay below the amplitude the Chaikin rounding leaves behind** (~0.06°). At 0.04° the simplification undid the smoothing and the staircase came back.
@@ -2714,6 +2715,48 @@ by hand is a second implementation of "what a map is", and the second
 implementation is the one that drifts.** The hash names no base layer,
 so the button states `satellite` itself.
 
+**THE DEFAULT MAP IS THE SATELLITE VIEW — IT IS NOT THE OWNER'S
+FIFTEEN-OVERLAY MAP (2026-11-14).** It was, from 2026-11-13, and the
+owner's verdict on it was *"its just too slow on some computers"* — the
+**wind animation** over the pressure lines is the reason (a canvas that
+repaints every frame over a field that has to be fetched and contoured
+first). It is now `#19.9733,0.0000,2/density=max`: the world on the
+satellite basemap, the pins at max, **no overlays at all**.
+
+**THE HASH NAMES NO `overlay=` SEGMENT, AND THAT IS THE POINT.** The
+hash-apply path only ADDS, but `applySavedStyle()` **REMOVES** every
+overlay the state does not contain first — so a hash with no overlays
+list is a hash that says **"none"**, and the button CLEARS the map
+rather than adding to it. **A MISSING OVERLAYS LIST MUST NOT BE
+NORMALISED INTO `[]`**: an empty array is also what a CORRUPTED state
+(`{}`) looks like, and `sanitizeState()` rejects that one precisely so
+it can never reach `applyMapState()` and strip every overlay by
+accident. The two are told apart by the presence of lat/lng/zoom/base/
+density.
+
+**THE LOW-RESOLUTION TIER OPENS THE SATELLITE VIEW TOO (2026-11-14).**
+`COOL_ID.low` was `"climate"` (the Köppen wash + the city names) — and
+**the city names alone pull the 1.16 MB city index**, so the "light" map
+was not light. It is `"plain"` now: `#19.9733,0.0000,2/density=medium`,
+**no overlays at all**. **MEDIUM, not max** — the pins are the heaviest
+thing a slow machine fetches (3,000 at max, 1,500 at medium), and the
+density is a **separate axis** from the overlays. **MEASURED LIVE**
+(`scripts/default_map_check.py`): the showcase opens with **13 overlays ·
+250 requests · 4.7 MB**, the satellite view with **0 overlays · 130
+requests · 2.6 MB**. The tier governs what AUTO-OPENS; the ✨ Cool maps
+chips still offer the showcase to anyone who clicks one (README Q-N49).
+
+**THE COOL-MAP CHIPS MUST WRAP — THEY USED TO RUN OFF THE PANEL ON A
+PHONE (2026-11-14).** `.leaflet-presets-chips` is ONE flex line, so its
+width is the **SUM** of the chips' widths, and the layers panel is
+**335 px** on a 393 px phone. **Measured: ten chips were 417 px and the
+eleventh made it 459 px** — the last chip's right edge at **435 px**
+against a panel that ends at **353 px**, so the last two or three chips
+were cut off and unreachable. `flex-wrap: wrap` + `min-width: 0` puts
+them on a second line instead: **after, the row is 330 px inside the 335
+px panel** and every chip is inside the panel **and** hit-testable. A
+new chip is not free — **measure the row's width when you add one.**
+
 **THE BOTTOM BAR HAS NO ROOM ON A PHONE, AND THE ⚙ IS THE LAST ITEM IN
 IT.** MEASURED at 393 px: the language switcher takes **157 px** and
 each button is **44 px** (the WCAG floor), so the bar's content is
@@ -2725,9 +2768,13 @@ gives.** `scripts/live_panel_audit.py` now asserts that **every**
 bottom-bar button is on screen and hit-testable, on a desktop and a
 phone.
 
-Pinned by `public_html/tests/default-map-button.bun.test.js` (11),
-`public_html/tests/live-panel-tabs.bun.test.js` (11) and measured by
-`scripts/live_panel_audit.py` (desktop · 393×852 phone · A++).
+Pinned by `public_html/tests/default-map-button.bun.test.js` (the
+owner's satellite hash, the base, and the "no overlays" contract),
+`public_html/tests/map-presets.bun.test.js` (the tier and the light map)
+and measured by `scripts/default_map_check.py` (a slow machine's
+`deviceMemory`/`hardwareConcurrency`/`saveData` stubbed before the
+page's scripts run) and `scripts/live_panel_audit.py` (desktop ·
+393×852 phone · A++).
 
 ---
 

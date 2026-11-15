@@ -159,6 +159,57 @@ describe("it is part of the URL", () => {
   });
 });
 
+describe("the field is fetched ONCE per window, not once per pan", () => {
+  // The delta FIELD is the whole world and does not change with the
+  // viewport — only the CONTOURING does. The first version fetched it
+  // again on every pan, and it also left `state.loaded` null so that
+  // `loadedCovers()` could never short-circuit.
+  //
+  // MEASURED on the live site: four pans of the change map cost FOUR
+  // extra fetches of the 130 KB field. After the fix: ONE fetch for the
+  // whole session, and the pans re-contour from the cache (395 → 364
+  // lines drawn — the new viewport, no network).
+  const refreshDelta = between(layerJs, "async function refreshDelta()", "async function setDeltaWindow");
+
+  test("the fetch is INSIDE the cache check", () => {
+    // The field is fetched only when the WINDOW changed, or when there
+    // is no field yet.
+    expect(refreshDelta).toContain("if (state.deltaWin !== win || !state.deltaField) {");
+    // ...and the fetch itself is inside that block.
+    const guard = refreshDelta.indexOf("if (state.deltaWin !== win || !state.deltaField) {");
+    const fetchAt = refreshDelta.indexOf("await fetch(");
+    expect(guard).toBeGreaterThan(-1);
+    expect(fetchAt).toBeGreaterThan(guard);
+  });
+
+  test("the field, its grid and its metadata are CACHED against the window", () => {
+    expect(refreshDelta).toContain("state.deltaWin = win;");
+    expect(refreshDelta).toContain("state.deltaField = field;");
+    expect(refreshDelta).toContain("state.deltaGrid = grid;");
+    expect(refreshDelta).toContain("state.deltaData = data;");
+    // The contouring then reads the CACHE, not a fresh fetch.
+    expect(refreshDelta).toContain("const field = state.deltaField;");
+    expect(refreshDelta).toContain("const grid = state.deltaGrid;");
+    expect(refreshDelta).toContain("const data = state.deltaData;");
+  });
+
+  test("the loaded box is RECORDED, so a pan inside it costs nothing", () => {
+    // `loadedCovers()` compares the viewport with `state.loaded`; with
+    // it null, EVERY refresh ran — and the delta path was the only one
+    // that always ran.
+    expect(refreshDelta).toContain("state.loaded = box;");
+    expect(refreshDelta).not.toContain("state.loaded = null;");
+  });
+
+  test("the cache is declared on the state", () => {
+    const st = between(layerJs, "const state = {", "const DELTA_COLOR_STOPS");
+    expect(st).toContain("deltaWin: null,");
+    expect(st).toContain("deltaField: null,");
+    expect(st).toContain("deltaGrid: null,");
+    expect(st).toContain("deltaData: null,");
+  });
+});
+
 describe("a link pasted into an OPEN tab applies it too", () => {
   test("the hashchange handler carries the window", () => {
     // A pasted link is a SAME-DOCUMENT navigation: the page does not

@@ -212,6 +212,16 @@
     // keys are the ones the API serves (see api/src/routes/weather-delta.ts).
     deltaWindow: readStoredDelta() || null,
     deltaWindows: [],           // what the archive can answer, filled on demand
+    // THE CACHED DELTA FIELD. The field is the WHOLE WORLD and does not
+    // change with the viewport, so it is fetched ONCE per window and
+    // re-used: a pan re-contours from the cache instead of going back to
+    // the network for the 130 KB field. `deltaWin` is the window the
+    // cache belongs to — a different window means a different field.
+    deltaWin: null,
+    deltaField: null,
+    deltaGrid: null,
+    deltaData: null,
+    deltaScale: 40,             // the largest |change| on the whole map
     colour: readStoredColour(), // how the lines are painted — see COLOUR_CHOICES
     // WHICH analysis is drawn — see SOURCE_CHOICES. "auto" lets the API
     // pick the newest one that covers the viewport.
@@ -757,61 +767,89 @@
   // without another request — and the lines come out in the API's own
   // shape, so the renderer, the labels, the antimeridian wrapping and
   // the colours are the same code either way.
+  //
+  // **THE FIELD IS FETCHED ONCE PER WINDOW AND THEN RE-USED.**
+  //
+  // The field is the WHOLE WORLD and it does not change with the
+  // viewport — only the CONTOURING does. The first version fetched it
+  // again on every pan, and it also left `state.loaded` null so that
+  // `loadedCovers()` could never short-circuit: **measured on the live
+  // site, four pans of the change map cost FOUR extra fetches of the
+  // 130 KB field** (the "delta" path was the only one that always ran).
+  //
+  // So the field, the blurred field and the scale are CACHED against the
+  // window they belong to, and a pan re-contours from the cache — the
+  // cheap part — instead of going back to the network for the expensive
+  // part. The lines are the same either way: the contouring is the same
+  // code on the same field.
   async function refreshDelta() {
     const win = state.deltaWindow;
     if (!win) return;
     try {
-      const resp = await fetch(`/api/weather/pressure/delta?window=${encodeURIComponent(win)}`, {
-        cache: "default",
-      });
-      if (!resp.ok) {
-        warn("isobar delta: HTTP", resp.status);
-        return;
-      }
-      const data = await resp.json();
-      if (!data || !data.grid || !data.data) return;
-      const bin = atob(data.data);
-      const bytes = new Uint8Array(bin.length);
-      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-      const values = new Int16Array(bytes.buffer);
-      const grid = {
-        cols: data.grid.cols,
-        rows: data.grid.rows,
-        latMin: data.grid.lat_min,
-        latStep: data.grid.lat_step,
-        lonMin: data.grid.lon_min,
-        lonStep: data.grid.lon_step,
-        scale: data.grid.scale,
-      };
+      // ── THE FIELD: fetched once per window ──────────────────────────
+      if (state.deltaWin !== win || !state.deltaField) {
+        const resp = await fetch(`/api/weather/pressure/delta?window=${encodeURIComponent(win)}`, {
+          cache: "default",
+        });
+        if (!resp.ok) {
+          warn("isobar delta: HTTP", resp.status);
+          return;
+        }
+        const data = await resp.json();
+        if (!data || !data.grid || !data.data) return;
+        const bin = atob(data.data);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        const values = new Int16Array(bytes.buffer);
+        const grid = {
+          cols: data.grid.cols,
+          rows: data.grid.rows,
+          latMin: data.grid.lat_min,
+          latStep: data.grid.lat_step,
+          lonMin: data.grid.lon_min,
+          lonStep: data.grid.lon_step,
+          scale: data.grid.scale,
+        };
 
-      // ── THE BLUR, THE SAME ONE THE LIVE CHART GETS ──────────────────
-      //
-      // The live chart is contoured from a Gaussian-blurred field
-      // (worker/isobars.py::smooth_field — σ = 2 cells, wrapping in
-      // longitude, nearest at the poles) because the analysis carries
-      // structure below synoptic scale and contoured raw it breaks into
-      // thousands of fragments. The delta skipped that, and a difference
-      // of two fields is TWICE the noise — so the change map was
-      // contouring the GRIB's own noise.
-      //
-      // Measured on the real 24-hour delta: the blur cuts the 0.10 hPa
-      // chart from 28,171 lines to 11,181 and the 0.25 hPa chart from
-      // 11,278 to 4,449 — and it gives the change map the same
-      // character as the live one.
+        // ── THE BLUR, THE SAME ONE THE LIVE CHART GETS ────────────────
+        //
+        // The live chart is contoured from a Gaussian-blurred field
+        // (worker/isobars.py::smooth_field — σ = 2 cells, wrapping in
+        // longitude, nearest at the poles) because the analysis carries
+        // structure below synoptic scale and contoured raw it breaks into
+        // thousands of fragments. The delta skipped that, and a difference
+        // of two fields is TWICE the noise — so the change map was
+        // contouring the GRIB's own noise.
+        //
+        // Measured on the real 24-hour delta: the blur cuts the 0.10 hPa
+        // chart from 28,171 lines to 11,181 and the 0.25 hPa chart from
+        // 11,278 to 4,449 — and it gives the change map the same
+        // character as the live one.
+        const DC = window.DeltaContour;
+        const field = DC && DC.smoothField ? DC.smoothField(values, grid) : values;
+
+        // ── THE COLOUR SCALE IS THE WHOLE MAP ──────────────────────────
+        //
+        // Computed from the WHOLE field, before the viewport is applied —
+        // otherwise the same line changes colour as the reader pans, and
+        // "red" would mean something different in every view.
+        let maxAbs = 0;
+        for (let i = 0; i < field.length; i++) {
+          const v = Math.abs(field[i]) / (grid.scale || 1);
+          if (v > maxAbs) maxAbs = v;
+        }
+        state.deltaScale = maxAbs > 0 ? maxAbs : 40;
+        // THE CACHE. Three things, all tied to THIS window: the decoded
+        // field, its grid, and the metadata the attribution prints.
+        state.deltaWin = win;
+        state.deltaField = field;
+        state.deltaGrid = grid;
+        state.deltaData = data;
+      }
+      const field = state.deltaField;
+      const grid = state.deltaGrid;
+      const data = state.deltaData;
       const DC = window.DeltaContour;
-      const field = DC && DC.smoothField ? DC.smoothField(values, grid) : values;
-
-      // ── THE COLOUR SCALE IS THE WHOLE MAP ────────────────────────────
-      //
-      // Computed from the WHOLE field, before the viewport is applied —
-      // otherwise the same line changes colour as the reader pans, and
-      // "red" would mean something different in every view.
-      let maxAbs = 0;
-      for (let i = 0; i < field.length; i++) {
-        const v = Math.abs(field[i]) / (grid.scale || 1);
-        if (v > maxAbs) maxAbs = v;
-      }
-      state.deltaScale = maxAbs > 0 ? maxAbs : 40;
 
       // ── CONTOUR THE VIEWPORT, NOT THE WORLD ──────────────────────────
       //
@@ -846,7 +884,10 @@
       setAttribution("Pressure change · " + (data.label || win) +
         " (" + (data.ref_cycle ? data.ref_cycle.slice(0, 10) : "") + " → " +
         (data.cycle ? data.cycle.slice(0, 10) : "") + ")");
-      state.loaded = null;
+      // The box the LINES were cut for. `loadedCovers()` compares it with
+      // the viewport: a pan that stays inside it costs nothing, and a pan
+      // that leaves it re-contours (from the cached field — no network).
+      state.loaded = box;
       render(items);
     } catch (e) {
       warn("isobar delta failed:", e);

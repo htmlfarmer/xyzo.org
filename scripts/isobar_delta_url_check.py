@@ -17,7 +17,9 @@ that matter:
      does NOT overwrite the reader's own stored window — a link is a
      VIEW, not a settings change;
   4. the SAME link pasted into an already-open tab (a same-document
-     navigation, where the boot-time restore never runs) applies it too.
+     navigation, where the boot-time restore never runs) applies it too;
+  5. a PAN re-contours the change map WITHOUT fetching the field again —
+     the field is the whole world and does not change with the viewport.
 
 Run: python3 scripts/isobar_delta_url_check.py
 """
@@ -28,10 +30,33 @@ from playwright.sync_api import sync_playwright
 BASE = "https://xyzo.org/"
 HASH = "#2.5480,40.4297,3/overlay=isobars@100/iso=0.1:pressure"
 LINK = "#2.5480,40.4297,3/overlay=isobars@100/delta=24h"
+DELTA_FIELD = "/api/weather/pressure/delta?window="
 
 
 def hash_of(page):
     return page.evaluate("() => window.location.hash")
+
+
+def field_fetches(page):
+    """How many times the delta FIELD has been fetched."""
+    return page.evaluate(
+        """(needle) => performance.getEntriesByType('resource')
+             .filter((r) => r.name.indexOf(needle) >= 0).length""",
+        DELTA_FIELD,
+    )
+
+
+def drawn_lines(page):
+    """How many lines the layer is actually drawing."""
+    return page.evaluate(
+        """() => {
+            const L = window.IsobarLayer;
+            const s = L && L._state ? L._state : null;
+            let n = 0;
+            if (s && s.group && s.group.eachLayer) s.group.eachLayer(() => { n++; });
+            return n;
+        }"""
+    )
 
 
 def chip_state(page, delta):
@@ -185,6 +210,36 @@ def main():
             failures.append(f"the pasted link's window was not applied: {st['window']!r}")
         if not st["active"]:
             failures.append("the chip row did not follow the pasted window")
+
+        # ── 5. a PAN re-contours, and does NOT re-fetch the field ───────
+        # The field is the WHOLE WORLD and does not change with the
+        # viewport — only the CONTOURING does. The first version fetched
+        # it again on every pan (measured: four pans, four extra fetches
+        # of the 130 KB field) and left `state.loaded` null so that
+        # `loadedCovers()` could never short-circuit.
+        pan = ctx.new_page()
+        pan.on("pageerror", lambda e: errs.append(str(e)[:200]))
+        pan.goto(BASE + LINK, wait_until="domcontentloaded", timeout=60000)
+        wait_for_map(pan)
+        pan.wait_for_timeout(10000)
+        fetches_before = field_fetches(pan)
+        lines_before = drawn_lines(pan)
+        for i in range(3):
+            pan.mouse.move(700, 450)
+            pan.mouse.down()
+            pan.mouse.move(700 + 80 * (i + 1), 450, steps=8)
+            pan.mouse.up()
+            pan.wait_for_timeout(1800)
+        pan.wait_for_timeout(5000)
+        fetches_after = field_fetches(pan)
+        lines_after = drawn_lines(pan)
+        print(f"the field was fetched {fetches_before} time(s); "
+              f"lines drawn {lines_before} → {lines_after}")
+        if fetches_after != fetches_before:
+            failures.append(
+                f"panning re-fetched the delta field ({fetches_before} → {fetches_after})")
+        if lines_after == 0:
+            failures.append("panning left the change map with NO lines drawn")
 
         if errs:
             failures.append(f"page errors: {errs[:3]}")

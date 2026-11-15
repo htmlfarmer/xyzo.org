@@ -20,6 +20,17 @@ const opacityJs = readFileSync(join(ROOT, "overlay-opacity.js"), "utf8");
 
 const MP = globalThis.MapPresets;
 
+// The slice of source between two markers. Anchored on CODE, never on a
+// comment: prose gets reworded, and an assertion anchored on prose ends
+// up slicing from -1.
+function between(src, startMarker, endMarker) {
+  const i = src.indexOf(startMarker);
+  expect(i).toBeGreaterThan(-1);
+  const rest = src.slice(i);
+  const j = rest.indexOf(endMarker);
+  return j < 0 ? rest : rest.slice(0, j);
+}
+
 // ── a throwaway localStorage ──────────────────────────────────────────
 function makeStorage() {
   const m = new Map();
@@ -381,6 +392,25 @@ describe("presets — the hashes are real app hashes", () => {
     // ...and its pins are MEDIUM, not max: the pins are the heaviest
     // thing a slow machine fetches (3,000 at max, 1,500 at medium).
     expect(low.density).toBe("medium");
+  });
+
+  test("the chips WRAP — the layers panel is 335 px on a 393 px phone", () => {
+    // The preset chips are ONE flex line, so their width is the SUM of
+    // their widths — and the layers panel is 335 px on a phone.
+    //
+    // MEASURED on a 393 px viewport: ten chips were 417 px and the
+    // eleventh (🛰️ Satellite) made it 459 px, so the last two or three
+    // chips sat PAST the panel's right edge (the last chip's right edge
+    // at 435 px against a panel that ends at 353 px) and were
+    // unreachable without horizontal scrolling.
+    //
+    // `flex-wrap: wrap` puts them on a second line instead, and
+    // `min-width: 0` lets the row shrink inside the flex parent that
+    // holds it. Measured after: the row is 330 px inside the 335 px
+    // panel, and all eleven chips are inside the panel AND hit-testable.
+    const block = between(stylesCss, ".leaflet-presets-chips {", "}");
+    expect(block).toMatch(/flex-wrap:\s*wrap/);
+    expect(block).toMatch(/min-width:\s*0/);
   });
 });
 
