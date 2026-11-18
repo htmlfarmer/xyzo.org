@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { compress } from "hono/compress";
 import { healthRoute } from "./routes/health";
 import { pinsRoute } from "./routes/pins";
+import { lyrzRoute } from "./routes/lyrz";
 import { adminRoute } from "./routes/admin";
 import { geocodeRoute } from "./routes/geocode";
 import { eventsRoute } from "./routes/events";
@@ -133,6 +134,9 @@ app.use("*", async (c, next) => {
 
 app.route("/api/health", healthRoute);
 app.route("/api", pinsRoute);
+// LYRz settlement: link a contributor to their LYRz identity and settle
+// their contributions out to lyrz.org as a portable LYRz balance.
+app.route("/api", lyrzRoute);
 app.route("/api", geocodeRoute);
 app.route("/api", eventsRoute);
 app.route("/api", upcomingEventsRoute);
@@ -243,6 +247,16 @@ const server = Bun.serve({
 });
 
 console.log(`[xyzo] listening on ${hostname}:${server.port}`);
+
+// LYRz settlement: contributors' work becomes a portable LYRz balance that
+// follows them across the ecosystem. Non-fatal by design — if LYRz is down
+// the contributions stay queued locally and are retried.
+void import("./lib/lyrz")
+  .then(async (m) => {
+    await m.ensureQueueTable();
+    m.startSettlementLoop();
+  })
+  .catch((e) => console.error("[lyrz] bridge not started:", e?.message ?? e));
 
 // Warm city lookup cache in background (world_cities foreign table, ~30s)
 // MAJOR_CITIES (~200 cities) are always loaded instantly; this adds coverage.
