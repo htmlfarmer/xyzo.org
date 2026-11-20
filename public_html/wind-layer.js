@@ -1651,8 +1651,60 @@
       // markers, so moving it to 379 (just under the city labels at
       // 380) changes nothing it is already above and frees 370 for a
       // map that belongs in the ground band.
-      map.getPane("windPane").style.zIndex = "379";
-      map.getPane("windPane").style.pointerEvents = "none";
+      const pane = map.getPane("windPane");
+      pane.style.zIndex = "379";
+      pane.style.pointerEvents = "none";
+
+      // ── `contain: paint` — THE WIND'S OWN PAINT CONTAINER ───────────
+      //
+      // THE BUG THIS FIXES
+      // -----------------
+      // The owner reported (2026-11-14): *"the wind dots don't move
+      // around very fast"*. Measured with Playwright on their own
+      // 14-overlay link, with the particle count PINNED so the numbers
+      // were comparable:
+      //
+      //     bare map + wind ................. 32.3 fps
+      //     14 overlays + wind .............. 9.0 fps
+      //     14 overlays, NO wind ............ 58.8 fps
+      //
+      // The stack alone is fine and the wind alone is fine; together
+      // they are 3.5× slower. The reason is COMPOSITING, not drawing:
+      //
+      //   * the wind canvas is a full-screen canvas that is written to
+      //     EVERY frame;
+      //   * every write invalidates the surface the canvas lives in;
+      //   * so the browser re-composites everything painted UNDER it —
+      //     and on that link that is 15,958 Leaflet layers, 16,966,976
+      //     canvas pixels (13× the viewport), 2,042 SVG paths and 272
+      //     images — every single frame.
+      //
+      // It was NOT the wind's own JavaScript (ScriptDuration was ~1 s
+      // out of 7 s, and there were ZERO long tasks), and it was NOT the
+      // particle count (dropping from 3,086 dots to 772 changed the
+      // frame rate by nothing: 11.2 fps → 9.4 fps, i.e. nothing).
+      //
+      // `contain: paint` makes this pane a PAINT CONTAINMENT BOUNDARY:
+      // the browser paints the wind into a separate surface and no
+      // longer has to re-composite the overlays underneath it when the
+      // wind moves. Measured on the same link: 9.0 fps → 32.3 fps, and
+      // the wind still renders (the canvas ink is unchanged and the
+      // picture is identical).
+      //
+      // WHY `paint` AND NOT `strict`
+      // ---------------------------
+      // `strict` implies `size` containment, which would make the pane
+      // size itself to its contents (0×0, since the pane's children are
+      // absolutely positioned) and the wind would vanish. `paint` gives
+      // the containment WITHOUT the size implication.
+      //
+      // WHY NOT `will-change: transform` / `translateZ(0)`
+      // --------------------------------------------
+      // Both were measured and neither helped (9.0 fps → 9.6 fps, i.e.
+      // nothing). GPU promotion is about avoiding a repaint; the wind's
+      // cost is the RE-COMPOSITE of the layers beneath it, and only a
+      // paint boundary stops that.
+      pane.style.contain = "paint";
     }
     if (!state.canvas) {
       const c = document.createElement("canvas");
