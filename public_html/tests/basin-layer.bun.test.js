@@ -159,27 +159,60 @@ describe("basin data assets", () => {
     expect(meta.kind_counts.interior).toBeGreaterThan(3);
   });
 
-  test("meta declares BOTH detail levels and a default", () => {
+  test("meta declares every detail level, its file and a default", () => {
     // The layer names its request off meta.levels[].file, so a level
     // that disappears leaves the overlay unable to load at all.
     const meta = readMeta();
     const ids = (meta.levels || []).map((l) => l.id);
     expect(ids).toContain("major");
     expect(ids).toContain("detailed");
+    expect(ids).toContain("internal");
+    expect(ids).toContain("internal-detailed");
     expect(ids).toContain(meta.default_level);
+    expect(ids.length).toBe(new Set(ids).size, "level ids must be unique");
     for (const lv of meta.levels) {
-      expect(lv.file).toMatch(/^basins_(major|detailed)\.geojson$/);
+      expect(lv.file).toMatch(/^basins_[a-z-]+\.geojson$/);
       expect(lv.simplify_deg).toBeGreaterThan(0);
-      // The same 235 basins at two precisions — a level must not hold
-      // a different set, or switching would change what is on the map.
       expect(lv.basins).toBeGreaterThan(200);
-      expect(lv.basins).toBe(meta.basin_count);
+      expect(lv.kind_counts).toBeTruthy();
+      expect(lv.source).toMatch(/^(major|internal)$/);
     }
-    // detailed is finer, so its file is the larger of the two
+
+    // THE POPULATION RULE, WHICH IS NOT "every level holds the same
+    // basins" ANY MORE.
+    //
+    // It used to be: both levels were the same 235 basins at two
+    // precisions, so `lv.basins === meta.basin_count` held for all of
+    // them and switching could never change what was on the map. The
+    // internal levels deliberately hold a DIFFERENT population (281
+    // endorheic basins), so the rule is now per population: the two
+    // precisions of one population agree with each other, and the two
+    // populations differ.
     const major = meta.levels.find((l) => l.id === "major");
     const detailed = meta.levels.find((l) => l.id === "detailed");
+    const internal = meta.levels.find((l) => l.id === "internal");
+    const internalFine = meta.levels.find((l) => l.id === "internal-detailed");
+
+    // …and each level agrees with its own population's count.
+    expect(major.basins).toBe(meta.basin_count);
+    expect(detailed.basins).toBe(major.basins);
+    expect(internalFine.basins).toBe(internal.basins);
+
+    // The two populations are genuinely different — that is the whole
+    // point of the internal levels.
+    expect(internal.basins).not.toBe(major.basins);
+    // …and the internal population is entirely endorheic, which is what
+    // the publisher's `TO_BAS = -888` filter selects for.
+    expect(internal.kind_counts.interior).toBe(internal.basins);
+    expect(internal.kind_counts.river || 0).toBe(0);
+    expect(internal.kind_counts.coast || 0).toBe(0);
+
+    // Within a population the finer level is the sharper one: a smaller
+    // tolerance and a bigger file.
     expect(detailed.simplify_deg).toBeLessThan(major.simplify_deg);
     expect(detailed.size).toBeGreaterThan(major.size);
+    expect(internalFine.simplify_deg).toBeLessThan(internal.simplify_deg);
+    expect(internalFine.size).toBeGreaterThan(internal.size);
   });
 
   test("the biggest basins are the ones you would expect", () => {

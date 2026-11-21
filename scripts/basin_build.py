@@ -75,13 +75,89 @@ SHP_NAME = "bas_wrld_38047.shp"
 # Both levels are the SAME 235 basins, so switching between them never
 # changes what is on the map — only how finely the boundary is drawn.
 # Measured: 324k -> 690k vertices, largest basin ring 2,432 -> 10,822.
+#
+# ── AND THE INTERNAL (ENDORHEIC) BASINS ────────────────────────────────
+#
+# Owner, 2026-11-20: *"can we start to support the INTERNAL BASINS we
+# kinda need them"*. They were never missing from the world — they were
+# missing from OUR DATA. The 2012 shapefile (`bas_wrld_38047`) carries
+# only `NAME_BASIN / GRID_CODE / AREA / PERIMETER`, so the overlay had
+# to read the hydrological character off the basin's NAME ("Interior" =
+# endorheic) and could only ever see the 8 coarse regions FAO named
+# that way.
+#
+# The FAO's **2022 "Hydrological basins of the world"** carries the
+# sub-basin table the 2012 file lacks — `MAJ_BAS / MAJ_NAME / MAJ_AREA /
+# SUB_BAS / SUB_NAME / SUB_AREA / TO_BAS` — and `TO_BAS` is the
+# downstream basin code: **-888 = internal sub-basin**, -999 = drains to
+# the sea. That is the publisher's OWN definition of "internal", not a
+# name we infer. It yields **281 named internal basins** (Sahara,
+# Caspian, Aral Sea, Lake Chad, Dead Sea, Great Salt Lake, Lake Eyre,
+# the Namib, the Kalahari pans, the Gobi lakes, Makgadikgadi …), each
+# with its own name and area — against the 8 coarse regions the name
+# heuristic could find.
+INTERNAL_ZIP = os.path.join(REPO, "maps", "hydrobasins_world.zip")
+INTERNAL_SHP_NAME = "final_world_basins.shp"
+INTERNAL_DOWNLOAD_URL = (
+    "https://storage.googleapis.com/fao-maps-catalog-data/boundaries/"
+    "hydrobasins_world.zip"
+)
+# `TO_BAS = -888` is FAO's own sentinel for an internally drained basin.
+INTERNAL_WHERE = "to_bas = -888"
+
+# (id, label, Douglas-Peucker tolerance in degrees, source key)
+#   source "major"    -> bas_wrld_38047 (235 named basins)
+#   source "internal" -> final_world_basins filtered to TO_BAS = -888
 DETAIL_LEVELS = [
-    # (id, label, Douglas-Peucker tolerance in degrees)
-    ("major", "Major basins", 0.05),
-    ("detailed", "Detailed", 0.01),
+    ("major", "Major basins", 0.05, "major"),
+    ("detailed", "Detailed", 0.01, "major"),
+    ("internal", "Internal", 0.05, "internal"),
+    ("internal-detailed", "Internal detailed", 0.01, "internal"),
 ]
 DEFAULT_LEVEL = "major"
 DEFAULT_SIMPLIFY = 0.05   # kept for the --simplify override
+
+# ── the UPSTREAM licence (HydroSHEDS version 1) ────────────────────────
+#
+# THE FAO LABELS BOTH SOURCES CC BY-SA 4.0 / CC BY 4.0, BUT THE PRODUCT
+# THEY ARE DERIVED FROM — HydroSHEDS version 1 — CARRIES ITS OWN LICENCE
+# (Appendix A of the HydroSHEDS Technical Documentation v1.4), and that
+# licence requires the **Exhibit B attribution to travel with the
+# product's METADATA**, not merely a credit in the corner of the map.
+#
+# `docs/DATA_LICENSES.md` had this logged as **OPEN**: *"the WWF/
+# HydroSHEDS statement and the 2008 citation are not yet [in the
+# metadata], and they are an obligation of the upstream licence."* It is
+# closed here — the same three strings `river_network_build.py` carries,
+# because they are the same upstream obligation and **a licence
+# obligation must survive a rebuild**: the builder OVERWRITES the
+# published meta.json, so a text that lives only in a doc is a text that
+# disappears the next time anyone runs the build.
+UPSTREAM = ("HydroSHEDS version 1 (via FAO AQUASTAT) — © World Wildlife "
+            "Fund, Inc. (2006-2022), used under licence")
+
+UPSTREAM_ATTRIBUTION = (
+    "This product incorporates data from the HydroSHEDS version 1 "
+    "database which is © World Wildlife Fund, Inc. (2006-2022) and has "
+    "been used herein under license. WWF has not evaluated the data as "
+    "altered and incorporated within this product, and therefore gives "
+    "no warranty regarding its accuracy, completeness, currency or "
+    "suitability for any particular purpose. Portions of the "
+    "HydroSHEDS v1 database incorporate data which are the intellectual "
+    "property rights of © USGS (2006-2008), NASA (2000-2005), ESRI "
+    "(1992-1998), CIAT (2004-2006), UNEP-WCMC (1993), WWF (2004), "
+    "Commonwealth of Australia (2007), and Her Royal Majesty and the "
+    "British Crown and are used under license. The HydroSHEDS v1 "
+    "database and more information are available at "
+    "https://www.hydrosheds.org."
+)
+
+UPSTREAM_CITATION = (
+    "The scientific citation for the HydroSHEDS version 1 database is: "
+    "Lehner, B., Verdin, K., Jarvis, A. (2008): New global hydrography "
+    "derived from spaceborne elevation data. Eos, Transactions, AGU, "
+    "89(10): 93-94."
+)
 
 # Mean Earth radius in km. The area is computed with the exact spherical
 # polygon formula rather than a projected area: PROJ's cylindrical
@@ -119,6 +195,30 @@ KIND_COLORS = {
 # The FAO sentinel for "belongs to no named basin".
 SENTINEL = "-9999"
 
+# What each source table contributes to a level. Four fields, because
+# the two sources differ in all four — see _build_level().
+#
+#   kind "from_name" means read the hydrological character off the
+#   basin's NAME (the 2012 file has no hydrology column at all); a
+#   literal means every feature from that source IS that kind. For the
+#   internal source that is the honest answer: the row was selected by
+#   FAO's own `TO_BAS = -888`, so it is an endorheic basin by
+#   construction, whatever the name says.
+SOURCE_SPECS = {
+    "major": {
+        "table": "bas_wrld_38047",
+        "name_col": "name_basin",
+        "where": f"name_basin <> '{SENTINEL}'",
+        "kind": "from_name",
+    },
+    "internal": {
+        "table": "final_world_basins",
+        "name_col": "sub_name",
+        "where": INTERNAL_WHERE,
+        "kind": KIND_INTERIOR,
+    },
+}
+
 # Places that must land in a plausible basin. A flipped axis or a botched
 # dissolve puts these in the wrong country, and only known places catch it.
 # Each probe is (lon, lat, acceptable basin names). The list matters:
@@ -141,6 +241,30 @@ PROBES = [
     (31.2, 30.0, ("Nile",)),          # Cairo
     (-90.2, 38.6, ("Mississippi",)),  # St Louis
     (2.35, 48.85, ("Seine",)),        # Paris
+]
+
+# Probes for the INTERNAL (endorheic) level. Every point was checked
+# against the source geometry with a real point-in-polygon test — a
+# probe that sits just outside its basin would make the gate fail on a
+# correct build, and one that sits in the wrong basin would pass a
+# broken one. Spans Africa, Asia, the Middle East, North America and
+# Australia, because a mirrored axis fails in the hemisphere you did
+# not probe.
+INTERNAL_PROBES = [
+    (-10.0, 23.0, ("Sahara",)),                       # central Sahara
+    (26.0, 28.0, ("Egyptian western Desert",)),       # N Africa
+    (19.0, 18.0, ("Borkou",)),                        # Lake Chad basin
+    (17.0, -18.0, ("Omuramba Ovambo",)),              # Botswana
+    (60.0, 45.0, ("Aral Sea",)),                      # Aral
+    (74.0, 46.3, ("Lake Balkash",)),                  # Balkhash
+    (64.0, 42.0, ("Kyzylkum",)),                      # Karakum/Kyzylkum
+    (54.0, 34.5, ("Dasht-e Kavir",)),                 # Iran plateau
+    (100.2, 36.9, ("Ch'ing-hai Hu",)),                # Qinghai Lake
+    (89.2, 42.9, ("Turpan Pendi",)),                  # Turpan depression
+    (90.5, 40.5, ("Lop Nur",)),                       # Lop Nur
+    (101.0, 41.0, ("Jo Shui", "Gaxun Nur")),          # Gobi
+    (-112.5, 41.2, ("Great Salt Lake",)),             # USA
+    (138.0, -30.0, ("Lake Frome",)),                  # Australia
 ]
 
 
@@ -193,21 +317,35 @@ def kind_for(name: str) -> str:
     return KIND_RIVER
 
 
-def extract_source() -> str:
-    """Unpack the source zip into a temp dir and return the .shp path."""
-    if not os.path.exists(SRC_ZIP):
-        raise SystemExit(
-            f"Source missing: {SRC_ZIP}\n"
-            f"Download it from {DOWNLOAD_URL} and save it there."
-        )
+def extract_source() -> tuple[str, dict[str, str]]:
+    """Unpack BOTH source zips into a temp dir.
+
+    Returns (tmpdir, {source_key: .shp path}). Two sources, because the
+    internal basins are not in the 2012 file — see INTERNAL_ZIP.
+    """
     tmp = tempfile.mkdtemp(prefix="basin_src_")
-    log(f"extracting {os.path.basename(SRC_ZIP)} ({os.path.getsize(SRC_ZIP) / 1e6:.0f} MB)")
-    with zipfile.ZipFile(SRC_ZIP) as z:
-        z.extractall(tmp)
-    shp = os.path.join(tmp, SHP_NAME)
-    if not os.path.exists(shp):
-        raise SystemExit(f"{SHP_NAME} not found inside the zip")
-    return tmp, shp
+    found: dict[str, str] = {}
+
+    for key, zip_path, shp_name in (
+        ("major", SRC_ZIP, SHP_NAME),
+        ("internal", INTERNAL_ZIP, INTERNAL_SHP_NAME),
+    ):
+        if not os.path.exists(zip_path):
+            url = DOWNLOAD_URL if key == "major" else INTERNAL_DOWNLOAD_URL
+            raise SystemExit(
+                f"Source missing: {zip_path}\n"
+                f"Download it from {url} and save it there."
+            )
+        log(f"extracting {os.path.basename(zip_path)} "
+            f"({os.path.getsize(zip_path) / 1e6:.0f} MB)")
+        with zipfile.ZipFile(zip_path) as z:
+            z.extractall(tmp)
+        shp = os.path.join(tmp, shp_name)
+        if not os.path.exists(shp):
+            raise SystemExit(f"{shp_name} not found inside {zip_path}")
+        found[key] = shp
+
+    return tmp, found
 
 
 def run_ogr(args: list[str]) -> None:
@@ -219,23 +357,37 @@ def run_ogr(args: list[str]) -> None:
 
 
 def _build_level(shp: str, tmpdir: str, simplify: float, coord_precision: int,
-                 out_geojson: str) -> tuple:
+                 out_geojson: str, spec: dict) -> tuple:
     """One detail level: dissolve -> simplify -> makevalid -> enrich.
+
+    `spec` names the source table, the column the basin's NAME lives in,
+    the rows to keep, and how the hydrological `kind` is decided. The
+    two sources differ in all four:
+
+        major     bas_wrld_38047  name_basin  <> '-9999'   kind_for(name)
+        internal  final_world_basins sub_name  to_bas=-888  always "interior"
+
+    The internal spec filters on FAO's OWN `TO_BAS = -888` sentinel
+    rather than on the basin's name — the publisher's definition of an
+    internally drained basin, not one we infer.
 
     Returns (features, kind_counts, total_area_km2, problems).
     """
+    table = spec["table"]
+    name_col = spec["name_col"]
+    where = spec["where"]
     # One pass: dissolve by basin name, compute the true area from an
     # equal-area projection, and simplify. The source polygons are tiny
     # and enormously detailed, so dissolving first is what makes the
     # output usable at all (50,225 polygons -> ~235).
     sql = f"""
         WITH u AS (
-          SELECT name_basin AS name,
+          SELECT {name_col} AS name,
                  count(*) AS n_polys,
                  ST_Union(geometry) AS geom
-          FROM bas_wrld_38047
-          WHERE name_basin <> '{SENTINEL}'
-          GROUP BY name_basin
+          FROM {table}
+          WHERE {where}
+          GROUP BY {name_col}
         )
         SELECT name,
                n_polys,
@@ -291,7 +443,12 @@ def _build_level(shp: str, tmpdir: str, simplify: float, coord_precision: int,
             problems.append(f"basin {name!r} has geometry type {gtype}")
             continue
         area_km2 = spherical_area_km2(feat.GetGeometryRef())
-        kind = kind_for(name)
+        # "from_name" = the 2012 file's heuristic (it has no hydrology
+        # column); anything else is fixed by the source spec.
+        if spec["kind"] == "from_name":
+            kind = kind_for(name)
+        else:
+            kind = spec["kind"]
         kinds[kind] = kinds.get(kind, 0) + 1
         total_area += area_km2
         out_features.append({
@@ -360,7 +517,7 @@ def _build_level(shp: str, tmpdir: str, simplify: float, coord_precision: int,
 
 def build(coord_precision: int = 4) -> dict:
     """Build every detail level and the shared meta.json."""
-    tmpdir, shp = extract_source()
+    tmpdir, shps = extract_source()
     try:
         os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -372,11 +529,14 @@ def build(coord_precision: int = 4) -> dict:
 
         levels_meta: list[dict] = []
         shared = None
-        for lid, label, tol in DETAIL_LEVELS:
+        for lid, label, tol, src_key, *_ in DETAIL_LEVELS:
+            spec = SOURCE_SPECS[src_key]
+            shp = shps[src_key]
             out_geojson = os.path.join(OUT_DIR, f"basins_{lid}.geojson")
-            log(f"[{lid}] building detail level ({tol} deg) ...")
+            log(f"[{lid}] building detail level ({tol} deg, "
+                f"source={spec['table']}) ...")
             features, kinds, total, problems = _build_level(
-                shp, tmpdir, tol, coord_precision, out_geojson)
+                shp, tmpdir, tol, coord_precision, out_geojson, spec)
             for pr in problems:
                 log(f"build problem ({lid}): {pr}")
             size = os.path.getsize(out_geojson)
@@ -387,10 +547,12 @@ def build(coord_precision: int = 4) -> dict:
                 "label": label,
                 "file": f"basins_{lid}.geojson",
                 "simplify_deg": tol,
+                "source": src_key,
                 "size": size,
                 "basins": len(features),
                 "total_area_km2": round(total),
             })
+            levels_meta[-1]["kind_counts"] = kinds
             if shared is None:
                 shared = (features, kinds, total)
 
@@ -404,6 +566,17 @@ def build(coord_precision: int = 4) -> dict:
             "download": DOWNLOAD_URL,
             "attribution": ATTRIBUTION,
             "license": LICENSE,
+            # ── the UPSTREAM (HydroSHEDS v1) obligation ──────────────
+            # docs/DATA_LICENSES.md logged this as OPEN: the FAO credit
+            # was present, but the upstream licence requires the WWF/
+            # HydroSHEDS statement AND the 2008 citation to travel with
+            # the LAYER'S METADATA, not just with a map credit. They are
+            # written here because this builder overwrites meta.json —
+            # a licence text that lives only in a document disappears
+            # the next time anyone rebuilds.
+            "upstream": UPSTREAM,
+            "upstream_attribution": UPSTREAM_ATTRIBUTION,
+            "upstream_citation": UPSTREAM_CITATION,
             "basin_count": len(features),
             "total_area_km2": round(total_area),
             "levels": levels_meta,
@@ -416,12 +589,15 @@ def build(coord_precision: int = 4) -> dict:
                 for f in features[:12]
             ],
             "note": (
-                "Basins are FAO-named drainage regions. The published "
-                "MAJ_BAS/SUB_BAS/TO_BAS attribute table is not distributed "
-                "with the geometry, so the basin area here is computed from "
-                "the polygons themselves in an equal-area projection. Two "
-                "detail levels are published: the same 235 basins drawn at "
-                "0.05 deg (fast) and 0.01 deg (~1 km, sharp)."
+                "Basins are FAO-named drainage regions. The 2012 source "
+                "carries only NAME_BASIN/GRID_CODE/AREA/PERIMETER, so the "
+                "basin area here is computed from the polygons themselves. "
+                "FOUR detail levels are published: the 235 named basins at "
+                "0.05 deg (fast) and 0.01 deg (~1 km, sharp), and the 281 "
+                "INTERNALLY DRAINED (endorheic) sub-basins at the same two "
+                "precisions — selected by FAO's own TO_BAS = -888 sentinel "
+                "from the 2022 Hydrological basins of the world dataset, "
+                "which carries the sub-basin table the 2012 file does not."
             ),
         }
         meta_path = os.path.join(OUT_DIR, "meta.json")
@@ -432,23 +608,56 @@ def build(coord_precision: int = 4) -> dict:
         # The gate runs on EVERY published level — a file that fails
         # must never be served, whichever one the user picks.
         for lv in levels_meta:
+            # Each level is gated against ITS OWN expectations — see
+            # LEVEL_EXPECT. The gate reads the PUBLISHED FILE, not the
+            # in-memory list: the shared `features` are the major
+            # level's, and passing those made the log line report "235
+            # basins" for a 281-basin internal level.
             verify(os.path.join(OUT_DIR, lv["file"]),
-                   {"total_area_km2": lv["total_area_km2"]}, features)
+                   {"total_area_km2": lv["total_area_km2"]},
+                   level=lv["id"])
         return meta
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
 
 
-def verify(geojson_path: str, meta: dict, features: list) -> None:
-    """Gate, not a checkpoint — a wrong axis passes a size check."""
+# What each published level must look like. ONE set of bounds cannot
+# serve both sources: the major levels hold 235 named basins covering
+# ~147 M km² of land, the internal levels hold 281 endorheic sub-basins
+# covering ~19.7 M km² (FAO's own SUB_AREA sum). A single range would
+# either reject a CORRECT internal build or accept a broken major one —
+# and a gate that cannot fail is not a gate.
+LEVEL_EXPECT = {
+    "major":    dict(count=(200, 400), area=(40, 200), probes=PROBES,
+                     all_kind=None),
+    "detailed": dict(count=(200, 400), area=(40, 200), probes=PROBES,
+                     all_kind=None),
+    "internal": dict(count=(270, 295), area=(14, 26),
+                     probes=INTERNAL_PROBES, all_kind=KIND_INTERIOR),
+    "internal-detailed": dict(count=(270, 295), area=(14, 26),
+                              probes=INTERNAL_PROBES, all_kind=KIND_INTERIOR),
+}
+
+
+def verify(geojson_path: str, meta: dict, level: str = "major") -> None:
+    """Gate, not a checkpoint — a wrong axis passes a size check.
+
+    `level` selects the expectations, because the internal levels come
+    from a different source with a different population. Expectations a
+    level does not have fall back to the major ones, so a level that
+    forgets to register still gets a gate rather than none.
+    """
+    exp = LEVEL_EXPECT.get(level, LEVEL_EXPECT["major"])
     problems = []
 
     ds = ogr.Open(geojson_path)
     lyr = ds.GetLayer(0)
 
-    if lyr.GetFeatureCount() < 200:
-        problems.append(f"only {lyr.GetFeatureCount()} basins (expected ~235)")
-    if lyr.GetFeatureCount() > 400:
+    lo, hi = exp["count"]
+    if lyr.GetFeatureCount() < lo:
+        problems.append(f"only {lyr.GetFeatureCount()} basins "
+                        f"(expected {lo}–{hi})")
+    if lyr.GetFeatureCount() > hi:
         problems.append(f"{lyr.GetFeatureCount()} basins — the dissolve did not run")
 
     # Every feature must carry a name and a positive area.
@@ -462,9 +671,24 @@ def verify(geojson_path: str, meta: dict, features: list) -> None:
             problems.append(f"basin {name!r} has area {area}")
             break
 
+    # The internal levels exist to be internal: a single feature that is
+    # not an endorheic basin means the TO_BAS filter did not apply, and
+    # the level would silently serve a mixed population under a name
+    # that promises one thing.
+    if exp["all_kind"]:
+        lyr.ResetReading()
+        wrong = [f.GetField("name") for f in lyr
+                 if f.GetField("kind") != exp["all_kind"]]
+        if wrong:
+            problems.append(
+                f"{len(wrong)} feature(s) are not {exp['all_kind']} "
+                f"(first: {wrong[0]!r}) — the internal filter did not apply"
+            )
+
     # Known places must land in a plausible basin.
-    for lon, lat, expect in PROBES:
+    for lon, lat, expect in exp["probes"]:
         pt = ogr.CreateGeometryFromWkt(f"POINT ({lon} {lat})")
+        lyr.ResetReading()
         hit = None
         for feat in lyr:
             try:
@@ -481,19 +705,23 @@ def verify(geojson_path: str, meta: dict, features: list) -> None:
             problems.append(f"probe ({lon},{lat}) → {hit!r}, expected one of {expect!r}")
 
     # The basins must cover a sane fraction of the land surface.
-    # Earth's land is ~149 M km² and these are the NAMED basins only, so
-    # the total should land in the same order of magnitude — a degrees /
-    # radians slip in the area formula inflates this by ~57x.
+    # Earth's land is ~149 M km² and the major levels hold the NAMED
+    # basins only, so the total should land in the same order of
+    # magnitude — a degrees / radians slip in the area formula inflates
+    # this by ~57x. The internal levels are a SUBSET of that, hence
+    # their own, much smaller, range.
     total = meta["total_area_km2"] / 1e6
-    if not (40 < total < 200):
-        problems.append(f"total basin area {total:.0f} M km² is implausible")
+    lo_a, hi_a = exp["area"]
+    if not (lo_a < total < hi_a):
+        problems.append(f"total basin area {total:.0f} M km² is implausible "
+                        f"(expected {lo_a}–{hi_a})")
 
     if problems:
         for p in problems:
-            log(f"VERIFY FAIL: {p}")
-        raise SystemExit("verify() failed — refusing to publish")
-    log(f"verify() passed: {len(features)} basins, {total:.0f} M km², "
-        f"{len(PROBES)} place probes OK")
+            log(f"VERIFY FAIL [{level}]: {p}")
+        raise SystemExit(f"verify() failed for level {level} — refusing to publish")
+    log(f"verify({level}) passed: {lyr.GetFeatureCount()} basins, "
+        f"{total:.0f} M km², {len(exp['probes'])} place probes OK")
 
 
 def main() -> None:
@@ -511,7 +739,11 @@ def main() -> None:
     args = ap.parse_args()
 
     if args.verify_only:
-        for lid, _label, _tol in DETAIL_LEVELS:
+        # Index the tuple rather than unpacking it: the level record has
+        # grown once already (a source key), and an unpack that must be
+        # edited every time it grows is an unpack that will be missed.
+        for lv_spec in DETAIL_LEVELS:
+            lid = lv_spec[0]
             path = os.path.join(OUT_DIR, f"basins_{lid}.geojson")
             if not os.path.exists(path):
                 print(f"[basins] missing {path} — run the build first",
@@ -521,10 +753,12 @@ def main() -> None:
             lv = next((x for x in meta.get("levels", []) if x["id"] == lid), {})
             ds = ogr.Open(path)
             lyr = ds.GetLayer(0)
-            feats = [{"name": f.GetField("name"), "area_km2": f.GetField("area_km2")}
-                     for f in lyr]
             ds = None
-            verify(path, {"total_area_km2": lv.get("total_area_km2", 0)}, feats)
+            # The level id selects the expectations (LEVEL_EXPECT) —
+            # reading it off meta.json means a level added to the build
+            # is verified by the same code path without a second list.
+            verify(path, {"total_area_km2": lv.get("total_area_km2", 0)},
+                   level=lid)
         print("[basins] verification PASSED for every published level")
         return
 

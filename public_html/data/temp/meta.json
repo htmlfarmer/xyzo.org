@@ -2,7 +2,7 @@
  "source": "NOAA NCEP GFS",
  "variable": "2 m air temperature",
  "product": "gfs.0p25",
- "run_time": "2026-11-14T18:00:00Z",
+ "run_time": "2026-11-21T06:00:00Z",
  "license": "US Government work (public domain)",
  "attribution": "NOAA NCEP GFS \u2014 2 m air temperature",
  "grid": {
@@ -25,12 +25,12 @@
   86.0
  ],
  "observed_c": [
-  -53.6,
-  44.6
+  -42.1,
+  42.1
  ],
  "observed_f": [
-  -64.5,
-  112.2
+  -43.7,
+  107.7
  ],
  "ramp": [
   {
@@ -146,5 +146,5 @@
    "f": 86.0
   }
  ],
- "built": "2026-11-14T21:45:15Z"
+ "built": "2026-11-21T09:36:45Z"
 }

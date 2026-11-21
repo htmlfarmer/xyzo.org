@@ -33,7 +33,7 @@ Anything that fails (a) or (b) is flagged **ACTION** below.
 | 🌾 Cropland / Land cover | ESA WorldCover 10 m v200 (2021) | **CC BY 4.0** | "ESA WorldCover 10 m v200 (2021) — CC BY 4.0" | OK |
 | 💧 Rivers | Natural Earth 10m Rivers + Lake Centerlines | public domain | "Natural Earth (public domain)" | OK |
 | 🌊 **Rivers (FAO 2026)** | FAO AQUASTAT, **"Rivers (Global, edition 2026)"** (published 2026-06-15, revised 2026-07-16), from **HydroRIVERS** / HydroSHEDS — **hotlinked FAO WMS** (`aquamaps/wms`, layer `river_network`), not baked. The river **names** come from the same publisher's classic rivers layer (`rivers_world_47950`) | **CC BY 4.0 — attribution required** | "FAO AQUASTAT — Rivers (Global, 2026 ed.), from HydroRIVERS · CC BY 4.0" (in `options.attribution`, so Leaflet prints it in the map's attribution bar) | OK — added 2026-11-05. **The cartography is ours** (the client sends its own SLD, because the publisher's published style is dark-on-light and its main stems vanish on the default dark basemap), but the DATA is the publisher's and the credit says so. The names are a **derived** work of the classic layer, redistributed as anchor points under the same CC BY 4.0 terms. Depends on a third-party service: ~2 s/tile cold (now cached by our own proxy, `api/src/routes/faoRiversProxy.ts`), no self-hosted fallback yet (README Known Issues Q-N-1) |
-| 🌊 Hydrological basins | FAO, "Major hydrological basins of the world" (AQUASTAT / SOLAW) | **CC BY-SA 4.0** | "FAO — Major hydrological basins of the world (CC BY-SA 4.0)" | OK — attribution **added 2026-10-28** |
+| 🌊 Hydrological basins | FAO AQUASTAT — **two sources**, both HydroSHEDS-derived: **(a)** "Major hydrological basins of the world" (2012, `bas_wrld_38047`) for the 235 named basins; **(b)** "Hydrological basins of the world" (v2, 2022, `hydrobasins_world.zip`) for the **281 internally drained (endorheic) sub-basins** — selected by the publisher's own `TO_BAS = -888` sentinel, which only source (b) carries | **CC BY-SA 4.0** (both) | "FAO — Major hydrological basins of the world (CC BY-SA 4.0)" in `options.attribution`, **plus the Exhibit B upstream statement and the 2008 citation in `meta.json`** | OK — attribution **added 2026-10-28**; **the Exhibit B obligation CLOSED 2026-11-21** (`upstream` / `upstream_attribution` / `upstream_citation` written by the builder itself, so a rebuild cannot drop them). Source (b) is a **CC BY-SA 4.0** redistribution of the same HydroSHEDS v1 core, so the stricter upstream terms govern both — see the table above. Both files are served as the map's own layer data, not offered as a downloadable dataset |
 | 🪨 Geology | Macrostrat (UW Macrostrat Lab / NSF) | **CC BY 4.0** | linked "Macrostrat (CC BY 4.0, UW Macrostrat Lab)" | OK |
 | 🗺️ Geologic contacts | USGS / GSC world geology WMS | public domain (Open File 2915) | "USGS / GSC (Open File 2915)" | OK |
 | 🛰️ NASA Satellite / Rain / Night | NASA GIBS | US Government work — public domain | "© NASA GIBS / …" | OK |
@@ -79,9 +79,21 @@ the same rule applies in spirit: **rendered, not raw**.
    is in question.
 2. **We must carry the Exhibit B attribution** in the layer's metadata
    — not just the FAO credit. The FAO credit is already in
-   `options.attribution`; **the WWF/HydroSHEDS statement and the 2008
-   citation are not yet**, and they are an obligation of the upstream
-   licence. **OPEN.**
+   `options.attribution`. **CLOSED 2026-11-21**, when the internal
+   (endorheic) basin levels were added from a second HydroSHEDS-derived
+   source and the obligation could no longer be deferred: all three
+   strings — `upstream`, `upstream_attribution` (the WWF statement
+   including *"WWF has not evaluated the data as altered and
+   incorporated within this product"*) and `upstream_citation` (Lehner,
+   Verdin & Jarvis 2008) — are now written into
+   `public_html/data/basins/meta.json` **by `scripts/basin_build.py`
+   itself**. They live in the builder, not only here, because the
+   builder OVERWRITES meta.json: a licence text that exists only in a
+   document disappears the next time anyone rebuilds (the exact failure
+   `river_network_build.py` records for its own upstream text).
+   Pinned by `public_html/tests/basin-detail-level.bun.test.js`, which
+   asserts both that the strings are *defined* and that they are
+   *written*.
 3. **We must not distribute the data as a stand-alone product** — so
    the pre-render plan (our own tile pyramid) is exactly the RIGHT
    shape, and a "download the river network" link would not be.

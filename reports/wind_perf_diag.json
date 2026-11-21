@@ -1,0 +1,416 @@
+{
+  "url": "https://xyzo.org/#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:100",
+  "started": "2026-11-14T23:41:22-0800",
+  "seconds": 8.0,
+  "browsers": {
+    "firefox": {
+      "browser": "firefox",
+      "load_s": 1.88,
+      "runs": [
+        {
+          "errors": [],
+          "env": {
+            "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+            "hw": 16,
+            "dpr": 1,
+            "viewport": [
+              1440,
+              900
+            ],
+            "deviceMemory": null,
+            "hash": "#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:100",
+            "overlayCount": 14,
+            "panes": 36,
+            "canvases": {
+              "count": 60,
+              "px": 16966976
+            }
+          },
+          "windStart": {
+            "enabled": true,
+            "particles": 1611,
+            "fps": 10,
+            "quality": 0.52,
+            "loaded": true,
+            "style": "particles",
+            "density": 100,
+            "qscale": 0.5220062499999999
+          },
+          "cadence": {
+            "frames": 98,
+            "seconds": 8.03,
+            "fps": 12.2,
+            "p50_ms": 83.6,
+            "p95_ms": 115.8,
+            "worst_ms": 116.8,
+            "over_100ms": 14,
+            "over_50ms": 85
+          },
+          "longTasks": {
+            "count": 0,
+            "total_ms": 0,
+            "p95_ms": 0,
+            "worst_ms": 0,
+            "busy_pct": 0
+          },
+          "dotSpeed": {
+            "windows": 15,
+            "samples": 14465,
+            "p50_px_per_s": 44.3,
+            "p90_px_per_s": 144.8
+          },
+          "windEnd": {
+            "enabled": true,
+            "particles": 1234,
+            "fps": 13,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 100,
+            "qscale": 0.4
+          },
+          "density_setting": 100,
+          "label": "density=100"
+        },
+        {
+          "errors": [],
+          "env": {
+            "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+            "hw": 16,
+            "dpr": 1,
+            "viewport": [
+              1440,
+              900
+            ],
+            "deviceMemory": null,
+            "hash": "#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:50",
+            "overlayCount": 14,
+            "panes": 36,
+            "canvases": {
+              "count": 60,
+              "px": 16966976
+            }
+          },
+          "windStart": {
+            "enabled": true,
+            "particles": 617,
+            "fps": 5,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 50,
+            "qscale": 0.4
+          },
+          "cadence": {
+            "frames": 106,
+            "seconds": 8.03,
+            "fps": 13.2,
+            "p50_ms": 83.6,
+            "p95_ms": 116.7,
+            "worst_ms": 134,
+            "over_100ms": 16,
+            "over_50ms": 84
+          },
+          "longTasks": {
+            "count": 0,
+            "total_ms": 0,
+            "p95_ms": 0,
+            "worst_ms": 0,
+            "busy_pct": 0
+          },
+          "dotSpeed": {
+            "windows": 15,
+            "samples": 7143,
+            "p50_px_per_s": 44,
+            "p90_px_per_s": 149.9
+          },
+          "windEnd": {
+            "enabled": true,
+            "particles": 617,
+            "fps": 12,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 50,
+            "qscale": 0.4
+          },
+          "density_setting": 50,
+          "label": "density=50"
+        },
+        {
+          "errors": [],
+          "env": {
+            "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+            "hw": 16,
+            "dpr": 1,
+            "viewport": [
+              1440,
+              900
+            ],
+            "deviceMemory": null,
+            "hash": "#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:25",
+            "overlayCount": 14,
+            "panes": 36,
+            "canvases": {
+              "count": 60,
+              "px": 16966976
+            }
+          },
+          "windStart": {
+            "enabled": true,
+            "particles": 309,
+            "fps": 14,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 25,
+            "qscale": 0.4
+          },
+          "cadence": {
+            "frames": 107,
+            "seconds": 8.08,
+            "fps": 13.2,
+            "p50_ms": 83.5,
+            "p95_ms": 116.7,
+            "worst_ms": 132.4,
+            "over_100ms": 13,
+            "over_50ms": 88
+          },
+          "longTasks": {
+            "count": 0,
+            "total_ms": 0,
+            "p95_ms": 0,
+            "worst_ms": 0,
+            "busy_pct": 0
+          },
+          "dotSpeed": {
+            "windows": 15,
+            "samples": 3563,
+            "p50_px_per_s": 45.4,
+            "p90_px_per_s": 147.9
+          },
+          "windEnd": {
+            "enabled": true,
+            "particles": 309,
+            "fps": 13,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 25,
+            "qscale": 0.4
+          },
+          "density_setting": 25,
+          "label": "density=25"
+        }
+      ],
+      "page_errors": [],
+      "page_error_count": 0
+    },
+    "chromium": {
+      "browser": "chromium",
+      "load_s": 9.98,
+      "runs": [
+        {
+          "errors": [],
+          "env": {
+            "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+            "hw": 16,
+            "dpr": 1,
+            "viewport": [
+              1440,
+              900
+            ],
+            "deviceMemory": 32,
+            "hash": "#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:100",
+            "overlayCount": 14,
+            "panes": 36,
+            "canvases": {
+              "count": 60,
+              "px": 16966976
+            }
+          },
+          "windStart": {
+            "enabled": true,
+            "particles": 1895,
+            "fps": 8,
+            "quality": 0.61,
+            "loaded": true,
+            "style": "particles",
+            "density": 100,
+            "qscale": 0.6141249999999999
+          },
+          "cadence": {
+            "frames": 53,
+            "seconds": 8.12,
+            "fps": 6.5,
+            "p50_ms": 150,
+            "p95_ms": 199.9,
+            "worst_ms": 283.4,
+            "over_100ms": 51,
+            "over_50ms": 51
+          },
+          "longTasks": {
+            "count": 0,
+            "total_ms": 0,
+            "p95_ms": 0,
+            "worst_ms": 0,
+            "busy_pct": 0
+          },
+          "dotSpeed": {
+            "windows": 16,
+            "samples": 16202,
+            "p50_px_per_s": 45.9,
+            "p90_px_per_s": 139.8
+          },
+          "windEnd": {
+            "enabled": true,
+            "particles": 1234,
+            "fps": 7,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 100,
+            "qscale": 0.4
+          },
+          "density_setting": 100,
+          "label": "density=100"
+        },
+        {
+          "errors": [],
+          "env": {
+            "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+            "hw": 16,
+            "dpr": 1,
+            "viewport": [
+              1440,
+              900
+            ],
+            "deviceMemory": 32,
+            "hash": "#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:50",
+            "overlayCount": 14,
+            "panes": 36,
+            "canvases": {
+              "count": 60,
+              "px": 16966976
+            }
+          },
+          "windStart": {
+            "enabled": true,
+            "particles": 617,
+            "fps": 9,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 50,
+            "qscale": 0.4
+          },
+          "cadence": {
+            "frames": 73,
+            "seconds": 8.13,
+            "fps": 9,
+            "p50_ms": 100,
+            "p95_ms": 216.7,
+            "worst_ms": 483.3,
+            "over_100ms": 32,
+            "over_50ms": 63
+          },
+          "longTasks": {
+            "count": 2,
+            "total_ms": 617,
+            "p95_ms": 460,
+            "worst_ms": 460,
+            "busy_pct": 7.6
+          },
+          "dotSpeed": {
+            "windows": 16,
+            "samples": 7781,
+            "p50_px_per_s": 41.8,
+            "p90_px_per_s": 149.4
+          },
+          "windEnd": {
+            "enabled": true,
+            "particles": 617,
+            "fps": 9,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 50,
+            "qscale": 0.4
+          },
+          "density_setting": 50,
+          "label": "density=50"
+        },
+        {
+          "errors": [],
+          "env": {
+            "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+            "hw": 16,
+            "dpr": 1,
+            "viewport": [
+              1440,
+              900
+            ],
+            "deviceMemory": 32,
+            "hash": "#2.1089,16.8750,3/density=max/overlay=wind-gfs@100,basins@100,koppen@100,soil-soilgrids@65,rivers@100,cropland-esa@50,population-density-worldpop-1-km@25,land-cover-esa@60,soil-type-hwsd-v2-2@30,wind-speed-gfs@30,tectonic-faults-usgs@100,nasa-rain@30,etopo@85,isobars@100/iso=0.25:pressure/isoSrc=gfs/wind=particles:speed:25",
+            "overlayCount": 14,
+            "panes": 36,
+            "canvases": {
+              "count": 60,
+              "px": 16966976
+            }
+          },
+          "windStart": {
+            "enabled": true,
+            "particles": 309,
+            "fps": 11,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 25,
+            "qscale": 0.4
+          },
+          "cadence": {
+            "frames": 85,
+            "seconds": 8.16,
+            "fps": 10.4,
+            "p50_ms": 99.9,
+            "p95_ms": 183.3,
+            "worst_ms": 350,
+            "over_100ms": 23,
+            "over_50ms": 70
+          },
+          "longTasks": {
+            "count": 2,
+            "total_ms": 549,
+            "p95_ms": 392,
+            "worst_ms": 392,
+            "busy_pct": 6.7
+          },
+          "dotSpeed": {
+            "windows": 16,
+            "samples": 3843,
+            "p50_px_per_s": 42.2,
+            "p90_px_per_s": 146.3
+          },
+          "windEnd": {
+            "enabled": true,
+            "particles": 309,
+            "fps": 9,
+            "quality": 0.4,
+            "loaded": true,
+            "style": "particles",
+            "density": 25,
+            "qscale": 0.4
+          },
+          "density_setting": 25,
+          "label": "density=25"
+        }
+      ],
+      "page_errors": [
+        "console:Failed to load resource: the server responded with a status of 400 ()",
+        "console:Failed to load resource: the server responded with a status of 400 ()"
+      ],
+      "page_error_count": 2
+    }
+  }
+}

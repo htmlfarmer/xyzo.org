@@ -281,16 +281,26 @@ def _screen_pixels_for_wind(page, threshold=18):
     import numpy as np
     from PIL import Image
 
-    pane = """() => [...document.querySelectorAll('.leaflet-pane')]
-        .find(x => /wind/i.test(x.className) && !/windSpeed/i.test(x.className))"""
+    # NOTE: this is an EXPRESSION, not a function — it is interpolated
+    # into `const p = %s;` and into `!!(%s)`. It used to be an arrow
+    # function source, so `p` bound the FUNCTION ITSELF (truthy, and a
+    # function has no `.style`) and every hide/show threw. The guard
+    # `!!(%s)` then evaluated `!!(function)` === true, so it did not
+    # catch it either. Both the throw and the blind guard were why the
+    # pixel gate never measured anything — see pixel_gate().
+    pane = """([...document.querySelectorAll('.leaflet-pane')]
+        .find(x => /wind/i.test(x.className) && !/windSpeed/i.test(x.className)))"""
 
     def snap():
         return np.asarray(
             Image.open(_io.BytesIO(page.screenshot())).convert("RGB")
         ).astype("int16")
 
+    # "missing" (not None): None means "the wind was not wanted" and is
+    # the only value pixel_gate() skips. A wanted wind whose pane is
+    # not in the document is a failure — the layer never mounted.
     if not page.evaluate("() => !!(%s)" % pane):
-        return None
+        return "missing"
     page.wait_for_timeout(400)
     shown = snap()
     page.evaluate("() => { const p = %s; if (p) p.style.display = 'none'; }" % pane)
@@ -308,6 +318,23 @@ def pixel_gate(report):
     Returns (ok, message). A run whose wind pane contributes zero
     screen pixels is a broken renderer, whatever its fps says — and it
     is exactly the run that would otherwise be quoted as a triumph.
+
+    THE SENTINELS, AND WHY THERE ARE THREE. This gate shipped broken:
+    the pixel check threw every time (the pane expression was
+    interpolated as a function, not called), `wind_px` stayed None on
+    the exception, and None was read as "not applicable" and skipped —
+    so a gate that had measured NOTHING reported success on a wind
+    nobody could see. There are now three distinct non-pixel answers:
+
+        None    the wind was not wanted for this run (wind-off
+                baseline) — legitimately not applicable, skipped
+        "error" the check threw — CANNOT VERIFY, fails
+        "missing"  the wind pane was not in the document — the layer
+                never mounted, fails
+        0       the pane exists and contributes no screen pixels —
+                invisible, fails
+
+    A gate that passes when it cannot run is not a gate.
     """
     for name, rep in report.get("browsers", {}).items():
         if "error" in rep:
@@ -316,6 +343,21 @@ def pixel_gate(report):
             px = r.get("wind_screen_px")
             if px is None:
                 continue
+            if px == "error":
+                return False, (
+                    "%s / %s: the wind-on-screen check could not run "
+                    "(an exception), so the fps figure (%.1f) is "
+                    "UNVERIFIED. Refusing to report an unmeasured "
+                    "renderer as a win."
+                    % (name, r.get("label"), r["cadence"]["fps"])
+                )
+            if px == "missing":
+                return False, (
+                    "%s / %s: the wind pane is not in the document — "
+                    "the layer never mounted, so the fps figure (%.1f) "
+                    "belongs to a page with no wind at all."
+                    % (name, r.get("label"), r["cadence"]["fps"])
+                )
             if px == 0:
                 return False, (
                     "%s / %s: the wind pane drew 0 pixels on screen — "
@@ -401,14 +443,29 @@ def run_browser(pw, name, url, seconds, window_ms, densities, settle_ms, headles
         # work — the backing store keeps its ink while the pane clips it
         # away, which is how "the canvas ink is unchanged" coexisted
         # with an invisible wind.
+        # AN ERROR HERE MUST NOT BECOME A PASS. `wind_px` stayed None
+        # when the check threw, and pixel_gate() treated None as "not
+        # applicable" and skipped it — so a gate that could not run
+        # reported success, which is exactly the failure this gate was
+        # written to prevent. The sentinel makes an errored check a
+        # FAILURE; None now means only "the wind was not wanted".
         wind_px = None
         if wants_wind:
             try:
                 wind_px = _screen_pixels_for_wind(page)
-                print("  … wind on screen: %s px" % (
-                    "INVISIBLE (0)" if wind_px == 0 else "{:,}".format(wind_px)
-                ), flush=True)
+                if isinstance(wind_px, int):
+                    print("  … wind on screen: %s px" % (
+                        "INVISIBLE (0)" if wind_px == 0
+                        else "{:,}".format(wind_px)
+                    ), flush=True)
+                else:
+                    # "missing" / "error" — printed plainly, because the
+                    # gate will fail on it and the operator needs to see
+                    # why before reading the verdict.
+                    print("  … wind on screen: NOT MEASURED (%s)"
+                          % wind_px, flush=True)
             except Exception as e:  # noqa: BLE001 — never kill the run
+                wind_px = "error"
                 print("  … pixel check FAILED: %s" % e, flush=True)
 
         results = []

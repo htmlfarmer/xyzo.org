@@ -6,26 +6,38 @@
    Basin boundaries delineated from hydrologically corrected elevation
    data (WWF HydroSHEDS and Hydro1K). CC BY-SA 4.0.
 
-   scripts/basin_build.py writes ONE basin set at TWO detail levels
-   (DETAIL_LEVELS in that script — major 0.05 deg, detailed 0.01 deg):
+   scripts/basin_build.py writes FOUR detail levels
+   (DETAIL_LEVELS in that script — two populations, two precisions
+   each):
 
-     /data/basins/basins_major.geojson     one dissolved polygon per
-     /data/basins/basins_detailed.geojson  basin: name, kind, area_km2,
-                                           n_polys
-     /data/basins/meta.json                attribution, legend, area
-                                           stats, and the `levels[]`
-                                           naming the two files above
+     /data/basins/basins_major.geojson              235 named basins at
+     /data/basins/basins_detailed.geojson           0.05 deg / 0.01 deg
+     /data/basins/basins_internal.geojson           281 internally
+     /data/basins/basins_internal-detailed.geojson  drained basins at
+                                                    0.05 deg / 0.01 deg
+     /data/basins/meta.json                         attribution, legend,
+                                                    area stats, and the
+                                                    `levels[]` naming the
+                                                    four files above
+
+   EVERY FEATURE CARRIES: name, kind, area_km2, n_polys.
+
+   THE INTERNAL (ENDORHEIC) LEVELS COME FROM A DIFFERENT SOURCE. The
+   2012 shapefile (bas_wrld_38047) has no hydrology column at all, so
+   the major levels read `kind` off the basin's NAME ("Interior" =
+   endorheic) and can only ever find the 8 regions FAO named that way.
+   The FAO's 2022 "Hydrological basins of the world" carries the
+   sub-basin table — MAJ_BAS / MAJ_NAME / MAJ_AREA / SUB_BAS / SUB_NAME
+   / SUB_AREA / TO_BAS — and `TO_BAS` is the downstream basin code,
+   **-888 = internal sub-basin**, -999 = drains to the sea. That is the
+   PUBLISHER'S OWN definition, so the internal levels filter on it
+   rather than guessing from a name: 281 named basins (Sahara, Aral
+   Sea, Lake Chad, Great Salt Lake, Lop Nur, Makgadikgadi …).
 
    The single-file `basins.geojson` this used to emit is gone: the
    builder deletes a stale copy so it cannot be served next to the
    per-level files. The layer reads the file name from meta.json's
    `levels[].file` (see levelUrl()) rather than hard-coding it.
-
-   The published FAO attribute table (MAJ_BAS / MAJ_NAME / MAJ_AREA /
-   SUB_BAS / SUB_NAME / SUB_AREA / TO_BAS) is a separate look-up that is
-   NOT distributed with the geometry and is not exposed by the FAO WMS, so
-   the overlay carries what the data actually has: the FAO basin name and
-   the area computed from the polygons in an equal-area projection.
 
    The layer is a GeoJSON FeatureGroup in its own pane. The polygons are
    NOT interactive — the pane ignores pointer events — so the basins never
@@ -36,13 +48,15 @@
   "use strict";
 
   const BASE = "/data/basins";
-  const BUILD = "202610281";
+  const BUILD = "202611201";
   const META_URL = BASE + "/meta.json?v=" + BUILD;
   // The GeoJSON URL depends on which DETAIL LEVEL is selected, so it
   // comes from meta.json's `levels[].file` rather than being fixed here.
-  // See DETAIL_LEVELS in scripts/basin_build.py: major (0.05 deg, ~6 MB)
-  // and detailed (0.01 deg ~1 km, ~13 MB) — the same 235 basins drawn
-  // at two precisions, so switching never changes what is on the map.
+  // See DETAIL_LEVELS in scripts/basin_build.py: two populations (235
+  // named basins, 281 internally drained ones) at two precisions each
+  // (0.05 deg ~ fast, 0.01 deg ~ 1 km sharp). Switching never changes
+  // WHICH basins are on the map except by population — the level rows
+  // come from meta, so a new level needs no edit here.
   const LEVEL_STORE_KEY = "xyzo.basinLevel";
 
   function levelUrl(file) {
@@ -139,6 +153,37 @@
   }
 
   // ── styling ──────────────────────────────────────────────────────────
+  // How much Leaflet may simplify the polygons it draws, in PIXELS.
+  //
+  // Leaflet simplifies every polyline and polygon with a tolerance of
+  // `smoothFactor` pixels (its default is 1.0), and that is why the
+  // "Detailed" button did nothing at all — see the note on buildLayer()
+  // for the full measurement.
+  //
+  //   coarse (0.05 deg) -> 1.0  (Leaflet's default: one screen pixel of
+  //                              error, so the fast map stays fast)
+  //   fine   (0.01 deg) -> 0    (no client-side simplification, so the
+  //                              published file's own precision is what
+  //                              the reader sees)
+  //
+  // IT IS READ FROM meta.json, NOT PATTERN-MATCHED ON THE LEVEL ID.
+  // There are four levels now, and `state.level === "detailed"` gave the
+  // wrong answer for `internal-detailed` — it would have shipped the
+  // sharp internal file at Leaflet's default tolerance, i.e. the exact
+  // no-op this whole rule exists to prevent, in the one level added
+  // after the rule was written. The tolerance is the fact that matters;
+  // the id is only its name.
+  //
+  // Falls back to 1.0 when meta has not loaded — the conservative
+  // choice, and the features are created after ensureData() has awaited
+  // meta anyway, so the real value is in place by then.
+  function levelSmoothFactor() {
+    const levels = (state.meta && state.meta.levels) || [];
+    const lv = levels.find((l) => l.id === state.level);
+    const tol = lv ? lv.simplify_deg : null;
+    return (tol != null && tol <= 0.01) ? 0 : 1.0;
+  }
+
   function styleFor(feature) {
     const p = feature.properties || {};
     const kind = p.kind || "river";
@@ -150,6 +195,12 @@
       fillColor: base,
       fillOpacity: 0.16 * state.opacity,
       interactive: false,
+      // Leaflet reads `smoothFactor` when the polygon is CREATED, and
+      // `setStyle` only re-applies the style — it does NOT re-simplify.
+      // So the factor has to be right at creation time (buildLayer /
+      // setLevel) AND carried here so a feature created afterwards gets
+      // the right one.
+      smoothFactor: levelSmoothFactor(),
     };
   }
 
@@ -274,6 +325,17 @@
       .then(() => {
         // fillLayer() clears and re-adds from state.features, which the
         // reload above has just replaced.
+        //
+        // THE LAYER'S OWN `smoothFactor` MUST CHANGE TOO. Leaflet reads
+        // it when a polygon is CREATED, and `setStyle` does NOT
+        // re-simplify — so a level switch that only swapped the data
+        // would keep the OLD tolerance and draw the detailed file with
+        // the major level's one-pixel simplification. That is exactly
+        // the bug this fixes, so the factor is set on the layer AND on
+        // every feature before the layer is rebuilt.
+        if (state.layer && typeof state.layer.options === "object") {
+          state.layer.options.smoothFactor = levelSmoothFactor();
+        }
         if (state.enabled) fillLayer();
         hideProbe();
         // Rebuild the legend so the detail chips show the new level.
@@ -295,6 +357,41 @@
       pane: PANE,
       style: (ft) => styleFor(ft),
       interactive: false,
+      // ── `smoothFactor` — LET THE DETAIL LEVEL BE THE DETAIL LEVEL
+      //
+      // Leaflet simplifies EVERY polyline and polygon it draws, with a
+      // tolerance of `smoothFactor` PIXELS (its default is 1.0). That
+      // is why the "Detailed" button did nothing at all:
+      //
+      //   * the DETAILED file really is finer — 689,947 vertices against
+      //     the major file's 324,123 (measured from the published
+      //     GeoJSON, and confirmed in the browser: the switch really does
+      //     fetch basins_detailed.geojson);
+      //   * but the CLIENT threw 98.7 % of it away — only 9,207 vertices
+      //     reached the screen;
+      //   * and the rendered result was byte-for-byte IDENTICAL to the
+      //     major level: all 235 paths had the same `d` attribute length
+      //     (121,217 → 123,306, a 1.7 % difference that is the 235
+      //     features' own outlines, not extra detail).
+      //
+      // A one-pixel tolerance is the right default for a line, but this
+      // layer ships TWO precisions on purpose — the whole point of the
+      // level switch is that the detailed file is the sharp one — and a
+      // client-side simplification throws that away before the reader
+      // ever sees it.
+      //
+      // The MAJOR level keeps Leaflet's default (1.0), so the fast map
+      // stays fast and still draws one screen pixel of error. The
+      // DETAILED level drops it to 0, so the published file's own
+      // precision (0.01° ≈ 1.1 km) is the precision the reader asked
+      // for. The cost is real and it is the point: the detailed file is
+      // 12.8 MB against the major file's 6.1 MB.
+      //
+      // `style` is called per feature, but `smoothFactor` is read when
+      // the polygon is CREATED, so it has to be right at creation time.
+      // It is set on the layer when the level changes (see
+      // setLevel()) and on every feature by `styleFor()`.
+      smoothFactor: levelSmoothFactor(),
       // CC BY-SA 4.0 REQUIRES attribution. Leaflet's attribution control
       // reads options.attribution off any layer (L.Layer.getAttribution)
       // and prints it in the bottom-right corner.
@@ -369,6 +466,16 @@
   // Mounted into the layers dropdown, as a SIBLING of the overlay list —
   // Leaflet empties and rebuilds .leaflet-control-layers-overlays on every
   // layer change, so a row inside that list is wiped.
+  // The level record for what is on screen right now. `state.level` is
+  // only set once ensureData() has run, and the legend can be mounted
+  // before that (ensureMeta resolves first) — so it falls back to the
+  // published default rather than reading an empty id.
+  function activeLevel() {
+    const levels = (state.meta && state.meta.levels) || [];
+    const id = state.level || (state.meta && state.meta.default_level) || "major";
+    return levels.find((l) => l.id === id) || levels[0] || null;
+  }
+
   function mountLegend() {
     if (state.legendMounted) return true;
     const list = document.querySelector(".leaflet-control-layers-list");
@@ -381,21 +488,40 @@
     host.className = "basin-legend leaflet-control-layers-basin";
     const colors = kindColors();
     const labels = kindLabels();
-    const rows = Object.keys(labels).map((k) => `
+    const lv = activeLevel();
+    // THE KIND ROWS AND THE COUNT FOLLOW THE ACTIVE LEVEL.
+    //
+    // The legend used to print the top-level `basin_count` (235) and
+    // all three kind rows whatever was selected — so the internal
+    // levels, which hold 281 basins that are ALL endorheic, would have
+    // been introduced by a key saying "235 FAO basins" over a list
+    // offering river and coastal basins that are not on the map at
+    // all. A key that describes a different picture than the one it
+    // sits beside is worse than no key.
+    const counts = (lv && lv.kind_counts) ||
+      (state.meta && state.meta.kind_counts) || {};
+    const present = Object.keys(labels).filter((k) => counts[k] > 0);
+    const rows = (present.length ? present : Object.keys(labels)).map((k) => `
       <div class="basin-legend-row">
         <span class="basin-legend-swatch" data-kind="${k}" style="background:${colors[k] || "#38bdf8"}"></span>
-        <span>${labels[k]}</span>
+        <span>${labels[k]}${counts[k] ? ` (${counts[k]})` : ""}</span>
       </div>`).join("");
-    const n = state.meta && state.meta.basin_count ? state.meta.basin_count : 235;
+    const n = (lv && lv.basins) ||
+      (state.meta && state.meta.basin_count) || 235;
     const schemeBtns = Object.keys(SCHEMES).map((k) => `
       <button type="button" class="basin-scheme-btn${state.scheme === k ? " active" : ""}" ` +
       `data-scheme="${k}" title="${SCHEME_LABELS[k]}" aria-pressed="${state.scheme === k}">` +
       `<span class="basin-scheme-dot" style="background:${SCHEME_SWATCHES[k]}"></span>` +
       `</button>`).join("");
-    // THE TWO DETAIL LEVELS, as a chip row. The builder publishes the
-    // SAME 235 basins at two precisions (major 0.05 deg, detailed
-    // 0.01 deg), so switching changes the edge detail and nothing
-    // else. It used to have no UI at all — and setLevel() called a
+    // THE DETAIL LEVELS, as a chip row — four of them now. The builder
+    // publishes the SAME 235 basins at two precisions (major 0.05 deg,
+    // detailed 0.01 deg) AND the 281 internally drained (endorheic)
+    // sub-basins at the same two precisions (`internal` and
+    // `internal-detailed`), so the row is: how much detail, and which
+    // population. The rows come from meta.json, so a level added to the
+    // builder appears here without touching this file.
+    //
+    // It used to have no UI at all — and setLevel() called a
     // refreshLevelButtons() that was never defined, so the first click
     // would have thrown a ReferenceError.
     const levels = (state.meta && state.meta.levels) || [];
@@ -555,7 +681,10 @@
 
   // ── public API ───────────────────────────────────────────────────────
   // ── export surface ───────────────────────────────────────────────────
-  // The 235 FAO drainage basins as polygons.
+  // WHICHEVER LEVEL IS ACTIVE — the 235 named basins at either
+  // precision, or the 281 internally drained ones. The exporter takes
+  // `state.features`, so the export follows what is on screen rather
+  // than a fixed population.
   //
   // LICENCE NOTE: the FAO basin data is CC BY-SA 4.0. An export that
   // contains these polygons is a DERIVATIVE and carries the same
