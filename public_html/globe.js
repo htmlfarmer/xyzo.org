@@ -30,7 +30,7 @@
 (function () {
   "use strict";
 
-  const V = "202611142000";
+  const V = "202611201930";
   const q = (p) => p + (p.includes("?") ? "&" : "?") + "v=" + V;
 
   // field-bake.js owns the canonical Web-Mercator bake and the ramp.

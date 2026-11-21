@@ -133,7 +133,7 @@
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.css">
   <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="styles.css?v=202611142000" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="styles.css?v=202611201930" media="print" onload="this.media='all'">
   <!-- THE CITY DATASET IS NOT PRELOADED. It used to be, with a comment
        saying the point was to start the 1.16 MB fetch "during idle time
        (after initial render)" — but a <link rel="preload"> in the HEAD
@@ -153,11 +153,11 @@
        when most users never click the trigger within the first few
        seconds. The chunks weigh 28 KB and 8 KB so the cache cost is
        trivial. -->
-  <link rel="prefetch" href="flag-quality.js?v=202611142000" as="script">
-  <link rel="prefetch" href="ai-story-chat.js?v=202611142000" as="script">
-  <script src="console-guard.js?v=202611142000"></script>
-  <script src="i18n.js?v=202611142000" defer></script>
-  <script src="command-bar.js?v=202611142000" defer></script>
+  <link rel="prefetch" href="flag-quality.js?v=202611201930" as="script">
+  <link rel="prefetch" href="ai-story-chat.js?v=202611201930" as="script">
+  <script src="console-guard.js?v=202611201930"></script>
+  <script src="i18n.js?v=202611201930" defer></script>
+  <script src="command-bar.js?v=202611201930" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -707,32 +707,32 @@ POST /api/ai/chat  {"message":"?"}    ← Ask the AI anything</pre>
       </div>
     </div>
   </div>
-  <script src="vendor/leaflet/leaflet.js?v=202611142000" defer></script>
-  <script src="vendor/leaflet.heat/leaflet-heat.js?v=202611142000" defer></script>
-  <script src="vendor/leaflet.markercluster/leaflet.markercluster.js?v=202611142000" defer></script>
-  <script src="vendor/marked/marked.umd.min.js?v=202611142000" defer></script>
-  <script src="vendor/dompurify/purify.min.js?v=202611142000" defer></script>
-  <script src="analytics.js?v=202611142000" defer></script>
-  <script src="perf-report.js?v=202611142000" defer></script>
-  <script src="presence.js?v=202611142000" defer></script>
-  <script src="city-engine.js?v=202611142000" defer></script>
-  <script src="submit-sniff.js?v=202611142000" defer></script>
+  <script src="vendor/leaflet/leaflet.js?v=202611201930" defer></script>
+  <script src="vendor/leaflet.heat/leaflet-heat.js?v=202611201930" defer></script>
+  <script src="vendor/leaflet.markercluster/leaflet.markercluster.js?v=202611201930" defer></script>
+  <script src="vendor/marked/marked.umd.min.js?v=202611201930" defer></script>
+  <script src="vendor/dompurify/purify.min.js?v=202611201930" defer></script>
+  <script src="analytics.js?v=202611201930" defer></script>
+  <script src="perf-report.js?v=202611201930" defer></script>
+  <script src="presence.js?v=202611201930" defer></script>
+  <script src="city-engine.js?v=202611201930" defer></script>
+  <script src="submit-sniff.js?v=202611201930" defer></script>
   <!-- offline.js registers /sw.js and shows an honest offline banner.
        It has no dependency on app.js and guards everything itself, but
        it must load so the worker is registered on the first visit — a
        service worker installed only after a successful online visit is
        the whole point. -->
-  <script src="offline.js?v=202611142000" defer></script>
+  <script src="offline.js?v=202611201930" defer></script>
   <!-- ramp-styles.js holds the palettes; overlay-palette.js mounts the
        picker that uses them. ramp-styles FIRST — without it
        window.RampStyles is undefined and the picker returns silently,
        which is exactly how this first shipped with no controls at all. -->
-  <script src="ramp-styles.js?v=202611142000" defer></script>
+  <script src="ramp-styles.js?v=202611201930" defer></script>
   <!-- overlay-palette.js adds the colour-style picker to each overlay
        row. It is called BY overlay-opacity.js (which already walks those
        rows), so it must be loaded before it — and both before app.js,
        which never mentions it (app.js is 8 bytes under its ceiling). -->
-  <script src="overlay-palette.js?v=202611142000" defer></script>
+  <script src="overlay-palette.js?v=202611201930" defer></script>
   <script src="overlay-opacity.js?v=202611090822" defer></script>
   <!-- map-presets.js: curated "cool map" presets, the first-visit
        showcase load and the ⭐ default / last-used map. Must load
@@ -741,64 +741,64 @@ POST /api/ai/chat  {"message":"?"}    ← Ask the AI anything</pre>
   <!-- Export: the contract, the writers and the engine load BEFORE the
        layer modules, because each layer module registers its export
        surface into the contract as it loads. -->
-  <script src="export-contract.js?v=202611142000" defer></script>
-  <script src="export-writers.js?v=202611142000" defer></script>
-  <script src="export-engine.js?v=202611142000" defer></script>
-  <script src="climate-layer.js?v=202611142000" defer></script>
+  <script src="export-contract.js?v=202611201930" defer></script>
+  <script src="export-writers.js?v=202611201930" defer></script>
+  <script src="export-engine.js?v=202611201930" defer></script>
+  <script src="climate-layer.js?v=202611201930" defer></script>
   <!-- weather-archive.js (the TIME MACHINE) loads BEFORE the weather
        layers: they ask it where their grid comes from. -->
-  <script src="weather-archive.js?v=202611142000" defer></script>
+  <script src="weather-archive.js?v=202611201930" defer></script>
   <!-- delta-contour.js: the client-side contouring of the CHANGE
        map. It must load BEFORE isobar-layer.js, which asks it. -->
-  <script src="delta-contour.js?v=202611142000"></script>
-  <script src="isobar-layer.js?v=202611142000" defer></script>
+  <script src="delta-contour.js?v=202611201930"></script>
+  <script src="isobar-layer.js?v=202611201930" defer></script>
   <!-- field-bake.js owns the canonical Web-Mercator bake and the ramp
        arithmetic. temp-layer.js reads it, and globe.js reads it too, so
        the flat map and the 3D globe paint the SAME picture from the
        SAME grid instead of two implementations that can drift. -->
-  <script src="field-bake.js?v=202611142000" defer></script>
+  <script src="field-bake.js?v=202611201930" defer></script>
   <!-- hover-ring.js owns the ONE hover circle on the map: the story
        pins, the earthquakes and every other point overlay ask it to
        move, so there is never more than one ring under the cursor. -->
-  <script src="hover-ring.js?v=202611142000" defer></script>
+  <script src="hover-ring.js?v=202611201930" defer></script>
   <!-- probe-stack.js owns the ONE positioner for every readout on the
        map. Each layer used to place its own probe at "cursor + 14px",
        so two or three of them landed on the same 14px and covered each
        other; the stacker lays them out in one column and keeps the
        hover card out of their way. It must load BEFORE the layer
        modules so their probes are stacked from the first frame. -->
-  <script src="probe-stack.js?v=202611142000" defer></script>
+  <script src="probe-stack.js?v=202611201930" defer></script>
   <!-- saved-searches.js keeps the previous answer for a search so a
        repeat search shows it at once (the query itself takes 3–50 s)
        and the fresh answer replaces it when it lands. It only defines a
        store, so it can load anywhere before app.js uses it. -->
-  <script src="saved-searches.js?v=202611142000" defer></script>
-  <script src="temp-layer.js?v=202611142000" defer></script>
+  <script src="saved-searches.js?v=202611201930" defer></script>
+  <script src="temp-layer.js?v=202611201930" defer></script>
   <!-- field-layer.js must load BEFORE cape-layer.js and ivt-layer.js:
        they are thin wrappers around the shared factory it exports. -->
-  <script src="field-layer.js?v=202611142000" defer></script>
+  <script src="field-layer.js?v=202611201930" defer></script>
   <!-- cape-layer.js and ivt-layer.js must load BEFORE app.js: app.js
        registers the overlays from window.CapeLayer / window.IvtLayer at
        parse time. -->
-  <script src="cape-layer.js?v=202611142000" defer></script>
-  <script src="ivt-layer.js?v=202611142000" defer></script>
+  <script src="cape-layer.js?v=202611201930" defer></script>
+  <script src="ivt-layer.js?v=202611201930" defer></script>
   <!-- wind-speed-layer.js must load BEFORE app.js (app.js registers the
        overlay from window.WindSpeedLayer at parse time) and AFTER
        field-layer.js (it is a thin wrapper around the shared factory). -->
-  <script src="wind-speed-layer.js?v=202611142000" defer></script>
-  <script src="soil-layer.js?v=202611142000" defer></script>
-  <script src="cropland-layer.js?v=202611142000" defer></script>
-  <script src="river-layer.js?v=202611142000" defer></script>
-  <script src="fao-rivers-layer.js?v=202611142000" defer></script>
+  <script src="wind-speed-layer.js?v=202611201930" defer></script>
+  <script src="soil-layer.js?v=202611201930" defer></script>
+  <script src="cropland-layer.js?v=202611201930" defer></script>
+  <script src="river-layer.js?v=202611201930" defer></script>
+  <script src="fao-rivers-layer.js?v=202611201930" defer></script>
   <!-- mag-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.MagLayer at parse time. -->
-  <script src="mag-layer.js?v=202611142000" defer></script>
+  <script src="mag-layer.js?v=202611201930" defer></script>
   <!-- basin-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.BasinLayer at parse time. -->
-  <script src="basin-layer.js?v=202611142000" defer></script>
+  <script src="basin-layer.js?v=202611201930" defer></script>
   <!-- geology-layer.js must load BEFORE app.js: app.js registers the
        Macrostrat bedrock + USGS contacts overlays at parse time. -->
-  <script src="geology-layer.js?v=202611142000" defer></script>
+  <script src="geology-layer.js?v=202611201930" defer></script>
   <!-- wind-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.WindLayer at parse time. -->
   <!-- city-labels.js must load BEFORE app.js: app.js registers the
@@ -807,74 +807,74 @@ POST /api/ai/chat  {"message":"?"}    ← Ask the AI anything</pre>
        overlay from window.EtopoLayer at parse time. -->
   <!-- wave-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.WaveLayer at parse time. -->
-  <script src="wave-layer.js?v=202611142000" defer></script>
-  <script src="etopo-layer.js?v=202611142000" defer></script>
-  <script src="city-labels.js?v=202611142000" defer></script>
-  <script src="wind-layer.js?v=202611142000" defer></script>
+  <script src="wave-layer.js?v=202611201930" defer></script>
+  <script src="etopo-layer.js?v=202611201930" defer></script>
+  <script src="city-labels.js?v=202611201930" defer></script>
+  <script src="wind-layer.js?v=202611201930" defer></script>
   <!-- lightning-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.LightningLayer at parse time. -->
-  <script src="lightning-layer.js?v=202611142000" defer></script>
+  <script src="lightning-layer.js?v=202611201930" defer></script>
   <!-- phytoplankton-layer.js must load BEFORE app.js: app.js registers
        the overlay from window.PhytoplanktonLayer at parse time. -->
-  <script src="phytoplankton-layer.js?v=202611142000" defer></script>
+  <script src="phytoplankton-layer.js?v=202611201930" defer></script>
   <!-- languages-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.LanguagesLayer at parse time. -->
-  <script src="languages-layer.js?v=202611142000" defer></script>
+  <script src="languages-layer.js?v=202611201930" defer></script>
   <!-- languages-regions-layer.js must load BEFORE app.js: the REGION
        version of the language overlay (one polygon per country, with
        the languages spoken there). -->
-  <script src="languages-regions-layer.js?v=202611142000" defer></script>
+  <script src="languages-regions-layer.js?v=202611201930" defer></script>
   <!-- earthquake-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.EarthquakeLayer at parse time. -->
-  <script src="earthquake-layer.js?v=202611142000" defer></script>
+  <script src="earthquake-layer.js?v=202611201930" defer></script>
   <!-- ocean-current-layer.js must load BEFORE app.js: app.js registers
        the overlay from window.OceanCurrentLayer at parse time. -->
-  <script src="ocean-current-layer.js?v=202611142000" defer></script>
+  <script src="ocean-current-layer.js?v=202611201930" defer></script>
   <!-- fault-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.FaultLayer at parse time. -->
-  <script src="fault-layer.js?v=202611142000" defer></script>
+  <script src="fault-layer.js?v=202611201930" defer></script>
   <!-- transport-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.TransportLayer at parse time. -->
-  <script src="transport-layer.js?v=202611142000" defer></script>
+  <script src="transport-layer.js?v=202611201930" defer></script>
   <!-- salinity-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.SalinityLayer at parse time. -->
-  <script src="salinity-layer.js?v=202611142000" defer></script>
+  <script src="salinity-layer.js?v=202611201930" defer></script>
   <!-- ocean-layer.js must load BEFORE app.js: app.js registers the
        overlay from window.OceanLayer at parse time. -->
-  <script src="ocean-layer.js?v=202611142000" defer></script>
-  <script src="hover-info.js?v=202611142000" defer></script>
-  <script src="digest-panel.js?v=202611142000" defer></script>
-  <script src="export-panel.js?v=202611142000" defer></script>
+  <script src="ocean-layer.js?v=202611201930" defer></script>
+  <script src="hover-info.js?v=202611201930" defer></script>
+  <script src="digest-panel.js?v=202611201930" defer></script>
+  <script src="export-panel.js?v=202611201930" defer></script>
   <!-- feedback-dialog.js must load BEFORE app.js: app.js's pin popup
        calls showFeedbackDialog(pin) at click time, and the file had
        never been linked here — the dialog was complete, styled and
        waiting, but unreachable, so its combined Report/Fix button
        never made it into a popup. -->
-  <script src="feedback-dialog.js?v=202611142000" defer></script>
+  <script src="feedback-dialog.js?v=202611201930" defer></script>
   <!-- view-handoff.js carries overlay state between the flat map and
        /globe. It must load BEFORE app.js (which builds the globe
        button's href from it), and it also loads on globe.html. -->
-  <script src="view-handoff.js?v=202611142000" defer></script>
+  <script src="view-handoff.js?v=202611201930" defer></script>
   <!-- generic-layers.js names the window.*Layer modules app.js registers
        through its shared loop — it must load BEFORE app.js reads it.
        population-layer.js (WorldPop 1 km, hotlinked WMTS) is one of
        them and likewise loads first; app.js only calls getTileLayer(). -->
-  <script src="generic-layers.js?v=202611142000" defer></script>
-  <script src="population-layer.js?v=202611142000" defer></script>
+  <script src="generic-layers.js?v=202611201930" defer></script>
+  <script src="population-layer.js?v=202611201930" defer></script>
   <!-- hwsd-layer.js: the FAO/IIASA Harmonized World Soils Database v2.2
        (34 WRB soil groups at ~1 km). Must load BEFORE app.js — app.js
        reads window.XYZO_GENERIC_LAYERS and calls getTileLayer() on each
        name at parse time, so a module that arrives later is silently
        skipped and the overlay never appears in the dropdown. -->
-  <script src="hwsd-layer.js?v=202611142000" defer></script>
-  <script src="tour.js?v=202611142000" defer></script>
-  <script src="app.js?v=202611142000" defer></script>
-  <script src="debug-panel.js?v=202611142000" defer></script>
-  <script src="update-check.js?v=202611142000" defer></script>
-  <script src="viewport-nudge.js?v=202611142000" defer></script>
-  <script src="map-debug.js?v=202611142000" defer></script>
-  <script src="cache-debug.js?v=202611142000" defer></script>
-  <script src="help-me-chat.js?v=202611142000" defer></script>
+  <script src="hwsd-layer.js?v=202611201930" defer></script>
+  <script src="tour.js?v=202611201930" defer></script>
+  <script src="app.js?v=202611201930" defer></script>
+  <script src="debug-panel.js?v=202611201930" defer></script>
+  <script src="update-check.js?v=202611201930" defer></script>
+  <script src="viewport-nudge.js?v=202611201930" defer></script>
+  <script src="map-debug.js?v=202611201930" defer></script>
+  <script src="cache-debug.js?v=202611201930" defer></script>
+  <script src="help-me-chat.js?v=202611201930" defer></script>
 
   <!-- ── Help Me Floating Button ─────────────────────────────────── -->
   <button id="help-me-btn" aria-label="Help Me — ask about problems and what to do"
@@ -1022,7 +1022,7 @@ POST /api/ai/chat  {"message":"?"}    ← Ask the AI anything</pre>
         } else {
           // Fallback: load the chunk on demand
           var script = document.createElement("script");
-          script.src = "help-me-chat.js?v=202611142000";
+          script.src = "help-me-chat.js?v=202611201930";
           script.onload = function() { window.XyzoHelpMe.open(userContext); };
           document.head.appendChild(script);
         }

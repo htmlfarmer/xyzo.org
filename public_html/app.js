@@ -413,7 +413,7 @@ function showQuickFlagDialog(prefill) {
     window.XyzoFlagQuality.showQuickFlagDialog(prefill);
     return;
   }
-  loadChunk('flag-quality.js?v=202611142000').then(() => {
+  loadChunk('flag-quality.js?v=202611201930').then(() => {
     if (window.XyzoFlagQuality && window.XyzoFlagQuality.showQuickFlagDialog) {
       window.XyzoFlagQuality.showQuickFlagDialog(prefill);
     }
@@ -425,7 +425,7 @@ function showReportDialog(pin) {
     window.XyzoFlagQuality.showReportDialog(pin);
     return;
   }
-  loadChunk('flag-quality.js?v=202611142000').then(() => {
+  loadChunk('flag-quality.js?v=202611201930').then(() => {
     if (window.XyzoFlagQuality && window.XyzoFlagQuality.showReportDialog) {
       window.XyzoFlagQuality.showReportDialog(pin);
     }
@@ -437,7 +437,7 @@ function openPinAiChat(pin) {
     window.XyzoAiStoryChat.open(pin);
     return;
   }
-  loadChunk('ai-story-chat.js?v=202611142000').then(() => {
+  loadChunk('ai-story-chat.js?v=202611201930').then(() => {
     if (window.XyzoAiStoryChat && window.XyzoAiStoryChat.open) {
       window.XyzoAiStoryChat.open(pin);
     }
@@ -3312,10 +3312,58 @@ function parseMapHash(hash) {
 // site keeps its exact shape (the tests anchor on it).
 let _deferOverlayAdds = false;
 const _deferredOverlayAdds = [];
+// Set while a flush is waiting out its two frames, so the success path
+// and the fetch's `finally` cannot schedule it twice.
+let _overlayFlushScheduled = false;
+// True from the moment a pin fetch is ATTEMPTED. The backstop below
+// uses it to tell "a fetch is under way, its finally will flush" from
+// "no pin fetch is ever going to run".
+let _pinFetchAttempted = false;
+let _overlayStagedAt = 0;
+let _overlayBackstop = 0;
+
+// THE STAGED OVERLAYS MUST NOT DEPEND ON THE PIN FETCH SUCCEEDING.
+//
+// Measured 2026-11-20 on the owner's own link over a throttled Regular-3G
+// connection: `/api/pins/map` answered 200, yet the overlay tiles were
+// still never requested 215 s later — only the 28 basemap tiles had ever
+// loaded. The flush lived in ONE place: the `items.length > 0` branch of
+// fetchPinsForViewport. Every other way out of that function — the 25 s
+// auto-abort firing while the body was still streaming, an HTTP error, a
+// network error, an exception, an EMPTY result, a superseded fetch, the
+// markers-off early return — dropped the staged overlays on the floor.
+// A shared link that named nine overlays then drew the basemap and
+// nothing else, and the only way to get the overlays was for a later
+// fetch to happen to succeed ("you maybe even have to pan around").
+//
+// So the flush runs from the fetch's `finally` — every outcome settles
+// there — plus the early exits that never reach it, plus a backstop for
+// the case where no pin fetch ever runs at all.
+const OVERLAY_BACKSTOP_MS = 4000;
+// THE CEILING IS SET BY THE FETCH'S OWN ABORT, NOT PICKED OUT OF THE AIR.
+// fetchPinsForViewport arms `setTimeout(…, 25000)` that aborts whatever
+// fetch is in flight, and an aborted fetch still runs its `finally` — so
+// every pin fetch is GUARANTEED to settle within 25 s of starting. This
+// has to be comfortably longer than that (30 s, measured from staging)
+// or the backstop fires FIRST and hands the reader overlays decoded
+// ahead of their markers — which is precisely the ordering the staging
+// exists to prevent, reintroducing it through the safety net meant to
+// replace it. Only a fetch that somehow never settles (or a hidden tab,
+// where requestAnimationFrame is suspended and the queued flush cannot
+// run) should ever reach this line.
+const OVERLAY_BACKSTOP_MAX_MS = 30000;
 
 /** Add the overlays that were staged at the boot. */
 function flushDeferredOverlays() {
+  _overlayFlushScheduled = false;
   if (!_deferredOverlayAdds.length) return;
+  // A batch that has been released re-arms the two clocks, so a LATER
+  // staging (a hash restore, a saved style) opens a fresh window instead
+  // of inheriting one that already expired — otherwise its backstop would
+  // judge it against the previous batch's timestamps and could release it
+  // before any fetch for it had even been attempted.
+  _overlayStagedAt = 0;
+  _pinFetchAttempted = false;
   const pending = _deferredOverlayAdds.splice(0, _deferredOverlayAdds.length);
   for (const item of pending) {
     const layer = WEATHER_OVERLAYS && WEATHER_OVERLAYS[item.name];
@@ -3327,6 +3375,78 @@ function flushDeferredOverlays() {
       XLog.warn("deferred overlay failed:", e);
     }
   }
+}
+
+/**
+ * Release the staged overlays TWO FRAMES from now.
+ *
+ * Two frames, not one: the first lets the pin canvas draw, the second
+ * lets the browser composite it before 280 tile images arrive to be
+ * decoded — that ordering is the entire reason the overlays are staged
+ * (see restoreMapView below).
+ *
+ * Idempotent on BOTH axes: `_overlayFlushScheduled` stops two callers in
+ * the same tick from queuing two frame chains, and the empty check in
+ * flushDeferredOverlays() makes a later call a no-op once the queue is
+ * drained. So every exit path can call it unconditionally.
+ */
+function scheduleDeferredOverlayFlush() {
+  if (!_deferredOverlayAdds.length || _overlayFlushScheduled) return;
+  _overlayFlushScheduled = true;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    flushDeferredOverlays();
+  }));
+}
+
+/**
+ * Last-resort release, armed the moment the first overlay is staged.
+ *
+ * This is NOT the normal path — the fetch's `finally` is. It exists for
+ * the case that path cannot cover: a boot where no pin fetch ever runs
+ * (markers off, a never-ready map, a code path nobody has foreseen).
+ *
+ * Every tick it asks ONE question: is anything actually going to release
+ * these overlays? A fetch in flight will (its `finally` flushes), and a
+ * flush already queued for the next frame will. If the answer to both is
+ * no, it releases them itself rather than leaving a reader staring at a
+ * basemap with nine overlays named in their link and zero tiles
+ * arriving — which is the bug this whole block exists to prevent.
+ *
+ * It re-arms rather than giving up, so it cannot strand the overlays by
+ * mis-reading one moment of the boot; OVERLAY_BACKSTOP_MAX_MS only bounds
+ * how long it will keep waiting for a legitimate flush to happen.
+ */
+function armOverlayFlushBackstop() {
+  // Re-arm rather than bail: a second batch staged while the first
+  // batch's timer is still pending must get a FULL window measured from
+  // its own staging, not the tail of the old one. Staging is a tight
+  // loop, so this resets repeatedly inside one batch and settles on the
+  // last push — which is the right clock.
+  if (_overlayBackstop) { clearTimeout(_overlayBackstop); _overlayBackstop = null; }
+  _overlayStagedAt = Date.now();
+  const tick = () => {
+    _overlayBackstop = null;
+    if (!_deferredOverlayAdds.length) return;         // already released
+    // Wait while something is still going to release this queue the
+    // RIGHT way: a flush already queued for the next frame, a fetch in
+    // flight (its `finally` flushes), or no fetch attempted yet but the
+    // boot is young enough that one is still expected.
+    //
+    // Once past OVERLAY_BACKSTOP_MAX_MS nothing is expected to release it
+    // any more — including the case where requestAnimationFrame is
+    // paused because the tab is hidden, which would otherwise leave
+    // `_overlayFlushScheduled` stuck true and this timer re-arming for
+    // ever. Past that point a visible map beats the markers-first
+    // ordering that staging was protecting.
+    const stale = Date.now() - _overlayStagedAt >= OVERLAY_BACKSTOP_MAX_MS;
+    if (!stale && (_overlayFlushScheduled || inflightCtrl || !_pinFetchAttempted)) {
+      _overlayBackstop = setTimeout(tick, OVERLAY_BACKSTOP_MS);
+      return;
+    }
+    XLog.warn("overlay flush backstop releasing staged overlays (no pin fetch flushed them)");
+    flushDeferredOverlays();
+  };
+  _overlayBackstop = setTimeout(tick, OVERLAY_BACKSTOP_MS);
 }
 
 function applyLayersFromParsedHash(parsed) {
@@ -3371,6 +3491,11 @@ function applyLayersFromParsedHash(parsed) {
           // unchanged) but the layer is added after the markers are
           // painted. See flushDeferredOverlays() above.
           _deferredOverlayAdds.push({ name: ovName, opacity: entry.opacity });
+          // Staging without arming the backstop is how a shared link
+          // ended up with overlays that never drew: the flush is only
+          // reachable from the pin fetch, and that fetch does not always
+          // reach it. See armOverlayFlushBackstop().
+          armOverlayFlushBackstop();
           continue;
         }
         if (!map.hasLayer(WEATHER_OVERLAYS[ovName])) {
@@ -9219,6 +9344,10 @@ async function fetchPinsForViewport() {
       if (inflightCtrl) { try { inflightCtrl.abort(); } catch (_) {} }
       canvasRenderer.setPins([]);
       clearAllMarkers();
+      // No fetch will run on this path, so nothing else would ever
+      // drain the staged-overlay queue — release it here. There are no
+      // markers to paint ahead of it, so it costs nothing.
+      scheduleDeferredOverlayFlush();
       return;
     }
   }
@@ -9232,6 +9361,9 @@ async function fetchPinsForViewport() {
       if (inflightCtrl) { try { inflightCtrl.abort(); } catch (_) {} }
       canvasRenderer.setPins([]);
       clearAllMarkers();
+      // Same as the block above: this path never reaches the `try`, so
+      // it must release the staged overlays itself.
+      scheduleDeferredOverlayFlush();
       return;
     }
   }
@@ -9269,6 +9401,11 @@ async function fetchPinsForViewport() {
   }
   const ctrl = new AbortController();
   inflightCtrl = ctrl;
+  // A real fetch is under way from here on. The backstop uses this to
+  // tell "a fetch is running and its `finally` will drain the queue"
+  // from "no pin fetch ever ran on this boot" — the latter is the only
+  // case it needs to act on itself.
+  _pinFetchAttempted = true;
 
   // Auto-abort after 25s so the browser never hits a TCP-level NetworkError.
   const _fetchTimer = setTimeout(() => { try { ctrl.abort(); } catch (_) {} }, 25000);
@@ -9497,14 +9634,11 @@ async function fetchPinsForViewport() {
         savePinsToCache(items, true);
         hideStaleBanner();
         canvasRenderer.setPins(items);
-        // THE OVERLAYS GO ON NOW — after the markers. Two frames: the
-        // first lets the pin canvas draw, the second lets the browser
-        // composite it before 280 tile images arrive to be decoded.
-        if (_deferredOverlayAdds.length) {
-          requestAnimationFrame(() => requestAnimationFrame(() => {
-            flushDeferredOverlays();
-          }));
-        }
+        // THE OVERLAYS GO ON NOW — after the markers. scheduleDeferred
+        // OverlayFlush() takes the two frames (see its comment); it is
+        // the same helper the `finally` below uses, so this path and
+        // every failing path release the queue by the same route.
+        scheduleDeferredOverlayFlush();
         // Force a redraw after a short delay to catch any edge cases where
         // the canvas cull bounds were stale during a concurrent zoom animation.
         setTimeout(() => canvasRenderer._scheduleRedraw(), 100);
@@ -9930,7 +10064,27 @@ async function fetchPinsForViewport() {
     restoreCachedPinsOrError();
   } finally {
     clearTimeout(_fetchTimer);
-    if (inflightCtrl === ctrl) inflightCtrl = null;
+    const stillMine = inflightCtrl === ctrl;
+    if (stillMine) inflightCtrl = null;
+    // THE OVERLAYS MUST BE RELEASED ON EVERY OUTCOME, NOT ONLY ON
+    // SUCCESS. This `finally` is the one place every exit from the try
+    // passes through — success, empty result, HTTP error, network error,
+    // the 25 s auto-abort firing mid-body, an exception, a superseded
+    // fetch. Before this, the queue was drained only by the
+    // `items.length > 0` branch, so any other outcome stranded every
+    // overlay the link had named: measured, `/api/pins/map` answered 200
+    // over a throttled connection and the overlay tiles were still never
+    // requested 215 s later.
+    //
+    // Two frames (see scheduleDeferredOverlayFlush) still separate this
+    // from the tile decode, so the markers-first ordering the staging
+    // exists for is preserved on the failing paths too.
+    //
+    // Skip only when a NEWER fetch has taken over: it owns the canvas
+    // now, and flushing here would start 280 tile decodes before it gets
+    // to paint its markers. That newer fetch's own `finally` releases
+    // the queue.
+    if (stillMine || !inflightCtrl) scheduleDeferredOverlayFlush();
   }
 }
 

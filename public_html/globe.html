@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Xyzo — 3D globe</title>
-<link rel="stylesheet" href="/vendor/maplibre-gl/maplibre-gl.css?v=202611142000">
-<link rel="stylesheet" href="/globe.css?v=202611142000">
+<link rel="stylesheet" href="/vendor/maplibre-gl/maplibre-gl.css?v=202611201930">
+<link rel="stylesheet" href="/globe.css?v=202611201930">
 </head>
 <body>
   <div id="globe"></div>
@@ -50,20 +50,20 @@
        is the normal first thing a user wants to do. -->
   <button type="button" id="globe-panel-open" hidden>☰ Layers</button>
 
-  <script src="/vendor/maplibre-gl/maplibre-gl.js?v=202611142000"></script>
+  <script src="/vendor/maplibre-gl/maplibre-gl.js?v=202611201930"></script>
   <!-- console-guard.js defines window.XLog, which every module on the
        site logs through. The globe had NO logger at all, so a failure
        in the wind animation (or in any other globe module) was
        completely SILENT: the overlay simply did nothing and the
        console said nothing either. -->
-  <script src="/console-guard.js?v=202611142000"></script>
+  <script src="/console-guard.js?v=202611201930"></script>
   <!-- ramp-styles.js is the ONE source of the site's colour schemes.
        The globe recolours its isobars with the same `recolor` the flat
        map uses, so a shared link means the same lines in both views. -->
-  <script src="/ramp-styles.js?v=202611142000"></script>
-  <script src="/view-handoff.js?v=202611142000"></script>
-  <script src="/field-bake.js?v=202611142000"></script>
-  <script src="/globe-wind.js?v=202611142000"></script>
-  <script src="/globe.js?v=202611142000"></script>
+  <script src="/ramp-styles.js?v=202611201930"></script>
+  <script src="/view-handoff.js?v=202611201930"></script>
+  <script src="/field-bake.js?v=202611201930"></script>
+  <script src="/globe-wind.js?v=202611201930"></script>
+  <script src="/globe.js?v=202611201930"></script>
 </body>
 </html>

@@ -261,6 +261,71 @@ def percentile(vals, p):
     return s[min(len(s) - 1, int(p * len(s)))]
 
 
+# ── the pixel check ─────────────────────────────────────────────────────
+#
+# "How many wind pixels are ON SCREEN?" — the question an fps number
+# cannot answer, and the one that matters most: a renderer that draws
+# nothing is the fastest renderer there is.
+#
+# Method: screenshot the page, hide ONLY the wind pane, screenshot
+# again, and count the pixels that changed. Those pixels are the wind's
+# contribution to the screen by construction. Isolating by hide/show
+# rather than reading the canvas is deliberate — `getImageData` reads
+# the BACKING STORE, which keeps its ink while a clipping ancestor
+# hides it, and that is precisely how an invisible wind was reported as
+# healthy ("the canvas ink is unchanged").
+def _screen_pixels_for_wind(page, threshold=18):
+    """Pixels on screen that belong to the wind pane. 0 == invisible."""
+    import io as _io
+
+    import numpy as np
+    from PIL import Image
+
+    pane = """() => [...document.querySelectorAll('.leaflet-pane')]
+        .find(x => /wind/i.test(x.className) && !/windSpeed/i.test(x.className))"""
+
+    def snap():
+        return np.asarray(
+            Image.open(_io.BytesIO(page.screenshot())).convert("RGB")
+        ).astype("int16")
+
+    if not page.evaluate("() => !!(%s)" % pane):
+        return None
+    page.wait_for_timeout(400)
+    shown = snap()
+    page.evaluate("() => { const p = %s; if (p) p.style.display = 'none'; }" % pane)
+    page.wait_for_timeout(600)
+    hidden = snap()
+    page.evaluate("() => { const p = %s; if (p) p.style.display = ''; }" % pane)
+    page.wait_for_timeout(300)
+    diff = np.abs(shown - hidden).max(axis=2)
+    return int((diff > threshold).sum())
+
+
+def pixel_gate(report):
+    """Refuse to publish an fps win that drew nothing.
+
+    Returns (ok, message). A run whose wind pane contributes zero
+    screen pixels is a broken renderer, whatever its fps says — and it
+    is exactly the run that would otherwise be quoted as a triumph.
+    """
+    for name, rep in report.get("browsers", {}).items():
+        if "error" in rep:
+            continue
+        for r in rep.get("runs", []):
+            px = r.get("wind_screen_px")
+            if px is None:
+                continue
+            if px == 0:
+                return False, (
+                    "%s / %s: the wind pane drew 0 pixels on screen — "
+                    "the fps figure (%.1f) is measuring a renderer that "
+                    "draws nothing. Refusing to report it as a win."
+                    % (name, r.get("label"), r["cadence"]["fps"])
+                )
+    return True, "wind visible on every run"
+
+
 def run_browser(pw, name, url, seconds, window_ms, densities, settle_ms, headless):
     launcher = getattr(pw, name)
     if name == "firefox":
@@ -323,6 +388,29 @@ def run_browser(pw, name, url, seconds, window_ms, densities, settle_ms, headles
         load_s = time.time() - t_goto
         page.wait_for_timeout(settle_ms)
 
+        # ── THE PIXEL CHECK ─────────────────────────────────────────────
+        # Every fps number this tool prints is only meaningful if the
+        # wind is actually ON SCREEN. It was not: `contain: paint` on
+        # the wind pane (2026-11-20) clipped the 0 × 0 pane's contents
+        # to nothing, and this tool reported 51 fps for a wind nobody
+        # could see — an fps gain with zero pixels, published as a win.
+        #
+        # So measure the wind's OWN pixels the only way that survives
+        # clipping: screenshot with the pane shown, hide it, screenshot
+        # again, diff. Reading the canvas with getImageData does NOT
+        # work — the backing store keeps its ink while the pane clips it
+        # away, which is how "the canvas ink is unchanged" coexisted
+        # with an invisible wind.
+        wind_px = None
+        if wants_wind:
+            try:
+                wind_px = _screen_pixels_for_wind(page)
+                print("  … wind on screen: %s px" % (
+                    "INVISIBLE (0)" if wind_px == 0 else "{:,}".format(wind_px)
+                ), flush=True)
+            except Exception as e:  # noqa: BLE001 — never kill the run
+                print("  … pixel check FAILED: %s" % e, flush=True)
+
         results = []
         for d in densities:
             if d is not None:
@@ -333,6 +421,7 @@ def run_browser(pw, name, url, seconds, window_ms, densities, settle_ms, headles
             )
             m["density_setting"] = d
             m["label"] = "density=%s" % ("off" if d is None else d)
+            m["wind_screen_px"] = wind_px
             results.append(m)
 
         return {
@@ -430,12 +519,20 @@ def main():
                      (r0.get("windEnd") or {}).get("quality"),
                      r0["longTasks"]["count"]))
 
+    # THE GATE. An fps number with no pixels beside it is how an
+    # invisible wind got published as a 51 fps win (2026-11-20). Check
+    # it BEFORE the report is written, so a failing run fails loudly
+    # and still leaves its evidence on disk.
+    gate_ok, gate_msg = pixel_gate(report)
+    report["pixel_gate"] = {"ok": gate_ok, "message": gate_msg}
+    print("\n── pixel gate ──\n  %s" % gate_msg, flush=True)
+
     if args.json:
         os.makedirs(os.path.dirname(args.json) or ".", exist_ok=True)
         with open(args.json, "w") as f:
             json.dump(report, f, indent=2)
         print("\nwrote %s" % args.json)
-    return 0
+    return 0 if gate_ok else 1
 
 
 if __name__ == "__main__":

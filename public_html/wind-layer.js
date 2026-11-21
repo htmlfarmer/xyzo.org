@@ -1655,56 +1655,61 @@
       pane.style.zIndex = "379";
       pane.style.pointerEvents = "none";
 
-      // ── `contain: paint` — THE WIND'S OWN PAINT CONTAINER ───────────
+      // ── DO NOT PUT `contain` ON THIS PANE ────────────────────────────
       //
-      // THE BUG THIS FIXES
-      // -----------------
-      // The owner reported (2026-11-14): *"the wind dots don't move
-      // around very fast"*. Measured with Playwright on their own
-      // 14-overlay link, with the particle count PINNED so the numbers
-      // were comparable:
+      // `contain: paint` WAS added here on 2026-11-20 as a compositing
+      // fix for the owner's *"the wind dots don't move around very fast"*
+      // report, and it was **removed the same day because it hid the
+      // wind entirely**. The owner caught it: *"i dont see the wind
+      // working now?"*
       //
-      //     bare map + wind ................. 32.3 fps
-      //     14 overlays + wind .............. 9.0 fps
-      //     14 overlays, NO wind ............ 58.8 fps
+      // WHY IT HIDES THE WIND
+      // --------------------
+      // **EVERY LEAFLET PANE IS 0 × 0** — a pane's children are
+      // absolutely positioned, so the pane has no intrinsic size. Paint
+      // containment clips the element's painting to its padding box, so
+      // a 0 × 0 pane clips its contents to **nothing**. `contain: strict`
+      // was correctly rejected for exactly this reason (size containment
+      // forces the pane to 0 × 0) — but `paint` clips to 0 × 0 TOO,
+      // because the pane was already 0 × 0. Only the mechanism differed;
+      // the result was the same.
       //
-      // The stack alone is fine and the wind alone is fine; together
-      // they are 3.5× slower. The reason is COMPOSITING, not drawing:
+      // MEASURED (Playwright, the owner's own link, the wind pane hidden
+      // and re-shown to isolate ITS pixels — fps and SCREEN pixels in the
+      // same run, which is the only way these two can be told apart):
       //
-      //   * the wind canvas is a full-screen canvas that is written to
-      //     EVERY frame;
-      //   * every write invalidates the surface the canvas lives in;
-      //   * so the browser re-composites everything painted UNDER it —
-      //     and on that link that is 15,958 Leaflet layers, 16,966,976
-      //     canvas pixels (13× the viewport), 2,042 SVG paths and 272
-      //     images — every single frame.
+      //     Firefox   as shipped:  51.3 fps,      58 wind px
+      //     Firefox   no contain:  24.5 fps,  34,954 wind px
+      //     Firefox   paint+sized: 15.5 fps,  67,651 wind px
+      //     Chromium  as shipped:  51.6 fps,       0 wind px
+      //     Chromium  no contain:  22.3 fps,  33,948 wind px
       //
-      // It was NOT the wind's own JavaScript (ScriptDuration was ~1 s
-      // out of 7 s, and there were ZERO long tasks), and it was NOT the
-      // particle count (dropping from 3,086 dots to 772 changed the
-      // frame rate by nothing: 11.2 fps → 9.4 fps, i.e. nothing).
+      // **THE 51 fps WAS A FAKE WIN — IT WAS 51 BECAUSE NOTHING WAS
+      // BEING DRAWN.** That is the identical trap this file's own notes
+      // already record (a freshly-replaced canvas measured 37 fps
+      // *"because the detached canvas was not being drawn at all"*), and
+      // it is why AGENTS.md now demands a pixel/geometry check beside
+      // every fps number for this renderer. The fps was also checked
+      // with the wind ACTUALLY VISIBLE: `contain: paint` on a correctly
+      // sized pane measured **14.4 fps against 14.7 fps without it** —
+      // no benefit once anything is drawn.
       //
-      // `contain: paint` makes this pane a PAINT CONTAINMENT BOUNDARY:
-      // the browser paints the wind into a separate surface and no
-      // longer has to re-composite the overlays underneath it when the
-      // wind moves. Measured on the same link: 9.0 fps → 32.3 fps, and
-      // the wind still renders (the canvas ink is unchanged and the
-      // picture is identical).
+      // So the compositing diagnosis may still be right, but this is not
+      // the fix for it. **If anyone re-proposes containment here, size
+      // the pane to the viewport FIRST, and prove BOTH halves in one
+      // run: the fps number AND a non-zero screen-pixel count for the
+      // wind pane.** An fps gain with zero pixels on screen is the bug
+      // wearing the fix's clothes.
       //
-      // WHY `paint` AND NOT `strict`
-      // ---------------------------
-      // `strict` implies `size` containment, which would make the pane
-      // size itself to its contents (0×0, since the pane's children are
-      // absolutely positioned) and the wind would vanish. `paint` gives
-      // the containment WITHOUT the size implication.
-      //
-      // WHY NOT `will-change: transform` / `translateZ(0)`
-      // --------------------------------------------
-      // Both were measured and neither helped (9.0 fps → 9.6 fps, i.e.
-      // nothing). GPU promotion is about avoiding a repaint; the wind's
-      // cost is the RE-COMPOSITE of the layers beneath it, and only a
-      // paint boundary stops that.
-      pane.style.contain = "paint";
+      // STILL TRUE, AND STILL RECORDED SO NOBODY RE-TRIES THEM: the
+      // alternatives for that compositing cost were measured and none
+      // worked — `will-change: transform` and `translateZ(0)` (GPU
+      // promotion; 9.0 → 9.6 fps, i.e. nothing), `isolation: isolate`
+      // (9.0 → 8.5), and dirty-rect clearing, which cannot work here
+      // because the field is dense — one dot per 420 px², so the union
+      // of the dirty rects is the whole screen (measured
+      // dirtyFrac = 0.957). The diagnosis stands; only the remedy was
+      // wrong.
     }
     if (!state.canvas) {
       const c = document.createElement("canvas");

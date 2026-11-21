@@ -1580,13 +1580,86 @@ displacement of the live pool):
   motion."* It clears itself when it stops being true. The density
   control (25–400 %, in the URL as the third field of `wind=`) shipped
   11-10; this is what makes it actionable.
-- **THE REST OF THE FRAME IS THE OVERLAY STACK, AND NO CSS FIX EXISTS**
-  (~17 ms per overlay layer; hiding the other 35 panes 267 → 50 ms).
-  Tested and rejected: `will-change`, `translate3d` (no change), and
-  **`contain: paint`, which only "worked" by clipping the map blank**
-  because **every Leaflet pane is 0 × 0**. Any future "make it faster"
-  change to this renderer therefore needs a **pixel/geometry check
-  beside the fps number**. Full measurement in README Q-N39.
+- **THE REST OF THE FRAME WAS THE OVERLAY STACK — AND `contain: paint` ON THE WIND PANE HID THE WIND** (2026-11-20).
+  The earlier note here said *"no CSS fix exists"*, and recorded that
+  `contain: paint` "only worked by clipping the map blank". **THE
+  MECHANISM WAS RIGHT AND THE CONCLUSION WAS WRONG** — and the wrong
+  half shipped, then was caught by the owner the same day: *"i dont
+  see the wind working now?"*
+  **THE DIAGNOSIS STANDS, AND IT IS WORTH KEEPING. Measured (Playwright,
+  the owner's own 14-overlay link, particle count PINNED, 3 runs each,
+  medians):**
+  - **bare map + wind: 32.3 fps**
+  - **14 overlays + wind: 9.0 fps**
+  - **14 overlays, NO wind: 58.8 fps**
+  The stack alone is fine; the wind alone is fine; **together they are
+  3.5× slower.** The wind canvas is a full-screen canvas written to
+  EVERY frame, and every write **INVALIDATES the surface it lives
+  in**, so the browser re-composites everything painted under it —
+  **15,958 Leaflet layers, 16,966,976 canvas pixels (13× the viewport),
+  2,042 SVG paths and 272 images — every frame.** The pin canvas
+  (`overlayPane`, z=400) sits directly ABOVE the wind pane (379), so
+  every wind frame re-uploads it too. **That is still the best
+  explanation of the slow-wind report, and the remedy for it is still
+  open.**
+  **WHY `contain: paint` WAS WRONG HERE — the fact that decided it:**
+  **EVERY LEAFLET PANE IS 0 × 0** (its children are absolutely
+  positioned, so it has no intrinsic size). Paint containment clips
+  painting to the padding box — so a 0 × 0 pane clips its contents to
+  **nothing**. The original analysis had this fact in hand and drew the
+  wrong conclusion from it: it rejected `contain: strict` *because* the
+  pane would become 0 × 0 and *"the wind would vanish"*, without
+  noticing the pane **already was** 0 × 0, so `paint` clipped it away
+  too. Only the mechanism differed; the result was identical.
+  **MEASURED — fps AND screen pixels in the same run, which is the only
+  way the two can be told apart:**
+  - **Firefox as shipped: 51.3 fps, 58 wind px** ← invisible
+  - Firefox, containment removed: 24.5 fps, 34,954 wind px
+  - Firefox, `paint` + viewport-sized pane: 15.5 fps, 67,651 wind px
+  - Chromium as shipped: **51.6 fps, 0 wind px** ← invisible
+  - Chromium, containment removed: 22.3 fps, 33,948 wind px
+  **THE 51 fps WAS FAST BECAUSE NOTHING WAS DRAWN** — an fps gain with
+  zero pixels, i.e. the bug wearing the fix's clothes. And with the
+  wind ACTUALLY VISIBLE, containment bought **nothing**: 14.4 fps
+  against 14.7 fps without it.
+  **WHAT WAS MEASURED AND RULED OUT (do not re-try these):** the
+  wind's own JavaScript (CDP `ScriptDuration` ~1 s out of 7 s, **ZERO
+  long tasks**); the **particle count** (3,086 → 772 dots changed
+  nothing: 11.2 → 9.4 fps); the canvas's **size** (16× smaller backing
+  store: nothing); the number of `fill()` calls (2 of 3 discs dropped:
+  nothing); and **GPU promotion** (`will-change: transform`,
+  `translateZ(0)`, `isolation: isolate`, `desynchronized`: all
+  9.0 → 9.6 fps, i.e. nothing).
+  **THE THREE TRAPS, ALL MEASURED:**
+  - **`contain: strict` IS WRONG.** It implies `size` containment, so
+    the pane sizes itself to its contents (**0 × 0**, because its
+    children are absolutely positioned) and **the wind VANISHES**. It
+    measured a 4× speedup while drawing nothing.
+  - **`contain: paint` IS WRONG ON THIS PANE FOR THE SAME REASON.** The
+    pane is already 0 × 0, so `paint` clips to 0 × 0 — measured 58 px
+    on screen in Firefox, 0 px in Chromium, at 51 fps.
+  - **`contain: paint` MUST BE ON THE PANE, NOT THE CANVAS** (on the
+    canvas: 9.0 → 8.3 fps, i.e. nothing).
+  **DIRTY-RECT CLEARING CANNOT WORK HERE**, and the reason is worth
+  keeping: the wind field is **DENSE** (one dot per 420 px²), so the
+  union of a thousand scattered 3 px rects is the whole screen —
+  measured `dirtyFrac = 0.957`, i.e. the union was always the full
+  canvas, so the code fell back to the full clear and nothing improved.
+  **THE RULE, AND IT IS THE ONE THAT WOULD HAVE CAUGHT THIS: ANY
+  "MAKE IT FASTER" CHANGE TO THIS RENDERER NEEDS A PIXEL/GEOMETRY CHECK
+  BESIDE THE FPS NUMBER.** There are now two examples of the same trap:
+  replacing the canvas element with a fresh one measured **37 fps**
+  because *the detached canvas was not being drawn at all*, and
+  `contain: paint` measured **51 fps** because *the pane clipped it to
+  nothing*. **A screen-pixel count, not `getImageData`** — the canvas
+  backing store keeps its ink while an ancestor clips it away, which is
+  how *"the canvas ink is unchanged"* coexisted with a wind nobody
+  could see. Enforced by `scripts/wind_perf_audit.py`, which now
+  screenshots with the wind pane hidden and re-shown and **fails the
+  run (exit 1) on a zero-pixel result**. Pinned by
+  `public_html/tests/wind-paint-containment.bun.test.js` (16,
+  mutation-checked: re-adding the line fails them). Full measurement in
+  README Q-N39.
 - **THE MEASUREMENT TOOL IS `scripts/wind_perf_audit.py`**, and real
   browsers report their own numbers through `client_perf` /
   `POST /api/analytics/perf` (client: `public_html/perf-report.js`,
@@ -2965,7 +3038,9 @@ non-deterministic by construction.
 
 ## Hydrological Basins Overlay Rules (FAO)
 
-- The source is the **FAO "Major hydrological basins of the world"** (AQUASTAT / SOLAW), `maps/bas_wrld_38047.zip` → `bas_wrld_38047.shp`, CC BY-SA 4.0. Basin boundaries delineated from hydrologically corrected elevation data (WWF **HydroSHEDS** and Hydro1K), 15 arc-seconds between 60 N and 60 S. `scripts/basin_build.py` converts it into **TWO detail levels of the same 235 basins** — `basins_major.geojson` (0.05°, ~6 MB) and `basins_detailed.geojson` (0.01°, ~13 MB) — plus `meta.json`, whose `levels[]` table names those files and whose `default_level` is `major`. The layer reads the filename from `meta.levels[].file` (`levelUrl()`); **a single `basins.geojson` is not produced any more and `build()` deletes a stale copy** so it cannot be served beside the per-level files. Switching levels never changes what is on the map, only its precision.
+- The source is the **FAO "Major hydrological basins of the world"** (AQUASTAT / SOLAW), `maps/bas_wrld_38047.zip` → `bas_wrld_38047.shp`, CC BY-SA 4.0. Basin boundaries delineated from hydrologically corrected elevation data (WWF **HydroSHEDS** and Hydro1K), 15 arc-seconds between 60 N and 60 S. `scripts/basin_build.py` converts it into **TWO detail levels of the same 235 basins** — `basins_major.geojson` (0.05°, ~6 MB) and `basins_detailed.geojson` (0.01°, ~13 MB) — plus `meta.json`, whose `levels[]` table names those files and whose `default_level` is `major`. The layer reads the filename from `meta.levels[].file` (`levelUrl()`); **a single `basins.geojson` is not produced any more and `build()` deletes a stale copy** so it cannot be served beside the per-level files. Switching levels changes the PRECISION of the boundary, and it must change
+it VISIBLY — see the `smoothFactor` rule below, because Leaflet threw the
+precision away and the switch was a no-op for months.
 - **THE PUBLISHED ATTRIBUTE TABLE IS NOT IN THE DOWNLOAD.** The dataset documents `MAJ_BAS / MAJ_NAME / MAJ_AREA / SUB_BAS / SUB_NAME / SUB_AREA / TO_BAS`, but the zip only carries `NAME_BASIN / GRID_CODE / AREA / PERIMETER`, and the FAO SOLAW WMS exposes nothing more (the second layer, `basins_ws_38002`, adds water-stress attributes). The overlay therefore carries what the data actually has: the **235 FAO basin names** plus the area **computed from the polygons**. Do not invent a MAJ/SUB grouping.
 - **The `-9999` sentinel is dropped.** 20,854 of the 50,225 source polygons carry the FAO name `-9999` (small slivers in no named basin). They are excluded; the remaining 235 basins total 147 M km², which is essentially all of Earth's land.
 - **DISSOLVE FIRST, THEN SIMPLIFY, THEN MAKE VALID.** The source is 50,225 polygons and 139 MB of geometry. `ST_Union` by name → 235 polygons; Douglas-Peucker at 0.05° → 6 MB; `ogr2ogr -makevalid -nlt MULTIPOLYGON` → valid output. The order matters: **Douglas-Peucker creates bowties** (121 of 235 features were invalid without the make-valid pass), and a `-makevalid` pass without `-nlt MULTIPOLYGON` silently writes an **empty** file.
@@ -2976,6 +3051,14 @@ non-deterministic by construction.
 - The GeoJSON is 6 MB raw / **1.4 MB gzipped** and is only fetched when the layer is switched on — `meta.json` (837 bytes) is fetched separately so the legend can mount without it.
 - **Colour schemes** (blue / red / black) live in `SCHEMES` in basin-layer.js and persist in `localStorage["xyzo.basinScheme"]`. The legend carries three colour-dot buttons; clicking one calls `setColorScheme()` which restyles the polygons AND calls `refreshLegendSwatches()` to recolour the legend's class rows. The scheme must feed `kindColors()`, or `styleFor()` keeps painting the meta colours after a switch.
 - **app.js's click-to-submit guard must check `BasinLayer.blocksClick()`** — the basin probe owns map clicks while armed, same as the climate/temp/soil/cropland/geology/mag probes. It was missing on 2026-10-28; without it the basin probe and the submitter overlay both fired on the same tap.
+- **LEAFLET SIMPLIFIES EVERY POLYGON IT DRAWS — AND IT READS THE TOLERANCE WHEN THE POLYGON IS CREATED.** Leaflet's `Polyline`/`Polygon` carry a `smoothFactor` option, a tolerance in **PIXELS**, and its default is **1.0**. It is applied by `_simplifyPoints()` (Douglas-Peucker) at creation. **THE "DETAILED" BUTTON WAS A NO-OP BECAUSE OF IT** (owner, 2026-11-20: *"shows the same map as major basin right?"* — the owner was right):
+  - the DETAILED file really IS finer — **689,947 vertices against the major file's 324,123** — and the switch really DOES fetch it;
+  - but the CLIENT threw **98.7 %** of it away: only **9,207** vertices reached the screen, and **all 235 rendered paths had byte-for-byte identical `d` attribute lengths** (121,217 → 123,306);
+  - **THE FIX**: `smoothFactor: 0` for the detailed level (the published file's own 0.01° ≈ 1.1 km is what the reader sees); the **major level keeps Leaflet's default (1.0)** so the fast map stays fast — the detailed file is 12.8 MB against 6.1 MB and draws 7.3× the vertices, and that cost is the point of the switch;
+  - **THE FACTOR MUST BE SET IN THREE PLACES, because `setStyle` does NOT re-simplify**: on the layer (`buildLayer`), on **every feature** (`styleFor`), and in `setLevel()` **BEFORE** `fillLayer()` re-adds the polygons. A switch that only swapped the data would keep the old tolerance and reproduce the bug exactly;
+  - **AFTER**: 8,972 → **65,782** drawn vertices (7.3×), total path length 121,217 → **629,126** (5.2×), individual basins **2.4×–10.6×** sharper, and switching back restores the original exactly.
+  - **NEVER `contain`-STYLE TRICKS APPLY HERE** — the wind's `contain: strict` trap (the pane sizes itself to 0×0 and the layer VANISHES) is the same shape of mistake: a "fix" that measures fast while drawing nothing.
+- **THE INTERIOR (ENDORHEIC) BASINS ARE PUBLISHED, COLOURED AND NAMED — 8 of them.** FAO's own documentation: *"TO_BAS — downstream sub-basin code (**-888 internal sub-basins** and -999 draining to the sea)"*. They were never missing from the data: `kind_counts` is `river 146 · coast 81 · interior 8`, each with its own colour (`interior: #a78bfa`) and its own legend row. **"Africa, South Interior" (867,049 km²) is the Makgadikgadi/Okavango pan of Botswana** — 552 km from the owner's own view on 2026-11-20, and visible on screen as a purple outline over the Kalahari. The 2012 shapefile we publish carries only `NAME_BASIN/GRID_CODE/AREA/PERIMETER` (no `TO_BAS`), so the kind is read off the FAO's own naming (`"Interior"` → endorheic) by `scripts/basin_build.py` — **do not invent a MAJ/SUB grouping** (see the attribute-table rule above).
 
 ## Geology Overlay Rules (Macrostrat + USGS/GSC)
 
